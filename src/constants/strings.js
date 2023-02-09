@@ -1,0 +1,16 @@
+export default {
+  app_name: 'Pokedex App',
+  continue: 'Continue',
+  no_event_today: 'No event today',
+  no_event_added: 'No event added',
+  viewEvents: 'View Events',
+  addEvent: 'Add Event',
+  cancel: 'cancel',
+  save: 'save',
+  close: 'close',
+  event_name: 'Event Name',
+  event_date: 'Event Date',
+  sample_event_name: 'Charizard Raid',
+  sample_event_date: '01-01-2023',
+  compulsorySign: ' *',
+};
