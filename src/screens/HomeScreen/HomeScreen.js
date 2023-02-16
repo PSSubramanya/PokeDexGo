@@ -6,6 +6,8 @@ import {
   SafeAreaView,
   StatusBar,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Pressable,
 } from 'react-native';
 // import TimePicker from 'react-times';
 import {Modal, Portal, Provider} from 'react-native-paper';
@@ -35,16 +37,24 @@ const HomeScreen = ({navigation}) => {
   const [viewCalendar, setViewCalendar] = useState(false);
   const [eventName, setEventName] = useState('');
   const [filePath, setFilePath] = useState({});
-  const [time, setTime] = useState('12:34pm');
+
+  const [time, setTime] = useState('Select Time');
+  const [hour, setHour] = useState(8);
+  const [minute, setMinute] = useState(25);
+  const [meridianStatus, setMeridianStatus] = useState('AM');
+  const [selectedTimePart, setSelectedTimePart] = useState('hour');
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalData, setModalData] = useState({});
 
-  const [meridianStatus, setMeridianStatus] = useState('AM');
-
   useEffect(() => {
     console.log('Selected new Dates', selectedStartDate);
   }, [selectedStartDate]);
+
+  useEffect(() => {
+    const timeValue = hour + ':' + minute + ' ' + meridianStatus;
+    setTime(timeValue);
+  }, [meridianStatus]);
 
   const showModal = () => setModalVisible(true);
 
@@ -131,47 +141,18 @@ const HomeScreen = ({navigation}) => {
                 compulsoryField={true}
               />
             </View>
-            <View
-              style={{
-                width: '45%',
-                marginRight: 10,
-                // backgroundColor: 'red',
-              }}>
-              <Text
-                style={{
-                  marginTop: 24,
-                  fontFamily: fontFamily.primaryFontFamilyBold,
-                  color: colors.bluishGrey,
-                  fontSize: 12,
-                }}>
-                Event Time
-              </Text>
-              <TouchableOpacity
-                onPress={() => {
-                  showModal();
-                }}>
-                <View
-                  style={{
-                    height: 45,
-                    borderBottomColor: 'grey',
-                    borderBottomWidth: 0.5,
-                  }}>
-                  {/* <Text
-                    style={{
-                      marginTop: 15,
-                      fontFamily: fontFamily.primaryFontFamilyRegular,
-                      color: colors.bluishGrey,
-                    }}>
-                    Time is {time}
-                  </Text> */}
-                  {/* <TimePicker
-                    // onFocusChange={this.onFocusChange.bind(this)}
-                    // onTimeChange={this.onTimeChange.bind(this)}
-                    onFocusChange={() => {}}
-                    onTimeChange={() => {}}
-                  /> */}
-                </View>
-              </TouchableOpacity>
+            <View style={{width: '45%'}}>
+              <TextInputField
+                headerTitle={strings.event_time}
+                placeholderText={time}
+                onChangeText={() => {}}
+                textInputData={time}
+                editable={false}
+                compulsoryField={true}
+                onPress={showModal}
+              />
+              {/* CHANGE AND REPLACE THIS ABOVE WIDGET TO NORMAL TEXTS */}
+              {/* <Text></Text> */}
             </View>
           </View>
         </View>
@@ -214,16 +195,122 @@ const HomeScreen = ({navigation}) => {
             marginTop: 20,
             fontFamily: fontFamily.primaryFontFamilyMedium,
           }}>
-          Select the timec(Title)
-        </Text>
-        <Text
-          style={{
-            textAlign: 'center',
-            fontFamily: fontFamily.primaryFontFamilyMedium,
-          }}>
-          Build Time Picker (Customised) here
+          Select the time
         </Text>
 
+        <View
+          style={{
+            borderWidth: 0.5,
+            borderColor: colors.purple,
+            alignItems: 'center',
+            marginHorizontal: horizontalScale(30),
+            borderRadius: 10,
+            // height: verticalScale(110),
+            justifyContent: 'space-between',
+          }}>
+          <TouchableOpacity
+            onPress={() => {
+              if (selectedTimePart === 'minute') {
+                if (minute <= 0) {
+                  setMinute(59);
+                } else {
+                  setMinute(num => num - 1);
+                }
+              } else if (selectedTimePart === 'hour') {
+                if (hour <= 1) {
+                  setHour(12);
+                } else {
+                  setHour(num => num - 1);
+                }
+              }
+            }}>
+            <Image
+              source={imagePaths.leftChevronIcon}
+              height={1}
+              width={1}
+              style={{
+                height: verticalScale(30),
+                width: horizontalScale(30),
+                marginVertical: verticalScale(20),
+                transform: [{rotate: '90deg'}],
+              }}
+            />
+          </TouchableOpacity>
+
+          <View style={{flexDirection: 'row'}}>
+            <Pressable
+              onPress={() => {
+                setSelectedTimePart('hour');
+              }}>
+              <Text
+                style={{
+                  color: colors.purple,
+                  fontFamily:
+                    selectedTimePart === 'hour'
+                      ? fontFamily.primaryFontFamilyBold
+                      : fontFamily.primaryFontFamilyRegular,
+                  fontSize: moderateScale(40),
+                }}>
+                {hour}
+              </Text>
+            </Pressable>
+            <Text
+              style={{
+                color: colors.purple,
+                fontFamily: fontFamily.primaryFontFamilyMedium,
+                fontSize: moderateScale(40),
+                opacity: 0.5,
+                marginLeft: horizontalScale(10),
+              }}>
+              :
+            </Text>
+            <Pressable
+              onPress={() => {
+                setSelectedTimePart('minute');
+              }}>
+              <Text
+                style={{
+                  color: colors.purple,
+                  fontFamily:
+                    selectedTimePart === 'minute'
+                      ? fontFamily.primaryFontFamilyBold
+                      : fontFamily.primaryFontFamilyRegular,
+                  fontSize: moderateScale(40),
+                  marginLeft: horizontalScale(10),
+                }}>
+                {minute > 9 ? minute : `0${minute}`}
+              </Text>
+            </Pressable>
+          </View>
+          <TouchableOpacity
+            onPress={() => {
+              if (selectedTimePart === 'minute') {
+                if (minute >= 59) {
+                  setMinute(0);
+                } else {
+                  setMinute(num => num + 1);
+                }
+              } else if (selectedTimePart === 'hour') {
+                if (hour >= 12) {
+                  setHour(1);
+                } else {
+                  setHour(num => num + 1);
+                }
+              }
+            }}>
+            <Image
+              source={imagePaths.rightChevronIcon}
+              height={1}
+              width={1}
+              style={{
+                height: verticalScale(30),
+                width: horizontalScale(30),
+                marginVertical: verticalScale(20),
+                transform: [{rotate: '90deg'}],
+              }}
+            />
+          </TouchableOpacity>
+        </View>
         <View>
           <View
             style={{
@@ -281,18 +368,29 @@ const HomeScreen = ({navigation}) => {
               buttonText={'PM'}
             />
           </View>
-          <Button
-            buttonStyle={[
-              styles.buttonStyle,
-              styles.viewButton,
-              {alignSelf: 'center'},
-            ]}
-            buttonTextStyle={[styles.viewButtonText]}
+          <View
+            style={{
+              borderWidth: 1,
+              borderColor: colors.purple,
+              opacity: 0.65,
+              marginHorizontal: horizontalScale(20),
+            }}
+          />
+          <TouchableOpacity
             onPress={() => {
               hideModal();
-            }}
-            buttonText={strings.close}
-          />
+            }}>
+            <Text
+              style={{
+                textTransform: 'uppercase',
+                fontFamily: fontFamily.primaryFontFamilyMedium,
+                alignSelf: 'center',
+                marginBottom: verticalScale(25),
+                marginTop: verticalScale(10),
+              }}>
+              {strings.close}
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     );

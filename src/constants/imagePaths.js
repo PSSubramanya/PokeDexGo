@@ -14,6 +14,8 @@ export default {
   rightChevronIcon: require('../assets/images/icons/rightChevronIcon.png'),
   checkmarkOnIcon: require('../assets/images/icons/checkmarkOnIcon.png'),
   checkmarkOffIcon: require('../assets/images/icons/checkmarkOffIcon.png'),
+  addIcon: require('../assets/images/icons/addIcon.png'),
+  minusIcon: require('../assets/images/icons/minusIcon.png'),
 
   //Images
   calendar1: require('../assets/images/calendar.png'),
