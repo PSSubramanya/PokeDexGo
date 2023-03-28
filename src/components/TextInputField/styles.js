@@ -1,29 +1,34 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import colors from '../../constants/colors';
 import fontFamily from '../../ultilities/fontFamily';
+import {
+  horizontalScale,
+  verticalScale,
+  moderateScale,
+} from '../../ultilities/scale';
 
 // eslint-disable-next-line no-undef
 export default styles = StyleSheet.create({
   HeaderTitle: {
     fontFamily: fontFamily.primaryFontFamilyBold,
     color: colors.bluishGrey,
-    marginLeft: 15,
-    marginTop: 25,
-    fontSize: 12,
+    marginLeft: horizontalScale(15),
+    marginTop: verticalScale(25),
+    fontSize: moderateScale(12),
   },
   TextInputView: {
     flexDirection: 'row',
   },
   textInputView: {
     fontFamily: fontFamily.primaryFontFamilyRegular,
-    marginTop: 10,
-    marginBottom: 10,
-    paddingLeft: 15,
+    paddingLeft: horizontalScale(16),
     textAlign: 'left',
+    marginTop: Platform.OS === 'ios' ? verticalScale(10) : verticalScale(0),
+    paddingBottom: verticalScale(5),
   },
   Divider: {
     borderBottomWidth: 1.5,
-    marginHorizontal: 10,
+    marginHorizontal: horizontalScale(10),
     width: '95%',
   },
   flexRow: {
@@ -32,8 +37,7 @@ export default styles = StyleSheet.create({
   compulsorySign: {
     fontFamily: fontFamily.primaryFontFamilyBold,
     color: colors.red,
-    // marginLeft: 2,
-    marginTop: 23,
-    fontSize: 18,
+    marginTop: verticalScale(20),
+    fontSize: moderateScale(15),
   },
 });

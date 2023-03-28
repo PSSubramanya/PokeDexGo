@@ -34,4 +34,15 @@ export default styles = StyleSheet.create({
     marginRight: horizontalScale(9),
     marginLeft: horizontalScale(5),
   },
+  timelineCardLineStyle: {
+    borderLeftWidth: 2,
+    borderColor: colors.purple,
+    marginHorizontal: 60,
+  },
+  timelineCardTopLineHeight: {
+    height: verticalScale(19),
+  },
+  timelineCardBottomLineHeight: {
+    height: verticalScale(38),
+  },
 });

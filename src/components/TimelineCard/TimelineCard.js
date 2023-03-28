@@ -14,12 +14,7 @@ const TimelineCard = ({
   return (
     <View>
       <View
-        style={{
-          height: 20,
-          borderLeftWidth: 2,
-          borderColor: colors.purple,
-          marginHorizontal: 60,
-        }}
+        style={[styles.timelineCardLineStyle, styles.timelineCardTopLineHeight]}
       />
       <View style={styles.cardContainer}>
         <Text style={styles.timestamp}>{timestamp}</Text>
@@ -33,12 +28,10 @@ const TimelineCard = ({
         </View>
       </View>
       <View
-        style={{
-          height: 40,
-          borderLeftWidth: 2,
-          borderColor: colors.purple,
-          marginHorizontal: 60,
-        }}
+        style={[
+          styles.timelineCardLineStyle,
+          styles.timelineCardBottomLineHeight,
+        ]}
       />
     </View>
   );

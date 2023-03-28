@@ -4,12 +4,9 @@ import {
   View,
   Image,
   SafeAreaView,
-  StatusBar,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   Pressable,
 } from 'react-native';
-// import TimePicker from 'react-times';
 import {Modal, Portal, Provider} from 'react-native-paper';
 
 import strings from '../../constants/strings';
@@ -22,6 +19,9 @@ import TextInputField from '../../components/TextInputField/TextInputField';
 import CalendarView from '../../components/CalendarView/CalendarView';
 import CardView from '../../components/CardView/CardView';
 import {chooseFile} from '../../ultilities/commonFunctions';
+import commonStyling from '../../ultilities/commonStyling/commonStyling';
+
+import eventsDisplayMockData from '../../ultilities/mockData/eventsPerDay';
 
 // remove this later
 import fontFamily from '../../ultilities/fontFamily';
@@ -34,6 +34,7 @@ import {
 const HomeScreen = ({navigation}) => {
   const dateToday = new Date();
   const [selectedStartDate, setSelectedStartDate] = useState(dateToday);
+  const [numberOfEvents, setNumberOfEvents] = useState(0);
   const [viewCalendar, setViewCalendar] = useState(false);
   const [eventName, setEventName] = useState('');
   const [filePath, setFilePath] = useState({});
@@ -49,11 +50,18 @@ const HomeScreen = ({navigation}) => {
 
   useEffect(() => {
     console.log('Selected new Dates', selectedStartDate);
+
+    const displayableEvents = eventsDisplayMockData.filter(
+      data =>
+        data?.eventDate === moment(selectedStartDate).format('DD/MM/YYYY'),
+    );
+    setNumberOfEvents(displayableEvents.length);
   }, [selectedStartDate]);
 
   useEffect(() => {
     const timeValue = hour + ':' + minute + ' ' + meridianStatus;
     setTime(timeValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [meridianStatus]);
 
   const showModal = () => setModalVisible(true);
@@ -125,34 +133,36 @@ const HomeScreen = ({navigation}) => {
             compulsoryField={true}
           />
           <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
-            <View style={{width: '45%'}}>
-              <TextInputField
-                headerTitle={strings.event_date}
-                placeholderText={strings.sample_event_date}
-                onChangeText={() => {}}
-                textInputData={moment(selectedStartDate)
-                  .format('DD/MM/YYYY')
-                  .toString()}
-                editable={false}
-                compulsoryField={true}
-              />
+            style={[commonStyling.flexRow, commonStyling.spaceBetweenStyling]}>
+            <View style={styles.smallerTextfieldWidth}>
+              <View style={commonStyling.flexRow}>
+                <Text style={styles.textFieldsHeader}>
+                  {strings.event_date}
+                </Text>
+                <Text style={styles.compulsorySignStyle}>
+                  {strings.compulsorySign}
+                </Text>
+              </View>
+              <View style={styles.textFieldContainer}>
+                <Text style={styles.textFieldStyle}>
+                  {moment(selectedStartDate).format('DD/MM/YYYY').toString()}
+                </Text>
+              </View>
             </View>
-            <View style={{width: '45%'}}>
-              <TextInputField
-                headerTitle={strings.event_time}
-                placeholderText={time}
-                onChangeText={() => {}}
-                textInputData={time}
-                editable={false}
-                compulsoryField={true}
-                onPress={showModal}
-              />
-              {/* CHANGE AND REPLACE THIS ABOVE WIDGET TO NORMAL TEXTS */}
-              {/* <Text></Text> */}
+            <View style={styles.smallerTextfieldWidth}>
+              <View style={commonStyling.flexRow}>
+                <Text style={styles.textFieldsHeader}>
+                  {strings.event_time}
+                </Text>
+                <Text style={styles.compulsorySignStyle}>
+                  {strings.compulsorySign}
+                </Text>
+              </View>
+              <TouchableOpacity onPress={showModal}>
+                <View style={styles.textFieldContainer}>
+                  <Text style={styles.textFieldStyle}>{time}</Text>
+                </View>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -180,34 +190,10 @@ const HomeScreen = ({navigation}) => {
 
   const modalContainer = () => {
     return (
-      <View
-        style={{
-          backgroundColor: 'white',
-          width: '80%',
-          height: '85%',
-          alignSelf: 'center',
-          borderRadius: 10,
-          justifyContent: 'space-between',
-        }}>
-        <Text
-          style={{
-            textAlign: 'center',
-            marginTop: 20,
-            fontFamily: fontFamily.primaryFontFamilyMedium,
-          }}>
-          Select the time
-        </Text>
+      <View style={styles.modalStyle}>
+        <Text style={styles.modalTitleStyle}>Select the time</Text>
 
-        <View
-          style={{
-            borderWidth: 0.5,
-            borderColor: colors.purple,
-            alignItems: 'center',
-            marginHorizontal: horizontalScale(30),
-            borderRadius: 10,
-            // height: verticalScale(110),
-            justifyContent: 'space-between',
-          }}>
+        <View style={styles.modalTimeContainer}>
           <TouchableOpacity
             onPress={() => {
               if (selectedTimePart === 'minute') {
@@ -228,56 +214,44 @@ const HomeScreen = ({navigation}) => {
               source={imagePaths.leftChevronIcon}
               height={1}
               width={1}
-              style={{
-                height: verticalScale(30),
-                width: horizontalScale(30),
-                marginVertical: verticalScale(20),
-                transform: [{rotate: '90deg'}],
-              }}
+              style={styles.upperChevron}
             />
           </TouchableOpacity>
 
-          <View style={{flexDirection: 'row'}}>
+          <View style={commonStyling.flexRow}>
             <Pressable
               onPress={() => {
                 setSelectedTimePart('hour');
               }}>
               <Text
-                style={{
-                  color: colors.purple,
-                  fontFamily:
-                    selectedTimePart === 'hour'
-                      ? fontFamily.primaryFontFamilyBold
-                      : fontFamily.primaryFontFamilyRegular,
-                  fontSize: moderateScale(40),
-                }}>
+                style={[
+                  styles.modalTimeStyle,
+                  {
+                    fontFamily:
+                      selectedTimePart === 'hour'
+                        ? fontFamily.primaryFontFamilyBold
+                        : fontFamily.primaryFontFamilyRegular,
+                  },
+                ]}>
                 {hour}
               </Text>
             </Pressable>
-            <Text
-              style={{
-                color: colors.purple,
-                fontFamily: fontFamily.primaryFontFamilyMedium,
-                fontSize: moderateScale(40),
-                opacity: 0.5,
-                marginLeft: horizontalScale(10),
-              }}>
-              :
-            </Text>
+            <Text style={styles.timeSeparatorStyle}>:</Text>
             <Pressable
               onPress={() => {
                 setSelectedTimePart('minute');
               }}>
               <Text
-                style={{
-                  color: colors.purple,
-                  fontFamily:
-                    selectedTimePart === 'minute'
-                      ? fontFamily.primaryFontFamilyBold
-                      : fontFamily.primaryFontFamilyRegular,
-                  fontSize: moderateScale(40),
-                  marginLeft: horizontalScale(10),
-                }}>
+                style={[
+                  styles.modalTimeStyle,
+                  styles.minuteDisplayStyle,
+                  {
+                    fontFamily:
+                      selectedTimePart === 'minute'
+                        ? fontFamily.primaryFontFamilyBold
+                        : fontFamily.primaryFontFamilyRegular,
+                  },
+                ]}>
                 {minute > 9 ? minute : `0${minute}`}
               </Text>
             </Pressable>
@@ -302,32 +276,15 @@ const HomeScreen = ({navigation}) => {
               source={imagePaths.rightChevronIcon}
               height={1}
               width={1}
-              style={{
-                height: verticalScale(30),
-                width: horizontalScale(30),
-                marginVertical: verticalScale(20),
-                transform: [{rotate: '90deg'}],
-              }}
+              style={styles.lowerChevron}
             />
           </TouchableOpacity>
         </View>
         <View>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-evenly',
-              marginBottom: 20,
-            }}>
+          <View style={styles.ampmSection}>
             <Button
               buttonStyle={[
-                {
-                  width: horizontalScale(50),
-                  height: verticalScale(50),
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginVertical: verticalScale(5),
-                  borderRadius: 5,
-                },
+                styles.amStyle,
                 meridianStatus === 'AM'
                   ? styles.viewButton
                   : styles.addEventButton,
@@ -339,19 +296,13 @@ const HomeScreen = ({navigation}) => {
               }
               onPress={() => {
                 setMeridianStatus('AM');
+                hideModal();
               }}
               buttonText={'AM'}
             />
             <Button
               buttonStyle={[
-                {
-                  width: horizontalScale(50),
-                  height: verticalScale(50),
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginVertical: verticalScale(5),
-                  borderRadius: 5,
-                },
+                styles.pmStyle,
                 meridianStatus === 'PM'
                   ? styles.viewButton
                   : styles.addEventButton,
@@ -364,32 +315,17 @@ const HomeScreen = ({navigation}) => {
               }
               onPress={() => {
                 setMeridianStatus('PM');
+                hideModal();
               }}
               buttonText={'PM'}
             />
           </View>
-          <View
-            style={{
-              borderWidth: 1,
-              borderColor: colors.purple,
-              opacity: 0.65,
-              marginHorizontal: horizontalScale(20),
-            }}
-          />
+          <View style={styles.modalBottomSection} />
           <TouchableOpacity
             onPress={() => {
               hideModal();
             }}>
-            <Text
-              style={{
-                textTransform: 'uppercase',
-                fontFamily: fontFamily.primaryFontFamilyMedium,
-                alignSelf: 'center',
-                marginBottom: verticalScale(25),
-                marginTop: verticalScale(10),
-              }}>
-              {strings.close}
-            </Text>
+            <Text style={styles.closeButton}>{strings.close}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -446,23 +382,38 @@ const HomeScreen = ({navigation}) => {
                       {moment(selectedStartDate.toString()).format('YYYY')}
                     </Text>
                   </View>
-                  <Image
-                    source={imagePaths.calendarIllustration3}
-                    height={1}
-                    width={1}
-                    style={styles.appIcon}
-                  />
-                  <Text style={styles.noEventTitle}>
-                    {strings.no_event_today}
-                  </Text>
-                  <Button
-                    buttonStyle={[styles.buttonStyle, styles.viewButton]}
-                    buttonTextStyle={[styles.viewButtonText]}
-                    onPress={() => {
-                      setViewCalendar(true);
-                    }}
-                    buttonText={strings.addEvent}
-                  />
+                  {numberOfEvents > 0 ? (
+                    <View style={commonStyling.absoluteCenterStyling}>
+                      <Text style={styles.numberOfEvents}>
+                        {numberOfEvents}
+                      </Text>
+                      <Text style={styles.noEventTitle}>
+                        {strings.events_today}
+                      </Text>
+                    </View>
+                  ) : (
+                    <View style={commonStyling.absoluteCenterStyling}>
+                      <Image
+                        source={imagePaths.calendarIllustration3}
+                        height={1}
+                        width={1}
+                        style={styles.appIcon}
+                      />
+                      <Text style={styles.noEventTitle}>
+                        {strings.no_event_today}
+                      </Text>
+                    </View>
+                  )}
+                  <View style={commonStyling.absoluteCenterStyling}>
+                    <Button
+                      buttonStyle={[styles.buttonStyle, styles.viewButton]}
+                      buttonTextStyle={[styles.viewButtonText]}
+                      onPress={() => {
+                        setViewCalendar(true);
+                      }}
+                      buttonText={strings.addEvent}
+                    />
+                  </View>
                 </View>
                 <TouchableOpacity
                   onPress={() => {

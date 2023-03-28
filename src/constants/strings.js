@@ -14,4 +14,5 @@ export default {
   sample_event_name: 'Charizard Raid',
   sample_event_date: '01-01-2023',
   compulsorySign: ' *',
+  events_today: 'Events Today',
 };
