@@ -31,15 +31,6 @@ const EventViewScreen = props => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalData, setModalData] = useState({});
 
-  // const tempDescriptionData = [
-  //   'abcde ascac acsacaca aacacacacascacasc ascascascasc',
-  //   'babcde ascacb',
-  //   'cabcde acsacaca aacacacacascacasc ascascascasc',
-  //   'eabcde ascac acsacaca',
-  //   'dabcde ascac acsacaca aacacacacascacasc ascascascasc',
-  // ];
-  let tempDescriptionData;
-
   useEffect(() => {
     const displayableEvents = eventsDisplayMockData.filter(
       data =>
@@ -229,14 +220,17 @@ export default EventViewScreen;
 
 // Implement Handlebars
 
-// At same time if there are more than 1 event at the same time on same day, use serial numbers to differentiate it
+// At same time if there are more than 1 event at the same time on same day, use serial numbers/bullets to differentiate it
 // Add range of time like from 2-5 for events duration
 // So basically add types for these somehow
 // If there is only 1 event in a time range make sure the card height resizes to that range limit eg. 2 - 5 pm
 // If there are multiple events, then split the range into so many cards and make sure the whole cards is within the time range
 // animate the cards
+// Split the HomeScreen Page iinto HomseScreen and Calandar Display for event adding properly
+// Based on that also check the Calandar in EventViewScreen page also
 // add a thread like UI effect for timeline flatlist
 // SORT Events based on time
+// PoGo Event Histroy Tab - Rahul Suggestion
 
 /*------------- */
 

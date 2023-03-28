@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TextInput} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import styles from './styles';
 import colors from '../../constants/colors';
 import strings from '../../constants/strings';
@@ -12,6 +18,7 @@ const TextInputField = ({
   textInputData,
   editable,
   compulsoryField,
+  onPress,
 }) => {
   /* There are 3 types of text input fields in this custom component -> "Username", "Password" and "Normal" type*/
 
@@ -23,24 +30,50 @@ const TextInputField = ({
         <Text style={styles.HeaderTitle}>{headerTitle}</Text>
         <Text style={styles.compulsorySign}>{strings.compulsorySign}</Text>
       </View>
-      <TextInput
-        style={styles.textInputView}
-        editable={editable}
-        placeholder={placeholderText}
-        placeholderTextColor={colors.grey}
-        onChangeText={onChangeText}
-        onFocus={val => {
-          setSelectedField(true);
-          console.log('SELECTED TEXTINPUT 1 ...', val);
-        }}
-        onBlur={val => {
-          setSelectedField(false);
-          console.log('SELECTED TEXTINPUT 2 ...', val);
-        }}
-        value={textInputData}
-        // keyboardType={'default'}
-        // secureTextEntry={false}
-      />
+      {onPress ? (
+        <TouchableOpacity
+          onPress={onPress}
+          // style={{backgroundColor: 'yellow', zIndex: 1}}
+        >
+          <TextInput
+            style={styles.textInputView}
+            editable={editable}
+            placeholder={placeholderText}
+            placeholderTextColor={colors.grey}
+            onChangeText={onChangeText}
+            onFocus={val => {
+              setSelectedField(true);
+              console.log('SELECTED TEXTINPUT 1 ...', val);
+            }}
+            onBlur={val => {
+              setSelectedField(false);
+              console.log('SELECTED TEXTINPUT 2 ...', val);
+            }}
+            value={textInputData}
+            // keyboardType={'default'}
+            // secureTextEntry={false}
+          />
+        </TouchableOpacity>
+      ) : (
+        <TextInput
+          style={styles.textInputView}
+          editable={editable}
+          placeholder={placeholderText}
+          placeholderTextColor={colors.grey}
+          onChangeText={onChangeText}
+          onFocus={val => {
+            setSelectedField(true);
+            console.log('SELECTED TEXTINPUT 1 ...', val);
+          }}
+          onBlur={val => {
+            setSelectedField(false);
+            console.log('SELECTED TEXTINPUT 2 ...', val);
+          }}
+          value={textInputData}
+          // keyboardType={'default'}
+          // secureTextEntry={false}
+        />
+      )}
 
       <View
         style={[

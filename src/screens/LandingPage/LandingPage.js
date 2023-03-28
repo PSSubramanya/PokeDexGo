@@ -12,6 +12,7 @@ import imagePaths from '../../constants/imagePaths';
 import colors from '../../constants/colors';
 import soundTracks from '../../constants/soundTracks';
 import styles from './styles';
+import commonStyling from '../../ultilities/commonStyling/commonStyling';
 import {horizontalScale, verticalScale} from '../../ultilities/scale';
 import {CircleRightArrow} from '../../assets/images/svg';
 
@@ -49,15 +50,12 @@ const LandingPage = ({navigation}) => {
             onPress={() => {
               navigation.navigate('HomeScreen');
             }}
-            style={{alignItems: 'center'}}>
+            style={commonStyling.centerAlignment}>
             <Image
               source={imagePaths.rightArrowCircle}
               height={1}
               width={1}
-              style={{
-                height: verticalScale(40),
-                width: horizontalScale(40),
-              }}
+              style={styles.rightArrowCircle}
             />
             <Text style={styles.smallTextSize}>{strings.continue}</Text>
           </TouchableOpacity>

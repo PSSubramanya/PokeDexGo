@@ -29,4 +29,8 @@ export default styles = StyleSheet.create({
     fontSize: moderateScale(12),
     fontFamily: fontFamily.primaryFontFamilyRegular,
   },
+  rightArrowCircle: {
+    height: verticalScale(40),
+    width: horizontalScale(40),
+  },
 });

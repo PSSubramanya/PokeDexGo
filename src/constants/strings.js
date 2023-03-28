@@ -10,7 +10,9 @@ export default {
   close: 'close',
   event_name: 'Event Name',
   event_date: 'Event Date',
+  event_time: 'Event Time',
   sample_event_name: 'Charizard Raid',
   sample_event_date: '01-01-2023',
   compulsorySign: ' *',
+  events_today: 'Events Today',
 };
