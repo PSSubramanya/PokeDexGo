@@ -178,9 +178,10 @@ def main():
             events[link] = new_event
 
     df=pandas.DataFrame(events,index=[0]).T
-    print(df)
+    df.columns=['Summary']
     df.to_csv('./file.csv')
     driver.quit()
     
+
 if __name__ == "__main__":
     main()
