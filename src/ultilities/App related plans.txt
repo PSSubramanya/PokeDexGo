@@ -1,0 +1,61 @@
+*** Plans ***
+
+
+App Plans:
+
+V1:
+Plan is to initially be able to add events personally and display it and edit/modify it and that it should notify us on event day and event time…
+
+V2:
+2nd level is to fetch the data of all events from PoGo game app/ game related websites and display the events in calendar and notify us the same like planned…
+
+    V2.1:
+    Display history tab
+
+    V2.2:
+    Display event calendar wise
+    Have a tab view where we can,
+    Display both history tab of events and also future upcoming events
+
+V3:
+Implement Pokedex in the app so it becomes easy for people to refer to the Pokemon in the event and get more info.
+Pokedex will have basic Pokemon infos and stats
+
+V4:
+Get the strength, weakness, movesets lists and make it more efficient for absolute information availability (with some crazy/good looking UI-UX and animations)
+Can refer Pokemon DB website for this for better idea
+
+Some important links:
+
+https://pokemondb.net/pokedex
+https://pokemondb.net/pokedex/stats/combo
+https://pokeapi.co/
+https://in.portal-pokemon.com/play/pokedex/0006_3
+
+V5:
+Try including Pokeraid app based features and scale the app…
+(Discuss about this idea)
+
+
+————
+
+Rahul:
+1.) Webscrapped data convert from CSV to API - Rahul
+
+
+Subbu:
+1.) Implement Handlebars for component based building
+2.) Range based implementations for events (Multiple events same day same time types)
+3.) Animate the cards
+4.) PoGo Event Histroy Tab - Rahul Suggestion
+5.) edit option to edit it in pop up menu - (If event is added by us not from API fetched)
+6.) Make calendar show that the day has events by having different style (Custom styling)
+7.) Push Notification implementation
+8.) Online and Offline Notification implementation
+9.) If checklist is clicked then notification shud not ring.
+10.)Make dates display in home page scrollable/ carousal for better UX feel
+11.) Add firebase+ analytics integration
+12.) Add notificatoin postpone and snoozing option etc.
+13.) Add redux
+14.) Learn and implement backend
+15.) Learn how to upload to playstore and App Store
