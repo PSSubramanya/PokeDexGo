@@ -3,6 +3,7 @@ import json
 import unicodedata
 from bottle import *
 from pivottablejs import pivot_ui
+import re
 
 links=[]
 summaries=[]
@@ -39,6 +40,7 @@ for summary in json_summary:
     split_sum_clean=split_sum[1].replace('\\xa0',' ')
     split_sum_clean=split_sum_clean.replace('\"','')
     split_sum_clean=split_sum_clean.replace('\'','')
+    split_sum_clean=re.sub(r'[^\x00-\x7F]+','',split_sum_clean)
     df_summaries.append(split_sum_clean)
 
 for sdate in start_date:
