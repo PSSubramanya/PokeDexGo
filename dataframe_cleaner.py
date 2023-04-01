@@ -1,5 +1,6 @@
 import pandas as pd
 import json
+from bottle import *
 
 links=[]
 summaries=[]
@@ -43,6 +44,14 @@ for sdate in start_date:
 pokemon_data['Summary']=df_summaries
 pokemon_data['Start DateTime'] = start_date_v2
 print(pokemon_data)
+pokemon_json=pokemon_data.to_json();
+print(pokemon_json)
+
+@get('/')
+def server_json():
+    return{"msg":pokemon_json,"error":"Cannot Host Data"}
+
+run(host='localhost',port=8080)
 #pokemon_data.to_csv('./cleaned.csv')
     
 #split json_Summary on : and create a column in datafarme with column :Summary

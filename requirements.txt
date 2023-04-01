@@ -4,3 +4,4 @@ lxml
 pandas
 webdriver-manager
 python-dateutil
+bottle
