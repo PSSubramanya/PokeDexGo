@@ -2,7 +2,7 @@ import {combineReducers} from 'redux';
 import CountReducer from './CountReducer';
 
 const AppReducer = combineReducers({
-  counter: CountReducer, //Sample - Remove Later
+  counter: CountReducer, //  TODO: Sample - Remove Later
 });
 
 const mainReducer = (state = {}, action) => {

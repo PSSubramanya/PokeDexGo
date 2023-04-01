@@ -1,4 +1,4 @@
-// Sample File - Remove Later
+//  TODO: Sample File - Remove Later
 
 import {COUNTER_CHANGE} from '../constants/types';
 const initialState = {

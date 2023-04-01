@@ -1,4 +1,4 @@
-// sample file - Remove Later
+// TODO: sample file - Remove Later
 import {COUNTER_CHANGE} from '../constants/types.js';
 
 export function changeCount(count) {
