@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   Text,
   View,
@@ -7,6 +8,7 @@ import {
   TouchableOpacity,
   Pressable,
 } from 'react-native';
+// import {changeCount} from '../../actions/count'; //Sample - Remove Later
 import {Modal, Portal, Provider} from 'react-native-paper';
 
 import strings from '../../constants/strings';
@@ -33,6 +35,9 @@ import {
 
 const HomeScreen = ({navigation}) => {
   const dateToday = new Date();
+  // const dispatch = useDispatch();
+  // Use dispatch(changeCount(tempcount)); where it is supposed to be triggered //Sample - Remove Later
+  // const countValue = useSelector(state => state?.counter?.count); //Sample - Remove Later
   const [selectedStartDate, setSelectedStartDate] = useState(dateToday);
   const [numberOfEvents, setNumberOfEvents] = useState(0);
   const [viewCalendar, setViewCalendar] = useState(false);
