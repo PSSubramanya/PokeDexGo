@@ -45,17 +45,18 @@ Rahul:
 
 Subbu:
 1.) Implement Handlebars for component based building
-2.) Range based implementations for events (Multiple events same day same time types)
-3.) Animate the cards
-4.) PoGo Event Histroy Tab - Rahul Suggestion
-5.) edit option to edit it in pop up menu - (If event is added by us not from API fetched)
-6.) Make calendar show that the day has events by having different style (Custom styling)
-7.) Push Notification implementation
-8.) Online and Offline Notification implementation
-9.) If checklist is clicked then notification shud not ring.
-10.)Make dates display in home page scrollable/ carousal for better UX feel
-11.) Add firebase+ analytics integration
-12.) Add notificatoin postpone and snoozing option etc.
-13.) Add redux
-14.) Learn and implement backend
-15.) Learn how to upload to playstore and App Store
+2.) Implement StoryBook for component based building
+3.) Range based implementations for events (Multiple events same day same time types)
+4.) Animate the cards
+5.) PoGo Event Histroy Tab - Rahul Suggestion
+6.) edit option to edit it in pop up menu - (If event is added by us not from API fetched)
+7.) Make calendar show that the day has events by having different style (Custom styling)
+8.) Push Notification implementation
+9.) Online and Offline Notification implementation
+10.) If checklist is clicked then notification shud not ring.
+11.)Make dates display in home page scrollable/ carousal for better UX feel
+12.) Add firebase+ analytics integration
+13.) Add notificatoin postpone and snoozing option etc.
+14.) Add redux
+15.) Learn and implement backend
+16.) Learn how to upload to playstore and App Store
