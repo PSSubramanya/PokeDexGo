@@ -11,6 +11,7 @@ json_summary=[]
 df_summaries=[]
 start_date=[]
 start_date_v2=[]
+img_src=[]
 
 df=pd.read_csv('./file.csv')
 
@@ -35,6 +36,17 @@ for summary in summaries:
     json_summary.append(summ[0].replace('{',''))
 #print(start_date)
 
+for summary in summaries:
+    summ=summary.split(',')
+    i=2
+    if 'img' not in summ[2]:
+        i=3
+        while 'img' not in summ[i]:
+            i+=1
+    img_split=summ[i].split(':',1)
+    img_split=img_split[1]
+    img_src.append(img_split.replace('\'','').replace('}',''))
+
 for summary in json_summary:
     split_sum=summary.split(':')
     split_sum_clean=split_sum[1].replace('\\xa0',' ')
@@ -51,6 +63,7 @@ for sdate in start_date:
 
 pokemon_data['Summary']=df_summaries
 pokemon_data['Start DateTime'] = start_date_v2
+pokemon_data['Img Src'] = img_src
 
 pivot_ui(pokemon_data)
 
@@ -64,7 +77,7 @@ def server_json():
 #run(host='localhost',port=8080)
 pokemon_object = json.dumps(pokemon_json,indent=4)
 
-with open('./pokemon_data.json',"w") as output_file:
+with open('./pokemon_data3.json',"w") as output_file:
     #output_file.write(pokemon_json.replace('\\','')+'\n')
     #output_file.write(pokemon_json_cleaned)
     output_file.write(json.dumps({"data": pokemon_json_cleaned}, indent=4 ))

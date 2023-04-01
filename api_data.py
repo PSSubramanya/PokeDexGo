@@ -12,6 +12,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.chrome.service import Service
 import pandas
+import requests
 
 current_year = datetime.now().year
 
@@ -59,6 +60,9 @@ def convert_to_yyy_mm_dd(date: str):
     date_object = datetime.strptime(date, "%Y-%m-%d %H:%M:%S")
     return date_object.strftime(yyy_mm_dd_format)
 
+def getdata(url): 
+    r = requests.get(url) 
+    return r.text 
 
 @dataclass
 class Event:
@@ -66,6 +70,7 @@ class Event:
     end_time: str = field(compare=False)
     summary: str
     description: str
+    img_src : str
 
     def to_dict(self):
         if is_all_day_event(self.start_time, self.end_time):
@@ -77,6 +82,7 @@ class Event:
                 "description": self.description,
                 "start": {"date": self.start_time},
                 "end": {"date": self.end_time},
+                "img_src": self.img_src,
             }
 
         elif event_ends_next_year(self.start_time, self.end_time):
@@ -93,6 +99,7 @@ class Event:
                 "description": self.description,
                 "start": {"dateTime": self.start_time, "timeZone": "UTC-5"},
                 "end": {"dateTime": self.end_time, "timeZone": "UTC-5"},
+                "img_src": self.img_src,
             }
 
         else:
@@ -101,6 +108,7 @@ class Event:
                 "description": self.description,
                 "start": {"dateTime": self.start_time, "timeZone": "UTC-5"},
                 "end": {"dateTime": self.end_time, "timeZone": "UTC-5"},
+                "img_src": self.img_src,
             }
 
         return metadata
@@ -133,9 +141,15 @@ def main():
         if "unannounced" in event_name:
             continue
         link = f"https://leekduck.com{event_name}"
+        print(link)
         event_links.add(link)
 
     for link in event_links:
+        htmldata = getdata(link) 
+        soup = BeautifulSoup(htmldata, 'html.parser') 
+        for item in soup.find_all('img'):
+            img_link='https://leekduck.com/'+item['src']
+            break
 
         driver.get(link)
         soup = BeautifulSoup(driver.page_source, "lxml")
@@ -168,13 +182,13 @@ def main():
 
         complete_end_date = f"{end_date}, {end_time}"
 
-        print(f"{link}: {complete_end_date}")
+        #print(f"{link}: {complete_end_date}")
 
         if start_date != "None":
             parsed_start_date = parse_date(complete_start_date)
             parsed_end_date = parse_date(complete_end_date)
 
-            new_event = Event(parsed_start_date, parsed_end_date, title, link)
+            new_event = Event(parsed_start_date, parsed_end_date, title, link,img_link)
             events[link] = new_event
 
     df=pandas.DataFrame(events,index=[0]).T
