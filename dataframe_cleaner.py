@@ -1,6 +1,8 @@
 import pandas as pd
 import json
+import unicodedata
 from bottle import *
+from pivottablejs import pivot_ui
 
 links=[]
 summaries=[]
@@ -26,32 +28,45 @@ for summary in summaries:
         i=3
         while 'start' not in summ[i]:
             i+=1
-    start_date.append(summ[i].replace('{',''))
+    summ_cleaned_date=summ[i].replace('{','')
+    start_date.append(summ_cleaned_date.replace('}',''))
     
     json_summary.append(summ[0].replace('{',''))
 #print(start_date)
 
 for summary in json_summary:
     split_sum=summary.split(':')
-    df_summaries.append(split_sum[1])
+    split_sum_clean=split_sum[1].replace('\\xa0',' ')
+    split_sum_clean=split_sum_clean.replace('\"','')
+    split_sum_clean=split_sum_clean.replace('\'','')
+    df_summaries.append(split_sum_clean)
 
 for sdate in start_date:
     split_date=sdate.split(':',1)
     #split_date_v2=str(split_date).split(':',1)
-    start_date_v2.append(split_date[1])
+    start_date_v2.append(split_date[1].replace('\'',''))
 #print(df_summaries)
 
 pokemon_data['Summary']=df_summaries
 pokemon_data['Start DateTime'] = start_date_v2
-print(pokemon_data)
-pokemon_json=pokemon_data.to_json();
-print(pokemon_json)
+
+pivot_ui(pokemon_data)
+
+pokemon_json=pokemon_data.to_json()
+pokemon_json_cleaned=json.loads(pokemon_json)
 
 @get('/')
 def server_json():
     return{"msg":pokemon_json,"error":"Cannot Host Data"}
 
-run(host='localhost',port=8080)
+#run(host='localhost',port=8080)
+pokemon_object = json.dumps(pokemon_json,indent=4)
+
+with open('./pokemon_data.json',"w") as output_file:
+    #output_file.write(pokemon_json.replace('\\','')+'\n')
+    #output_file.write(pokemon_json_cleaned)
+    output_file.write(json.dumps({"data": pokemon_json_cleaned}, indent=4 ))
+
 #pokemon_data.to_csv('./cleaned.csv')
     
 #split json_Summary on : and create a column in datafarme with column :Summary

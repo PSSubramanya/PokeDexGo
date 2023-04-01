@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>PivotTable.js</title>
+
+        <!-- external libs from cdnjs -->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/d3_renderers.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/c3_renderers.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/export_renderers.min.js"></script>
+
+        <style>
+            body {font-family: Verdana;}
+            .node {
+              border: solid 1px white;
+              font: 10px sans-serif;
+              line-height: 12px;
+              overflow: hidden;
+              position: absolute;
+              text-indent: 2px;
+            }
+            .c3-line, .c3-focused {stroke-width: 3px !important;}
+            .c3-bar {stroke: white !important; stroke-width: 1;}
+            .c3 text { font-size: 12px; color: grey;}
+            .tick line {stroke: white;}
+            .c3-axis path {stroke: grey;}
+            .c3-circle { opacity: 1 !important; }
+            .c3-xgrid-focus {visibility: hidden !important;}
+        </style>
+    </head>
+    <body>
+        <script type="text/javascript">
+            $(function(){
+                if(window.location != window.parent.location)
+                    $("<a>", {target:"_blank", href:""})
+                        .text("[pop out]").prependTo($("body"));
+
+                $("#output").pivotUI(
+                    $.csv.toArrays($("#output").text()),
+                    $.extend({
+                        renderers: $.extend(
+                            $.pivotUtilities.renderers,
+                            $.pivotUtilities.c3_renderers,
+                            $.pivotUtilities.d3_renderers,
+                            $.pivotUtilities.export_renderers
+                            ),
+                        hiddenAttributes: [""]
+                    }, {})
+                ).show();
+             });
+        </script>
+        <div id="output" style="display: none;">,Links,Summary,Start DateTime
+0,https://leekduck.com/events/raidhour20230329/, Lugia Raid Hour, dateTime: 2023-03-29 18:00:00
+1,https://leekduck.com/events/mega-venusaur-in-mega-raids-march-2023/, Mega Venusaur in Mega Raids, dateTime: 2023-03-21 10:00:00
+2,https://leekduck.com/events/season-14-master-league_little-cup/, Master League and Little Cup | Rising Heroes, dateTime: 2023-03-30 01:30:00
+3,https://leekduck.com/events/season-14-ultra-league_little-cup/, Ultra League and Little Cup | Rising Heroes, dateTime: 2023-05-04 01:30:00
+4,https://leekduck.com/events/elite-raid-regieleki-april-2023/, Regieleki in Elite Raids, dateTime: 2023-04-09 11:00:00
+5,https://leekduck.com/events/season-14-great-league_ultra_league_master-league_evolution-cup-great-league-edition/, Great League, dateTime: 2023-04-13 01:30:00
+6,https://leekduck.com/events/season-14-master-league_catch-cup-rising-heroes-edition/, Master League and Catch Cup, dateTime: 2023-05-25 01:30:00
+7,https://leekduck.com/events/season-14-ultra-league_sunshine-cup-great-league-edition/, Ultra League and Sunshine Cup, dateTime: 2023-05-11 01:30:00
+8,https://leekduck.com/events/team-go-rocket-takeover-march-2023/, Team GO Rocket Takeover, dateTime: 2023-03-25 10:00:00
+9,https://leekduck.com/events/thundurus-in-5-star-raid-battles-march-2023/, Thundurus in 5-star Raid Battles, dateTime: 2023-03-21 10:00:00
+10,https://leekduck.com/events/season-14-ultra-league_mountain-cup-great-league-edition/, Ultra League and Mountain Cup, dateTime: 2023-03-23 01:30:00
+11,https://leekduck.com/events/lets-go-event/, Lets GO!, dateTime: 2023-03-21 10:00:00
+12,https://leekduck.com/events/april-communitydayclassic2023/, April Community Day Classic, dateTime: 2023-04-29 14:00:00
+13,https://leekduck.com/events/pokemonspotlighthour2023-03-28/, Popplio Spotlight Hour, dateTime: 2023-03-28 18:00:00
+14,https://leekduck.com/events/go-battle-day-stardust/, GO Battle Day, date: 2023-05-14
+15,https://leekduck.com/events/season-10-rising-heroes-research-breakthrough/, Rising Heroes Research Breakthrough - Season 10, dateTime: 2023-03-02 02:30:00
+16,https://leekduck.com/events/season-14-master-league_elements-cup-little-edition/, Master League and Element Cup, dateTime: 2023-05-18 01:30:00
+17,https://leekduck.com/events/season-10-rising-heroes/, Season 10, dateTime: 2023-03-01 10:00:00
+18,https://leekduck.com/events/season-14-great-league_color-cup-great-league-edition-remix/, Great League and Color Cup, dateTime: 2023-03-09 02:30:00
+19,https://leekduck.com/events/season-14-great-league_master-premier-cup/, Great League and Master Premier Cup | Rising Heroes, dateTime: 2023-04-27 01:30:00
+20,https://leekduck.com/events/season-14-master-league_spring-cup-great-league-edition/, Master League and Spring Cup, dateTime: 2023-04-06 01:30:00
+21,https://leekduck.com/events/season-14-great-league_weather-cup-ultra-league-edition/, Great League and Weather Cup, dateTime: 2023-04-20 01:30:00
+22,https://leekduck.com/events/april-communityday2023/, Togetic Community Day, dateTime: 2023-04-15 14:00:00
+23,https://leekduck.com/events/raidhour20230405/, Lugia Raid Hour, dateTime: 2023-04-05 18:00:00
+24,https://leekduck.com/events/mega-alakazam-in-mega-raids-march-2023/, Mega Alakazam in Mega Raids, dateTime: 2023-03-28 10:00:00
+25,https://leekduck.com/events/lugia-in-5-star-raid-battles-march-2023/, Lugia in 5-star Raid Battles, dateTime: 2023-03-28 10:00:00
+26,https://leekduck.com/events/may-communityday2023/, May Community Day, dateTime: 2023-05-21 14:00:00
+</div>
+    </body>
+</html>
