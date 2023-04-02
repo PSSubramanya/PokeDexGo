@@ -5,25 +5,42 @@ App Plans:
 
 V1:
 Plan is to initially be able to add events personally and display it and edit/modify it and that it should notify us on event day and event time…
+Fetch the data of all events from PoGo game app/ game related websites and display the events in calendar and notify us the same like planned…
+    Create a Banner with main image, Tags, Description, Notification and tick with date and number of events on the date.
+    On click on banner -> Modal should be displayed with:
+        Tile
+        Description
+        Tags
+        Scrollable image to display variants of the pokemon
+        Close Button
+    Display event calendar wise.
+    Completed events to be shown in graysacle.
 
 V2:
-2nd level is to fetch the data of all events from PoGo game app/ game related websites and display the events in calendar and notify us the same like planned…
-
-    V2.1:
-    Display history tab
-
-    V2.2:
-    Display event calendar wise
-    Have a tab view where we can,
-    Display both history tab of events and also future upcoming events
+Calendar mode and Consecutive mode of displaying events.
+Show all the attacks the event pokemon has in pokemon go and higlight the featured attack
+Button to travel back in time to display all events that happened on that particular date in the past. 
 
 V3:
-Implement Pokedex in the app so it becomes easy for people to refer to the Pokemon in the event and get more info.
-Pokedex will have basic Pokemon infos and stats
+Searchable option for previous events.
+Month and Year choice to select previous date and view events
+Calendar option also to view previous events
+Create a new page to answer basic FAQ questions such as "what are spotlight hours?", "What are elite raids" etc....
 
 V4:
 Get the strength, weakness, movesets lists and make it more efficient for absolute information availability (with some crazy/good looking UI-UX and animations)
-Can refer Pokemon DB website for this for better idea
+Can refer Pokemon DB website for this for better idea.
+Saving user data.
+Collecting data on users location on Calendar.
+Match users/friends by the locations.
+Toggle b/w friends and all users so users have an option to make new friends.
+Make smash or pass page for pokemon XDD.
+
+V5:
+Make a pokemon chat gpt like cat-gpt.
+
+V6:
+Make a new pokemon generator apps gpt models.
 
 Some important links:
 
