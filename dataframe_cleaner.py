@@ -77,11 +77,9 @@ def server_json():
 #run(host='localhost',port=8080)
 pokemon_object = json.dumps(pokemon_json,indent=4)
 
-with open('./pokemon_data3.json',"w") as output_file:
+with open('./pokemon_data.json',"w") as output_file:
     #output_file.write(pokemon_json.replace('\\','')+'\n')
     #output_file.write(pokemon_json_cleaned)
     output_file.write(json.dumps({"data": pokemon_json_cleaned}, indent=4 ))
 
 #pokemon_data.to_csv('./cleaned.csv')
-    
-#split json_Summary on : and create a column in datafarme with column :Summary

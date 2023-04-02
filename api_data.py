@@ -141,14 +141,13 @@ def main():
         if "unannounced" in event_name:
             continue
         link = f"https://leekduck.com{event_name}"
-        print(link)
         event_links.add(link)
 
     for link in event_links:
         htmldata = getdata(link) 
         soup = BeautifulSoup(htmldata, 'html.parser') 
         for item in soup.find_all('img'):
-            img_link='https://leekduck.com/'+item['src']
+            img_link='https://leekduck.com'+item['src']
             break
 
         driver.get(link)
@@ -181,9 +180,7 @@ def main():
         ).text.split("M")[0] + "M".replace("  ", " ")
 
         complete_end_date = f"{end_date}, {end_time}"
-
-        #print(f"{link}: {complete_end_date}")
-
+        
         if start_date != "None":
             parsed_start_date = parse_date(complete_start_date)
             parsed_end_date = parse_date(complete_end_date)
