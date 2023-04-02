@@ -15,6 +15,7 @@ Fetch the data of all events from PoGo game app/ game related websites and displ
         Close Button
     Display event calendar wise.
     Completed events to be shown in graysacle.
+When we add a task like trade of do PvP for personal reasons even that should be displayed in the event display screen.
 
 V2:
 Calendar mode and Consecutive mode of displaying events.
