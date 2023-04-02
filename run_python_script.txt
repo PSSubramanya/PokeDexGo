@@ -1,0 +1,20 @@
+*** Steps to automatically execute a python script daily using windows scheduler***
+
+Step 1 : Search for “Task Scheduler”.
+         Go to Actions > Create Task
+         Give a name
+
+Step 2 : Go to Actions > New
+         Add the Python Executable File to the Program Script:
+            Find the Python Path using where python in the command line.
+        In Program/Script, add the path that you have copied from the command line.
+
+Step 3 : Add the Path to Your Python Script in the Arguments
+            Go to the folder where your Python script is located. Right-click on the file and select Copy as path.
+            In the "Add arguments (optional)” box, you will add the name of your python file.
+            In the "Start in (optional)" box, you will add the location of your python file.
+            Click “OK”.
+
+Step 4 : Trigger Your Script Execution
+            Go to “Triggers” > New
+            Click “OK”
