@@ -12,6 +12,7 @@ dfSummaries=[]
 startDate=[]
 startDateV2=[]
 imgSrc=[]
+bonus=[]
 
 df=pd.read_csv('./file.csv')
 
@@ -47,6 +48,15 @@ for summary in summaries:
     imgSplit=imgSplit[1]
     imgSrc.append(imgSplit.replace('\'','').replace('}',''))
 
+for summary in summaries:
+     summ= summary.split('bonus')
+     summSplit=summ[1].split(':',1)
+     summCleaned=summSplit[1].replace('}','')
+     #summCleaned=summCleaned.encode().decode('unicode-escape')
+     print(summCleaned)
+     #bonus.append(summSplit[1].replace('}',''))
+     bonus.append(summCleaned)
+
 for summary in jsonSummary:
     splitSum=summary.split(':')
     splitSumClean=splitSum[1].replace('\\xa0',' ')
@@ -64,6 +74,7 @@ for sdate in startDate:
 pokemonData['Summary']=dfSummaries
 pokemonData['Start DateTime'] = startDateV2
 pokemonData['Img Src'] = imgSrc
+pokemonData['Bonus'] = bonus
 
 pivot_ui(pokemonData)
 
