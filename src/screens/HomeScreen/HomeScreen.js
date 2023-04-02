@@ -8,7 +8,14 @@ import {
   TouchableOpacity,
   Pressable,
 } from 'react-native';
-// import {changeCount} from '../../actions/count'; //Sample - Remove Later
+
+import {
+  eventLinks,
+  eventSummary,
+  eventStartTimeStamp,
+  eventImageLoad,
+} from '../../actions/eventData';
+
 import {Modal, Portal, Provider} from 'react-native-paper';
 
 import strings from '../../constants/strings';
@@ -24,6 +31,8 @@ import {chooseFile} from '../../ultilities/commonFunctions';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
 
 import eventsDisplayMockData from '../../ultilities/mockData/eventsPerDay';
+// import mockPokemonData from '../../ultilities/mockData/samplePokeInfo.json';
+import webscrappedData from '../../ultilities/webscrappedData/pokemon_data.json';
 
 // remove this later
 import fontFamily from '../../ultilities/fontFamily';
@@ -35,9 +44,8 @@ import {
 
 const HomeScreen = ({navigation}) => {
   const dateToday = new Date();
-  // const dispatch = useDispatch();
-  // Use dispatch(changeCount(tempcount)); where it is supposed to be triggered //Sample - Remove Later
-  // const countValue = useSelector(state => state?.counter?.count); //Sample - Remove Later
+  const dispatch = useDispatch();
+
   const [selectedStartDate, setSelectedStartDate] = useState(dateToday);
   const [numberOfEvents, setNumberOfEvents] = useState(0);
   const [viewCalendar, setViewCalendar] = useState(false);
@@ -68,6 +76,19 @@ const HomeScreen = ({navigation}) => {
     setTime(timeValue);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [meridianStatus]);
+
+  useEffect(() => {
+    const loadedData = webscrappedData?.data;
+    const eventLinksData = loadedData?.Links;
+    const eventSummaryData = loadedData?.Summary;
+    const eventStartDateTimeData = loadedData?.['Start DateTime'];
+    const eventImageUrlData = loadedData?.['Img Src'];
+
+    dispatch(eventLinks(eventLinksData));
+    dispatch(eventSummary(eventSummaryData));
+    dispatch(eventStartTimeStamp(eventStartDateTimeData));
+    dispatch(eventImageLoad(eventImageUrlData));
+  }, []);
 
   const showModal = () => setModalVisible(true);
 

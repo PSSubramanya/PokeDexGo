@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
 import {
   Text,
   View,
@@ -23,6 +24,22 @@ import colors from '../../constants/colors';
 const EventViewScreen = props => {
   const selectedDate = props?.route?.params?.selectedDate;
 
+  const loadedEventLinks = useSelector(
+    state => state?.eventDataReducer?.eventlinks,
+  );
+
+  const loadedEventSummary = useSelector(
+    state => state?.eventDataReducer?.eventsummary,
+  );
+
+  const loadedEventTimeStamp = useSelector(
+    state => state?.eventDataReducer?.eventtimestamps,
+  );
+
+  const loadedEventImages = useSelector(
+    state => state?.eventDataReducer?.eventimages,
+  );
+
   const [selectedStartDate, setSelectedStartDate] = useState(selectedDate);
   const [eventsData, setEventsData] = useState(null);
   const [notifications, setNotifications] = useState([]);
@@ -38,6 +55,13 @@ const EventViewScreen = props => {
     );
     setEventsData(displayableEvents);
   }, [selectedStartDate]);
+
+  useEffect(() => {
+    console.log('***** loadedEventLinks *****', loadedEventLinks);
+    console.log('***** loadedEventSummary *****', loadedEventSummary);
+    console.log('***** loadedEventTimeStamp *****', loadedEventTimeStamp);
+    console.log('***** loadedEventImages *****', loadedEventImages);
+  }, []);
 
   const showModal = () => setModalVisible(true);
 

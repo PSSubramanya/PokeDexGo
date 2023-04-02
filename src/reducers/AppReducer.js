@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
-import CountReducer from './CountReducer';
+import EventDataReducer from './EventDataReducer';
 
 const AppReducer = combineReducers({
-  counter: CountReducer, //Sample - Remove Later
+  eventDataReducer: EventDataReducer,
 });
 
 const mainReducer = (state = {}, action) => {

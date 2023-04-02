@@ -57,6 +57,6 @@ Subbu:
 11.)Make dates display in home page scrollable/ carousal for better UX feel
 12.) Add firebase+ analytics integration
 13.) Add notificatoin postpone and snoozing option etc.
-14.) Add redux
+14.) Add redux - DONE
 15.) Learn and implement backend
 16.) Learn how to upload to playstore and App Store

@@ -1,1 +1,4 @@
-export const COUNTER_CHANGE = 'COUNTER_CHANGE'; //sample - Remove Later
+export const EVENT_LINKS = 'EVENT_LINKS';
+export const EVENT_SUMMARY = 'EVENT_SUMMARY';
+export const EVENT_START_DATE_TIME = 'EVENT_START_DATE_TIME';
+export const EVENT_IMAGE_URL = 'EVENT_IMAGE_URL';
