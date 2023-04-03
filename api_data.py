@@ -165,9 +165,12 @@ def main():
         
         img_src=[]
         for item in soup.find_all('img'):
-            img_link='https://leekduck.com'+item['src']
-            img_src.append(img_link)
-
+            src=item.get("src")
+            if src:
+                src = requests.compat.urljoin(url, src)
+            #img_link='https://leekduck.com'+item['src']
+                img_src.append(src)
+        img_src.pop()
         for soups in soup.find_all("div",class_="bonus-text"):
             soup_bonus.append(soups.string)
         #spans = soup2.find_all('span', {'id': 'event-time-end'})
