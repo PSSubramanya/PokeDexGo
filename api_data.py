@@ -72,6 +72,7 @@ class Event:
     description: str
     img_src : str
     bonus:list
+    timeZone:str
 
     def to_dict(self):
         if is_all_day_event(self.start_time, self.end_time):
@@ -85,6 +86,7 @@ class Event:
                 "end": {"date": self.end_time},
                 "img_src": self.img_src,
                 "bonus": self.bonus,
+                "timeZone": self.timeZone,
             }
 
         elif event_ends_next_year(self.start_time, self.end_time):
@@ -99,20 +101,22 @@ class Event:
             metadata = {
                 "summary": self.summary,
                 "description": self.description,
-                "start": {"dateTime": self.start_time, "timeZone": "UTC-5"},
-                "end": {"dateTime": self.end_time, "timeZone": "UTC-5"},
+                "start": {"dateTime": self.start_time},
+                "end": {"dateTime": self.end_time},
                 "img_src": self.img_src,
                 "bonus": self.bonus,
+                "timeZone": self.timeZone,
             }
 
         else:
             metadata = {
                 "summary": self.summary,
                 "description": self.description,
-                "start": {"dateTime": self.start_time, "timeZone": "UTC-5"},
-                "end": {"dateTime": self.end_time, "timeZone": "UTC-5"},
+                "start": {"dateTime": self.start_time},
+                "end": {"dateTime": self.end_time},
                 "img_src": self.img_src,
                 "bonus": self.bonus,
+                "timeZone": self.timeZone,
             }
 
         return metadata
@@ -137,7 +141,7 @@ def main():
         "span",
         class_="event-header-item-wrapper"
     )
-
+    timeZone=str()
     event_links = set()
 
     for span in soup:
@@ -151,13 +155,18 @@ def main():
         soup_bonus=[]
         htmldata = getdata(link) 
         soup = BeautifulSoup(htmldata, 'html.parser') 
+        soup2=BeautifulSoup(driver.page_source, "lxml")
+
         for item in soup.find_all('img'):
             img_link='https://leekduck.com'+item['src']
             break
         for soups in soup.find_all("div",class_="bonus-text"):
             soup_bonus.append(soups.string)
-
-        print(soup_bonus)
+        #spans = soup2.find_all('span', {'id': 'event-time-end'})
+        for span in soup2.find_all('span', {'id': 'event-time-end'}):
+            timeZoneString=span.string
+            timeZoneSplit=timeZoneString.split('M')
+            timeZone=timeZoneSplit[1]
         driver.get(link)
         soup = BeautifulSoup(driver.page_source, "lxml")
 
@@ -193,7 +202,7 @@ def main():
             parsed_start_date = parse_date(complete_start_date)
             parsed_end_date = parse_date(complete_end_date)
 
-            new_event = Event(parsed_start_date, parsed_end_date, title, link,img_link,soup_bonus)
+            new_event = Event(parsed_start_date, parsed_end_date, title, link,img_link,soup_bonus,timeZone)
             events[link] = new_event
 
     df=pandas.DataFrame(events,index=[0]).T

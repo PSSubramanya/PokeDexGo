@@ -13,6 +13,8 @@ startDate=[]
 startDateV2=[]
 imgSrc=[]
 bonus=[]
+timeZone=[]
+endDate=[]
 
 df=pd.read_csv('./file.csv')
 
@@ -53,9 +55,45 @@ for summary in summaries:
      summSplit=summ[1].split(':',1)
      summCleaned=summSplit[1].replace('}','')
      #summCleaned=summCleaned.encode().decode('unicode-escape')
-     print(summCleaned)
-     #bonus.append(summSplit[1].replace('}',''))
-     bonus.append(summCleaned)
+     summCleanedSplit=summCleaned.split('timeZone')
+     strToBeCleaned=summCleanedSplit[0]
+     strToReplace=','
+     replacementStr=''
+     pos=strToBeCleaned.rfind(strToReplace)
+     if pos >-1:
+         summCleanedSplit=strToBeCleaned[:pos]+replacementStr + strToBeCleaned[pos + len(strToReplace): ]
+     else:
+         summCleanedSplit=strToBeCleaned
+     strToReplace2='\''
+     pos2=summCleanedSplit.rfind(strToReplace2)
+     if pos2>-1:
+         summCleanedSplit=summCleanedSplit[:pos2]+replacementStr + summCleanedSplit[pos2 + len(strToReplace2): ]
+     else:
+        summCleanedSplit=strToBeCleaned
+     bonus.append(summCleanedSplit)
+
+for summary in summaries:
+    summ=summary.split('end')
+    summ=summ[1].split('img_src')
+    summ=summ[0].split(':',1)
+    summ=summ[1].split(':',1)
+    summ=summ[1].replace('}','')
+    summ=summ.replace(',','')
+    strToReplace='\''
+    replacementStr=''
+    pos=summ.rfind(strToReplace)
+    if pos >-1:
+        summCleanedSplit=summ[:pos]+replacementStr + summ[pos + len(strToReplace): ]
+    else:
+        summCleanedSplit=summ
+    endDate.append(summCleanedSplit.replace('\'',''))
+
+for summary in summaries:
+    summ=summary.split('timeZone')
+    summTimeZone=summ[1].split(':')
+    summTimeZone=summTimeZone[1].replace('}','')
+    summTimeZone=summTimeZone.replace('\'','')
+    timeZone.append(summTimeZone.replace('\\xa0',''))
 
 for summary in jsonSummary:
     splitSum=summary.split(':')
@@ -68,13 +106,16 @@ for summary in jsonSummary:
 for sdate in startDate:
     splitDate=sdate.split(':',1)
     #splitDate_v2=str(splitDate).split(':',1)
+    splitDate=splitDate[1].split(':',1)
     startDateV2.append(splitDate[1].replace('\'',''))
 #print(dfSummaries)
 
 pokemonData['Summary']=dfSummaries
 pokemonData['Start DateTime'] = startDateV2
+pokemonData['End DateTime'] = endDate
 pokemonData['Img Src'] = imgSrc
 pokemonData['Bonus'] = bonus
+pokemonData['timeZone'] = timeZone
 
 pivot_ui(pokemonData)
 
