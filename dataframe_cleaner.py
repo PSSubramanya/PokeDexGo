@@ -41,36 +41,47 @@ for summary in summaries:
 #print(startDate)
 
 for summary in summaries:
-    summ=summary.split(',')
-    i=2
-    if 'img' not in summ[2]:
-        i=3
-        while 'img' not in summ[i]:
-            i+=1
-    imgSplit=summ[i].split(':',1)
-    imgSplit=imgSplit[1]
-    imgSrc.append(imgSplit.replace('\'','').replace('}',''))
+    summ=summary.split('img_src')
+    summ=summ[1].split('Bonus')
+    summ=summ[0].split(':',1)
+    strToBeCleaned=summ[1]
+    strToReplace='\''
+    replacementStr=''
+    pos=strToBeCleaned.rfind(strToReplace)
+    if pos >-1:
+        summCleanedSplit=strToBeCleaned[:pos]+replacementStr + strToBeCleaned[pos + len(strToReplace): ]
+    else:
+        summCleanedSplit=strToBeCleaned
+    strToReplace2=','
+    pos2=summCleanedSplit.rfind(strToReplace2)
+    if pos2 >-1:
+        summCleanedSplit=summCleanedSplit[:pos2]+replacementStr + summCleanedSplit[pos2 + len(strToReplace): ]
+    else:
+        summCleanedSplit=summCleanedSplit
+    imgSrc.append(summCleanedSplit)
 
 for summary in summaries:
-     summ= summary.split('bonus')
-     summSplit=summ[1].split(':',1)
-     summCleaned=summSplit[1].replace('}','')
-     #summCleaned=summCleaned.encode().decode('unicode-escape')
-     summCleanedSplit=summCleaned.split('timeZone')
-     strToBeCleaned=summCleanedSplit[0]
-     strToReplace=','
+     summ= summary.split('timeZone')
+     #summSplit=summ[1].split(':',1)
+     summ=summ[0].split('Bonus')
+     summ=summ[1].split(':',1)
+     summ=summ[1].replace(',','')
+     #summCleaned=summSplit[1].replace('}','')
+     #summCleanedSplit=summCleaned.split('timeZone')
+     strToBeCleaned=summ
+     strToReplace='\''
      replacementStr=''
      pos=strToBeCleaned.rfind(strToReplace)
      if pos >-1:
          summCleanedSplit=strToBeCleaned[:pos]+replacementStr + strToBeCleaned[pos + len(strToReplace): ]
      else:
          summCleanedSplit=strToBeCleaned
-     strToReplace2='\''
-     pos2=summCleanedSplit.rfind(strToReplace2)
-     if pos2>-1:
-         summCleanedSplit=summCleanedSplit[:pos2]+replacementStr + summCleanedSplit[pos2 + len(strToReplace2): ]
-     else:
-        summCleanedSplit=strToBeCleaned
+     #strToReplace2='\''
+     #pos2=summCleanedSplit.rfind(strToReplace2)
+     #if pos2>-1:
+     #    summCleanedSplit=summCleanedSplit[:pos2]+replacementStr + summCleanedSplit[pos2 + len(strToReplace2): ]
+     #else:
+     #   summCleanedSplit=strToBeCleaned
      bonus.append(summCleanedSplit)
 
 for summary in summaries:
@@ -92,8 +103,10 @@ for summary in summaries:
 for summary in summaries:
     summ=summary.split('timeZone')
     summTimeZone=summ[1].split(':')
-    summTimeZone=summTimeZone[1].replace('}','')
+    summTimeZone=summTimeZone[1].split(',')
+    summTimeZone=summTimeZone[0].replace('}','')
     summTimeZone=summTimeZone.replace('\'','')
+    #summTimeZone=summTimeZone.replace('\'','')
     timeZone.append(summTimeZone.replace('\\xa0',''))
 
 for summary in summaries:

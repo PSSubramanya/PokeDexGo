@@ -86,7 +86,7 @@ class Event:
                 "start": {"date": self.start_time},
                 "end": {"date": self.end_time},
                 "img_src": self.img_src,
-                "bonus": self.bonus,
+                "Bonus": self.bonus,
                 "timeZone": self.timeZone,
                 "Description":self.Description,
             }
@@ -106,7 +106,7 @@ class Event:
                 "start": {"dateTime": self.start_time},
                 "end": {"dateTime": self.end_time},
                 "img_src": self.img_src,
-                "bonus": self.bonus,
+                "Bonus": self.bonus,
                 "timeZone": self.timeZone,
                 "Description":self.Description,
             }
@@ -118,7 +118,7 @@ class Event:
                 "start": {"dateTime": self.start_time},
                 "end": {"dateTime": self.end_time},
                 "img_src": self.img_src,
-                "bonus": self.bonus,
+                "Bonus": self.bonus,
                 "timeZone": self.timeZone,
                 "Description":self.Description,
             }
@@ -148,6 +148,7 @@ def main():
     timeZone=str()
     Description=str()
     event_links = set()
+    img_src = list()
 
     for span in soup:
         event_name = span.find("a").get("href")
@@ -161,10 +162,12 @@ def main():
         htmldata = getdata(link) 
         soup = BeautifulSoup(htmldata, 'html.parser') 
         soup2=BeautifulSoup(driver.page_source, "lxml")
-
+        
+        img_src=[]
         for item in soup.find_all('img'):
             img_link='https://leekduck.com'+item['src']
-            break
+            img_src.append(img_link)
+
         for soups in soup.find_all("div",class_="bonus-text"):
             soup_bonus.append(soups.string)
         #spans = soup2.find_all('span', {'id': 'event-time-end'})
@@ -212,7 +215,7 @@ def main():
             parsed_start_date = parse_date(complete_start_date)
             parsed_end_date = parse_date(complete_end_date)
 
-            new_event = Event(parsed_start_date, parsed_end_date, title, link,img_link,soup_bonus,timeZone,Description)
+            new_event = Event(parsed_start_date, parsed_end_date, title, link,img_src,soup_bonus,timeZone,Description)
             events[link] = new_event
 
     df=pandas.DataFrame(events,index=[0]).T
