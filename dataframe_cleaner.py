@@ -65,7 +65,7 @@ for summary in summaries:
      #summSplit=summ[1].split(':',1)
      summ=summ[0].split('Bonus')
      summ=summ[1].split(':',1)
-     summ=summ[1].replace(',','')
+     summ=summ[1]
      #summCleaned=summSplit[1].replace('}','')
      #summCleanedSplit=summCleaned.split('timeZone')
      strToBeCleaned=summ
@@ -76,12 +76,12 @@ for summary in summaries:
          summCleanedSplit=strToBeCleaned[:pos]+replacementStr + strToBeCleaned[pos + len(strToReplace): ]
      else:
          summCleanedSplit=strToBeCleaned
-     #strToReplace2='\''
-     #pos2=summCleanedSplit.rfind(strToReplace2)
-     #if pos2>-1:
-     #    summCleanedSplit=summCleanedSplit[:pos2]+replacementStr + summCleanedSplit[pos2 + len(strToReplace2): ]
-     #else:
-     #   summCleanedSplit=strToBeCleaned
+     strToReplace2=','
+     pos2=summCleanedSplit.rfind(strToReplace2)
+     if pos2>-1:
+         summCleanedSplit=summCleanedSplit[:pos2]+replacementStr + summCleanedSplit[pos2 + len(strToReplace2): ]
+     else:
+        summCleanedSplit=strToBeCleaned
      bonus.append(summCleanedSplit)
 
 for summary in summaries:
@@ -106,7 +106,7 @@ for summary in summaries:
     summTimeZone=summTimeZone[1].split(',')
     summTimeZone=summTimeZone[0].replace('}','')
     summTimeZone=summTimeZone.replace('\'','')
-    #summTimeZone=summTimeZone.replace('\'','')
+    summTimeZone=summTimeZone.replace(' ','')
     timeZone.append(summTimeZone.replace('\\xa0',''))
 
 for summary in summaries:
