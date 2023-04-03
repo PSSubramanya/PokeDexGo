@@ -73,6 +73,7 @@ class Event:
     img_src : str
     bonus:list
     timeZone:str
+    Description:str
 
     def to_dict(self):
         if is_all_day_event(self.start_time, self.end_time):
@@ -87,6 +88,7 @@ class Event:
                 "img_src": self.img_src,
                 "bonus": self.bonus,
                 "timeZone": self.timeZone,
+                "Description":self.Description,
             }
 
         elif event_ends_next_year(self.start_time, self.end_time):
@@ -106,6 +108,7 @@ class Event:
                 "img_src": self.img_src,
                 "bonus": self.bonus,
                 "timeZone": self.timeZone,
+                "Description":self.Description,
             }
 
         else:
@@ -117,6 +120,7 @@ class Event:
                 "img_src": self.img_src,
                 "bonus": self.bonus,
                 "timeZone": self.timeZone,
+                "Description":self.Description,
             }
 
         return metadata
@@ -142,6 +146,7 @@ def main():
         class_="event-header-item-wrapper"
     )
     timeZone=str()
+    Description=str()
     event_links = set()
 
     for span in soup:
@@ -169,6 +174,11 @@ def main():
             timeZone=timeZoneSplit[1]
         driver.get(link)
         soup = BeautifulSoup(driver.page_source, "lxml")
+
+        for p in soup.find_all("div",class_="event-description"):
+            data=p.find_all('p')
+            desc=str(data[0]).replace('<p>','')
+            Description=desc.replace('</p>','')
 
         title = soup.find("h1").text.strip()  
 
@@ -202,7 +212,7 @@ def main():
             parsed_start_date = parse_date(complete_start_date)
             parsed_end_date = parse_date(complete_end_date)
 
-            new_event = Event(parsed_start_date, parsed_end_date, title, link,img_link,soup_bonus,timeZone)
+            new_event = Event(parsed_start_date, parsed_end_date, title, link,img_link,soup_bonus,timeZone,Description)
             events[link] = new_event
 
     df=pandas.DataFrame(events,index=[0]).T

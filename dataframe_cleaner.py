@@ -15,6 +15,7 @@ imgSrc=[]
 bonus=[]
 timeZone=[]
 endDate=[]
+description=[]
 
 df=pd.read_csv('./file.csv')
 
@@ -95,6 +96,14 @@ for summary in summaries:
     summTimeZone=summTimeZone.replace('\'','')
     timeZone.append(summTimeZone.replace('\\xa0',''))
 
+for summary in summaries:
+    summ=summary.split('Description')
+    summ=summ[1].split(':',1)
+    summ=str(summ[1])
+    summ=re.sub(r'<.*?>','',summ)
+    summ=summ.replace('\'','')
+    description.append(summ.replace('}',''))
+
 for summary in jsonSummary:
     splitSum=summary.split(':')
     splitSumClean=splitSum[1].replace('\\xa0',' ')
@@ -116,6 +125,7 @@ pokemonData['End DateTime'] = endDate
 pokemonData['Img Src'] = imgSrc
 pokemonData['Bonus'] = bonus
 pokemonData['timeZone'] = timeZone
+pokemonData['Description'] = description
 
 pivot_ui(pokemonData)
 
