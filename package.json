@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "generate": "plop"
   },
   "dependencies": {
     "@react-navigation/native": "^6.0.13",
@@ -33,6 +34,7 @@
     "eslint": "^7.32.0",
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "0.72.3",
+    "plop": "^3.1.2",
     "react-test-renderer": "18.1.0"
   },
   "jest": {

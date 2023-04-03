@@ -44,7 +44,7 @@ Rahul:
 
 
 Subbu:
-1.) Implement Handlebars for component based building
+1.) Implement Handlebars for component based building - DONE
 2.) Implement StoryBook for component based building
 3.) Range based implementations for events (Multiple events same day same time types)
 4.) Animate the cards
@@ -60,3 +60,8 @@ Subbu:
 14.) Add redux - DONE
 15.) Learn and implement backend
 16.) Learn how to upload to playstore and App Store
+17.) Carousal Slider Component
+18.) Build an EventDisplayCard to replace TimelineCard as per Figma
+19.) Keep Knob and Timeline based component "TimelineCard" style separaetely in one branch and "EventDisplayCard" in another branch
+20.) Note concepts used in the project so it helps for resume - Applies to all
+21.) Learn to write test files if possible
