@@ -1,6 +1,5 @@
 import pandas as pd
 import json
-import unicodedata
 from bottle import *
 from pivottablejs import pivot_ui
 import re
