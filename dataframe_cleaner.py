@@ -15,6 +15,7 @@ bonus=[]
 timeZone=[]
 endDate=[]
 description=[]
+data=[]
 
 df=pd.read_csv('./file.csv')
 
@@ -139,21 +140,27 @@ pokemonData['Bonus'] = bonus
 pokemonData['timeZone'] = timeZone
 pokemonData['Description'] = description
 
+pokemonData['json'] = pokemonData.to_json(orient='records', lines=True).splitlines()
+
 pivot_ui(pokemonData)
 
-pokemonJson=pokemonData.to_json()
-pokemonJsonCleaned=json.loads(pokemonJson)
+for i in pokemonData['json']:
+    data.append(json.loads(i))
 
-@get('/')
-def server_json():
-    return{"msg":pokemonJsonCleaned,"error":"Cannot Host Data"}
+#pokemonJson=pokemonData.to_json()
+#pokemonJsonCleaned=json.loads(pokemonJson)
+
+#@get('/')
+#def server_json():
+    #return{"msg":pokemonJsonCleaned,"error":"Cannot Host Data"}
 
 #run(host='localhost',port=8080)
-pokemon_object = json.dumps(pokemonJson,indent=4)
+#pokemon_object = json.dumps(pokemonJson,indent=4)
 
-with open('./pokemon_data.json',"w") as output_file:
+with open('./pokemon_data2.json',"w") as output_file:
     #output_file.write(pokemon_json.replace('\\','')+'\n')
     #output_file.write(pokemon_json_cleaned)
-    output_file.write(json.dumps({"data": pokemonJsonCleaned}, indent=4 ))
+    #output_file.write(json.dumps({"data": pokemonJsonCleaned}, indent=4 ))
+    output_file.write(json.dumps({"data": data}, indent=4 ))
 
 #pokemonData.to_csv('./cleaned.csv')
