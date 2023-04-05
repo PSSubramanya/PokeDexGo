@@ -3,6 +3,7 @@ import json
 from bottle import *
 from pivottablejs import pivot_ui
 import re
+from ast import literal_eval
 
 links=[]
 summaries=[]
@@ -147,6 +148,9 @@ pivot_ui(pokemonData)
 for i in pokemonData['json']:
     data.append(json.loads(i))
 
+for i in data:
+    i['Img Src'] = literal_eval(i['Img Src'])
+    i['Bonus'] = literal_eval(i['Bonus'])
 #pokemonJson=pokemonData.to_json()
 #pokemonJsonCleaned=json.loads(pokemonJson)
 
