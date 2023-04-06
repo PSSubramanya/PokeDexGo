@@ -108,7 +108,11 @@ for summary in summaries:
     summTimeZone=summTimeZone[0].replace('}','')
     summTimeZone=summTimeZone.replace('\'','')
     summTimeZone=summTimeZone.replace(' ','')
-    timeZone.append(summTimeZone.replace('\\xa0',''))
+    if summTimeZone=="":
+        summTimeZone="LocalTime"
+        timeZone.append(summTimeZone.replace('\\xa0',''))
+    elif summTimeZone!="":
+        timeZone.append(summTimeZone.replace('\\xa0',''))
 
 for summary in summaries:
     summ=summary.split('Description')
