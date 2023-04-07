@@ -169,8 +169,9 @@ def main():
             if src:
                 src = requests.compat.urljoin(url, src)
                 if len(img_src)==0 or 'pokemon_icons' in src:
+                    if src not in img_src:
             #img_link='https://leekduck.com'+item['src']
-                    img_src.append(src)
+                        img_src.append(src)
         #img_src.pop()
         for soups in soup.find_all("div",class_="bonus-text"):
             soup_bonus.append(soups.string)
