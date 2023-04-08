@@ -16,9 +16,7 @@ import imagePaths from '../../constants/imagePaths';
 import styles from './styles';
 import moment from 'moment';
 import CalendarView from '../../components/CalendarView/CalendarView';
-import TimelineCard from '../../components/TimelineCard/TimelineCard';
 import Button from '../../components/Button/Button';
-import eventsDisplayMockData from '../../ultilities/mockData/eventsPerDay';
 import colors from '../../constants/colors';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
 import {horizontalScale} from '../../ultilities/scale';
@@ -41,7 +39,7 @@ const EventViewScreen = props => {
   const [modalData, setModalData] = useState({});
 
   const [modalImageIndex, setModalImageIndex] = useState(0);
-  const [modalImageOffsetIndex, setModalImageOffsetIndex] = useState(0);
+  // const [modalImageOffsetIndex, setModalImageOffsetIndex] = useState(0); /* NOTE: Alternate method for scrolling using scrollToOffset */
 
   useEffect(() => {
     const displayableEvents = loadedEventJSONData?.data.filter(
@@ -50,6 +48,7 @@ const EventViewScreen = props => {
         moment(selectedStartDate).format('DD/MM/YYYY'),
     );
     setEventsData(displayableEvents);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStartDate]);
 
   const showModal = () => {
@@ -128,17 +127,9 @@ const EventViewScreen = props => {
     return <EventDisplayCard item={item} />;
   };
 
-  const modalContainer = () => {
-    const substring = 'pokemon_icons';
-
-    const modalImages = modalData?.['Img Src']?.filter(data =>
-      data?.includes(substring),
-    );
-
+  const eventBonusesDisplay = () => {
     return (
-      <View style={styles.modalInnerStyle}>
-        <Text style={styles.modalTextStyle}>{modalData.Summary}</Text>
-        <Text style={styles.eventDescription}>{modalData?.Description}</Text>
+      <>
         {modalData?.Bonus?.length > 0 ? (
           <FlatList
             contentContainerStyle={styles.descriptionDataContentView}
@@ -153,9 +144,36 @@ const EventViewScreen = props => {
             }}
           />
         ) : null}
+      </>
+    );
+  };
 
-        {/* CAROUSAL SLIDER SECTION */}
+  const eventTimeDisplay = () => {
+    return (
+      <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
+        {`Starts on ${moment(modalData?.['Start DateTime']).format(
+          'DD/MM/YYYY',
+        )} at ${moment(modalData?.['Start DateTime']).format('LT')}`}
+      </Text>
+    );
+  };
 
+  const modalCloseButton = () => {
+    return (
+      <Button
+        buttonStyle={[styles.buttonStyle, styles.viewButton]}
+        buttonTextStyle={[styles.viewButtonText]}
+        onPress={() => {
+          hideModal();
+        }}
+        buttonText={strings.close}
+      />
+    );
+  };
+
+  const carousalImageSliderSection = modalImages => {
+    return (
+      <>
         <View style={styles.eventImageContainer}>
           {modalImages?.length > 1 ? (
             <TouchableOpacity
@@ -271,65 +289,92 @@ const EventViewScreen = props => {
             }}
           />
         ) : null}
+      </>
+    );
+  };
 
-        {/* CAROUSAL SLIDER TILL HERE */}
+  const modalContainer = () => {
+    const substring = 'pokemon_icons';
 
-        <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
-          {`Starts on ${moment(modalData?.['Start DateTime']).format(
-            'DD/MM/YYYY',
-          )} at ${moment(modalData?.['Start DateTime']).format('LT')}`}
-        </Text>
-        <Button
-          buttonStyle={[styles.buttonStyle, styles.viewButton]}
-          buttonTextStyle={[styles.viewButtonText]}
-          onPress={() => {
-            hideModal();
-          }}
-          buttonText={strings.close}
+    const modalImages = modalData?.['Img Src']?.filter(data =>
+      data?.includes(substring),
+    );
+
+    return (
+      <View style={styles.modalInnerStyle}>
+        <Text style={styles.modalTextStyle}>{modalData.Summary}</Text>
+        <Text style={styles.eventDescription}>{modalData?.Description}</Text>
+        {eventBonusesDisplay()}
+        {carousalImageSliderSection(modalImages)}
+        {eventTimeDisplay()}
+        {modalCloseButton()}
+      </View>
+    );
+  };
+
+  const modalPopUp = () => {
+    return (
+      <Portal>
+        <Modal
+          style={styles.modalMarginStyle}
+          visible={modalVisible}
+          onDismiss={hideModal}
+          contentContainerStyle={styles.modalExternalStyle}>
+          {modalContainer()}
+        </Modal>
+      </Portal>
+    );
+  };
+
+  const calandarView = () => {
+    return (
+      <View style={styles.calandarView}>
+        <CalendarView
+          setSelectedStartDate={setSelectedStartDate}
+          selectedStartDate={selectedStartDate}
         />
       </View>
+    );
+  };
+
+  const eventHeaderSection = () => {
+    return (
+      <View style={styles.eventsSectionHeader}>
+        <Text style={styles.eventDateText}>
+          {moment(selectedStartDate).format('MMM Do, YYYY')}
+        </Text>
+        <Text style={styles.eventNumberText}>
+          Number of events {eventsData?.length ?? 0}
+        </Text>
+      </View>
+    );
+  };
+
+  const eventsDetailSection = () => {
+    return (
+      <ScrollView style={styles.eventDataListContainer}>
+        {eventsData?.length !== 0 ? (
+          <View>
+            <FlatList
+              data={eventsData}
+              keyExtractor={item => item.id}
+              renderItem={renderItem}
+            />
+          </View>
+        ) : (
+          renderEmptyListComponent()
+        )}
+      </ScrollView>
     );
   };
 
   return (
     <Provider>
       <SafeAreaView style={{}}>
-        <Portal>
-          <Modal
-            style={styles.modalMarginStyle}
-            visible={modalVisible}
-            onDismiss={hideModal}
-            contentContainerStyle={styles.modalExternalStyle}>
-            {modalContainer()}
-          </Modal>
-        </Portal>
-        <View style={styles.calandarView}>
-          <CalendarView
-            setSelectedStartDate={setSelectedStartDate}
-            selectedStartDate={selectedStartDate}
-          />
-        </View>
-        <View style={styles.eventsSectionHeader}>
-          <Text style={styles.eventDateText}>
-            {moment(selectedStartDate).format('MMM Do, YYYY')}
-          </Text>
-          <Text style={styles.eventNumberText}>
-            Number of events {eventsData?.length ?? 0}
-          </Text>
-        </View>
-        <ScrollView style={styles.eventDataListContainer}>
-          {eventsData?.length !== 0 ? (
-            <View>
-              <FlatList
-                data={eventsData}
-                keyExtractor={item => item.id}
-                renderItem={renderItem}
-              />
-            </View>
-          ) : (
-            renderEmptyListComponent()
-          )}
-        </ScrollView>
+        {modalPopUp()}
+        {calandarView()}
+        {eventHeaderSection()}
+        {eventsDetailSection()}
       </SafeAreaView>
     </Provider>
   );
