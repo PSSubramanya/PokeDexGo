@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {
   Text,
   View,
@@ -9,18 +9,10 @@ import {
   Pressable,
 } from 'react-native';
 
-import {
-  eventLinks,
-  eventSummary,
-  eventStartTimeStamp,
-  eventImageLoad,
-} from '../../actions/eventData';
-
 import {Modal, Portal, Provider} from 'react-native-paper';
 
 import strings from '../../constants/strings';
 import imagePaths from '../../constants/imagePaths';
-import colors from '../../constants/colors';
 import styles from './styles';
 import moment from 'moment';
 import Button from '../../components/Button/Button';
@@ -29,10 +21,6 @@ import CalendarView from '../../components/CalendarView/CalendarView';
 import CardView from '../../components/CardView/CardView';
 import {chooseFile} from '../../ultilities/commonFunctions';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
-
-import eventsDisplayMockData from '../../ultilities/mockData/eventsPerDay';
-// import mockPokemonData from '../../ultilities/mockData/samplePokeInfo.json';
-import webscrappedData from '../../ultilities/webscrappedData/pokemon_data.json';
 
 // remove this later
 import fontFamily from '../../ultilities/fontFamily';
@@ -44,7 +32,10 @@ import {
 
 const HomeScreen = ({navigation}) => {
   const dateToday = new Date();
-  const dispatch = useDispatch();
+
+  const loadedEventJSONData = useSelector(
+    state => state?.eventDataReducer?.eventdataload,
+  );
 
   const [selectedStartDate, setSelectedStartDate] = useState(dateToday);
   const [numberOfEvents, setNumberOfEvents] = useState(0);
@@ -59,16 +50,16 @@ const HomeScreen = ({navigation}) => {
   const [selectedTimePart, setSelectedTimePart] = useState('hour');
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [modalData, setModalData] = useState({});
 
   useEffect(() => {
-    console.log('Selected new Dates', selectedStartDate);
-
-    const displayableEvents = eventsDisplayMockData.filter(
+    const displayableEvents = loadedEventJSONData?.data.filter(
       data =>
-        data?.eventDate === moment(selectedStartDate).format('DD/MM/YYYY'),
+        moment(data?.['Start DateTime']).format('DD/MM/YYYY') ===
+        moment(selectedStartDate).format('DD/MM/YYYY'),
     );
+
     setNumberOfEvents(displayableEvents.length);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStartDate]);
 
   useEffect(() => {
@@ -76,19 +67,6 @@ const HomeScreen = ({navigation}) => {
     setTime(timeValue);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [meridianStatus]);
-
-  useEffect(() => {
-    const loadedData = webscrappedData?.data;
-    const eventLinksData = loadedData?.Links;
-    const eventSummaryData = loadedData?.Summary;
-    const eventStartDateTimeData = loadedData?.['Start DateTime'];
-    const eventImageUrlData = loadedData?.['Img Src'];
-
-    dispatch(eventLinks(eventLinksData));
-    dispatch(eventSummary(eventSummaryData));
-    dispatch(eventStartTimeStamp(eventStartDateTimeData));
-    dispatch(eventImageLoad(eventImageUrlData));
-  }, []);
 
   const showModal = () => setModalVisible(true);
 

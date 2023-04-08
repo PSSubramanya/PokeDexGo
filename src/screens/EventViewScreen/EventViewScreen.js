@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {useSelector} from 'react-redux';
 import {
   Text,
@@ -16,222 +16,404 @@ import imagePaths from '../../constants/imagePaths';
 import styles from './styles';
 import moment from 'moment';
 import CalendarView from '../../components/CalendarView/CalendarView';
-import TimelineCard from '../../components/TimelineCard/TimelineCard';
 import Button from '../../components/Button/Button';
-import eventsDisplayMockData from '../../ultilities/mockData/eventsPerDay';
 import colors from '../../constants/colors';
+import commonStyling from '../../ultilities/commonStyling/commonStyling';
+import {horizontalScale} from '../../ultilities/scale';
+import CardView from '../../components/CardView/CardView';
+import EventDisplayCard from '../../components/EventDisplayCard/EventDisplayCard';
 
 const EventViewScreen = props => {
+  let listViewRef = useRef();
+
   const selectedDate = props?.route?.params?.selectedDate;
 
-  const loadedEventLinks = useSelector(
-    state => state?.eventDataReducer?.eventlinks,
-  );
-
-  const loadedEventSummary = useSelector(
-    state => state?.eventDataReducer?.eventsummary,
-  );
-
-  const loadedEventTimeStamp = useSelector(
-    state => state?.eventDataReducer?.eventtimestamps,
-  );
-
-  const loadedEventImages = useSelector(
-    state => state?.eventDataReducer?.eventimages,
+  const loadedEventJSONData = useSelector(
+    state => state?.eventDataReducer?.eventdataload,
   );
 
   const [selectedStartDate, setSelectedStartDate] = useState(selectedDate);
   const [eventsData, setEventsData] = useState(null);
-  const [notifications, setNotifications] = useState([]);
-  const [checkLists, setCheckLists] = useState([]);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalData, setModalData] = useState({});
 
+  const [modalImageIndex, setModalImageIndex] = useState(0);
+  // const [modalImageOffsetIndex, setModalImageOffsetIndex] = useState(0); /* NOTE: Alternate method for scrolling using scrollToOffset */
+
   useEffect(() => {
-    const displayableEvents = eventsDisplayMockData.filter(
+    const displayableEvents = loadedEventJSONData?.data.filter(
       data =>
-        data?.eventDate === moment(selectedStartDate).format('DD/MM/YYYY'),
+        moment(data?.['Start DateTime']).format('DD/MM/YYYY') ===
+        moment(selectedStartDate).format('DD/MM/YYYY'),
     );
     setEventsData(displayableEvents);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStartDate]);
 
-  useEffect(() => {
-    console.log('***** loadedEventLinks *****', loadedEventLinks);
-    console.log('***** loadedEventSummary *****', loadedEventSummary);
-    console.log('***** loadedEventTimeStamp *****', loadedEventTimeStamp);
-    console.log('***** loadedEventImages *****', loadedEventImages);
-  }, []);
+  const showModal = () => {
+    setModalVisible(true);
+    setModalImageIndex(0);
+    // setModalImageOffsetIndex(0); /* NOTE: Alternate method for scrolling using scrollToOffset */
+  };
 
-  const showModal = () => setModalVisible(true);
+  const hideModal = () => {
+    setModalVisible(false);
+    setModalImageIndex(0);
+    // setModalImageOffsetIndex(0);  /* NOTE: Alternate method for scrolling using scrollToOffset */
+  };
 
-  const hideModal = () => setModalVisible(false);
+  const leftButtonHandler = id => {
+    listViewRef.current.scrollToIndex({animated: true, index: id});
 
-  const cardContainerView = item => {
-    return (
-      <View style={styles.timelineCardStyle}>
-        <View style={styles.flexRowStyle}>
-          <View style={styles.cardHeaderSection}>
-            <Image
-              source={{uri: item?.eventImage}}
-              height={1}
-              width={1}
-              style={styles.eventImage}
-              resizeMode={'contain'}
-            />
-          </View>
+    /* NOTE: Alternate method for scrolling using scrollToOffset */
+    /*
+      const offsetValue = modalImageOffsetIndex - horizontalScale(280);
+      listViewRef.scrollToOffset({
+        offset: offsetValue,
+        animated: true,
+      });
+      setModalImageOffsetIndex(offsetValue);
+    */
+  };
 
-          <View style={styles.cardBodySection}>
-            <View>
-              <Text style={styles.eventName}>{item.eventName}</Text>
-              <Text style={styles.eventDescription}>
-                {item.eventDescription}
-              </Text>
-            </View>
-            <Text style={styles.eventTimeStyle}>
-              {`starts at ${item.eventTime}`}
-            </Text>
-          </View>
-        </View>
-        <View style={styles.cardFooterSection}>
-          <TouchableOpacity
-            onPress={() => {
-              const tempNotificationsArray = notifications;
-              let tempArray = [];
+  const rightButtonHandler = id => {
+    listViewRef.current.scrollToIndex({animated: true, index: id});
 
-              if (tempNotificationsArray.includes(item)) {
-                tempArray = tempNotificationsArray.filter(obj => obj !== item);
-                setNotifications(tempArray);
-                return;
-              } else {
-                tempArray = [...tempNotificationsArray, item];
-                setNotifications(tempArray);
-              }
-            }}>
-            <View style={{}}>
-              <Image
-                source={
-                  notifications.includes(item)
-                    ? imagePaths.notificationsOnIcon
-                    : imagePaths.notificationsOffIcon2
-                }
-                height={1}
-                width={1}
-                style={styles.notificationIcon}
-              />
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              const tempCheckListArray = checkLists;
-              let tempArray = [];
-
-              if (tempCheckListArray.includes(item)) {
-                tempArray = tempCheckListArray.filter(obj => obj !== item);
-                setCheckLists(tempArray);
-                return;
-              } else {
-                tempArray = [...tempCheckListArray, item];
-                setCheckLists(tempArray);
-              }
-            }}>
-            <Image
-              source={
-                checkLists.includes(item)
-                  ? imagePaths.checkmarkOnIcon
-                  : imagePaths.checkmarkOffIcon
-              }
-              height={1}
-              width={1}
-              style={styles.checkmarkIcon}
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
+    /* NOTE: Alternate method for scrolling using scrollToOffset */
+    /*
+      const offsetValue = modalImageOffsetIndex + horizontalScale(280);
+      listViewRef.scrollToOffset({
+        offset: offsetValue,
+        animated: true,
+      });
+      setModalImageOffsetIndex(offsetValue);
+    */
   };
 
   const renderItem = ({item}) => {
     return (
-      <TimelineCard
-        cardContainerView={cardContainerView(item)}
-        timestamp={item.eventTime}
+      <View style={styles.eventsList}>
+        <TouchableOpacity
+          onPress={() => {
+            showModal();
+            setModalData(item);
+          }}>
+          <CardView
+            innerView={eventCardContainer(item)}
+            style={styles.cardInnerStyling}
+          />
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
+  const renderEmptyListComponent = () => {
+    return (
+      <View style={[commonStyling.absoluteCenterStyling, styles.emptyListView]}>
+        <Image
+          source={imagePaths.calendarIllustration4}
+          height={1}
+          width={1}
+          style={styles.emptyListImage}
+          resizeMode={'contain'}
+        />
+        <Text style={styles.emptyListText}>There is no event for the day</Text>
+      </View>
+    );
+  };
+
+  const eventCardContainer = item => {
+    return <EventDisplayCard item={item} />;
+  };
+
+  const eventBonusesDisplay = () => {
+    return (
+      <>
+        {modalData?.Bonus?.length > 0 ? (
+          <FlatList
+            contentContainerStyle={styles.descriptionDataContentView}
+            data={modalData?.Bonus}
+            keyExtractor={item => item}
+            renderItem={({item}) => {
+              return (
+                <View style={styles.descriptionView}>
+                  <Text style={styles.descriptionText}>{item}</Text>
+                </View>
+              );
+            }}
+          />
+        ) : null}
+      </>
+    );
+  };
+
+  const eventTimeDisplay = () => {
+    return (
+      <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
+        {`Starts on ${moment(modalData?.['Start DateTime']).format(
+          'DD/MM/YYYY',
+        )} at ${moment(modalData?.['Start DateTime']).format('LT')}`}
+      </Text>
+    );
+  };
+
+  const modalCloseButton = () => {
+    return (
+      <Button
+        buttonStyle={[styles.buttonStyle, styles.viewButton]}
+        buttonTextStyle={[styles.viewButtonText]}
         onPress={() => {
-          showModal();
-          setModalData(item);
+          hideModal();
         }}
-        // timelinetype={'single'} // so we can make slight changes for range style
+        buttonText={strings.close}
       />
     );
   };
 
+  /* CAROUSAL SECTION */
+  /**Contents to pass:
+   * OnPress Right
+   * Disable right
+   * Onpress left
+   * Disable left
+   * Card View
+   * Card data
+   * Pagination Data
+   * Pagination Condition
+   */
+
+  const leftChevronIcon = modalImages => {
+    return (
+      <>
+        {modalImages?.length > 1 ? (
+          <TouchableOpacity
+            onPress={() => {
+              if (modalImageIndex > 0) {
+                const tempIndex = modalImageIndex - 1;
+                setModalImageIndex(tempIndex);
+                leftButtonHandler(tempIndex);
+              }
+            }}
+            disabled={modalImageIndex > 0 ? false : true}>
+            <Image
+              source={imagePaths.leftChevronIcon}
+              height={1}
+              width={1}
+              style={[
+                styles.chevronIcon,
+                {
+                  opacity: modalImageIndex > 0 ? 1 : 0.5,
+                },
+              ]}
+            />
+          </TouchableOpacity>
+        ) : null}
+      </>
+    );
+  };
+
+  const rightChevronIcon = modalImages => {
+    return (
+      <>
+        {modalImages?.length > 1 ? (
+          <TouchableOpacity
+            onPress={() => {
+              if (modalImageIndex < modalImages.length) {
+                const tempIndex = modalImageIndex + 1;
+                setModalImageIndex(tempIndex);
+                rightButtonHandler(tempIndex);
+              }
+            }}
+            disabled={modalImageIndex < modalImages.length - 1 ? false : true}>
+            <Image
+              source={imagePaths.rightChevronIcon}
+              height={1}
+              width={1}
+              style={[
+                styles.chevronIcon,
+                {
+                  opacity: modalImageIndex < modalImages.length - 1 ? 1 : 0.5,
+                },
+              ]}
+            />
+          </TouchableOpacity>
+        ) : null}
+      </>
+    );
+  };
+
+  const carousalData = modalImages => {
+    return (
+      <>
+        {modalImages?.length > 0 ? (
+          <FlatList
+            data={modalImages}
+            keyExtractor={item => item}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{
+              marginLeft: modalImages?.length > 1 ? horizontalScale(-32) : 0,
+            }}
+            scrollEnabled={false}
+            ref={listViewRef}
+            renderItem={({item, index}) => {
+              return (
+                <Image
+                  source={{uri: item}}
+                  height={1}
+                  width={1}
+                  style={styles.modalImage}
+                  resizeMode={'contain'}
+                />
+              );
+            }}
+          />
+        ) : (
+          <View>
+            <Image
+              source={{
+                uri: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png',
+              }}
+              height={1}
+              width={1}
+              style={styles.modalImage}
+              resizeMode={'contain'}
+            />
+            <Text style={styles.noImageTextStyle}>NO IMAGES AVAILABLE</Text>
+          </View>
+        )}
+      </>
+    );
+  };
+
+  const paginationView = modalImages => {
+    return (
+      <>
+        {modalImages?.length > 1 ? (
+          <FlatList
+            data={modalImages}
+            keyExtractor={item => item}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            renderItem={({item, index}) => {
+              return (
+                <View style={styles.paginationView}>
+                  <View
+                    style={[
+                      styles.paginationDots,
+                      {
+                        backgroundColor:
+                          modalImageIndex === index
+                            ? colors.vermillion
+                            : colors.purple,
+                      },
+                    ]}
+                  />
+                </View>
+              );
+            }}
+          />
+        ) : null}
+      </>
+    );
+  };
+
+  const carousalImageSliderSection = modalImages => {
+    return (
+      <>
+        <View style={styles.eventImageContainer}>
+          {leftChevronIcon(modalImages)}
+          {carousalData(modalImages)}
+          {rightChevronIcon(modalImages)}
+        </View>
+        {paginationView(modalImages)}
+      </>
+    );
+  };
+
   const modalContainer = () => {
+    const substring = 'pokemon_icons';
+
+    const modalImages = modalData?.['Img Src']?.filter(data =>
+      data?.includes(substring),
+    );
+
     return (
       <View style={styles.modalInnerStyle}>
-        <Text style={styles.modalTextStyle}>{modalData.eventName}</Text>
-        <Image
-          source={{uri: modalData?.eventImage}}
-          height={1}
-          width={1}
-          style={styles.modalImage}
-          resizeMode={'contain'}
-        />
-        <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
-          {`Starts at ${modalData.eventTime}`}
-        </Text>
-        <FlatList
-          contentContainerStyle={styles.descriptionDataContentView}
-          data={modalData?.eventDescription?.split(',')}
-          keyExtractor={item => item}
-          renderItem={({item}) => {
-            return (
-              <View style={styles.descriptionView}>
-                <Text style={styles.descriptionText}>{item}</Text>
-              </View>
-            );
-          }}
-        />
-        <Button
-          buttonStyle={[styles.buttonStyle, styles.viewButton]}
-          buttonTextStyle={[styles.viewButtonText]}
-          onPress={() => {
-            hideModal();
-          }}
-          buttonText={strings.close}
+        <Text style={styles.modalTextStyle}>{modalData.Summary}</Text>
+        <Text style={styles.eventDescription}>{modalData?.Description}</Text>
+        {eventBonusesDisplay()}
+        {carousalImageSliderSection(modalImages)}
+        {eventTimeDisplay()}
+        {modalCloseButton()}
+      </View>
+    );
+  };
+
+  const modalPopUp = () => {
+    return (
+      <Portal>
+        <Modal
+          style={styles.modalMarginStyle}
+          visible={modalVisible}
+          onDismiss={hideModal}
+          contentContainerStyle={styles.modalExternalStyle}>
+          {modalContainer()}
+        </Modal>
+      </Portal>
+    );
+  };
+
+  const calandarView = () => {
+    return (
+      <View style={styles.calandarView}>
+        <CalendarView
+          setSelectedStartDate={setSelectedStartDate}
+          selectedStartDate={selectedStartDate}
         />
       </View>
+    );
+  };
+
+  const eventHeaderSection = () => {
+    return (
+      <View style={styles.eventsSectionHeader}>
+        <Text style={styles.eventDateText}>
+          {moment(selectedStartDate).format('MMM Do, YYYY')}
+        </Text>
+        <Text style={styles.eventNumberText}>
+          Number of events {eventsData?.length ?? 0}
+        </Text>
+      </View>
+    );
+  };
+
+  const eventsDetailSection = () => {
+    return (
+      <ScrollView style={styles.eventDataListContainer}>
+        {eventsData?.length !== 0 ? (
+          <View>
+            <FlatList
+              data={eventsData}
+              keyExtractor={item => item.id}
+              renderItem={renderItem}
+            />
+          </View>
+        ) : (
+          renderEmptyListComponent()
+        )}
+      </ScrollView>
     );
   };
 
   return (
     <Provider>
       <SafeAreaView style={{}}>
-        <Portal>
-          <Modal
-            style={styles.modalMarginStyle}
-            visible={modalVisible}
-            onDismiss={hideModal}
-            contentContainerStyle={styles.modalExternalStyle}>
-            {modalContainer()}
-          </Modal>
-        </Portal>
-        <ScrollView>
-          <CalendarView
-            setSelectedStartDate={setSelectedStartDate}
-            selectedStartDate={selectedStartDate}
-          />
-          {eventsData?.length !== 0 ? (
-            <View>
-              <View style={styles.flatListKnob} />
-              <FlatList
-                data={eventsData}
-                keyExtractor={item => item.id}
-                renderItem={renderItem}
-              />
-              <View style={styles.flatListKnob} />
-            </View>
-          ) : null}
-        </ScrollView>
+        {modalPopUp()}
+        {calandarView()}
+        {eventHeaderSection()}
+        {eventsDetailSection()}
       </SafeAreaView>
     </Provider>
   );

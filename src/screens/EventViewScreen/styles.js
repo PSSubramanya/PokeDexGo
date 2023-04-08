@@ -24,6 +24,7 @@ export default styles = StyleSheet.create({
     fontFamily: fontFamily.primaryFontFamilyRegular,
     fontSize: moderateScale(11.5),
     marginTop: verticalScale(5),
+    marginBottom: verticalScale(30),
   },
   eventTimeStyle: {
     fontFamily: fontFamily.primaryFontFamilyRegular,
@@ -36,20 +37,6 @@ export default styles = StyleSheet.create({
     marginLeft: horizontalScale(13),
     width: horizontalScale(190),
     justifyContent: 'space-between',
-  },
-  notificationIcon: {
-    height: verticalScale(25),
-    width: horizontalScale(25),
-  },
-  checkmarkIcon: {
-    height: verticalScale(25),
-    width: horizontalScale(25),
-    marginBottom: verticalScale(5),
-  },
-  cardFooterSection: {
-    height: verticalScale(80),
-    justifyContent: 'space-between',
-    marginRight: horizontalScale(12),
   },
   cardHeaderSection: {
     height: verticalScale(60),
@@ -78,18 +65,20 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalMarginStyle: {
-    marginHorizontal: horizontalScale(38),
+    marginHorizontal: horizontalScale(20),
   },
   modalImage: {
-    height: verticalScale(193),
-    width: horizontalScale(193),
+    height: verticalScale(200),
+    width: horizontalScale(200),
     marginTop: verticalScale(9),
+    marginHorizontal: horizontalScale(40),
   },
   modalDescriptionStyle: {
     textAlign: 'center',
     fontFamily: fontFamily.primaryFontFamilyMedium,
     marginVertical: verticalScale(10),
     color: colors.bluishGrey,
+    fontSize: moderateScale(12),
   },
   modalTextStyle: {
     fontFamily: fontFamily.primaryFontFamilyBold,
@@ -134,5 +123,69 @@ export default styles = StyleSheet.create({
     color: colors.purple,
     fontFamily: fontFamily.primaryFontFamilyMedium,
     fontSize: moderateScale(12),
+  },
+  emptyListImage: {
+    height: verticalScale(180),
+    width: horizontalScale(180),
+  },
+  emptyListText: {
+    fontFamily: fontFamily.primaryFontFamilyRegular,
+    fontSize: moderateScale(16),
+  },
+  eventDataListContainer: {
+    height: '50%',
+    marginTop: verticalScale(10),
+  },
+  calandarView: {
+    height: '45%',
+  },
+  emptyListView: {
+    marginTop: verticalScale(30),
+  },
+  cardInnerStyling: {
+    marginHorizontal: horizontalScale(10),
+    borderRadius: 8,
+  },
+  eventsList: {
+    marginTop: verticalScale(20),
+  },
+  eventsSectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginHorizontal: horizontalScale(12),
+  },
+  eventDateText: {
+    fontFamily: fontFamily.primaryFontFamilyMedium,
+    fontSize: moderateScale(16),
+  },
+  eventNumberText: {
+    fontFamily: fontFamily.primaryFontFamilyRegular,
+    fontSize: moderateScale(12),
+  },
+  paginationView: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  paginationDots: {
+    height: horizontalScale(6),
+    width: verticalScale(6),
+    borderRadius: 20,
+    marginHorizontal: horizontalScale(6),
+  },
+  chevronIcon: {
+    height: verticalScale(40),
+    width: horizontalScale(40),
+    marginTop: verticalScale(30),
+  },
+  eventImageContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  noImageTextStyle: {
+    fontFamily: fontFamily.primaryFontFamilyRegular,
+    fontSize: moderateScale(18),
+    color: colors.purple,
+    alignSelf: 'center',
   },
 });
