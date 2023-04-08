@@ -171,99 +171,125 @@ const EventViewScreen = props => {
     );
   };
 
-  const carousalImageSliderSection = modalImages => {
+  /* CAROUSAL SECTION */
+  /**Contents to pass:
+   * OnPress Right
+   * Disable right
+   * Onpress left
+   * Disable left
+   * Card View
+   * Card data
+   * Pagination Data
+   * Pagination Condition
+   */
+
+  const leftChevronIcon = modalImages => {
     return (
       <>
-        <View style={styles.eventImageContainer}>
-          {modalImages?.length > 1 ? (
-            <TouchableOpacity
-              onPress={() => {
-                if (modalImageIndex > 0) {
-                  const tempIndex = modalImageIndex - 1;
-                  setModalImageIndex(tempIndex);
-                  leftButtonHandler(tempIndex);
-                }
-              }}
-              disabled={modalImageIndex > 0 ? false : true}>
-              <Image
-                source={imagePaths.leftChevronIcon}
-                height={1}
-                width={1}
-                style={[
-                  styles.chevronIcon,
-                  {
-                    opacity: modalImageIndex > 0 ? 1 : 0.5,
-                  },
-                ]}
-              />
-            </TouchableOpacity>
-          ) : null}
-
-          {modalImages?.length > 0 ? (
-            <FlatList
-              data={modalImages}
-              keyExtractor={item => item}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{
-                marginLeft: modalImages?.length > 1 ? horizontalScale(-32) : 0,
-              }}
-              scrollEnabled={false}
-              ref={listViewRef}
-              renderItem={({item, index}) => {
-                return (
-                  <Image
-                    source={{uri: item}}
-                    height={1}
-                    width={1}
-                    style={styles.modalImage}
-                    resizeMode={'contain'}
-                  />
-                );
-              }}
+        {modalImages?.length > 1 ? (
+          <TouchableOpacity
+            onPress={() => {
+              if (modalImageIndex > 0) {
+                const tempIndex = modalImageIndex - 1;
+                setModalImageIndex(tempIndex);
+                leftButtonHandler(tempIndex);
+              }
+            }}
+            disabled={modalImageIndex > 0 ? false : true}>
+            <Image
+              source={imagePaths.leftChevronIcon}
+              height={1}
+              width={1}
+              style={[
+                styles.chevronIcon,
+                {
+                  opacity: modalImageIndex > 0 ? 1 : 0.5,
+                },
+              ]}
             />
-          ) : (
-            <View>
-              <Image
-                source={{
-                  uri: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png',
-                }}
-                height={1}
-                width={1}
-                style={styles.modalImage}
-                resizeMode={'contain'}
-              />
-              <Text style={styles.noImageTextStyle}>NO IMAGES AVAILABLE</Text>
-            </View>
-          )}
+          </TouchableOpacity>
+        ) : null}
+      </>
+    );
+  };
 
-          {modalImages?.length > 1 ? (
-            <TouchableOpacity
-              onPress={() => {
-                if (modalImageIndex < modalImages.length) {
-                  const tempIndex = modalImageIndex + 1;
-                  setModalImageIndex(tempIndex);
-                  rightButtonHandler(tempIndex);
-                }
+  const rightChevronIcon = modalImages => {
+    return (
+      <>
+        {modalImages?.length > 1 ? (
+          <TouchableOpacity
+            onPress={() => {
+              if (modalImageIndex < modalImages.length) {
+                const tempIndex = modalImageIndex + 1;
+                setModalImageIndex(tempIndex);
+                rightButtonHandler(tempIndex);
+              }
+            }}
+            disabled={modalImageIndex < modalImages.length - 1 ? false : true}>
+            <Image
+              source={imagePaths.rightChevronIcon}
+              height={1}
+              width={1}
+              style={[
+                styles.chevronIcon,
+                {
+                  opacity: modalImageIndex < modalImages.length - 1 ? 1 : 0.5,
+                },
+              ]}
+            />
+          </TouchableOpacity>
+        ) : null}
+      </>
+    );
+  };
+
+  const carousalData = modalImages => {
+    return (
+      <>
+        {modalImages?.length > 0 ? (
+          <FlatList
+            data={modalImages}
+            keyExtractor={item => item}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{
+              marginLeft: modalImages?.length > 1 ? horizontalScale(-32) : 0,
+            }}
+            scrollEnabled={false}
+            ref={listViewRef}
+            renderItem={({item, index}) => {
+              return (
+                <Image
+                  source={{uri: item}}
+                  height={1}
+                  width={1}
+                  style={styles.modalImage}
+                  resizeMode={'contain'}
+                />
+              );
+            }}
+          />
+        ) : (
+          <View>
+            <Image
+              source={{
+                uri: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png',
               }}
-              disabled={
-                modalImageIndex < modalImages.length - 1 ? false : true
-              }>
-              <Image
-                source={imagePaths.rightChevronIcon}
-                height={1}
-                width={1}
-                style={[
-                  styles.chevronIcon,
-                  {
-                    opacity: modalImageIndex < modalImages.length - 1 ? 1 : 0.5,
-                  },
-                ]}
-              />
-            </TouchableOpacity>
-          ) : null}
-        </View>
+              height={1}
+              width={1}
+              style={styles.modalImage}
+              resizeMode={'contain'}
+            />
+            <Text style={styles.noImageTextStyle}>NO IMAGES AVAILABLE</Text>
+          </View>
+        )}
+      </>
+    );
+  };
 
+  const paginationView = modalImages => {
+    return (
+      <>
         {modalImages?.length > 1 ? (
           <FlatList
             data={modalImages}
@@ -289,6 +315,19 @@ const EventViewScreen = props => {
             }}
           />
         ) : null}
+      </>
+    );
+  };
+
+  const carousalImageSliderSection = modalImages => {
+    return (
+      <>
+        <View style={styles.eventImageContainer}>
+          {leftChevronIcon(modalImages)}
+          {carousalData(modalImages)}
+          {rightChevronIcon(modalImages)}
+        </View>
+        {paginationView(modalImages)}
       </>
     );
   };
