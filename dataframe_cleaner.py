@@ -5,6 +5,7 @@ from pivottablejs import pivot_ui
 import re
 from ast import literal_eval
 
+
 links=[]
 summaries=[]
 jsonSummary=[]
@@ -17,6 +18,8 @@ timeZone=[]
 endDate=[]
 description=[]
 data=[]
+pokemonId=[]
+dateDuration=[]
 
 df=pd.read_csv('./file.csv')
 
@@ -45,7 +48,8 @@ for summary in summaries:
     summ=summary.split('img_src')
     summ=summ[1].split('Bonus')
     summ=summ[0].split(':',1)
-    strToBeCleaned=summ[1]
+    summ=summ[1].split('pokemonId')
+    strToBeCleaned=summ[0]
     strToReplace='\''
     replacementStr=''
     pos=strToBeCleaned.rfind(strToReplace)
@@ -122,6 +126,28 @@ for summary in summaries:
     summ=summ.replace('\'','')
     description.append(summ.replace('}',''))
 
+for summary in summaries:
+    summ=summary.split('pokemonId')
+    summ=summ[1].split('Bonus')
+    strToBeCleaned=summ[0]
+    strToReplace=','
+    replacementStr=''
+    pos=strToBeCleaned.rfind(strToReplace)
+    if pos >-1:
+        summCleanedSplit=strToBeCleaned[:pos]+replacementStr + strToBeCleaned[pos + len(strToReplace): ]
+    else:
+        summCleanedSplit=strToBeCleaned
+    summ=summCleanedSplit.split(':',1)
+    strToBeCleaned2=summ[1]
+    strToReplace2='\''
+    replacementStr2=''
+    pos2=strToBeCleaned2.rfind(strToReplace2)
+    if pos2 >-1:
+        summCleanedSplit=strToBeCleaned2[:pos2]+replacementStr2 + strToBeCleaned2[pos2 + len(strToReplace2): ]
+    else:
+        summCleanedSplit=strToBeCleaned2
+    pokemonId.append(summCleanedSplit)
+
 for summary in jsonSummary:
     splitSum=summary.split(':')
     splitSumClean=splitSum[1].replace('\\xa0',' ')
@@ -137,10 +163,25 @@ for sdate in startDate:
     startDateV2.append(splitDate[1].replace('\'',''))
 #print(dfSummaries)
 
+for i in range(len(startDateV2)):
+    startDateDuration=startDateV2[i].lstrip(' ').split(' ',1)
+    endDateDuration=endDate[i].lstrip(' ').split(' ',1)
+    duration=pd.date_range(start=startDateDuration[0],end=endDateDuration[0])
+
+    gapDuration=[]
+    for i in duration:
+        match_str = re.search(r'\d{4}-\d{2}-\d{2}',str(i))
+        res = datetime.strptime(match_str.group(), '%Y-%m-%d').date()
+        gapDuration.append(str(res))
+    dateDuration.append(gapDuration)
+
+
 pokemonData['Summary']=dfSummaries
 pokemonData['Start DateTime'] = startDateV2
 pokemonData['End DateTime'] = endDate
+pokemonData['Duration'] = dateDuration
 pokemonData['Img Src'] = imgSrc
+pokemonData['pokemonId'] = pokemonId
 pokemonData['Bonus'] = bonus
 pokemonData['timeZone'] = timeZone
 pokemonData['Description'] = description
@@ -155,6 +196,7 @@ for i in pokemonData['json']:
 for i in data:
     i['Img Src'] = literal_eval(i['Img Src'])
     i['Bonus'] = literal_eval(i['Bonus'])
+    i['pokemonId'] = literal_eval(i['pokemonId'])
 #pokemonJson=pokemonData.to_json()
 #pokemonJsonCleaned=json.loads(pokemonJson)
 

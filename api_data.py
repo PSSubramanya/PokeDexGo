@@ -13,6 +13,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.chrome.service import Service
 import pandas
 import requests
+import re
 
 current_year = datetime.now().year
 
@@ -74,6 +75,7 @@ class Event:
     bonus:list
     timeZone:str
     Description:str
+    pokemonId:list
 
     def to_dict(self):
         if is_all_day_event(self.start_time, self.end_time):
@@ -86,6 +88,7 @@ class Event:
                 "start": {"date": self.start_time},
                 "end": {"date": self.end_time},
                 "img_src": self.img_src,
+                "pokemonId" : self.pokemonId,
                 "Bonus": self.bonus,
                 "timeZone": self.timeZone,
                 "Description":self.Description,
@@ -106,6 +109,7 @@ class Event:
                 "start": {"dateTime": self.start_time},
                 "end": {"dateTime": self.end_time},
                 "img_src": self.img_src,
+                "pokemonId" : self.pokemonId,
                 "Bonus": self.bonus,
                 "timeZone": self.timeZone,
                 "Description":self.Description,
@@ -118,6 +122,7 @@ class Event:
                 "start": {"dateTime": self.start_time},
                 "end": {"dateTime": self.end_time},
                 "img_src": self.img_src,
+                "pokemonId" : self.pokemonId,
                 "Bonus": self.bonus,
                 "timeZone": self.timeZone,
                 "Description":self.Description,
@@ -164,6 +169,7 @@ def main():
         soup2=BeautifulSoup(driver.page_source, "lxml")
         
         img_src=[]
+        pokemonId=[]
         for item in soup.find_all('img'):
             src=item.get("src")
             if src:
@@ -172,6 +178,13 @@ def main():
                     if src not in img_src:
             #img_link='https://leekduck.com'+item['src']
                         img_src.append(src)
+                        pokemonIdData=re. findall('\d+', src)
+                        if len(pokemonIdData)>0:
+                            if len(pokemonIdData[0])<=3 and 'pokemon_icons' in src:
+                                pokemonIdCleaned=pokemonIdData[0].lstrip("0")
+                                if pokemonIdCleaned not in pokemonId:
+                                    pokemonId.append(pokemonIdCleaned)
+                                    #print(pokemonIdData[0].lstrip("0"))
         #img_src.pop()
         for soups in soup.find_all("div",class_="bonus-text"):
             soup_bonus.append(soups.string)
@@ -220,7 +233,7 @@ def main():
             parsed_start_date = parse_date(complete_start_date)
             parsed_end_date = parse_date(complete_end_date)
 
-            new_event = Event(parsed_start_date, parsed_end_date, title, link,img_src,soup_bonus,timeZone,Description)
+            new_event = Event(parsed_start_date, parsed_end_date, title, link,img_src,soup_bonus,timeZone,Description,pokemonId)
             events[link] = new_event
 
     df=pandas.DataFrame(events,index=[0]).T
