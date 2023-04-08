@@ -1798,6 +1798,13 @@
   "resolved" "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.5.tgz"
   "version" "15.7.5"
 
+"@types/react-addons-shallow-compare@^0.14.22":
+  "integrity" "sha512-krgFRorWtbVJLzpJsJD6O27Lew3YHuemVZbL9RFvq8TF1w9DbrHjiiLuIyWIL6AjunBkUrQlErfbUv1TYKiK9w=="
+  "resolved" "https://registry.npmjs.org/@types/react-addons-shallow-compare/-/react-addons-shallow-compare-0.14.22.tgz"
+  "version" "0.14.22"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@^16.8 || ^17.0 || ^18.0":
   "integrity" "sha512-EEG67of7DsvRDU6BLLI0p+k1GojDLz9+lZsnCpCRTa/lOokvyPBvp8S5x+A24hME3yyQuIipcP70KJ6H7Qupww=="
   "resolved" "https://registry.npmjs.org/@types/react/-/react-18.0.31.tgz"
@@ -3615,7 +3622,7 @@
   dependencies:
     "bser" "2.1.1"
 
-"fbjs@^0.8.9":
+"fbjs@^0.8.4", "fbjs@^0.8.9":
   "integrity" "sha512-EQaWFK+fEPSoibjNy8IxUtaFOMXcWsY0JaVrQoZR9zC8N2Ygf9iDITPWjUTVIax95b6I742JFLqASHfsag/vKA=="
   "resolved" "https://registry.npmjs.org/fbjs/-/fbjs-0.8.18.tgz"
   "version" "0.8.18"
@@ -6657,6 +6664,14 @@
   "resolved" "https://registry.npmjs.org/range-parser/-/range-parser-1.2.1.tgz"
   "version" "1.2.1"
 
+"react-addons-shallow-compare@15.6.2":
+  "integrity" "sha512-yAV9tOObmKPiohqne1jiMcx6kDjfz7GeL8K9KHgI+HvDsbrRv148uyUzrPc6GwepZnQcJ59Q3lp1ghrkyPwtjg=="
+  "resolved" "https://registry.npmjs.org/react-addons-shallow-compare/-/react-addons-shallow-compare-15.6.2.tgz"
+  "version" "15.6.2"
+  dependencies:
+    "fbjs" "^0.8.4"
+    "object-assign" "^4.1.0"
+
 "react-devtools-core@4.24.0":
   "integrity" "sha512-Rw7FzYOOzcfyUPaAm9P3g0tFdGqGq2LLiAI+wjYcp6CsF3DeeMrRS3HZAho4s273C29G/DJhx0e8BpRE/QZNGg=="
   "resolved" "https://registry.npmjs.org/react-devtools-core/-/react-devtools-core-4.24.0.tgz"
@@ -6762,6 +6777,14 @@
     "react-freeze" "^1.0.0"
     "warn-once" "^0.1.0"
 
+"react-native-snap-carousel@^4.0.0-beta.6":
+  "integrity" "sha512-jr6Kesrn+/047FwL32JRwAL6/l4Soz2uw73rFM5LfoGTgZhPatUsw60eTE3bznqFewPhoFIKezYe2m3LypTnIA=="
+  "resolved" "https://registry.npmjs.org/react-native-snap-carousel/-/react-native-snap-carousel-4.0.0-beta.6.tgz"
+  "version" "4.0.0-beta.6"
+  dependencies:
+    "@types/react-addons-shallow-compare" "^0.14.22"
+    "react-addons-shallow-compare" "15.6.2"
+
 "react-native-sound@^0.11.2":
   "integrity" "sha512-LmGc8lgOK3qecYMVQpyHvww/C+wgT6sWeMpVbOe4NCRGC2yKd4fo4U0KBUo9PO7AqKESO3I/2GZg1/C0+bwiiA=="
   "resolved" "https://registry.npmjs.org/react-native-sound/-/react-native-sound-0.11.2.tgz"
@@ -6780,7 +6803,7 @@
     "prop-types" "^15.7.2"
     "yargs" "^16.1.1"
 
-"react-native@*", "react-native@>= 0.30.0", "react-native@>=0.59", "react-native@>=0.8.0", "react-native@0.70.4":
+"react-native@*", "react-native@>= 0.30.0", "react-native@>=0.58.0", "react-native@>=0.59", "react-native@>=0.8.0", "react-native@0.70.4":
   "integrity" "sha512-1e4jWotS20AJ/4lGVkZQs2wE0PvCpIRmPQEQ1FyH7wdyuewFFIxbUHqy6vAj1JWVFfAzbDakOQofrIkkHWLqNA=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.70.4.tgz"
   "version" "0.70.4"
@@ -6852,7 +6875,7 @@
     "react-shallow-renderer" "^16.15.0"
     "scheduler" "^0.22.0"
 
-"react@*", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^18.1.0", "react@>= 15.2.1", "react@>=16.3.0", "react@>=16.8", "react@>=17.0.0", "react@18.1.0":
+"react@*", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^18.1.0", "react@>= 15.2.1", "react@>=16.0.0", "react@>=16.3.0", "react@>=16.8", "react@>=17.0.0", "react@18.1.0":
   "integrity" "sha512-4oL8ivCz5ZEPyclFQXaNksK3adutVS8l2xzZU0cqEFrE9Sb7fC0EFK5uEk74wIreL1DERyjvsU915j1pcT2uEQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.1.0.tgz"
   "version" "18.1.0"

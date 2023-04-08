@@ -3,11 +3,24 @@ import {
   EVENT_SUMMARY,
   EVENT_START_DATE_TIME,
   EVENT_IMAGE_URL,
+  EVENT_DATA_LOAD,
 } from '../constants/types';
 import {combineReducers} from 'redux';
 
 const initialState = {
   data: {},
+};
+
+const eventdataload = (state = initialState, action) => {
+  switch (action.type) {
+    case EVENT_DATA_LOAD:
+      return {
+        ...state,
+        data: action.payload,
+      };
+    default:
+      return state;
+  }
 };
 
 const eventlinks = (state = initialState, action) => {
@@ -61,6 +74,7 @@ const eventDataReducer = combineReducers({
   eventsummary,
   eventtimestamps,
   eventimages,
+  eventdataload,
 });
 
 export default eventDataReducer;

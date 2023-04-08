@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 import {
   Text,
   View,
@@ -11,12 +12,15 @@ import strings from '../../constants/strings';
 import imagePaths from '../../constants/imagePaths';
 import colors from '../../constants/colors';
 import soundTracks from '../../constants/soundTracks';
+import {eventDataLoad} from '../../actions/eventData';
 import styles from './styles';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
-import {horizontalScale, verticalScale} from '../../ultilities/scale';
 import {CircleRightArrow} from '../../assets/images/svg';
+import webscrappedData from '../../ultilities/webscrappedData/pokemon_data.json';
 
 const LandingPage = ({navigation}) => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     soundTracks?.pikapika1.play(success => {
       if (success) {
@@ -29,6 +33,12 @@ const LandingPage = ({navigation}) => {
     soundTracks?.pikapika1.setVolume(0.5); // Reduce the volume by half
     soundTracks?.pikapika1.setPan(0.5); // Position the sound to the full right in a stereo field
     soundTracks?.pikapika1.setNumberOfLoops(0); // Loop indefinitely until stop() is called
+  }, []);
+
+  useEffect(() => {
+    const loadedData = webscrappedData?.data;
+    dispatch(eventDataLoad(loadedData));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

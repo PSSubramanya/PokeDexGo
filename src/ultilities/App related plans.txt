@@ -65,3 +65,5 @@ Subbu:
 19.) Keep Knob and Timeline based component "TimelineCard" style separaetely in one branch and "EventDisplayCard" in another branch
 20.) Note concepts used in the project so it helps for resume - Applies to all
 21.) Learn to write test files if possible
+22.) Make custom hooks so functionalities can be moved to different files
+23.) Maintain this branch for "TimelineCard" - DONE

@@ -22,6 +22,7 @@ export default {
   calendar2: require('../assets/images/calendar2.png'),
   calendar3: require('../assets/images/calendar3.png'),
   time: require('../assets/images/time.png'),
+  pokemonBanner: require('../assets/images/pokemonBanner.jpg'),
 
   //Illustrations
   calendarIllustration1: require('../assets/images/illustrations/calendarIllustration1.png'),

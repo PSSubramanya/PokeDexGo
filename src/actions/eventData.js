@@ -3,7 +3,15 @@ import {
   EVENT_SUMMARY,
   EVENT_START_DATE_TIME,
   EVENT_IMAGE_URL,
+  EVENT_DATA_LOAD,
 } from '../constants/types.js';
+
+export function eventDataLoad(data) {
+  return {
+    type: EVENT_DATA_LOAD,
+    payload: data,
+  };
+}
 
 export function eventLinks(data) {
   return {
