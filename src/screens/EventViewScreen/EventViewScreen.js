@@ -41,6 +41,8 @@ const EventViewScreen = props => {
   const [modalImageIndex, setModalImageIndex] = useState(0);
   // const [modalImageOffsetIndex, setModalImageOffsetIndex] = useState(0); /* NOTE: Alternate method for scrolling using scrollToOffset */
 
+  const [pokemonName, setPokemonName] = useState('');
+
   useEffect(() => {
     const displayableEvents = loadedEventJSONData?.data.filter(
       data =>
@@ -50,6 +52,20 @@ const EventViewScreen = props => {
     setEventsData(displayableEvents);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStartDate]);
+
+  // TODO: TOMORROW
+  useEffect(() => {
+    let pokeName;
+    fetch(
+      `https://pokeapi.co/api/v2/pokemon/${modalData?.pokemonId?.[modalImageIndex]}`,
+    ).then(response => {
+      response.json().then(res => {
+        pokeName = res?.name;
+        setPokemonName(pokeName);
+      });
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [modalImageIndex, modalVisible]);
 
   const showModal = () => {
     setModalVisible(true);
@@ -333,18 +349,69 @@ const EventViewScreen = props => {
   };
 
   const modalContainer = () => {
-    const substring = 'pokemon_icons';
+    // https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${modalData?.pokemonId[index]}.png
+    // https://img.pokemondb.net/artwork/large/charizard-mega-x.jpg - problem how to guess if a pokemon has only 1 or X form also??
+    // https://img.pokemondb.net/artwork/large/charizard-mega-y.jpg
+    // https://img.pokemondb.net/artwork/large/rayquaza-mega.jpg
+    // https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/176.png
+
+    // https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/384-Mega.png
+    // https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/006-Mega-X.png
+    // https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/006-Mega-Y.png
+
+    // https://img.pokemondb.net/artwork/large/rayquaza-mega.jpg
+
+    // TODO: Note down more substrings for normal and shiny like eg. pm747 and pm747.s and other substrings for other cases like aolan and galarian cases */
+    const substring1 = 'pokemon_icons'; // for normal images
+    const substring2 = '_51.png'; // Mega and Mega X
+    const substring3 = '_52.png'; // Mega Y
+    const substring4 = '_shiny.png'; // Shiny
 
     const modalImages = modalData?.['Img Src']?.filter(data =>
-      data?.includes(substring),
+      data?.includes(substring1),
     );
+
+    let displayableModalImages = [];
+
+    modalImages?.map((data, idx) => {
+      let pushedImage;
+      if (data?.includes(substring2)) {
+        if (pokemonName === 'charizard' || pokemonName === 'mewtwo') {
+          pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-mega-x.jpg`;
+        } else {
+          pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-mega.jpg`;
+        }
+        displayableModalImages = [...displayableModalImages, pushedImage];
+      } else if (data?.includes(substring3)) {
+        pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-mega-y.jpg`;
+        displayableModalImages = [...displayableModalImages, pushedImage];
+      } else if (data?.includes(substring4)) {
+        const ret = data;
+        const newStr1 = ret.replace(
+          'https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_',
+          '',
+        );
+        const newStr2 = newStr1.replace('_shiny.png', '');
+        const newstr3 = newStr2.substr(-3);
+        const finalString = newStr2.replace(newstr3, '');
+
+        // eslint-disable-next-line radix
+        pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${parseInt(
+          finalString,
+        )}.png`;
+        displayableModalImages = [...displayableModalImages, pushedImage];
+      } else {
+        pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${modalData?.pokemonId[idx]}.png`;
+        displayableModalImages = [...displayableModalImages, pushedImage];
+      }
+    });
 
     return (
       <View style={styles.modalInnerStyle}>
         <Text style={styles.modalTextStyle}>{modalData.Summary}</Text>
         <Text style={styles.eventDescription}>{modalData?.Description}</Text>
         {eventBonusesDisplay()}
-        {carousalImageSliderSection(modalImages)}
+        {carousalImageSliderSection(displayableModalImages)}
         {eventTimeDisplay()}
         {modalCloseButton()}
       </View>

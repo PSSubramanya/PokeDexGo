@@ -16,7 +16,7 @@ import {eventDataLoad} from '../../actions/eventData';
 import styles from './styles';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
 import {CircleRightArrow} from '../../assets/images/svg';
-import webscrappedData from '../../ultilities/webscrappedData/pokemon_data.json';
+import webscrappedData from '../../ultilities/webscrappedData/pokemon_data2.json';
 
 const LandingPage = ({navigation}) => {
   const dispatch = useDispatch();
