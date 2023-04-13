@@ -16,12 +16,14 @@ class Event:
     imgSrc : list
     pokemonName : list
     combatPower : list
+    shiny : list
 
     def to_dict(self):
         metadata = {
                 "imgSrc": self.imgSrc,
                 "pokemonName": self.pokemonName,
-                "combatPower":self.combatPower,
+                "shiny": self.shiny,
+                "combatPower": self.combatPower,
         }
 
         return metadata
@@ -43,6 +45,8 @@ def main():
     imgSrcEgg=[]
     pokemonNameEgg=[]
     combatPowerEgg=[]
+    shinyEgg=[]
+    shiny=[]
 
     url = "https://leekduck.com/eggs/"
 
@@ -59,6 +63,11 @@ def main():
         soup2=soup1.find_all("li",class_='egg-list-item')
         for li in soup2:
             img=li.find('img')
+            imgShiny=li.find("img",class_='shiny-icon')
+            if imgShiny!=None:
+                shiny.append(True)
+            else:
+                shiny.append(False)
             src=img.get('src')
             if src:
                 src = requests.compat.urljoin(url, src)
@@ -70,10 +79,11 @@ def main():
             spanCpList=spanCpStr.split('n>')[1]
             spanCpCleaned=str(spanCpList).replace('</div>','')
             combatPower.append(spanCpCleaned.replace('\n','').strip())
-        events[distance[i]]=Event(imgSrc,pokemonName,combatPower)
+        events[distance[i]]=Event(imgSrc,pokemonName,combatPower,shiny)
         imgSrc=[]
         pokemonName=[]
         combatPower=[]
+        shiny=[]
     
     df=pd.DataFrame(events,index=[0]).T
     df.columns=['Summary']
@@ -115,32 +125,43 @@ def main():
         summ=summary.split('pokemonName')
         summ=summ[1].split('combatPower')
         summ=summ[0].split(':')
-        strToBeCleaned=summ[1]
-        strToReplace=','
+        summ=summ[1].rsplit(',',1)
+        strToBeCleaned=summ[0]
+        """strToReplace=','
         replacementStr=''
         pos=strToBeCleaned.rfind(strToReplace)
         if pos >-1:
             summCleanedSplit=strToBeCleaned[:pos]+replacementStr + strToBeCleaned[pos + len(strToReplace): ]
         else:
             summCleanedSplit=strToBeCleaned
-        strToBeCleaned2=summCleanedSplit
+        #strToBeCleaned2=summCleanedSplit
+        strToBeCleaned2=strToBeCleaned
         strToReplace2='\''
         replacementStr2=''
         pos2=strToBeCleaned2.rfind(strToReplace2)
         if pos2 >-1:
             summCleanedSplit=strToBeCleaned2[:pos2]+replacementStr2 + strToBeCleaned2[pos2 + len(strToReplace2): ]
         else:
-            summCleanedSplit=strToBeCleaned2
-        pokemonNameEgg.append(summCleanedSplit)
+            summCleanedSplit=strToBeCleaned2"""
+        pokemonNameEgg.append(strToBeCleaned)
 
-    for  summary in summaries:
+    for summary in summaries:
         summ=summary.split('combatPower')
         summ=summ[1].split(':',1)
         summ=summ[1].replace('}','')
         combatPowerEgg.append(summ)
 
+    for summary in summaries:
+        summ=summary.split('shiny')
+        summ=summ[1].split('combatPower')
+        summ=summ[0].split(':',1)
+        summ=summ[1].rsplit(',',1)
+        shinyEgg.append(summ[0])
+
+
     eggData['imgSrc'] = imgSrcEgg
     eggData['pokemonName'] = pokemonNameEgg
+    eggData['shiny'] = shinyEgg
     eggData['combatPower'] = combatPowerEgg
 
     eggData['json'] = eggData.to_json(orient='records', lines=True).splitlines()
@@ -154,6 +175,7 @@ def main():
         i['imgSrc'] = literal_eval(i['imgSrc'])
         i['pokemonName'] = literal_eval(i['pokemonName'])
         i['combatPower'] = literal_eval(i['combatPower'])
+        i['shiny'] = literal_eval(i['shiny'])
 
     with open('./egg_data.json',"w") as output_file:
         #output_file.write(pokemon_json.replace('\\','')+'\n')
