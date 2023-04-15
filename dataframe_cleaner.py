@@ -4,6 +4,8 @@ from bottle import *
 from pivottablejs import pivot_ui
 import re
 from ast import literal_eval
+import requests
+from urllib.request import Request,urlopen
 
 
 links=[]
@@ -20,6 +22,7 @@ description=[]
 data=[]
 pokemonId=[]
 dateDuration=[]
+pokemonType=[]
 
 df=pd.read_csv('./file.csv')
 
@@ -147,6 +150,37 @@ for summary in summaries:
     else:
         summCleanedSplit=strToBeCleaned2
     pokemonId.append(summCleanedSplit)
+    pokemonIdSplit=summCleanedSplit.split(',')
+    pokemonMiniType=[]
+    url='https://pokeapi.co/api/v2/pokemon/'
+    for i in pokemonIdSplit:
+        pokemonMiniType2=[]
+        pokeId=i.replace('\'','')
+        pokeId=pokeId.replace('[','')
+        pokeId=pokeId.replace(']','')
+        pokeId=int(pokeId.strip() or 0)
+        if pokeId!=0:
+            mainurl=url+str(pokeId)
+            req = Request(
+            url=mainurl, 
+            headers={'User-Agent': 'Mozilla/5.0'}
+            )
+            responseJSON=urlopen(req)
+            dataJSONType=json.loads(responseJSON.read())
+            #print(len(dataJSONType['types']))
+            for j in range(len(dataJSONType['types'])):
+                typeData=dataJSONType['types'][j]
+                typeData=str(typeData).split('name')
+                typeData=typeData[1].split(',')
+                typeData=typeData[0].split(':')
+                typeData=typeData[1].replace(" ","")
+                typeData=typeData.replace('\'','')
+                print(typeData)
+                pokemonMiniType2.append(typeData)
+            pokemonMiniType.append(pokemonMiniType2)
+        else:
+            pokemonMiniType.append(list())
+    pokemonType.append(pokemonMiniType)
 
 for summary in jsonSummary:
     splitSum=summary.split(':')
@@ -175,13 +209,13 @@ for i in range(len(startDateV2)):
         gapDuration.append(str(res))
     dateDuration.append(gapDuration)
 
-
 pokemonData['Summary']=dfSummaries
 pokemonData['Start DateTime'] = startDateV2
 pokemonData['End DateTime'] = endDate
 pokemonData['Duration'] = dateDuration
 pokemonData['Img Src'] = imgSrc
 pokemonData['pokemonId'] = pokemonId
+pokemonData['type'] = pokemonType
 pokemonData['Bonus'] = bonus
 pokemonData['timeZone'] = timeZone
 pokemonData['Description'] = description
@@ -197,6 +231,10 @@ for i in data:
     i['Img Src'] = literal_eval(i['Img Src'])
     i['Bonus'] = literal_eval(i['Bonus'])
     i['pokemonId'] = literal_eval(i['pokemonId'])
+    """ if i['type'][0] != list():
+        for j in range(len(i['type'])):
+            i['type'][j] = literal_eval(i['type'][j]) """
+            
 #pokemonJson=pokemonData.to_json()
 #pokemonJsonCleaned=json.loads(pokemonJson)
 
