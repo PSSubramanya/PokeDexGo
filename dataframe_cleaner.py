@@ -106,7 +106,10 @@ for summary in summaries:
         summCleanedSplit=summ[:pos]+replacementStr + summ[pos + len(strToReplace): ]
     else:
         summCleanedSplit=summ
-    endDate.append(summCleanedSplit.replace('\'',''))
+    summCleanedSplit=summCleanedSplit.replace('\'','')
+    summCleanedSplit=summCleanedSplit.lstrip()
+    summCleanedSplit=summCleanedSplit.rstrip()
+    endDate.append(summCleanedSplit)
 
 for summary in summaries:
     summ=summary.split('timeZone')
@@ -175,7 +178,6 @@ for summary in summaries:
                 typeData=typeData[0].split(':')
                 typeData=typeData[1].replace(" ","")
                 typeData=typeData.replace('\'','')
-                print(typeData)
                 pokemonMiniType2.append(typeData)
             pokemonMiniType.append(pokemonMiniType2)
         else:
@@ -194,7 +196,9 @@ for sdate in startDate:
     splitDate=sdate.split(':',1)
     #splitDate_v2=str(splitDate).split(':',1)
     splitDate=splitDate[1].split(':',1)
-    startDateV2.append(splitDate[1].replace('\'',''))
+    splitDateString=splitDate[1].replace('\'','')
+    splitDateString=splitDateString.lstrip()
+    startDateV2.append(splitDateString)
 #print(dfSummaries)
 
 for i in range(len(startDateV2)):
