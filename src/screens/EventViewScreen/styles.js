@@ -29,8 +29,7 @@ export default styles = StyleSheet.create({
   eventTimeStyle: {
     fontFamily: fontFamily.primaryFontFamilyRegular,
     fontSize: moderateScale(11.5),
-    marginTop: verticalScale(5),
-    marginBottom: verticalScale(5),
+    marginTop: verticalScale(15),
     color: colors.purple,
   },
   cardBodySection: {
@@ -76,7 +75,7 @@ export default styles = StyleSheet.create({
   modalDescriptionStyle: {
     textAlign: 'center',
     fontFamily: fontFamily.primaryFontFamilyMedium,
-    marginVertical: verticalScale(10),
+    marginVertical: verticalScale(5),
     color: colors.bluishGrey,
     fontSize: moderateScale(12),
   },
@@ -145,6 +144,7 @@ export default styles = StyleSheet.create({
   cardInnerStyling: {
     marginHorizontal: horizontalScale(10),
     borderRadius: 8,
+    marginBottom: verticalScale(10),
   },
   eventsList: {
     marginTop: verticalScale(20),
@@ -187,5 +187,23 @@ export default styles = StyleSheet.create({
     fontSize: moderateScale(18),
     color: colors.purple,
     alignSelf: 'center',
+  },
+  pokemonName: {
+    paddingVertical: verticalScale(5),
+    paddingHorizontal: horizontalScale(5),
+    color: colors.purple,
+    fontFamily: fontFamily.primaryFontFamilyMedium,
+    fontSize: moderateScale(12),
+    textAlign: 'center',
+  },
+  pokemonDescription: {
+    paddingHorizontal: horizontalScale(18),
+    paddingBottom: verticalScale(10),
+  },
+  pokemonTypeImageStyel: {
+    height: verticalScale(20),
+    width: horizontalScale(20),
+    // marginTop: verticalScale(9),
+    // marginHorizontal: horizontalScale(40),
   },
 });

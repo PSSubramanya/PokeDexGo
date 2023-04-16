@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import {View, Image, Text, TouchableOpacity} from 'react-native';
 import imagePaths from '../../constants/imagePaths';
+import {horizontalScale} from '../../ultilities/scale';
+import moment from 'moment';
 import styles from './styles';
 
 const EventDisplayCard = props => {
-  const {item} = props;
+  const {item, eventCompletionStatus} = props;
 
   const [notifications, setNotifications] = useState([]);
   const [checkLists, setCheckLists] = useState([]);
@@ -18,6 +20,37 @@ const EventDisplayCard = props => {
         style={styles.pokemonBanner}
         resizeMode={'cover'}
       />
+
+      {eventCompletionStatus ? <View style={styles.greyScalingStyle} /> : null}
+
+      {item?.Bonus?.length > 0 ? (
+        <View style={styles.bonusSection}>
+          <View style={[styles.bonusTextView, {width: horizontalScale(110)}]}>
+            <Text numberOfLines={1} style={styles.bonusTextStyle}>
+              {item?.Bonus?.[0]}
+            </Text>
+          </View>
+          <View style={[styles.bonusTextView, {width: horizontalScale(110)}]}>
+            <Text numberOfLines={1} style={styles.bonusTextStyle}>
+              {item?.Bonus?.[1]}
+            </Text>
+          </View>
+          <View style={[styles.bonusTextView]}>
+            <Text numberOfLines={1} style={styles.bonusTextStyle}>
+              {item?.Bonus?.length - 2}+
+            </Text>
+          </View>
+        </View>
+      ) : null}
+      {/* TODO: Need to get this below condition fixed via JSON */}
+      {eventCompletionStatus ? (
+        <View style={styles.completedTextView}>
+          <Text numberOfLines={1} style={styles.completedTextStyle}>
+            EVENT COMPLETED
+          </Text>
+        </View>
+      ) : null}
+
       <View style={styles.eventCardBodySection}>
         <View style={styles.eventTextSection}>
           <Text style={styles.eventTitle}>{item?.Summary}</Text>

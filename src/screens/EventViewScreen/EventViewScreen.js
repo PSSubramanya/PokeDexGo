@@ -19,7 +19,9 @@ import CalendarView from '../../components/CalendarView/CalendarView';
 import Button from '../../components/Button/Button';
 import colors from '../../constants/colors';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
+import pokeTypesData from '../../ultilities/pokemonData/pokemon_types';
 import {horizontalScale} from '../../ultilities/scale';
+import {toCamelCase} from '../../ultilities/commonFunctions';
 import CardView from '../../components/CardView/CardView';
 import EventDisplayCard from '../../components/EventDisplayCard/EventDisplayCard';
 
@@ -42,6 +44,7 @@ const EventViewScreen = props => {
   // const [modalImageOffsetIndex, setModalImageOffsetIndex] = useState(0); /* NOTE: Alternate method for scrolling using scrollToOffset */
 
   const [pokemonName, setPokemonName] = useState('');
+  const [pokemonType, setPokemonType] = useState([]);
 
   useEffect(() => {
     const displayableEvents = loadedEventJSONData?.data.filter(
@@ -53,7 +56,7 @@ const EventViewScreen = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStartDate]);
 
-  // TODO: TOMORROW
+  // TODO: TOMORROW try to fetch Mega pokemon names when it is the shown pokemon
   useEffect(() => {
     let pokeName;
     fetch(
@@ -112,8 +115,12 @@ const EventViewScreen = props => {
       <View style={styles.eventsList}>
         <TouchableOpacity
           onPress={() => {
+            let pokeType;
             showModal();
             setModalData(item);
+
+            pokeType = item?.type;
+            setPokemonType(pokeType);
           }}>
           <CardView
             innerView={eventCardContainer(item)}
@@ -140,7 +147,24 @@ const EventViewScreen = props => {
   };
 
   const eventCardContainer = item => {
-    return <EventDisplayCard item={item} />;
+    let eventCompletionStatus;
+    let currentDate = new Date();
+    let date2 = new Date(item?.['Start DateTime']);
+
+    if (currentDate > date2) {
+      eventCompletionStatus = true;
+    } else if (currentDate < date2) {
+      eventCompletionStatus = false;
+    } else {
+      eventCompletionStatus = false;
+    }
+
+    return (
+      <EventDisplayCard
+        item={item}
+        eventCompletionStatus={eventCompletionStatus}
+      />
+    );
   };
 
   const eventBonusesDisplay = () => {
@@ -166,11 +190,19 @@ const EventViewScreen = props => {
 
   const eventTimeDisplay = () => {
     return (
-      <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
-        {`Starts on ${moment(modalData?.['Start DateTime']).format(
-          'DD/MM/YYYY',
-        )} at ${moment(modalData?.['Start DateTime']).format('LT')}`}
-      </Text>
+      <>
+        <Text style={[styles.eventTimeStyle]}>Event Ranges from</Text>
+        <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
+          {`Starts: ${moment(modalData?.['Start DateTime']).format(
+            'DD/MM/YYYY',
+          )}, ${moment(modalData?.['Start DateTime']).format('LT')} `}
+        </Text>
+        <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
+          {`Ends: ${moment(modalData?.['End DateTime']).format(
+            'DD/MM/YYYY',
+          )}, ${moment(modalData?.['End DateTime']).format('LT')}`}
+        </Text>
+      </>
     );
   };
 
@@ -271,7 +303,7 @@ const EventViewScreen = props => {
             contentContainerStyle={{
               marginLeft: modalImages?.length > 1 ? horizontalScale(-32) : 0,
             }}
-            scrollEnabled={false}
+            scrollEnabled={true}
             ref={listViewRef}
             renderItem={({item, index}) => {
               return (
@@ -312,6 +344,7 @@ const EventViewScreen = props => {
             keyExtractor={item => item}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
+            scrollEnabled={false}
             renderItem={({item, index}) => {
               return (
                 <View style={styles.paginationView}>
@@ -335,6 +368,64 @@ const EventViewScreen = props => {
     );
   };
 
+  const pokemonTypeView = pdata => {
+    return (
+      <View style={[commonStyling.flexRow]}>
+        <Image
+          source={{
+            uri: pokeTypesData[pdata],
+          }}
+          height={1}
+          width={1}
+          style={styles.pokemonTypeImageStyel}
+          resizeMode={'contain'}
+        />
+        <Text style={{marginLeft: 5, marginRight: 10}}>
+          {toCamelCase(pdata)}
+        </Text>
+      </View>
+    );
+  };
+
+  const pokemonNameAndTypeView = () => {
+    let pokeName;
+    const substring1 = 'pokemon_icons';
+    const substring2 = '_51.png';
+    const substring3 = '_52.png';
+
+    const modalImages = modalData?.['Img Src']?.filter(data =>
+      data?.includes(substring1),
+    );
+    if (modalImages?.[modalImageIndex]?.includes(substring2)) {
+      if (pokemonName === 'charizard' || pokemonName === 'mewtwo') {
+        pokeName = `Mega ${pokemonName} X`;
+      } else {
+        pokeName = `Mega ${pokemonName}`;
+      }
+    } else if (modalImages?.[modalImageIndex]?.includes(substring3)) {
+      pokeName = `Mega ${pokemonName} Y`;
+    } else {
+      pokeName = pokemonName;
+    }
+    return (
+      <View style={[styles.pokemonDescription]}>
+        <Text style={styles.pokemonName}>{toCamelCase(pokeName)}</Text>
+        <View
+          style={[
+            commonStyling.flexRow,
+            {
+              justifyContent: 'space-between',
+              alignSelf: 'center',
+            },
+          ]}>
+          {pokemonType?.[modalImageIndex]?.map(pdata => {
+            return pokemonTypeView(pdata);
+          })}
+        </View>
+      </View>
+    );
+  };
+
   const carousalImageSliderSection = modalImages => {
     return (
       <>
@@ -343,6 +434,7 @@ const EventViewScreen = props => {
           {carousalData(modalImages)}
           {rightChevronIcon(modalImages)}
         </View>
+        {pokemonNameAndTypeView()}
         {paginationView(modalImages)}
       </>
     );
@@ -361,12 +453,41 @@ const EventViewScreen = props => {
 
     // https://img.pokemondb.net/artwork/large/rayquaza-mega.jpg
 
-    // TODO: Note down more substrings for normal and shiny like eg. pm747 and pm747.s and other substrings for other cases like aolan and galarian cases */
-    const substring1 = 'pokemon_icons'; // for normal images
-    const substring2 = '_51.png'; // Mega and Mega X
-    const substring3 = '_52.png'; // Mega Y
-    const substring4 = '_shiny.png'; // Shiny
+    // https://img.pokemondb.net/artwork/large/sneasel-hisuian.jpg // FOR HISUIAN
+    // https://img.pokemondb.net/artwork/large/articuno-galarian.jpg // FOR GALARIAN
+    // https://img.pokemondb.net/artwork/large/meowth-alolan.jpg // FOR ALOLAN
 
+    // TODO: Note down more substrings for normal and shiny like eg. pm747 and pm747.s and other substrings for other cases like aolan and galarian cases */
+    const substring1 = 'pokemon_icons'; // for normal images - DONE
+    const substring2 = '_51.png'; // Mega and Mega X - DONE
+    const substring3 = '_52.png'; // Mega Y - DONE
+    const substring4 = '_shiny.png'; // Shiny - DONE
+    const substring5 = '.s.icon.png'; // Shiny - DONE
+    const substring6 = 'fHISUIAN.icon.png'; // HISUIAN - DONE
+    const substring7 = 'fHISUIAN.s.icon.png'; // HISUIAN Shiny
+    const substring8 = '_31.png'; // GALARIAN - DONE
+    const substring9 = '_31_shiny.png'; // Shiny Glarian
+    const substring10 = '_61.png'; // ALOLAN - DONE
+    const substring11 = '_61_shiny.png'; // Shiny Alolan
+
+    // TODO: More categories needed to be checked... - Hisuian, Galarian, Alolan and other type of subsrtings in the images
+    // TODO: What to do for special app/game based stylised pokemon display? - Directly show game image of that pokemon!? - Design how?
+    /* For the above category there may be a link - https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/025-Rock-Star.png */
+    // TODO: What to do for special multiple variant based pokemons display? - Eg. Furfrou - Id: 676
+    // https://leekduck.com/assets/img/pokemon_icons/pm676.fNATURAL.s.icon.png
+    // TODO: How to display shiny versions of HISUIAN, GALARIAN and ALOLAN pokemons as we need the URL String for it for Official images
+    // What about Shadow Variants?
+
+    /*
+    https://leekduck.com/assets/img/pokemon_icons/pm211.fHISUIAN.icon.png - FOR HISUIAN - substring = "fHISUIAN.icon.png"
+    https://leekduck.com/assets/img/pokemon_icons/pm211.fHISUIAN.s.icon.png - FOR HISUIAN Shiny - substring = "fHISUIAN.s.icon.png"
+    https://leekduck.com/assets/img/pokemon_icons/pm570.icon.png - FOR NORNAL - "pm570" - "pm" - NO NEED TO SPECIFY THIS CASE SEPARATELY I FEEL
+    https://leekduck.com/assets/img/pokemon_icons/pm787.s.icon.png - FOR SHINY - "pm787.s." - ".s.icon.png"
+    https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_077_31.png - FOR GALARIAN - "_31.png"
+    https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_077_31_shiny.png - FOR GALARIAN SHINY - "_31_shiny.png"
+    https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_088_61.png - ALOLAN Pokemon - "_61.png"
+    https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_088_61_shiny.png - ALOLAN Shiny Pokemon - "_61_shiny.png"
+    */
     const modalImages = modalData?.['Img Src']?.filter(data =>
       data?.includes(substring1),
     );
@@ -385,6 +506,15 @@ const EventViewScreen = props => {
       } else if (data?.includes(substring3)) {
         pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-mega-y.jpg`;
         displayableModalImages = [...displayableModalImages, pushedImage];
+      } else if (data?.includes(substring6)) {
+        pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-hisuian.jpg`;
+        displayableModalImages = [...displayableModalImages, pushedImage];
+      } else if (data?.includes(substring8)) {
+        pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-galarian.jpg`;
+        displayableModalImages = [...displayableModalImages, pushedImage];
+      } else if (data?.includes(substring10)) {
+        pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-alolan.jpg`;
+        displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring4)) {
         const ret = data;
         const newStr1 = ret.replace(
@@ -394,6 +524,20 @@ const EventViewScreen = props => {
         const newStr2 = newStr1.replace('_shiny.png', '');
         const newstr3 = newStr2.substr(-3);
         const finalString = newStr2.replace(newstr3, '');
+
+        // eslint-disable-next-line radix
+        pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${parseInt(
+          finalString,
+        )}.png`;
+        displayableModalImages = [...displayableModalImages, pushedImage];
+      } else if (data?.includes(substring5)) {
+        const ret = data;
+        const newStr1 = ret.replace(
+          'https://leekduck.com/assets/img/pokemon_icons/',
+          '',
+        );
+        const newStr2 = newStr1.replace('.s.icon.png', '');
+        const finalString = newStr2.replace('pm', '');
 
         // eslint-disable-next-line radix
         pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${parseInt(
