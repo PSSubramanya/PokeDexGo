@@ -3,6 +3,7 @@ import {
   requestCameraPermission,
   requestExternalWritePermission,
 } from './permissionAccess';
+import axios from 'axios';
 
 export const captureImage = async (type, setFilePath) => {
   let options = {
@@ -97,3 +98,14 @@ export const toCamelCase = text => {
 
   return finalString.slice(0, -1);
 };
+
+export function checkImageExists(path) {
+  return axios
+    .get(path)
+    .then(() => {
+      return true;
+    })
+    .catch(() => {
+      return false;
+    });
+}

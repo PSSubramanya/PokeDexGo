@@ -1,0 +1,33 @@
+https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${modalData?.pokemonId[index]}.png
+https://img.pokemondb.net/artwork/large/charizard-mega-x.jpg - problem how to guess if a pokemon has only 1 or X form also??
+https://img.pokemondb.net/artwork/large/charizard-mega-y.jpg
+https://img.pokemondb.net/artwork/large/rayquaza-mega.jpg
+https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/176.png
+
+https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/384-Mega.png
+https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/006-Mega-X.png
+https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/006-Mega-Y.png
+
+https://img.pokemondb.net/artwork/large/rayquaza-mega.jpg
+
+https://img.pokemondb.net/artwork/large/sneasel-hisuian.jpg - FOR HISUIAN
+https://img.pokemondb.net/artwork/large/articuno-galarian.jpg - FOR GALARIAN
+https://img.pokemondb.net/artwork/large/meowth-alolan.jpg - FOR ALOLAN
+
+https://github.com/HybridShivam/Pokemon/tree/master/assets/images - SOME MORE VARiANT IMAGES AND GMAX IMAGES
+
+/* For the above category there may be a link - https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/025-Rock-Star.png */
+    // TODO: What to do for special multiple variant based pokemons display? - Eg. Furfrou - Id: 676
+    // https://leekduck.com/assets/img/pokemon_icons/pm676.fNATURAL.s.icon.png
+    // TODO: How to display shiny versions of HISUIAN, GALARIAN and ALOLAN pokemons, Shadow Pokemons, Variants of some pokemons and special look based pokemons for events
+
+    /*
+    https://leekduck.com/assets/img/pokemon_icons/pm211.fHISUIAN.icon.png - FOR HISUIAN - substring = "fHISUIAN.icon.png"
+    https://leekduck.com/assets/img/pokemon_icons/pm211.fHISUIAN.s.icon.png - FOR HISUIAN Shiny - substring = "fHISUIAN.s.icon.png"
+    https://leekduck.com/assets/img/pokemon_icons/pm570.icon.png - FOR NORNAL - "pm570" - "pm" - NO NEED TO SPECIFY THIS CASE SEPARATELY I FEEL
+    https://leekduck.com/assets/img/pokemon_icons/pm787.s.icon.png - FOR SHINY - "pm787.s." - ".s.icon.png"
+    https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_077_31.png - FOR GALARIAN - "_31.png"
+    https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_077_31_shiny.png - FOR GALARIAN SHINY - "_31_shiny.png"
+    https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_088_61.png - ALOLAN Pokemon - "_61.png"
+    https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_088_61_shiny.png - ALOLAN Shiny Pokemon - "_61_shiny.png"
+    */

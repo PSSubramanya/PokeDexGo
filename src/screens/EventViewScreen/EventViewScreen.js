@@ -21,7 +21,7 @@ import colors from '../../constants/colors';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
 import pokeTypesData from '../../ultilities/pokemonData/pokemon_types';
 import {horizontalScale} from '../../ultilities/scale';
-import {toCamelCase} from '../../ultilities/commonFunctions';
+import {toCamelCase, checkImageExists} from '../../ultilities/commonFunctions';
 import CardView from '../../components/CardView/CardView';
 import EventDisplayCard from '../../components/EventDisplayCard/EventDisplayCard';
 
@@ -56,7 +56,6 @@ const EventViewScreen = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStartDate]);
 
-  // TODO: TOMORROW try to fetch Mega pokemon names when it is the shown pokemon
   useEffect(() => {
     let pokeName;
     fetch(
@@ -149,7 +148,7 @@ const EventViewScreen = props => {
   const eventCardContainer = item => {
     let eventCompletionStatus;
     let currentDate = new Date();
-    let date2 = new Date(item?.['Start DateTime']);
+    let date2 = new Date(item?.['End DateTime']);
 
     if (currentDate > date2) {
       eventCompletionStatus = true;
@@ -441,22 +440,6 @@ const EventViewScreen = props => {
   };
 
   const modalContainer = () => {
-    // https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${modalData?.pokemonId[index]}.png
-    // https://img.pokemondb.net/artwork/large/charizard-mega-x.jpg - problem how to guess if a pokemon has only 1 or X form also??
-    // https://img.pokemondb.net/artwork/large/charizard-mega-y.jpg
-    // https://img.pokemondb.net/artwork/large/rayquaza-mega.jpg
-    // https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/176.png
-
-    // https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/384-Mega.png
-    // https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/006-Mega-X.png
-    // https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/006-Mega-Y.png
-
-    // https://img.pokemondb.net/artwork/large/rayquaza-mega.jpg
-
-    // https://img.pokemondb.net/artwork/large/sneasel-hisuian.jpg // FOR HISUIAN
-    // https://img.pokemondb.net/artwork/large/articuno-galarian.jpg // FOR GALARIAN
-    // https://img.pokemondb.net/artwork/large/meowth-alolan.jpg // FOR ALOLAN
-
     // TODO: Note down more substrings for normal and shiny like eg. pm747 and pm747.s and other substrings for other cases like aolan and galarian cases */
     const substring1 = 'pokemon_icons'; // for normal images - DONE
     const substring2 = '_51.png'; // Mega and Mega X - DONE
@@ -470,24 +453,6 @@ const EventViewScreen = props => {
     const substring10 = '_61.png'; // ALOLAN - DONE
     const substring11 = '_61_shiny.png'; // Shiny Alolan
 
-    // TODO: More categories needed to be checked... - Hisuian, Galarian, Alolan and other type of subsrtings in the images
-    // TODO: What to do for special app/game based stylised pokemon display? - Directly show game image of that pokemon!? - Design how?
-    /* For the above category there may be a link - https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/025-Rock-Star.png */
-    // TODO: What to do for special multiple variant based pokemons display? - Eg. Furfrou - Id: 676
-    // https://leekduck.com/assets/img/pokemon_icons/pm676.fNATURAL.s.icon.png
-    // TODO: How to display shiny versions of HISUIAN, GALARIAN and ALOLAN pokemons as we need the URL String for it for Official images
-    // What about Shadow Variants?
-
-    /*
-    https://leekduck.com/assets/img/pokemon_icons/pm211.fHISUIAN.icon.png - FOR HISUIAN - substring = "fHISUIAN.icon.png"
-    https://leekduck.com/assets/img/pokemon_icons/pm211.fHISUIAN.s.icon.png - FOR HISUIAN Shiny - substring = "fHISUIAN.s.icon.png"
-    https://leekduck.com/assets/img/pokemon_icons/pm570.icon.png - FOR NORNAL - "pm570" - "pm" - NO NEED TO SPECIFY THIS CASE SEPARATELY I FEEL
-    https://leekduck.com/assets/img/pokemon_icons/pm787.s.icon.png - FOR SHINY - "pm787.s." - ".s.icon.png"
-    https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_077_31.png - FOR GALARIAN - "_31.png"
-    https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_077_31_shiny.png - FOR GALARIAN SHINY - "_31_shiny.png"
-    https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_088_61.png - ALOLAN Pokemon - "_61.png"
-    https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_088_61_shiny.png - ALOLAN Shiny Pokemon - "_61_shiny.png"
-    */
     const modalImages = modalData?.['Img Src']?.filter(data =>
       data?.includes(substring1),
     );
@@ -545,7 +510,55 @@ const EventViewScreen = props => {
         )}.png`;
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else {
-        pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${modalData?.pokemonId[idx]}.png`;
+        const tempImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${modalData?.pokemonId[idx]}.png`;
+
+        // // TODO: TRY TO GET THIS DONE IF POSSIBLE
+        // const checkedStatus = checkImageExists(tempImage);
+        // console.log("What's the path CHECKSTATUS", checkedStatus);
+        // if (checkImageExists(tempImage)) {
+        //   // console.log("What's the path EXISTS", tempImage);
+        //   pushedImage = tempImage;
+        // } else {
+        //   // console.log("What's the path HELL NAAAH", data);
+        //   pushedImage = data;
+        // }
+
+        // displayableModalImages = [...displayableModalImages, pushedImage];
+
+        const ret = data;
+        const newStr1 = ret.replace(
+          'https://leekduck.com/assets/img/pokemon_icons/',
+          '',
+        );
+
+        let newStr2;
+
+        if (newStr1.includes('pm')) {
+          newStr2 = newStr1.replace('pm', '');
+        } else if (newStr1.includes('pokemon_icon_')) {
+          newStr2 = newStr1.replace('pokemon_icon_', '');
+        }
+
+        let newStr3;
+
+        if (newStr2.includes('.icon.png')) {
+          newStr3 = newStr2.replace('.icon.png', '');
+        } else if (newStr2.includes('.png')) {
+          newStr3 = newStr2.replace('.png', '');
+        }
+
+        const finalString = newStr3;
+        if (finalString?.length > 6) {
+          pushedImage = data;
+        } else {
+          pushedImage = tempImage;
+        }
+        /** NOTE:
+         * Why length > 6 is used as condition above because when the image string is split, it comes to a number of 3 digits max.
+         * Even so some strings may have _00 and _11 attached to it making its length 6 so.
+         */
+
+        // pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${modalData?.pokemonId[idx]}.png`;
         displayableModalImages = [...displayableModalImages, pushedImage];
       }
     });
