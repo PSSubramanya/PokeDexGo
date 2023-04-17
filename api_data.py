@@ -174,17 +174,25 @@ def main():
             src=item.get("src")
             if src:
                 src = requests.compat.urljoin(url, src)
+                #to always include the first link in the img src list 
                 if len(img_src)==0 or 'pokemon_icons' in src:
-                    if src not in img_src:
+                    if '_crop' not in src:
+                        if src not in img_src:
             #img_link='https://leekduck.com'+item['src']
-                        img_src.append(src)
-                        pokemonIdData=re. findall('\d+', src)
-                        if len(pokemonIdData)>0:
-                            if len(pokemonIdData[0])<=3 and 'pokemon_icons' in src:
-                                pokemonIdCleaned=pokemonIdData[0].lstrip("0")
-                                if pokemonIdCleaned not in pokemonId:
-                                    pokemonId.append(pokemonIdCleaned)
-                                    #print(pokemonIdData[0].lstrip("0"))
+                            img_src.append(src)
+                            #find a digits in the img src string to get the pokemon id
+                            pokemonIdData=re. findall('\d+', src)
+                            if len(pokemonIdData)>0:
+                                # if the digits is less or equal to 3 and pokemon_icons is in string of img src:
+                                if len(pokemonIdData[0])<=3 and 'pokemon_icons' in src:
+                                    #remove leading zeroes from pokemon id , since it is to be used in pokeapi api
+                                    pokemonIdCleaned=pokemonIdData[0].lstrip("0")
+                                    #check for mega pokemon
+                                    if '_51' in src:
+                                        pokemonId.append(str(pokemonIdCleaned+'_51'))
+                                    else:
+                                        pokemonId.append(pokemonIdCleaned)
+                                        #print(pokemonIdData[0].lstrip("0"))
         #img_src.pop()
         for soups in soup.find_all("div",class_="bonus-text"):
             soup_bonus.append(soups.string)
