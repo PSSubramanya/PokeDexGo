@@ -198,8 +198,10 @@ def main():
                                     #remove leading zeroes from pokemon id , since it is to be used in pokeapi api
                                     pokemonIdCleaned = pokemonIdData[0].lstrip("0")
                                     #check for mega pokemon
-                                    if '_51' in src:
+                                    if '_51.png' in src:
                                         pokemonId.append(str(pokemonIdCleaned+'_51'))
+                                    elif '_52.png' in src:
+                                        pokemonId.append(str(pokemonIdCleaned+'_52'))
                                     else:
                                         pokemonId.append(pokemonIdCleaned)
                                         #print(pokemonIdData[0].lstrip("0"))
