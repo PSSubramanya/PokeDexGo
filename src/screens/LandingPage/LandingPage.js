@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {
   Text,
@@ -16,10 +16,12 @@ import {eventDataLoad} from '../../actions/eventData';
 import styles from './styles';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
 import {CircleRightArrow} from '../../assets/images/svg';
-import webscrappedData from '../../ultilities/pokemonData/pokemon_data2.json';
+import webscrappedData from '../../ultilities/pokemonData/pokemon_data6.json';
 
 const LandingPage = ({navigation}) => {
   const dispatch = useDispatch();
+
+  const [loadData, setLoadData] = useState([]);
 
   useEffect(() => {
     soundTracks?.pikapika1.play(success => {
@@ -36,10 +38,22 @@ const LandingPage = ({navigation}) => {
   }, []);
 
   useEffect(() => {
-    const loadedData = webscrappedData?.data;
-    dispatch(eventDataLoad(loadedData));
+    let loadedData;
+    fetch('https://rahulvhegde.github.io/Data/pokemon_data2.json').then(
+      response => {
+        response.json().then(res => {
+          loadedData = res?.data;
+          setLoadData(loadedData);
+        });
+      },
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    dispatch(eventDataLoad(loadData));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loadData]);
 
   return (
     <SafeAreaView style={{}}>
@@ -52,7 +66,9 @@ const LandingPage = ({navigation}) => {
             width={1}
             style={styles.appIcon}
           />
-          <Text style={styles.appName}>{strings.app_name}</Text>
+          <Text style={[styles.appName, styles.primaryColorStyle]}>
+            {strings.app_name}
+          </Text>
         </View>
         {/* <CircleRightArrow /> */}
         <View style={styles.centerAlignmentStyle}>
@@ -67,7 +83,9 @@ const LandingPage = ({navigation}) => {
               width={1}
               style={styles.rightArrowCircle}
             />
-            <Text style={styles.smallTextSize}>{strings.continue}</Text>
+            <Text style={[styles.smallTextSize, styles.primaryColorStyle]}>
+              {strings.continue}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

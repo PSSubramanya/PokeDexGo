@@ -371,18 +371,33 @@ const HomeScreen = ({navigation}) => {
                     style={[styles.chevronIcon, styles.rightChevronIcon]}
                   />
                 </TouchableOpacity>
-                <View>
+                <View style={{marginBottom: 50}}>
                   <View style={styles.centerContainer}>
                     <View style={styles.flexRow}>
-                      <Text style={[styles.mediumFont, styles.mediumFontSize]}>
+                      <Text
+                        style={[
+                          styles.mediumFont,
+                          styles.mediumFontSize,
+                          styles.primaryColorStyle,
+                        ]}>
                         {moment(selectedStartDate.toString()).format('MMM')}
                       </Text>
-                      <Text style={[styles.mediumFont, styles.mediumFontSize]}>
+                      <Text
+                        style={[
+                          styles.mediumFont,
+                          styles.mediumFontSize,
+                          styles.primaryColorStyle,
+                        ]}>
                         {' '}
                         {moment(selectedStartDate.toString()).format('DD')}
                       </Text>
                     </View>
-                    <Text style={[styles.boldFont, styles.largeFontSize]}>
+                    <Text
+                      style={[
+                        styles.boldFont,
+                        styles.largeFontSize,
+                        styles.primaryColorStyle,
+                      ]}>
                       {moment(selectedStartDate.toString()).format('YYYY')}
                     </Text>
                   </View>
@@ -391,7 +406,8 @@ const HomeScreen = ({navigation}) => {
                       <Text style={styles.numberOfEvents}>
                         {numberOfEvents}
                       </Text>
-                      <Text style={styles.noEventTitle}>
+                      <Text
+                        style={[styles.noEventTitle, styles.primaryColorStyle]}>
                         {strings.events_today}
                       </Text>
                     </View>
@@ -403,12 +419,14 @@ const HomeScreen = ({navigation}) => {
                         width={1}
                         style={styles.appIcon}
                       />
-                      <Text style={styles.noEventTitle}>
+                      <Text
+                        style={[styles.noEventTitle, styles.primaryColorStyle]}>
                         {strings.no_event_today}
                       </Text>
                     </View>
                   )}
-                  <View style={commonStyling.absoluteCenterStyling}>
+                  {/* TODO: THIS FOR V2 or V3 */}
+                  {/* <View style={commonStyling.absoluteCenterStyling}>
                     <Button
                       buttonStyle={[styles.buttonStyle, styles.viewButton]}
                       buttonTextStyle={[styles.viewButtonText]}
@@ -417,7 +435,7 @@ const HomeScreen = ({navigation}) => {
                       }}
                       buttonText={strings.addEvent}
                     />
-                  </View>
+                  </View> */}
                 </View>
                 <TouchableOpacity
                   onPress={() => {

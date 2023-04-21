@@ -33,4 +33,7 @@ export default styles = StyleSheet.create({
     height: verticalScale(40),
     width: horizontalScale(40),
   },
+  primaryColorStyle: {
+    color: colors.secondaryColor,
+  },
 });

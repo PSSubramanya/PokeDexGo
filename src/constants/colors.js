@@ -12,4 +12,9 @@ export default {
   vermillionLight: 'rgba(246, 67, 7, 0.8)',
   red: '#FF0000',
   grey: '#cccccc',
+
+  // common colors
+  primaryColor: '#514CFA',
+  secondaryColor: 'rgba(53,53,203,1)',
+  // secondaryColor: 'rgba(203,53,53,1)',
 };

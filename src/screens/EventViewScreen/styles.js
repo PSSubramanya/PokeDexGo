@@ -203,7 +203,15 @@ export default styles = StyleSheet.create({
   pokemonTypeImageStyel: {
     height: verticalScale(20),
     width: horizontalScale(20),
-    // marginTop: verticalScale(9),
-    // marginHorizontal: horizontalScale(40),
+  },
+  pokemonNameStyle: {
+    marginLeft: horizontalScale(5),
+    marginRight: horizontalScale(10),
+    color: colors.vermillion,
+    fontFamily: fontFamily.primaryFontFamilyMedium,
+    fontSize: moderateScale(12),
+  },
+  primaryColorStyle: {
+    color: colors.secondaryColor,
   },
 });

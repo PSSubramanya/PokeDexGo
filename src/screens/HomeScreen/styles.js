@@ -269,4 +269,7 @@ export default styles = StyleSheet.create({
     alignSelf: 'center',
     color: colors.purple,
   },
+  primaryColorStyle: {
+    color: colors.secondaryColor,
+  },
 });

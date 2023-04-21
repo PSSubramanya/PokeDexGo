@@ -92,4 +92,7 @@ export default styles = StyleSheet.create({
     fontFamily: fontFamily.primaryFontFamilyBold,
     fontSize: moderateScale(18),
   },
+  primaryColorStyle: {
+    color: colors.secondaryColor,
+  },
 });

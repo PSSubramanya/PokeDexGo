@@ -69,6 +69,18 @@ const EventViewScreen = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modalImageIndex, modalVisible]);
 
+  const fetchShinyGalarianHisuianAlolanPokeImages = (pokeName, type) => {
+    let pokeImage;
+    fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}-${type}`).then(
+      response => {
+        response.json().then(res => {
+          pokeImage = res?.sprites?.other?.['official-artwork']?.front_shiny;
+        });
+      },
+    );
+    return pokeImage;
+  };
+
   const showModal = () => {
     setModalVisible(true);
     setModalImageIndex(0);
@@ -140,7 +152,9 @@ const EventViewScreen = props => {
           style={styles.emptyListImage}
           resizeMode={'contain'}
         />
-        <Text style={styles.emptyListText}>There is no event for the day</Text>
+        <Text style={[styles.emptyListText, styles.primaryColorStyle]}>
+          {strings.no_event_string}
+        </Text>
       </View>
     );
   };
@@ -190,7 +204,7 @@ const EventViewScreen = props => {
   const eventTimeDisplay = () => {
     return (
       <>
-        <Text style={[styles.eventTimeStyle]}>Event Ranges from</Text>
+        <Text style={[styles.eventTimeStyle]}>{strings.event_ranges_from}</Text>
         <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
           {`Starts: ${moment(modalData?.['Start DateTime']).format(
             'DD/MM/YYYY',
@@ -302,7 +316,7 @@ const EventViewScreen = props => {
             contentContainerStyle={{
               marginLeft: modalImages?.length > 1 ? horizontalScale(-32) : 0,
             }}
-            scrollEnabled={true}
+            scrollEnabled={false}
             ref={listViewRef}
             renderItem={({item, index}) => {
               return (
@@ -327,7 +341,9 @@ const EventViewScreen = props => {
               style={styles.modalImage}
               resizeMode={'contain'}
             />
-            <Text style={styles.noImageTextStyle}>NO IMAGES AVAILABLE</Text>
+            <Text style={styles.noImageTextStyle}>
+              {strings.no_images_available.toUpperCase()}
+            </Text>
           </View>
         )}
       </>
@@ -379,9 +395,7 @@ const EventViewScreen = props => {
           style={styles.pokemonTypeImageStyel}
           resizeMode={'contain'}
         />
-        <Text style={{marginLeft: 5, marginRight: 10}}>
-          {toCamelCase(pdata)}
-        </Text>
+        <Text style={styles.pokemonNameStyle}>{toCamelCase(pdata)}</Text>
       </View>
     );
   };
@@ -412,10 +426,7 @@ const EventViewScreen = props => {
         <View
           style={[
             commonStyling.flexRow,
-            {
-              justifyContent: 'space-between',
-              alignSelf: 'center',
-            },
+            commonStyling.horizontalCenterStyling,
           ]}>
           {pokemonType?.[modalImageIndex]?.map(pdata => {
             return pokemonTypeView(pdata);
@@ -480,6 +491,24 @@ const EventViewScreen = props => {
       } else if (data?.includes(substring10)) {
         pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-alolan.jpg`;
         displayableModalImages = [...displayableModalImages, pushedImage];
+      } else if (data?.includes(substring7)) {
+        pushedImage = fetchShinyGalarianHisuianAlolanPokeImages(
+          pokemonName,
+          'hisui',
+        );
+        displayableModalImages = [...displayableModalImages, pushedImage];
+      } else if (data?.includes(substring9)) {
+        pushedImage = fetchShinyGalarianHisuianAlolanPokeImages(
+          pokemonName,
+          'galar',
+        );
+        displayableModalImages = [...displayableModalImages, pushedImage];
+      } else if (data?.includes(substring11)) {
+        pushedImage = fetchShinyGalarianHisuianAlolanPokeImages(
+          pokemonName,
+          'alola',
+        );
+        displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring4)) {
         const ret = data;
         const newStr1 = ret.replace(
@@ -512,18 +541,7 @@ const EventViewScreen = props => {
       } else {
         const tempImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${modalData?.pokemonId[idx]}.png`;
 
-        // // TODO: TRY TO GET THIS DONE IF POSSIBLE
-        // const checkedStatus = checkImageExists(tempImage);
-        // console.log("What's the path CHECKSTATUS", checkedStatus);
-        // if (checkImageExists(tempImage)) {
-        //   // console.log("What's the path EXISTS", tempImage);
-        //   pushedImage = tempImage;
-        // } else {
-        //   // console.log("What's the path HELL NAAAH", data);
-        //   pushedImage = data;
-        // }
-
-        // displayableModalImages = [...displayableModalImages, pushedImage];
+        // TODO: TRY TO GET THIS DONE IF POSSIBLE - Try using axios or checkImageExists(url) to get this done
 
         const ret = data;
         const newStr1 = ret.replace(
@@ -564,14 +582,18 @@ const EventViewScreen = props => {
     });
 
     return (
-      <View style={styles.modalInnerStyle}>
-        <Text style={styles.modalTextStyle}>{modalData.Summary}</Text>
-        <Text style={styles.eventDescription}>{modalData?.Description}</Text>
-        {eventBonusesDisplay()}
-        {carousalImageSliderSection(displayableModalImages)}
-        {eventTimeDisplay()}
-        {modalCloseButton()}
-      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.modalInnerStyle}>
+          <Text style={styles.modalTextStyle}>{modalData.Summary}</Text>
+          <Text style={[styles.eventDescription, styles.primaryColorStyle]}>
+            {modalData?.Description}
+          </Text>
+          {eventBonusesDisplay()}
+          {carousalImageSliderSection(displayableModalImages)}
+          {eventTimeDisplay()}
+          {modalCloseButton()}
+        </View>
+      </ScrollView>
     );
   };
 
@@ -603,11 +625,11 @@ const EventViewScreen = props => {
   const eventHeaderSection = () => {
     return (
       <View style={styles.eventsSectionHeader}>
-        <Text style={styles.eventDateText}>
+        <Text style={[styles.eventDateText, styles.primaryColorStyle]}>
           {moment(selectedStartDate).format('MMM Do, YYYY')}
         </Text>
-        <Text style={styles.eventNumberText}>
-          Number of events {eventsData?.length ?? 0}
+        <Text style={[styles.eventNumberText, styles.primaryColorStyle]}>
+          {strings.number_of_events} : {eventsData?.length ?? 0}
         </Text>
       </View>
     );
