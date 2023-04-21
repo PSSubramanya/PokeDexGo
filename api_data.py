@@ -14,6 +14,7 @@ from selenium.webdriver.chrome.service import Service
 import pandas
 import requests
 import re
+import constants
 
 current_year = datetime.now().year
 
@@ -272,7 +273,7 @@ def main():
     #create a dataframe of events to be saved as csv
     df = pandas.DataFrame(events,index=[0]).T
     df.columns = ['Summary']
-    df.to_csv('./file.csv')
+    df.to_csv(constants.URL+'file.csv')
     driver.quit()
     
 

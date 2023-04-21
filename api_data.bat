@@ -1,0 +1,1 @@
+"C:\anaconda\python.exe" "C:\Users\Rahul V Hegde\Desktop\subbu\PokeDexGo\api_data.py"

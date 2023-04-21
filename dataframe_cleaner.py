@@ -6,6 +6,8 @@ import re
 from ast import literal_eval
 import requests
 from urllib.request import Request,urlopen
+import shutil
+import constants
 
 
 links=[]
@@ -22,9 +24,9 @@ description=[]
 data=[]
 pokemonId=[]
 dateDuration=[]
-pokemonType=[]
+pokemonType=[]  
 
-df=pd.read_csv('./file.csv')
+df=pd.read_csv(constants.URL+'file.csv')
 
 pokemonData=pd.DataFrame()
 
@@ -289,7 +291,6 @@ pokemonData['Description'] = description
 
 pokemonData['json'] = pokemonData.to_json(orient='records', lines=True).splitlines()
 
-pivot_ui(pokemonData)
 
 for i in pokemonData['json']:
     data.append(json.loads(i))
@@ -305,7 +306,7 @@ for j in data:
             j['pokemonId'][k]=j['pokemonId'][k].replace('_51','')
         elif '_52' in j['pokemonId'][k]:
             j['pokemonId'][k]=j['pokemonId'][k].replace('_52','')
-#pokemonJson=pokemonData.to_json()
+#pokemonJson=pokemonData.to_json()  
 #pokemonJsonCleaned=json.loads(pokemonJson)
 
 #@get('/')
@@ -315,10 +316,11 @@ for j in data:
 #run(host='localhost',port=8080)
 #pokemon_object = json.dumps(pokemonJson,indent=4)
 
-with open('./pokemon_data2.json',"w") as output_file:
+with open('C:/Users/Rahul V Hegde/Desktop/subbu/PokeDexGo/pokemon_data2.json',"w") as output_file:
     #output_file.write(pokemon_json.replace('\\','')+'\n')
     #output_file.write(pokemon_json_cleaned)
     #output_file.write(json.dumps({"data": pokemonJsonCleaned}, indent=4 ))
     output_file.write(json.dumps({"data": data}, indent=4 ))
 
 #pokemonData.to_csv('./cleaned.csv')
+shutil.copy((constants.URL+'pokemon_data2.json'),(constants.COMMIT_URL))
