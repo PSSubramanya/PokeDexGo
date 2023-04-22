@@ -143,7 +143,7 @@ for summary in summaries:
     summ=str(summ[1])
     summ=re.sub(r'<.*?>','',summ)
     summ=summ.replace('\'','')
-    description.append(summ.replace('}',''))
+    description.append(summ.replace('}','').lstrip())
 
 for summary in summaries:
     summ=summary.split('pokemonId')
@@ -256,7 +256,7 @@ for summary in jsonSummary:
     splitSumClean=splitSumClean.replace('\"','')
     splitSumClean=splitSumClean.replace('\'','')
     splitSumClean=re.sub(r'[^\x00-\x7F]+','',splitSumClean)
-    dfSummaries.append(splitSumClean)
+    dfSummaries.append(splitSumClean.lstrip())
 
 for sdate in startDate:
     splitDate=sdate.split(':',1)
