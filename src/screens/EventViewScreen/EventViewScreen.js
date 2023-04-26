@@ -208,12 +208,16 @@ const EventViewScreen = props => {
         <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
           {`Starts: ${moment(modalData?.['Start DateTime']).format(
             'DD/MM/YYYY',
-          )}, ${moment(modalData?.['Start DateTime']).format('LT')} `}
+          )}, ${moment(modalData?.['Start DateTime']).format('LT')} ${
+            modalData?.timeZone
+          }`}
         </Text>
         <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
           {`Ends: ${moment(modalData?.['End DateTime']).format(
             'DD/MM/YYYY',
-          )}, ${moment(modalData?.['End DateTime']).format('LT')}`}
+          )}, ${moment(modalData?.['End DateTime']).format('LT')} ${
+            modalData?.timeZone
+          }`}
         </Text>
       </>
     );
@@ -333,9 +337,10 @@ const EventViewScreen = props => {
         ) : (
           <View>
             <Image
-              source={{
-                uri: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png',
-              }}
+              // source={{
+              //   uri: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png',
+              // }}
+              source={imagePaths.noImage}
               height={1}
               width={1}
               style={styles.modalImage}
@@ -422,7 +427,9 @@ const EventViewScreen = props => {
     }
     return (
       <View style={[styles.pokemonDescription]}>
-        <Text style={styles.pokemonName}>{toCamelCase(pokeName)}</Text>
+        {modalImages?.length !== 0 ? (
+          <Text style={styles.pokemonName}>{toCamelCase(pokeName)}</Text>
+        ) : null}
         <View
           style={[
             commonStyling.flexRow,

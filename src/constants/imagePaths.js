@@ -23,6 +23,7 @@ export default {
   calendar3: require('../assets/images/calendar3.png'),
   time: require('../assets/images/time.png'),
   pokemonBanner: require('../assets/images/pokemonBanner.jpg'),
+  noImage: require('../assets/images/no_image.png'),
 
   //Illustrations
   calendarIllustration1: require('../assets/images/illustrations/calendarIllustration1.png'),
