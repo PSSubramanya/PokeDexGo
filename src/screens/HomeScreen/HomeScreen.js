@@ -52,10 +52,8 @@ const HomeScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    const displayableEvents = loadedEventJSONData?.data.filter(
-      data =>
-        moment(data?.['Start DateTime']).format('DD/MM/YYYY') ===
-        moment(selectedStartDate).format('DD/MM/YYYY'),
+    const displayableEvents = loadedEventJSONData?.data.filter(data =>
+      data?.Duration.includes(moment(selectedStartDate).format('YYYY-MM-DD')),
     );
 
     setNumberOfEvents(displayableEvents.length);

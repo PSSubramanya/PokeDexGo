@@ -214,4 +214,11 @@ export default styles = StyleSheet.create({
   primaryColorStyle: {
     color: colors.secondaryColor,
   },
+  activityIndicatorStyle: {
+    height: verticalScale(220),
+    width: horizontalScale(220),
+    zIndex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   FlatList,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import {Modal, Portal, Provider} from 'react-native-paper';
 
@@ -46,11 +47,11 @@ const EventViewScreen = props => {
   const [pokemonName, setPokemonName] = useState('');
   const [pokemonType, setPokemonType] = useState([]);
 
+  const [showLoader, setShowLoader] = useState(true);
+
   useEffect(() => {
-    const displayableEvents = loadedEventJSONData?.data.filter(
-      data =>
-        moment(data?.['Start DateTime']).format('DD/MM/YYYY') ===
-        moment(selectedStartDate).format('DD/MM/YYYY'),
+    const displayableEvents = loadedEventJSONData?.data.filter(data =>
+      data?.Duration?.includes(moment(selectedStartDate).format('YYYY-MM-DD')),
     );
     setEventsData(displayableEvents);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -330,6 +331,12 @@ const EventViewScreen = props => {
                   width={1}
                   style={styles.modalImage}
                   resizeMode={'contain'}
+                  onLoadStart={() => {
+                    setShowLoader(true);
+                  }}
+                  onLoad={() => {
+                    setShowLoader(false);
+                  }}
                 />
               );
             }}
@@ -448,6 +455,11 @@ const EventViewScreen = props => {
       <>
         <View style={styles.eventImageContainer}>
           {leftChevronIcon(modalImages)}
+          {showLoader ? (
+            <View style={styles.activityIndicatorStyle}>
+              <ActivityIndicator />
+            </View>
+          ) : null}
           {carousalData(modalImages)}
           {rightChevronIcon(modalImages)}
         </View>
@@ -470,6 +482,7 @@ const EventViewScreen = props => {
     const substring9 = '_31_shiny.png'; // Shiny Glarian
     const substring10 = '_61.png'; // ALOLAN - DONE
     const substring11 = '_61_shiny.png'; // Shiny Alolan
+    const substring12 = 'fMEGA'; // Mega and Mega X - DONE
 
     const modalImages = modalData?.['Img Src']?.filter(data =>
       data?.includes(substring1),
@@ -479,7 +492,7 @@ const EventViewScreen = props => {
 
     modalImages?.map((data, idx) => {
       let pushedImage;
-      if (data?.includes(substring2)) {
+      if (data?.includes(substring2) || data?.includes(substring12)) {
         if (pokemonName === 'charizard' || pokemonName === 'mewtwo') {
           pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-mega-x.jpg`;
         } else {
