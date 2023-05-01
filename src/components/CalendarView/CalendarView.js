@@ -1,5 +1,6 @@
 import React from 'react';
 import CalendarPicker from 'react-native-calendar-picker';
+import colors from '../../constants/colors';
 import fontFamily from '../../ultilities/fontFamily';
 import styles from './styles';
 
@@ -17,8 +18,14 @@ const CalendarView = ({setSelectedStartDate, selectedStartDate}) => {
       todayBackgroundColor={'#18D183'}
       previousTitle={'Prev'}
       nextTitle={'Next'}
-      previousTitleStyle={{fontFamily: fontFamily.primaryFontFamilyBold}}
-      nextTitleStyle={{fontFamily: fontFamily.primaryFontFamilyBold}}
+      previousTitleStyle={{
+        fontFamily: fontFamily.primaryFontFamilyBold,
+        color: colors.secondaryColor,
+      }}
+      nextTitleStyle={{
+        fontFamily: fontFamily.primaryFontFamilyBold,
+        color: colors.secondaryColor,
+      }}
       // enableDateChange={true}
       // dayLabelsWrapper //ViewStyle
     />

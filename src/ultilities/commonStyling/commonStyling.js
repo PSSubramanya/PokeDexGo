@@ -22,5 +22,9 @@ export default styles = StyleSheet.create({
   centerAlignment: {
     alignItems: 'center',
   },
+  horizontalCenterStyling: {
+    justifyContent: 'space-between',
+    alignSelf: 'center',
+  },
   // Write Styles for different fonts in the app
 });

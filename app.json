@@ -1,4 +1,5 @@
 {
   "name": "PokedexApp",
-  "displayName": "PokedexApp"
+  "displayName": "PokedexApp",
+  "orientation": "portrait"
 }

@@ -3,6 +3,7 @@ import {
   requestCameraPermission,
   requestExternalWritePermission,
 } from './permissionAccess';
+import axios from 'axios';
 
 export const captureImage = async (type, setFilePath) => {
   let options = {
@@ -78,3 +79,33 @@ export const chooseFile = (type, setFilePath) => {
     setFilePath(response);
   });
 };
+
+export const toCamelCase = text => {
+  const tempString = text;
+  const str = tempString?.split(' ');
+  let finalString = '';
+
+  let arrayOfStrings = str.map(data => {
+    const restOfTheString = data.slice(1);
+    const firstLetter = data.slice(0, 1).toUpperCase();
+    const fullString = firstLetter.concat(restOfTheString);
+    return fullString;
+  });
+
+  arrayOfStrings.map(data => {
+    finalString = finalString + data + ' ';
+  });
+
+  return finalString.slice(0, -1);
+};
+
+export function checkImageExists(path) {
+  return axios
+    .get(path)
+    .then(() => {
+      return true;
+    })
+    .catch(() => {
+      return false;
+    });
+}

@@ -15,4 +15,10 @@ export default {
   sample_event_date: '01-01-2023',
   compulsorySign: ' *',
   events_today: 'Events Today',
+  no_event_string: 'There is no event for the day',
+  event_ranges_from: 'Event Ranges from',
+  no_images_available: 'No Images Available',
+  number_of_events: 'Number of events',
+  plus: '+',
+  event_completed: 'Event Completed',
 };
