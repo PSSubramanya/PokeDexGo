@@ -207,6 +207,8 @@ def main():
                                         pokemonId.append(str(pokemonIdCleaned+'fMEGA'))
                                     elif '_61.png' in src:
                                         pokemonId.append(str(pokemonIdCleaned+'_61'))
+                                    elif 'fHISUIAN' in src:
+                                        pokemonId.append(str(pokemonIdCleaned+'fHISUIAN'))
                                     else:
                                         pokemonId.append(pokemonIdCleaned)
                                         #print(pokemonIdData[0].lstrip("0"))
@@ -217,10 +219,50 @@ def main():
                         img_poke_shiny=img_poke_shiny.split('.icon.')
                         img_poke_shiny=img_poke_shiny[0]+'.s.icon.png'
                         img_src.append(img_poke_shiny)
+                        pokemonIdData = re. findall('\d+', img_poke_shiny)
+                        if len(pokemonIdData)>0:
+                                # if the digits is less or equal to 3 and pokemon_icons is in string of img src:
+                                if len(pokemonIdData[0])<=3 and 'pokemon_icons' in img_poke_shiny:
+                                    #remove leading zeroes from pokemon id , since it is to be used in pokeapi api
+                                    pokemonIdCleaned = pokemonIdData[0].lstrip("0")
+                                    #check for mega pokemon
+                                    if '_51.png' in img_poke_shiny or '_51.s.icon.png' in img_poke_shiny:
+                                        print(img_poke_shiny)
+                                        pokemonId.append(str(pokemonIdCleaned+'_51'))
+                                    elif '_52.png' in img_poke_shiny or '_52.s.icon.png' in img_poke_shiny :
+                                        pokemonId.append(str(pokemonIdCleaned+'_52'))
+                                    elif 'fMEGA' in img_poke_shiny:
+                                        pokemonId.append(str(pokemonIdCleaned+'fMEGA'))
+                                    elif '_61.png' in img_poke_shiny  or '_61.s.icon.png' in img_poke_shiny :
+                                        pokemonId.append(str(pokemonIdCleaned+'_61'))
+                                    elif 'fHISUIAN' in img_poke_shiny:
+                                        pokemonId.append(str(pokemonIdCleaned+'fHISUIAN'))
+                                    else:
+                                        pokemonId.append(pokemonIdCleaned)
+
                     else:
                         img_poke_shiny=img_poke_shiny.split('.png')
                         img_poke_shiny=img_poke_shiny[0]+'_shiny.png'
                         img_src.append(img_poke_shiny)
+                        pokemonIdData = re. findall('\d+', img_poke_shiny)
+                        if len(pokemonIdData)>0:
+                                # if the digits is less or equal to 3 and pokemon_icons is in string of img src:
+                                if len(pokemonIdData[0])<=3 and 'pokemon_icons' in img_poke_shiny:
+                                    #remove leading zeroes from pokemon id , since it is to be used in pokeapi api
+                                    pokemonIdCleaned = pokemonIdData[0].lstrip("0")
+                                    #check for mega pokemon
+                                    if '_51.png' in img_poke_shiny or '_51_shiny.png' in img_poke_shiny:
+                                        pokemonId.append(str(pokemonIdCleaned+'_51'))
+                                    elif '_52.png' in img_poke_shiny or '_52_shiny.png' in img_poke_shiny:
+                                        pokemonId.append(str(pokemonIdCleaned+'_52'))
+                                    elif 'fMEGA' in img_poke_shiny:
+                                        pokemonId.append(str(pokemonIdCleaned+'fMEGA'))
+                                    elif '_61.png' in img_poke_shiny or '_61_shiny.png' in img_poke_shiny:
+                                        pokemonId.append(str(pokemonIdCleaned+'_61'))
+                                    elif 'fHISUIAN' in img_poke_shiny:
+                                        pokemonId.append(str(pokemonIdCleaned+'fHISUIAN'))
+                                    else:
+                                        pokemonId.append(pokemonIdCleaned)
         #img_src.pop()
         #obtain all div with class="bonus" to get bonus details for thet event
         for soups in soup.find_all("div",class_="bonus-text"):

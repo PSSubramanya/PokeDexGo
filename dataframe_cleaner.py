@@ -54,6 +54,9 @@ def poke_51_52_61_fMEGA(pokeId,id,url,typeData):
         newurl=url+(typeData+'-mega')
     elif id == '_61':
         newurl=url+(typeData+'-alola')
+    elif id == 'fHISUIAN':
+        newurl = url+(typeData+'-hisui')
+        print(pokeId)
     else:
         newurl = url+pokeId
     return newurl
@@ -67,6 +70,8 @@ def poke_special(pokemonMiniType2,pokeId,url,id):
         pokeId = pokeId.replace('fMEGA','')
     elif id == '_61':
         pokeId = pokeId.replace('_61','')
+    elif id == 'fHISUIAN':
+        pokeId = pokeId.replace('fHISUIAN','')
     mainurl=url+pokeId
     req = Request(
             url=mainurl, 
@@ -245,6 +250,10 @@ for summary in summaries:
                 id = 'fMEGA'
                 pokemonMiniType2 = poke_special(pokemonMiniType2,pokeId,url,id)
                 pokemonMiniType.append(pokemonMiniType2)
+            elif 'fHISUIAN' in pokeId:
+                id = 'fHISUIAN'
+                pokemonMiniType2 = poke_special(pokemonMiniType2,pokeId,url,id)
+                pokemonMiniType.append(pokemonMiniType2)
             else:
                 id=''
                 pokemonMiniType2=poke_special(pokemonMiniType2,pokeId,url,id)
@@ -316,6 +325,8 @@ for j in data:
             j['pokemonId'][k]=j['pokemonId'][k].replace('fMEGA','') 
         elif '_61' in j['pokemonId'][k]:
             j['pokemonId'][k]=j['pokemonId'][k].replace('_61','') 
+        elif 'fHISUIAN' in j['pokemonId'][k]:
+            j['pokemonId'][k]=j['pokemonId'][k].replace('fHISUIAN','') 
         
 for k in data:
     for i in k['Img Src']:
