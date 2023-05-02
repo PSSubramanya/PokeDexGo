@@ -203,9 +203,24 @@ def main():
                                         pokemonId.append(str(pokemonIdCleaned+'_51'))
                                     elif '_52.png' in src:
                                         pokemonId.append(str(pokemonIdCleaned+'_52'))
+                                    elif 'fMEGA' in src:
+                                        pokemonId.append(str(pokemonIdCleaned+'fMEGA'))
+                                    elif '_61.png' in src:
+                                        pokemonId.append(str(pokemonIdCleaned+'_61'))
                                     else:
                                         pokemonId.append(pokemonIdCleaned)
                                         #print(pokemonIdData[0].lstrip("0"))
+                elif 'shiny-icon' in src:
+                    #prev_img_link=soup.findall("li",class_='pkmn-list-item')
+                    img_poke_shiny=img_src[len(img_src)-1]
+                    if '.icon.' in img_poke_shiny:
+                        img_poke_shiny=img_poke_shiny.split('.icon.')
+                        img_poke_shiny=img_poke_shiny[0]+'.s.icon.png'
+                        img_src.append(img_poke_shiny)
+                    else:
+                        img_poke_shiny=img_poke_shiny.split('.png')
+                        img_poke_shiny=img_poke_shiny[0]+'_shiny.png'
+                        img_src.append(img_poke_shiny)
         #img_src.pop()
         #obtain all div with class="bonus" to get bonus details for thet event
         for soups in soup.find_all("div",class_="bonus-text"):

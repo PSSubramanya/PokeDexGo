@@ -25,6 +25,7 @@ data=[]
 pokemonId=[]
 dateDuration=[]
 pokemonType=[]  
+preference=[]
 
 df=pd.read_csv(constants.URL+'file.csv')
 
@@ -41,7 +42,7 @@ def getPokeName(pokeId,mainurl,req):
     typeData=typeData.replace('\'','')
     return typeData
 
-def poke_51_52(pokeId,id,url,typeData):
+def poke_51_52_61_fMEGA(pokeId,id,url,typeData):
     if id == '_51':
         if pokeId == '6' or pokeId =='150':
             newurl=url+(typeData+'-mega-x')
@@ -49,6 +50,10 @@ def poke_51_52(pokeId,id,url,typeData):
             newurl=url+(typeData+'-mega')
     elif id == '_52':
         newurl=url+(typeData+'-mega-y')
+    elif id == 'fMEGA':
+        newurl=url+(typeData+'-mega')
+    elif id == '_61':
+        newurl=url+(typeData+'-alola')
     else:
         newurl = url+pokeId
     return newurl
@@ -58,13 +63,17 @@ def poke_special(pokemonMiniType2,pokeId,url,id):
         pokeId=pokeId.replace('_51','')
     elif id == '_52':
         pokeId=pokeId.replace('_52','')
+    elif id == 'fMEGA':
+        pokeId = pokeId.replace('fMEGA','')
+    elif id == '_61':
+        pokeId = pokeId.replace('_61','')
     mainurl=url+pokeId
     req = Request(
             url=mainurl, 
             headers={'User-Agent': 'Mozilla/5.0'}
         )
     typeData=getPokeName(pokeId,mainurl,req)
-    newurl=poke_51_52(pokeId,id,url,typeData)
+    newurl=poke_51_52_61_fMEGA(pokeId,id,url,typeData)
     req2=Request(
             url=newurl, 
             headers={'User-Agent': 'Mozilla/5.0'}
@@ -80,6 +89,10 @@ def poke_special(pokemonMiniType2,pokeId,url,id):
         typeData2=typeData2.replace('\'','')
         pokemonMiniType2.append(typeData2)
     return pokemonMiniType2	
+
+def calculate_preference(dateDuration):
+    for i in dateDuration:
+        preference.append(len(i))
 
 for i in range(len(df)):
     links.append(df.iloc[i,0])
@@ -217,12 +230,20 @@ for summary in summaries:
         #pokeId=int(pokeId.strip() or 0)
         if len(pokeId)>0:
             if '_51' in pokeId:
-                id='_51'
-                pokemonMiniType2=poke_special(pokemonMiniType2,pokeId,url,id)
+                id = '_51'
+                pokemonMiniType2 = poke_special(pokemonMiniType2,pokeId,url,id)
                 pokemonMiniType.append(pokemonMiniType2)
             elif '_52' in pokeId:
-                id='_52'
-                pokemonMiniType2=poke_special(pokemonMiniType2,pokeId,url,id)
+                id = '_52'
+                pokemonMiniType2 = poke_special(pokemonMiniType2,pokeId,url,id)
+                pokemonMiniType.append(pokemonMiniType2)
+            elif '_61' in pokeId:
+                id = '_61'
+                pokemonMiniType2 = poke_special(pokemonMiniType2,pokeId,url,id)
+                pokemonMiniType.append(pokemonMiniType2)
+            elif 'fMEGA' in pokeId:
+                id = 'fMEGA'
+                pokemonMiniType2 = poke_special(pokemonMiniType2,pokeId,url,id)
                 pokemonMiniType.append(pokemonMiniType2)
             else:
                 id=''
@@ -260,10 +281,13 @@ for i in range(len(startDateV2)):
         gapDuration.append(str(res))
     dateDuration.append(gapDuration)
 
+calculate_preference(dateDuration)
+
 pokemonData['Summary']=dfSummaries
 pokemonData['Start DateTime'] = startDateV2
 pokemonData['End DateTime'] = endDate
 pokemonData['Duration'] = dateDuration
+pokemonData['preference'] = preference
 pokemonData['Img Src'] = imgSrc
 pokemonData['pokemonId'] = pokemonId
 pokemonData['type'] = pokemonType
@@ -288,7 +312,11 @@ for j in data:
             j['pokemonId'][k]=j['pokemonId'][k].replace('_51','')
         elif '_52' in j['pokemonId'][k]:
             j['pokemonId'][k]=j['pokemonId'][k].replace('_52','')
-
+        elif 'fMEGA' in  j['pokemonId'][k]:
+            j['pokemonId'][k]=j['pokemonId'][k].replace('fMEGA','') 
+        elif '_61' in j['pokemonId'][k]:
+            j['pokemonId'][k]=j['pokemonId'][k].replace('_61','') 
+        
 for k in data:
     for i in k['Img Src']:
         if '_shiny' in i:
@@ -379,10 +407,82 @@ for k in data:
             imageSrc=imageSrc[0]+'.icon.png'
             pokemonIdData = re. findall('\d+', imageSrc)
             pokemonIdCleaned = pokemonIdData[0].lstrip("0")
-            print(pokemonIdCleaned)
             if imageSrc not in k['Img Src']:
                 k['Img Src'].append(imageSrc)
                 k['pokemonId'].append(pokemonIdCleaned)
+                if '_51' in imageSrc:
+                    #add code to add types for pokemon
+                    pokeURL='https://pokeapi.co/api/v2/pokemon/'
+                    urlLink=pokeURL+str(pokemonIdCleaned)
+                    pokereq = Request(
+                        url=urlLink, 
+                        headers={'User-Agent': 'Mozilla/5.0'}
+                    )
+                    typePoke=getPokeName(pokemonIdCleaned,urlLink,pokereq)
+                    if pokemonIdCleaned == 6 or pokemonIdCleaned == 150:
+                        newpokeurl=urlLink+(typePoke+'-mega-x')
+                    else:
+                        newpokeurl=urlLink+(typePoke+'-mega')
+                    req3=Request(
+                        url=newpokeurl, 
+                        headers={'User-Agent': 'Mozilla/5.0'}
+                    )
+                    responseJSON3=urlopen(req3)
+                    dataJSONType3=json.loads(responseJSON3.read())
+                    pokemonMiniType3=[]
+                    for h in range(len(dataJSONType3['types'])):
+                        typeData3=dataJSONType3['types'][h]
+                        typeData3=str(typeData3).split('name')
+                        typeData3=typeData3[1].split(',')
+                        typeData3=typeData3[0].split(':')
+                        typeData3=typeData3[1].replace(" ","")
+                        typeData3=typeData3.replace('\'','')
+                        pokemonMiniType3.append(typeData3)
+                    k['type'].append(pokemonMiniType3)
+                elif '_52' in imageSrc:
+                    pokeURL='https://pokeapi.co/api/v2/pokemon/'
+                    urlLink=pokeURL+str(pokemonIdCleaned)
+                    pokereq = Request(
+                        url=urlLink, 
+                        headers={'User-Agent': 'Mozilla/5.0'}
+                    )
+                    typePoke=getPokeName(pokemonIdCleaned,urlLink,pokereq)
+                    newpokeurl=urlLink+(typePoke+'-mega-y')
+                    req3=Request(
+                        url=newpokeurl, 
+                        headers={'User-Agent': 'Mozilla/5.0'}
+                    )
+                    responseJSON3=urlopen(req3)
+                    dataJSONType3=json.loads(responseJSON3.read())
+                    pokemonMiniType3=[]
+                    for h in range(len(dataJSONType3['types'])):
+                        typeData3=dataJSONType3['types'][h]
+                        typeData3=str(typeData3).split('name')
+                        typeData3=typeData3[1].split(',')
+                        typeData3=typeData3[0].split(':')
+                        typeData3=typeData3[1].replace(" ","")
+                        typeData3=typeData3.replace('\'','')
+                        pokemonMiniType3.append(typeData3)
+                    k['type'].append(pokemonMiniType3)
+                else:
+                    pokeURL='https://pokeapi.co/api/v2/pokemon/'
+                    newpokeurl=pokeURL+str(pokemonIdCleaned)
+                    req3=Request(
+                        url=newpokeurl, 
+                        headers={'User-Agent': 'Mozilla/5.0'}
+                    )
+                    responseJSON3=urlopen(req3)
+                    dataJSONType3=json.loads(responseJSON3.read())
+                    pokemonMiniType3=[]
+                    for h in range(len(dataJSONType3['types'])):
+                        typeData3=dataJSONType3['types'][h]
+                        typeData3=str(typeData3).split('name')
+                        typeData3=typeData3[1].split(',')
+                        typeData3=typeData3[0].split(':')
+                        typeData3=typeData3[1].replace(" ","")
+                        typeData3=typeData3.replace('\'','')
+                        pokemonMiniType3.append(typeData3)
+                    k['type'].append(pokemonMiniType3)
 
 #pokemonJson=pokemonData.to_json()  
 #pokemonJsonCleaned=json.loads(pokemonJson)
