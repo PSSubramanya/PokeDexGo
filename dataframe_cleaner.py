@@ -339,8 +339,10 @@ for k in data:
                 k['Img Src'].append(imageSrc)
                 k['pokemonId'].append(pokemonIdCleaned)
                 if '_51' in imageSrc:
+                    pokemonIdString=str(pokemonIdCleaned)
                     #add code to add types for pokemon
                     pokeURL='https://pokeapi.co/api/v2/pokemon/'
+                    """
                     urlLink=pokeURL+str(pokemonIdCleaned)
                     pokereq = Request(
                         url=urlLink, 
@@ -357,8 +359,9 @@ for k in data:
                     )
                     responseJSON3=urlopen(req3)
                     dataJSONType3=json.loads(responseJSON3.read())
-                    pokemonMiniType3=[]
-                    for h in range(len(dataJSONType3['types'])):
+                    pokemonMiniType3=[] """
+                    pokemonMiniType5=[]
+                    """ for h in range(len(dataJSONType3['types'])):
                         typeData3=dataJSONType3['types'][h]
                         typeData3=str(typeData3).split('name')
                         typeData3=typeData3[1].split(',')
@@ -366,10 +369,15 @@ for k in data:
                         typeData3=typeData3[1].replace(" ","")
                         typeData3=typeData3.replace('\'','')
                         pokemonMiniType3.append(typeData3)
-                    k['type'].append(pokemonMiniType3)
+                    print(pokemonMiniType3) """
+                    pokemonMiniType4=poke_special(pokemonMiniType5,pokemonIdString,pokeURL,' ')
+                    print(pokemonMiniType4)
+                    k['type'].append(pokemonMiniType4)
                 elif '_52' in imageSrc:
+                    pokemonIdString=str(pokemonIdCleaned)
                     pokeURL='https://pokeapi.co/api/v2/pokemon/'
-                    urlLink=pokeURL+str(pokemonIdCleaned)
+                    """ urlLink=pokeURL+str(pokemonIdCleaned)
+                    pokemonIdString=str(pokemonIdCleaned)
                     pokereq = Request(
                         url=urlLink, 
                         headers={'User-Agent': 'Mozilla/5.0'}
@@ -382,8 +390,9 @@ for k in data:
                     )
                     responseJSON3=urlopen(req3)
                     dataJSONType3=json.loads(responseJSON3.read())
-                    pokemonMiniType3=[]
-                    for h in range(len(dataJSONType3['types'])):
+                    pokemonMiniType3=[] """
+                    pokemonMiniType5=[]
+                    """ for h in range(len(dataJSONType3['types'])):
                         typeData3=dataJSONType3['types'][h]
                         typeData3=str(typeData3).split('name')
                         typeData3=typeData3[1].split(',')
@@ -391,18 +400,24 @@ for k in data:
                         typeData3=typeData3[1].replace(" ","")
                         typeData3=typeData3.replace('\'','')
                         pokemonMiniType3.append(typeData3)
-                    k['type'].append(pokemonMiniType3)
+                    print(pokemonMiniType3) """
+                    pokemonMiniType4=poke_special(pokemonMiniType5,pokemonIdString,pokeURL,' ')
+                    print(pokemonMiniType4)
+                    k['type'].append(pokemonMiniType4)
                 else:
+                    pokemonIdString=str(pokemonIdCleaned)
                     pokeURL='https://pokeapi.co/api/v2/pokemon/'
-                    newpokeurl=pokeURL+str(pokemonIdCleaned)
+                    """newpokeurl=pokeURL+str(pokemonIdCleaned)
+                    pokemonIdString=str(pokemonIdCleaned)
                     req3=Request(
                         url=newpokeurl, 
                         headers={'User-Agent': 'Mozilla/5.0'}
                     )
                     responseJSON3=urlopen(req3)
-                    dataJSONType3=json.loads(responseJSON3.read())
-                    pokemonMiniType3=[]
-                    for h in range(len(dataJSONType3['types'])):
+                    dataJSONType3=json.loads(responseJSON3.read()) """
+                    #pokemonMiniType3=[]
+                    pokemonMiniType5=[]
+                    """ for h in range(len(dataJSONType3['types'])):
                         typeData3=dataJSONType3['types'][h]
                         typeData3=str(typeData3).split('name')
                         typeData3=typeData3[1].split(',')
@@ -410,7 +425,10 @@ for k in data:
                         typeData3=typeData3[1].replace(" ","")
                         typeData3=typeData3.replace('\'','')
                         pokemonMiniType3.append(typeData3)
-                    k['type'].append(pokemonMiniType3)
+                    print(pokemonMiniType3) """
+                    pokemonMiniType4=poke_special(pokemonMiniType5,pokemonIdString,pokeURL,' ')
+                    print(pokemonMiniType4)
+                    k['type'].append(pokemonMiniType4)
 
 
         elif '.s.' in i:
@@ -422,9 +440,11 @@ for k in data:
                 k['Img Src'].append(imageSrc)
                 k['pokemonId'].append(pokemonIdCleaned)
                 if '_51' in imageSrc:
+                    pokemonIdString=str(pokemonIdCleaned)
                     #add code to add types for pokemon
                     pokeURL='https://pokeapi.co/api/v2/pokemon/'
-                    urlLink=pokeURL+str(pokemonIdCleaned)
+                    """urlLink=pokeURL+str(pokemonIdCleaned)
+                    pokemonIdString=str(pokemonIdCleaned)
                     pokereq = Request(
                         url=urlLink, 
                         headers={'User-Agent': 'Mozilla/5.0'}
@@ -440,18 +460,22 @@ for k in data:
                     )
                     responseJSON3=urlopen(req3)
                     dataJSONType3=json.loads(responseJSON3.read())
-                    pokemonMiniType3=[]
-                    for h in range(len(dataJSONType3['types'])):
+                    pokemonMiniType3=[] """
+                    pokemonMiniType5=[]
+                    """ for h in range(len(dataJSONType3['types'])):
                         typeData3=dataJSONType3['types'][h]
                         typeData3=str(typeData3).split('name')
                         typeData3=typeData3[1].split(',')
                         typeData3=typeData3[0].split(':')
                         typeData3=typeData3[1].replace(" ","")
                         typeData3=typeData3.replace('\'','')
-                        pokemonMiniType3.append(typeData3)
-                    k['type'].append(pokemonMiniType3)
+                        pokemonMiniType3.append(typeData3) """
+                    pokemonMiniType4=poke_special(pokemonMiniType5,pokemonIdString,pokeURL,' ')
+                    k['type'].append(pokemonMiniType4)
                 elif '_52' in imageSrc:
+                    pokemonIdString=str(pokemonIdCleaned)
                     pokeURL='https://pokeapi.co/api/v2/pokemon/'
+                    """
                     urlLink=pokeURL+str(pokemonIdCleaned)
                     pokereq = Request(
                         url=urlLink, 
@@ -465,35 +489,40 @@ for k in data:
                     )
                     responseJSON3=urlopen(req3)
                     dataJSONType3=json.loads(responseJSON3.read())
-                    pokemonMiniType3=[]
-                    for h in range(len(dataJSONType3['types'])):
+                    pokemonMiniType3=[] """
+                    pokemonMiniType5=[]
+                    """ for h in range(len(dataJSONType3['types'])):
                         typeData3=dataJSONType3['types'][h]
                         typeData3=str(typeData3).split('name')
                         typeData3=typeData3[1].split(',')
                         typeData3=typeData3[0].split(':')
                         typeData3=typeData3[1].replace(" ","")
                         typeData3=typeData3.replace('\'','')
-                        pokemonMiniType3.append(typeData3)
-                    k['type'].append(pokemonMiniType3)
+                        pokemonMiniType3.append(typeData3) """
+                    pokemonMiniType4=poke_special(pokemonMiniType5,pokemonIdString,pokeURL,' ')
+                    k['type'].append(pokemonMiniType4)
                 else:
+                    pokemonIdString=str(pokemonIdCleaned)
                     pokeURL='https://pokeapi.co/api/v2/pokemon/'
-                    newpokeurl=pokeURL+str(pokemonIdCleaned)
+                    """newpokeurl=pokeURL+str(pokemonIdCleaned)
                     req3=Request(
                         url=newpokeurl, 
                         headers={'User-Agent': 'Mozilla/5.0'}
                     )
                     responseJSON3=urlopen(req3)
-                    dataJSONType3=json.loads(responseJSON3.read())
-                    pokemonMiniType3=[]
-                    for h in range(len(dataJSONType3['types'])):
+                    dataJSONType3=json.loads(responseJSON3.read()) """
+                    #pokemonMiniType3=[]
+                    pokemonMiniType5=[]
+                    """ for h in range(len(dataJSONType3['types'])):
                         typeData3=dataJSONType3['types'][h]
                         typeData3=str(typeData3).split('name')
                         typeData3=typeData3[1].split(',')
                         typeData3=typeData3[0].split(':')
                         typeData3=typeData3[1].replace(" ","")
                         typeData3=typeData3.replace('\'','')
-                        pokemonMiniType3.append(typeData3)
-                    k['type'].append(pokemonMiniType3)
+                        pokemonMiniType3.append(typeData3) """
+                    pokemonMiniType4=poke_special(pokemonMiniType5,pokemonIdString,pokeURL,' ')
+                    k['type'].append(pokemonMiniType4)
 
 #pokemonJson=pokemonData.to_json()  
 #pokemonJsonCleaned=json.loads(pokemonJson)
@@ -505,11 +534,11 @@ for k in data:
 #run(host='localhost',port=8080)
 #pokemon_object = json.dumps(pokemonJson,indent=4)
 
-with open('C:/Users/Rahul V Hegde/Desktop/subbu/PokeDexGo/pokemon_data2.json',"w") as output_file:
+#with open('C:/Users/Rahul V Hegde/Desktop/subbu/PokeDexGo/pokemon_data2.json',"w") as output_file:
     #output_file.write(pokemon_json.replace('\\','')+'\n')
     #output_file.write(pokemon_json_cleaned)
     #output_file.write(json.dumps({"data": pokemonJsonCleaned}, indent=4 ))
-    output_file.write(json.dumps({"data": data}, indent=4 ))
+    #output_file.write(json.dumps({"data": data}, indent=4 ))
 
 #pokemonData.to_csv('./cleaned.csv')
-shutil.copy((constants.URL+'pokemon_data2.json'),(constants.COMMIT_URL))
+#shutil.copy((constants.URL+'pokemon_data2.json'),(constants.COMMIT_URL))
