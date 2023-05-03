@@ -534,11 +534,11 @@ for k in data:
 #run(host='localhost',port=8080)
 #pokemon_object = json.dumps(pokemonJson,indent=4)
 
-#with open('C:/Users/Rahul V Hegde/Desktop/subbu/PokeDexGo/pokemon_data2.json',"w") as output_file:
+with open('C:/Users/Rahul V Hegde/Desktop/subbu/PokeDexGo/pokemon_data2.json',"w") as output_file:
     #output_file.write(pokemon_json.replace('\\','')+'\n')
     #output_file.write(pokemon_json_cleaned)
     #output_file.write(json.dumps({"data": pokemonJsonCleaned}, indent=4 ))
-    #output_file.write(json.dumps({"data": data}, indent=4 ))
+    output_file.write(json.dumps({"data": data}, indent=4 ))
 
 #pokemonData.to_csv('./cleaned.csv')
-#shutil.copy((constants.URL+'pokemon_data2.json'),(constants.COMMIT_URL))
+shutil.copy((constants.URL+'pokemon_data2.json'),(constants.COMMIT_URL))
