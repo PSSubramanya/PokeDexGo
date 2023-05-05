@@ -808,12 +808,17 @@ const EventViewScreen = props => {
     );
   };
 
+  const setSelectedMonth = () => {
+    setEventsData(null);
+  };
+
   const calandarView = () => {
     return (
       <View style={styles.calandarView}>
         <CalendarView
           setSelectedStartDate={setSelectedStartDate}
           selectedStartDate={selectedStartDate}
+          setSelectedMonth={setSelectedMonth}
           calanderRef={calanderRef}
         />
       </View>
