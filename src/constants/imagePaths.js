@@ -24,10 +24,14 @@ export default {
   time: require('../assets/images/time.png'),
   pokemonBanner: require('../assets/images/pokemonBanner.jpg'),
   noImage: require('../assets/images/no_image.png'),
+  noInternetImage: require('../assets/images/pichu.jpeg'),
 
   //Illustrations
   calendarIllustration1: require('../assets/images/illustrations/calendarIllustration1.png'),
   calendarIllustration2: require('../assets/images/illustrations/calendarIllustration2.png'),
   calendarIllustration3: require('../assets/images/illustrations/calendarIllustration3.png'),
   calendarIllustration4: require('../assets/images/illustrations/calendarIllustration4.png'),
+
+  //gifs
+  pichuDancing: require('../assets/images/gifs/pichuGif.webp'),
 };

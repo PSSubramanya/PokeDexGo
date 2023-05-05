@@ -30,12 +30,20 @@ import {
   moderateScale,
 } from '../../ultilities/scale';
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = props => {
+  const {navigation, route} = props;
+  const {params} = route;
+  const {loadData} = params; //props?.route?.params?.selectedDate;
+
   const dateToday = new Date();
 
-  const loadedEventJSONData = useSelector(
+  let loadedEventJSONData = useSelector(
     state => state?.eventDataReducer?.eventdataload,
   );
+
+  if (!loadedEventJSONData) {
+    loadedEventJSONData = loadData;
+  }
 
   const [selectedStartDate, setSelectedStartDate] = useState(dateToday);
   const [numberOfEvents, setNumberOfEvents] = useState(0);
@@ -451,19 +459,20 @@ const HomeScreen = ({navigation}) => {
                 </TouchableOpacity>
               </View>
               <TouchableOpacity
+                style={styles.viewEventIcon}
                 onPress={() => {
                   navigation.navigate('EventViewScreen', {
                     selectedDate: selectedStartDate,
                   });
                 }}>
-                <View style={styles.viewEventIcon}>
-                  <Image
-                    source={imagePaths.calendarIcon}
-                    height={1}
-                    width={1}
-                    style={[styles.calendarIcon]}
-                  />
-                </View>
+                {/* <View> */}
+                <Image
+                  source={imagePaths.calendarIcon}
+                  height={1}
+                  width={1}
+                  style={[styles.calendarIcon]}
+                />
+                {/* </View> */}
               </TouchableOpacity>
             </View>
           ) : (

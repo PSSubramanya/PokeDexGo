@@ -21,4 +21,5 @@ export default {
   number_of_events: 'Number of events',
   plus: '+',
   event_completed: 'Event Completed',
+  ok: 'ok',
 };
