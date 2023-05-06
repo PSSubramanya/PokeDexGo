@@ -71,8 +71,6 @@ const EventViewScreen = props => {
       sortByKey(displayableEvents, 'preference') ?? displayableEvents;
     setEventsData(sortedArry);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-
-    console.log('IMAGE STATUS', sortedArry);
   }, [selectedStartDate]);
 
   useEffect(() => {
@@ -82,7 +80,6 @@ const EventViewScreen = props => {
     ).then(response => {
       response.json().then(res => {
         pokeName = res?.name;
-        console.log('YUVI POKENAME', pokeName);
         setPokemonName(pokeName);
       });
     });
@@ -90,44 +87,8 @@ const EventViewScreen = props => {
   }, [modalImageIndex, modalVisible, gridViewStatus]);
 
   useEffect(() => {
-    console.log(
-      'POKEMON NAME sub DEX',
-      modalData?.pokemonId?.[modalImageIndex],
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [modalImageIndex]);
-
-  useEffect(() => {
     setGridViewStatus(false);
   }, [modalVisible]);
-
-  /*
-    const fetchShinyGalarianHisuianAlolanPokeImages = (idx, type) => {
-      let pokeImage;
-      let pokeDispName;
-      let fetchString;
-
-      fetch(
-        `https://pokeapi.co/api/v2/pokemon/${modalData?.pokemonId?.[idx]}`,
-      ).then(response => {
-        response.json().then(res => {
-          pokeDispName = res?.name;
-          console.log('VARIANT POKPOKName 2', pokeDispName);
-        });
-      });
-
-      console.log('VARIANT 2 2 2', fetchString);
-
-      fetch(fetchString).then(response => {
-        response.json().then(res => {
-          pokeImage = res?.sprites?.other?.['official-artwork']?.front_shiny;
-          console.log('VARIANT', pokeImage);
-        });
-      });
-      return pokeImage;
-    };
-
-  */
 
   const showModal = () => {
     setModalVisible(true);
@@ -141,16 +102,22 @@ const EventViewScreen = props => {
 
   const leftButtonHandler = (id, modalImages) => {
     //TODO: Need to fix this limit of 30 items and make scrolling smooth for what so ever number of images we have
-    if (modalImages?.length <= 30) {
-      listViewRef.current.scrollToIndex({animated: true, index: id});
-    }
+    //TODO: Try to use gridIndex and modalIndex, whenever gridImage is selected, trigger a useEffect which sets modalIndex
+    //TODO: Then scrollToIndex(modalIndex). Hopefully this can solve this issue
+    /*
+      if (modalImages?.length <= 30) {
+        listViewRef.current.scrollToIndex({animated: true, index: id});
+      }
+    */
   };
 
   const rightButtonHandler = (id, modalImages) => {
     //TODO: Need to fix this limit of 30 items and make scrolling smooth for what so ever number of images we have
-    if (modalImages?.length <= 30) {
-      listViewRef.current.scrollToIndex({animated: true, index: id});
-    }
+    /*
+      if (modalImages?.length <= 30) {
+        listViewRef.current.scrollToIndex({animated: true, index: id});
+      }
+    */
   };
 
   const renderItem = ({item}) => {
@@ -379,18 +346,10 @@ const EventViewScreen = props => {
           }}
           scrollEnabled={false}
           ref={listViewRef}
-          // onScrollBeginDrag={() => console.log('begin')}
-          // onScrollEndDrag={() => console.log('end')}
           onScrollToIndexFailed={scrollToIndexFailed}
           renderItem={({item, index}) => {
             return (
               <Image
-                // source={{
-                //   uri:
-                //     modalImages?.length <= 6
-                //       ? item
-                //       : modalImages[modalImageIndex],
-                // }}
                 source={{uri: modalImages[modalImageIndex]}}
                 height={1}
                 width={1}
@@ -467,7 +426,6 @@ const EventViewScreen = props => {
         onPress={() => {
           setGridViewStatus(false);
           setModalImageIndex(index);
-          console.log('YUVI ABCDDD', item, index, modalImageIndex);
         }}>
         <Image
           source={{uri: item}}
@@ -610,10 +568,6 @@ const EventViewScreen = props => {
     const substring14 = '_51_shiny.png'; //Mega Shiny
     const substring15 = '_52_shiny.png'; //Mega Shiny
 
-    /*
-    pokemon_mega_images
-    */
-
     const modalImages = modalData?.['Img Src']?.filter(data =>
       data?.includes(substring1),
     );
@@ -624,41 +578,28 @@ const EventViewScreen = props => {
 
     modalImages?.map((data, idx) => {
       let pushedImage;
-      // console.log(
-      //   'MEGA data',
-      //   data,
-      //   data?.includes(substring14),
-      //   data?.includes(substring13),
-      //   data?.includes(substring15),
-      // );
       if (data?.includes(substring2) || data?.includes(substring12)) {
         if (pokemonName === 'charizard' || pokemonName === 'mewtwo') {
           pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-mega-x.jpg`;
-          console.log('MEGA BOYS 4', pushedImage);
         } else {
           pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-mega.jpg`;
-          console.log('MEGA BOYS 5', pushedImage);
         }
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring3)) {
         pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-mega-y.jpg`;
-        console.log('MEGA BOYS 6', pushedImage);
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring14) || data?.includes(substring13)) {
         if (pokemonName === 'charizard' || pokemonName === 'mewtwo') {
           const pokeString = pokemonName + 'X';
           pushedImage = pokemon_mega_images[pokeString];
-          console.log('MEGA BOYS 1', pokeString, pushedImage);
         } else {
           const pokeString = pokemonName;
           pushedImage = pokemon_mega_images[pokeString];
-          console.log('MEGA BOYS 2', pokeString, pushedImage);
         }
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring15)) {
         const pokeString = pokemonName + 'Y';
         pushedImage = pokemon_mega_images[pokeString];
-        console.log('MEGA BOYS 3', pokeString, pushedImage);
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring6)) {
         pushedImage = pokemon_hisuian_variants[modalData?.pokemonId?.[idx]];
@@ -672,32 +613,14 @@ const EventViewScreen = props => {
       } else if (data?.includes(substring7)) {
         const idString = modalData?.pokemonId?.[idx] + 's';
         pushedImage = pokemon_hisuian_variants[idString];
-        console.log(
-          'VARIANT 2',
-          idString,
-          modalData?.pokemonId?.[idString],
-          pushedImage,
-        );
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring9)) {
         const idString = modalData?.pokemonId?.[idx] + 's';
         pushedImage = pokemon_galarian_variants[idString];
-        console.log(
-          'VARIANT 3',
-          idString,
-          modalData?.pokemonId?.[idString],
-          pushedImage,
-        );
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring11)) {
         const idString = modalData?.pokemonId?.[idx] + 's';
         pushedImage = pokemon_alolan_variants[idString];
-        console.log(
-          'VARIANT 4',
-          idString,
-          modalData?.pokemonId?.[idString],
-          pushedImage,
-        );
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring4)) {
         const ret = data;
@@ -766,7 +689,6 @@ const EventViewScreen = props => {
          * Even so some strings may have _00 and _11 attached to it making its length 6 so.
          */
 
-        // pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${modalData?.pokemonId[idx]}.png`;
         displayableModalImages = [...displayableModalImages, pushedImage];
       }
     });
@@ -775,8 +697,6 @@ const EventViewScreen = props => {
 
   const modalContainer = () => {
     let displayableModalImages = pokeImageMappingFunction();
-
-    console.log('displayableModalImages', displayableModalImages);
 
     return (
       <ScrollView showsVerticalScrollIndicator={false}>

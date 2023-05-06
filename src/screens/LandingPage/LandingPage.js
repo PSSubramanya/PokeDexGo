@@ -8,7 +8,7 @@ import {
   SafeAreaView,
   StatusBar,
 } from 'react-native';
-import NetInfo, {useNetInfo} from '@react-native-community/netinfo';
+import {useNetInfo} from '@react-native-community/netinfo';
 import {Modal, Portal, Provider} from 'react-native-paper';
 import Button from '../../components/Button/Button';
 import strings from '../../constants/strings';
@@ -38,18 +38,13 @@ const LandingPage = ({navigation}) => {
       }
     });
 
-    soundTracks?.pikapika1.setVolume(0.5); // Reduce the volume by half
-    soundTracks?.pikapika1.setPan(0.5); // Position the sound to the full right in a stereo field
-    soundTracks?.pikapika1.setNumberOfLoops(0); // Loop indefinitely until stop() is called
+    soundTracks?.pikapika1.setVolume(0.5); // NOTE: Reduce the volume by half
+    soundTracks?.pikapika1.setPan(0.5); // NOTE: Position the sound to the full right in a stereo field
+    soundTracks?.pikapika1.setNumberOfLoops(0); // NOTE: Loop indefinitely until stop() is called
   }, []);
 
   useEffect(() => {
-    // NetInfo.fetch().then(state => {
-    //   console.log('Connection type', state.type);
-    //   console.log('Is connected?', state.isConnected);
-    //   setNetworkState(state?.isConnected);
-    // });
-    setNetworkState(netInfo.isConnected); //netInfo.type
+    setNetworkState(netInfo.isConnected); // NOTE: netInfo.type for getting type of network. Eg. Cellular or Wifi etc.
   }, [netInfo]);
 
   useEffect(() => {
@@ -124,6 +119,58 @@ const LandingPage = ({navigation}) => {
     );
   };
 
+  const appIconContainer = () => {
+    return (
+      <View style={styles.centerAlignmentStyle}>
+        <Image
+          source={imagePaths.appIcon}
+          height={1}
+          width={1}
+          style={styles.appIcon}
+        />
+        <Text style={[styles.appName, styles.primaryColorStyle]}>
+          {strings.app_name}
+        </Text>
+      </View>
+    );
+  };
+
+  const continueButton = () => {
+    return (
+      <>
+        {networkState ? (
+          <View style={styles.centerAlignmentStyle}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('HomeScreen', {loadData: loadData});
+              }}
+              style={commonStyling.centerAlignment}>
+              <Image
+                source={imagePaths.rightArrowCircle}
+                height={1}
+                width={1}
+                style={styles.rightArrowCircle}
+              />
+              <Text style={[styles.smallTextSize, styles.primaryColorStyle]}>
+                {strings.continue}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        ) : null}
+      </>
+    );
+  };
+
+  const mainContainerBody = () => {
+    return (
+      <View style={styles.mainContainer}>
+        {appIconContainer()}
+        {continueButton()}
+        {/* <CircleRightArrow /> */}
+      </View>
+    );
+  };
+
   return (
     <Provider>
       <SafeAreaView style={{}}>
@@ -132,39 +179,7 @@ const LandingPage = ({navigation}) => {
           backgroundColor={colors.darkBlue}
         />
         {modalPopUp()}
-        <View style={styles.mainContainer}>
-          <View style={styles.centerAlignmentStyle}>
-            <Image
-              source={imagePaths.appIcon}
-              height={1}
-              width={1}
-              style={styles.appIcon}
-            />
-            <Text style={[styles.appName, styles.primaryColorStyle]}>
-              {strings.app_name}
-            </Text>
-          </View>
-          {/* <CircleRightArrow /> */}
-          {networkState ? (
-            <View style={styles.centerAlignmentStyle}>
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('HomeScreen', {loadData: loadData});
-                }}
-                style={commonStyling.centerAlignment}>
-                <Image
-                  source={imagePaths.rightArrowCircle}
-                  height={1}
-                  width={1}
-                  style={styles.rightArrowCircle}
-                />
-                <Text style={[styles.smallTextSize, styles.primaryColorStyle]}>
-                  {strings.continue}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          ) : null}
-        </View>
+        {mainContainerBody()}
       </SafeAreaView>
     </Provider>
   );

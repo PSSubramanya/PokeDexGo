@@ -342,152 +342,160 @@ const HomeScreen = props => {
     );
   };
 
+  const modalPopUp = () => {
+    return (
+      <Portal>
+        <Modal
+          style={styles.modalMarginStyle}
+          visible={modalVisible}
+          onDismiss={hideModal}
+          contentContainerStyle={styles.modalExternalStyle}>
+          {modalContainer()}
+        </Modal>
+      </Portal>
+    );
+  };
+
+  const addEventScreenView = () => {
+    return (
+      <View>
+        <CalendarView
+          setSelectedStartDate={setSelectedStartDate}
+          selectedStartDate={selectedStartDate}
+        />
+        <CardView
+          innerView={cardContainerView()}
+          style={styles.cardInnerStyling}
+        />
+      </View>
+    );
+  };
+
+  const homeScreenBody = () => {
+    return (
+      <View>
+        <View
+          style={[
+            styles.flexRow,
+            styles.mainContainer,
+            styles.centerContainer,
+          ]}>
+          <TouchableOpacity
+            onPress={() => {
+              var a = selectedStartDate;
+              // no_of_days is an integer value
+              var b = new Date(a.setDate(a.getDate() - 1));
+              setSelectedStartDate(b);
+            }}>
+            <Image
+              source={imagePaths.leftChevronIcon}
+              height={1}
+              width={1}
+              style={[styles.chevronIcon, styles.rightChevronIcon]}
+            />
+          </TouchableOpacity>
+          <View style={{marginBottom: 50}}>
+            <View style={styles.centerContainer}>
+              <View style={styles.flexRow}>
+                <Text
+                  style={[
+                    styles.mediumFont,
+                    styles.mediumFontSize,
+                    styles.primaryColorStyle,
+                  ]}>
+                  {moment(selectedStartDate.toString()).format('MMM')}
+                </Text>
+                <Text
+                  style={[
+                    styles.mediumFont,
+                    styles.mediumFontSize,
+                    styles.primaryColorStyle,
+                  ]}>
+                  {' '}
+                  {moment(selectedStartDate.toString()).format('DD')}
+                </Text>
+              </View>
+              <Text
+                style={[
+                  styles.boldFont,
+                  styles.largeFontSize,
+                  styles.primaryColorStyle,
+                ]}>
+                {moment(selectedStartDate.toString()).format('YYYY')}
+              </Text>
+            </View>
+            {numberOfEvents > 0 ? (
+              <View style={commonStyling.absoluteCenterStyling}>
+                <Text style={styles.numberOfEvents}>{numberOfEvents}</Text>
+                <Text style={[styles.noEventTitle, styles.primaryColorStyle]}>
+                  {strings.events_today}
+                </Text>
+              </View>
+            ) : (
+              <View style={commonStyling.absoluteCenterStyling}>
+                <Image
+                  source={imagePaths.calendarIllustration3}
+                  height={1}
+                  width={1}
+                  style={styles.appIcon}
+                />
+                <Text style={[styles.noEventTitle, styles.primaryColorStyle]}>
+                  {strings.no_event_today}
+                </Text>
+              </View>
+            )}
+            {/* TODO: THIS FOR V2 or V3 */}
+            {/* <View style={commonStyling.absoluteCenterStyling}>
+            <Button
+              buttonStyle={[styles.buttonStyle, styles.viewButton]}
+              buttonTextStyle={[styles.viewButtonText]}
+              onPress={() => {
+                setViewCalendar(true);
+              }}
+              buttonText={strings.addEvent}
+            />
+          </View> */}
+          </View>
+          <TouchableOpacity
+            onPress={() => {
+              var a = selectedStartDate;
+              // no_of_days is an integer value
+              var b = new Date(a.setDate(a.getDate() + 1));
+              setSelectedStartDate(b);
+            }}>
+            <Image
+              source={imagePaths.rightChevronIcon}
+              height={1}
+              width={1}
+              style={[styles.chevronIcon, styles.leftChevronIcon]}
+            />
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity
+          style={styles.viewEventIcon}
+          onPress={() => {
+            navigation.navigate('EventViewScreen', {
+              selectedDate: selectedStartDate,
+            });
+          }}>
+          {/* <View> */}
+          <Image
+            source={imagePaths.calendarIcon}
+            height={1}
+            width={1}
+            style={[styles.calendarIcon]}
+          />
+          {/* </View> */}
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   return (
     <Provider>
       <SafeAreaView style={{}}>
-        <Portal>
-          <Modal
-            style={styles.modalMarginStyle}
-            visible={modalVisible}
-            onDismiss={hideModal}
-            contentContainerStyle={styles.modalExternalStyle}>
-            {modalContainer()}
-          </Modal>
-        </Portal>
-        <View>
-          {!viewCalendar ? (
-            <View>
-              <View
-                style={[
-                  styles.flexRow,
-                  styles.mainContainer,
-                  styles.centerContainer,
-                ]}>
-                <TouchableOpacity
-                  onPress={() => {
-                    var a = selectedStartDate;
-                    // no_of_days is an integer value
-                    var b = new Date(a.setDate(a.getDate() - 1));
-                    setSelectedStartDate(b);
-                  }}>
-                  <Image
-                    source={imagePaths.leftChevronIcon}
-                    height={1}
-                    width={1}
-                    style={[styles.chevronIcon, styles.rightChevronIcon]}
-                  />
-                </TouchableOpacity>
-                <View style={{marginBottom: 50}}>
-                  <View style={styles.centerContainer}>
-                    <View style={styles.flexRow}>
-                      <Text
-                        style={[
-                          styles.mediumFont,
-                          styles.mediumFontSize,
-                          styles.primaryColorStyle,
-                        ]}>
-                        {moment(selectedStartDate.toString()).format('MMM')}
-                      </Text>
-                      <Text
-                        style={[
-                          styles.mediumFont,
-                          styles.mediumFontSize,
-                          styles.primaryColorStyle,
-                        ]}>
-                        {' '}
-                        {moment(selectedStartDate.toString()).format('DD')}
-                      </Text>
-                    </View>
-                    <Text
-                      style={[
-                        styles.boldFont,
-                        styles.largeFontSize,
-                        styles.primaryColorStyle,
-                      ]}>
-                      {moment(selectedStartDate.toString()).format('YYYY')}
-                    </Text>
-                  </View>
-                  {numberOfEvents > 0 ? (
-                    <View style={commonStyling.absoluteCenterStyling}>
-                      <Text style={styles.numberOfEvents}>
-                        {numberOfEvents}
-                      </Text>
-                      <Text
-                        style={[styles.noEventTitle, styles.primaryColorStyle]}>
-                        {strings.events_today}
-                      </Text>
-                    </View>
-                  ) : (
-                    <View style={commonStyling.absoluteCenterStyling}>
-                      <Image
-                        source={imagePaths.calendarIllustration3}
-                        height={1}
-                        width={1}
-                        style={styles.appIcon}
-                      />
-                      <Text
-                        style={[styles.noEventTitle, styles.primaryColorStyle]}>
-                        {strings.no_event_today}
-                      </Text>
-                    </View>
-                  )}
-                  {/* TODO: THIS FOR V2 or V3 */}
-                  {/* <View style={commonStyling.absoluteCenterStyling}>
-                    <Button
-                      buttonStyle={[styles.buttonStyle, styles.viewButton]}
-                      buttonTextStyle={[styles.viewButtonText]}
-                      onPress={() => {
-                        setViewCalendar(true);
-                      }}
-                      buttonText={strings.addEvent}
-                    />
-                  </View> */}
-                </View>
-                <TouchableOpacity
-                  onPress={() => {
-                    var a = selectedStartDate;
-                    // no_of_days is an integer value
-                    var b = new Date(a.setDate(a.getDate() + 1));
-                    setSelectedStartDate(b);
-                  }}>
-                  <Image
-                    source={imagePaths.rightChevronIcon}
-                    height={1}
-                    width={1}
-                    style={[styles.chevronIcon, styles.leftChevronIcon]}
-                  />
-                </TouchableOpacity>
-              </View>
-              <TouchableOpacity
-                style={styles.viewEventIcon}
-                onPress={() => {
-                  navigation.navigate('EventViewScreen', {
-                    selectedDate: selectedStartDate,
-                  });
-                }}>
-                {/* <View> */}
-                <Image
-                  source={imagePaths.calendarIcon}
-                  height={1}
-                  width={1}
-                  style={[styles.calendarIcon]}
-                />
-                {/* </View> */}
-              </TouchableOpacity>
-            </View>
-          ) : (
-            <View>
-              <CalendarView
-                setSelectedStartDate={setSelectedStartDate}
-                selectedStartDate={selectedStartDate}
-              />
-              <CardView
-                innerView={cardContainerView()}
-                style={styles.cardInnerStyling}
-              />
-            </View>
-          )}
-        </View>
+        {modalPopUp()}
+        <View>{!viewCalendar ? homeScreenBody() : addEventScreenView()}</View>
       </SafeAreaView>
     </Provider>
   );
