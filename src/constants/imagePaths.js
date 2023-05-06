@@ -25,6 +25,8 @@ export default {
   pokemonBanner: require('../assets/images/pokemonBanner.jpg'),
   noImage: require('../assets/images/no_image.png'),
   noInternetImage: require('../assets/images/pichu.jpeg'),
+  noDateSelectedPromptImage1: require('../assets/images/cutePika1.png'),
+  noDateSelectedPromptImage2: require('../assets/images/cutePika2.png'),
 
   //Illustrations
   calendarIllustration1: require('../assets/images/illustrations/calendarIllustration1.png'),

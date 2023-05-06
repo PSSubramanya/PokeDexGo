@@ -127,6 +127,10 @@ export default styles = StyleSheet.create({
     height: verticalScale(180),
     width: horizontalScale(180),
   },
+  selectDatePromptImage: {
+    height: verticalScale(250),
+    width: horizontalScale(250),
+  },
   emptyListText: {
     fontFamily: fontFamily.primaryFontFamilyRegular,
     fontSize: moderateScale(16),
@@ -138,7 +142,7 @@ export default styles = StyleSheet.create({
   calandarView: {
     height: '45%',
   },
-  emptyListView: {
+  topPaddingStyle: {
     marginTop: verticalScale(30),
   },
   cardInnerStyling: {

@@ -8,9 +8,7 @@ import {
   SafeAreaView,
   StatusBar,
 } from 'react-native';
-import {useNetInfo} from '@react-native-community/netinfo';
-import {Modal, Portal, Provider} from 'react-native-paper';
-import Button from '../../components/Button/Button';
+import {useNetStatusInfo} from '../../ultilities/customHooks/useNetStatusInfo';
 import strings from '../../constants/strings';
 import imagePaths from '../../constants/imagePaths';
 import colors from '../../constants/colors';
@@ -23,11 +21,9 @@ import webscrappedData from '../../ultilities/pokemonData/pokemon_data6.json';
 
 const LandingPage = ({navigation}) => {
   const dispatch = useDispatch();
-  const netInfo = useNetInfo();
+  const {networkState} = useNetStatusInfo();
 
   const [loadData, setLoadData] = useState([]);
-  const [networkState, setNetworkState] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     soundTracks?.pikapika1.play(success => {
@@ -44,10 +40,6 @@ const LandingPage = ({navigation}) => {
   }, []);
 
   useEffect(() => {
-    setNetworkState(netInfo.isConnected); // NOTE: netInfo.type for getting type of network. Eg. Cellular or Wifi etc.
-  }, [netInfo]);
-
-  useEffect(() => {
     let loadedData;
     fetch('https://rahulvhegde.github.io/Data/pokemon_data2.json').then(
       response => {
@@ -58,66 +50,12 @@ const LandingPage = ({navigation}) => {
       },
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [networkState]);
 
   useEffect(() => {
     dispatch(eventDataLoad(loadData));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loadData]);
-
-  useEffect(() => {
-    if (networkState) {
-      hideModal();
-    } else {
-      showModal();
-    }
-  }, [networkState]);
-
-  const showModal = () => {
-    setModalVisible(true);
-  };
-
-  const hideModal = () => {
-    setModalVisible(false);
-  };
-
-  const modalContainer = () => {
-    return (
-      <View style={styles.modalInnerStyle}>
-        <Image
-          // source={imagePaths.pichuDancing}
-          source={imagePaths.noInternetImage}
-          height={1}
-          width={1}
-          style={styles.appIcon}
-          resizeMode={'contain'}
-        />
-        <Text style={styles.modalText}>Please Turn on the Internet</Text>
-        <Button
-          buttonStyle={[styles.buttonStyle, styles.okButton]}
-          buttonTextStyle={[styles.okButtonText]}
-          onPress={() => {
-            hideModal();
-          }}
-          buttonText={strings.ok.toUpperCase()}
-        />
-      </View>
-    );
-  };
-
-  const modalPopUp = () => {
-    return (
-      <Portal>
-        <Modal
-          style={styles.modalMarginStyle}
-          visible={modalVisible}
-          onDismiss={hideModal}
-          contentContainerStyle={styles.modalExternalStyle}>
-          {modalContainer()}
-        </Modal>
-      </Portal>
-    );
-  };
 
   const appIconContainer = () => {
     return (
@@ -172,16 +110,10 @@ const LandingPage = ({navigation}) => {
   };
 
   return (
-    <Provider>
-      <SafeAreaView style={{}}>
-        <StatusBar
-          barStyle={'dark-content'}
-          backgroundColor={colors.darkBlue}
-        />
-        {modalPopUp()}
-        {mainContainerBody()}
-      </SafeAreaView>
-    </Provider>
+    <SafeAreaView style={{}}>
+      <StatusBar barStyle={'dark-content'} backgroundColor={colors.darkBlue} />
+      {mainContainerBody()}
+    </SafeAreaView>
   );
 };
 

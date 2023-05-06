@@ -22,4 +22,5 @@ export default {
   plus: '+',
   event_completed: 'Event Completed',
   ok: 'ok',
+  select_date_prompt: 'Please select a date to view the events',
 };

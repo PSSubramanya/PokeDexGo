@@ -1,4 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
+import {useNetStatusInfo} from '../../ultilities/customHooks/useNetStatusInfo';
 import {useSelector} from 'react-redux';
 import {
   Text,
@@ -31,10 +32,12 @@ import CardView from '../../components/CardView/CardView';
 import EventDisplayCard from '../../components/EventDisplayCard/EventDisplayCard';
 
 const EventViewScreen = props => {
+  const selectedDate = props?.route?.params?.selectedDate;
+
   let listViewRef = useRef();
   const calanderRef = useRef();
 
-  const selectedDate = props?.route?.params?.selectedDate;
+  const {networkState} = useNetStatusInfo();
 
   const loadedEventJSONData = useSelector(
     state => state?.eventDataReducer?.eventdataload,
@@ -143,7 +146,8 @@ const EventViewScreen = props => {
 
   const renderEmptyListComponent = () => {
     return (
-      <View style={[commonStyling.absoluteCenterStyling, styles.emptyListView]}>
+      <View
+        style={[commonStyling.absoluteCenterStyling, styles.topPaddingStyle]}>
         <Image
           source={imagePaths.calendarIllustration4}
           height={1}
@@ -153,6 +157,24 @@ const EventViewScreen = props => {
         />
         <Text style={[styles.emptyListText, styles.primaryColorStyle]}>
           {strings.no_event_string}
+        </Text>
+      </View>
+    );
+  };
+
+  const renderSelectDatePromptComponent = () => {
+    return (
+      <View
+        style={[commonStyling.absoluteCenterStyling, styles.topPaddingStyle]}>
+        <Image
+          source={imagePaths.noDateSelectedPromptImage1}
+          height={1}
+          width={1}
+          style={styles.selectDatePromptImage}
+          resizeMode={'contain'}
+        />
+        <Text style={[styles.emptyListText, styles.primaryColorStyle]}>
+          {strings.select_date_prompt}
         </Text>
       </View>
     );
@@ -749,7 +771,9 @@ const EventViewScreen = props => {
     return (
       <View style={styles.eventsSectionHeader}>
         <Text style={[styles.eventDateText, styles.primaryColorStyle]}>
-          {moment(selectedStartDate).format('MMM Do, YYYY')}
+          {eventsData !== null
+            ? moment(selectedStartDate).format('MMM Do, YYYY')
+            : ''}
         </Text>
         <Text style={[styles.eventNumberText, styles.primaryColorStyle]}>
           {strings.number_of_events} : {eventsData?.length ?? 0}
@@ -778,12 +802,15 @@ const EventViewScreen = props => {
 
   return (
     <Provider>
-      <SafeAreaView style={{}}>
-        {modalPopUp()}
-        {calandarView()}
-        {eventHeaderSection()}
-        {eventsDetailSection()}
-      </SafeAreaView>
+      {networkState ? (
+        <SafeAreaView style={{}}>
+          {modalPopUp()}
+          {calandarView()}
+          {eventsData !== null ? eventHeaderSection() : null}
+          {eventsData !== null ? eventsDetailSection() : null}
+          {eventsData === null ? renderSelectDatePromptComponent() : null}
+        </SafeAreaView>
+      ) : null}
     </Provider>
   );
 };

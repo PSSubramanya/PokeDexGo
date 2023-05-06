@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
+import {useNetStatusInfo} from '../../ultilities/customHooks/useNetStatusInfo';
 import {
   Text,
   View,
@@ -36,6 +37,8 @@ const HomeScreen = props => {
   const {loadData} = params; //props?.route?.params?.selectedDate;
 
   const dateToday = new Date();
+
+  const {networkState} = useNetStatusInfo();
 
   let loadedEventJSONData = useSelector(
     state => state?.eventDataReducer?.eventdataload,
@@ -493,10 +496,12 @@ const HomeScreen = props => {
 
   return (
     <Provider>
-      <SafeAreaView style={{}}>
-        {modalPopUp()}
-        <View>{!viewCalendar ? homeScreenBody() : addEventScreenView()}</View>
-      </SafeAreaView>
+      {networkState ? (
+        <SafeAreaView style={{}}>
+          {modalPopUp()}
+          <View>{!viewCalendar ? homeScreenBody() : addEventScreenView()}</View>
+        </SafeAreaView>
+      ) : null}
     </Provider>
   );
 };
