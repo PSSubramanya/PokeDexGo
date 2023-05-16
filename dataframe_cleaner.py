@@ -8,6 +8,7 @@ import requests
 from urllib.request import Request,urlopen
 import shutil
 import constants
+import time
 
 
 links=[]
@@ -32,7 +33,9 @@ df=pd.read_csv(constants.URL+'file.csv')
 pokemonData=pd.DataFrame()
 
 def getPokeName(pokeId,mainurl,req):
+    start_time=time.time()
     responseJSON=urlopen(req)
+    print(time.time()-start_time)
     dataJSONType=json.loads(responseJSON.read())
     typeData=dataJSONType['forms']
     typeData=str(typeData).split('name')
@@ -43,6 +46,7 @@ def getPokeName(pokeId,mainurl,req):
     return typeData
 
 def poke_51_52_61_fMEGA(pokeId,id,url,typeData):
+    print(typeData)
     if id == '_51':
         if pokeId == '6' or pokeId =='150':
             newurl=url+(typeData+'-mega-x')

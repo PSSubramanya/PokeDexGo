@@ -214,13 +214,16 @@ def main():
                                         #print(pokemonIdData[0].lstrip("0"))
                 elif 'shiny-icon' in src:
                     #prev_img_link=soup.findall("li",class_='pkmn-list-item')
-                    img_poke_shiny=img_src[len(img_src)-1]
-                    if '.icon.' in img_poke_shiny:
+                    img_poke_shiny=img_src[len(img_src)-1]   
+                    if '.icon.' in img_poke_shiny and (img_poke_shiny.count('.s')<2):
+                        print(img_poke_shiny)
+                        print(img_poke_shiny.count('.s'))
                         img_poke_shiny=img_poke_shiny.split('.icon.')
                         img_poke_shiny=img_poke_shiny[0]+'.s.icon.png'
-                        img_src.append(img_poke_shiny)
-                        pokemonIdData = re. findall('\d+', img_poke_shiny)
-                        if len(pokemonIdData)>0:
+                        if img_poke_shiny not in img_src and img_poke_shiny.count('.s')<2:
+                            img_src.append(img_poke_shiny)
+                            pokemonIdData = re. findall('\d+', img_poke_shiny)
+                            if len(pokemonIdData)>0:
                                 # if the digits is less or equal to 3 and pokemon_icons is in string of img src:
                                 if len(pokemonIdData[0])<=3 and 'pokemon_icons' in img_poke_shiny:
                                     #remove leading zeroes from pokemon id , since it is to be used in pokeapi api
@@ -240,12 +243,14 @@ def main():
                                     else:
                                         pokemonId.append(pokemonIdCleaned)
 
-                    else:
+                    elif '_shiny' in img_poke_shiny and  (img_poke_shiny.count('_shiny')<2 and img_poke_shiny.count('.s')<2):
+                        print(img_poke_shiny)
                         img_poke_shiny=img_poke_shiny.split('.png')
                         img_poke_shiny=img_poke_shiny[0]+'_shiny.png'
-                        img_src.append(img_poke_shiny)
-                        pokemonIdData = re. findall('\d+', img_poke_shiny)
-                        if len(pokemonIdData)>0:
+                        if img_poke_shiny not in img_src and img_poke_shiny.count('_shiny')<2 and img_poke_shiny.count('.s')<2 :
+                            img_src.append(img_poke_shiny)
+                            pokemonIdData = re. findall('\d+', img_poke_shiny)
+                            if len(pokemonIdData)>0:
                                 # if the digits is less or equal to 3 and pokemon_icons is in string of img src:
                                 if len(pokemonIdData[0])<=3 and 'pokemon_icons' in img_poke_shiny:
                                     #remove leading zeroes from pokemon id , since it is to be used in pokeapi api
