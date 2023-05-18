@@ -337,32 +337,33 @@ for k in data:
         if '_shiny' in i:
             imageSrc=i.split('_shiny')
             imageSrc=imageSrc[0]+'.png'
+            print(imageSrc)
             pokemonIdData = re. findall('\d+', imageSrc)
             pokemonIdCleaned = pokemonIdData[0].lstrip("0")
             if imageSrc not in k['Img Src']:
                 k['Img Src'].append(imageSrc)
                 k['pokemonId'].append(pokemonIdCleaned)
-                if '_51' in imageSrc:
+                if '_51.png' in imageSrc:
                     pokemonIdString=str(pokemonIdCleaned)
                     #add code to add types for pokemon
                     pokeURL='https://pokeapi.co/api/v2/pokemon/'
                     pokemonMiniType5=[]
                     pokemonMiniType4=poke_special(pokemonMiniType5,pokemonIdString,pokeURL,' ')
-                    print(pokemonMiniType4)
+                    #print(pokemonMiniType4)
                     k['type'].append(pokemonMiniType4)
-                elif '_52' in imageSrc:
+                elif '_52.png' in imageSrc:
                     pokemonIdString=str(pokemonIdCleaned)
                     pokeURL='https://pokeapi.co/api/v2/pokemon/'
                     pokemonMiniType5=[]
                     pokemonMiniType4=poke_special(pokemonMiniType5,pokemonIdString,pokeURL,' ')
-                    print(pokemonMiniType4)
+                    #print(pokemonMiniType4)
                     k['type'].append(pokemonMiniType4)
                 else:
                     pokemonIdString=str(pokemonIdCleaned)
                     pokeURL='https://pokeapi.co/api/v2/pokemon/'
                     pokemonMiniType5=[]
                     pokemonMiniType4=poke_special(pokemonMiniType5,pokemonIdString,pokeURL,' ')
-                    print(pokemonMiniType4)
+                    #print(pokemonMiniType4)
                     k['type'].append(pokemonMiniType4)
 
 
@@ -374,14 +375,14 @@ for k in data:
             if imageSrc not in k['Img Src']:
                 k['Img Src'].append(imageSrc)
                 k['pokemonId'].append(pokemonIdCleaned)
-                if '_51' in imageSrc:
+                if '_51.png' in imageSrc:
                     pokemonIdString=str(pokemonIdCleaned)
                     #add code to add types for pokemon
                     pokeURL='https://pokeapi.co/api/v2/pokemon/'
                     pokemonMiniType5=[]
                     pokemonMiniType4=poke_special(pokemonMiniType5,pokemonIdString,pokeURL,' ')
                     k['type'].append(pokemonMiniType4)
-                elif '_52' in imageSrc:
+                elif '_52.png' in imageSrc:
                     pokemonIdString=str(pokemonIdCleaned)
                     pokeURL='https://pokeapi.co/api/v2/pokemon/'
                     pokemonMiniType5=[]
@@ -403,7 +404,7 @@ for k in data:
 #run(host='localhost',port=8080)
 #pokemon_object = json.dumps(pokemonJson,indent=4)
 
-with open('C:/Users/Rahul V Hegde/Desktop/subbu/PokeDexGo/pokemon_data2.json',"w") as output_file:
+with open(constants.URL+'pokemon_data2.json',"w") as output_file:
     #output_file.write(pokemon_json.replace('\\','')+'\n')
     #output_file.write(pokemon_json_cleaned)
     #output_file.write(json.dumps({"data": pokemonJsonCleaned}, indent=4 ))
