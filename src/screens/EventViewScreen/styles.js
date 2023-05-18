@@ -194,7 +194,6 @@ export default styles = StyleSheet.create({
   },
   pokemonName: {
     paddingVertical: verticalScale(5),
-    paddingHorizontal: horizontalScale(5),
     color: colors.purple,
     fontFamily: fontFamily.primaryFontFamilyMedium,
     fontSize: moderateScale(12),
@@ -255,16 +254,19 @@ export default styles = StyleSheet.create({
     backgroundColor: colors.white,
     paddingHorizontal: horizontalScale(5),
   },
-  // upperChevron: {
-  //   height: verticalScale(30),
-  //   width: horizontalScale(30),
-  //   marginVertical: verticalScale(20),
-  //   transform: [{rotate: '90deg'}],
-  // },
-  // lowerChevron: {
-  //   height: verticalScale(30),
-  //   width: horizontalScale(30),
-  //   marginVertical: verticalScale(20),
-  //   transform: [{rotate: '90deg'}],
-  // },
+  gridViewDisplay: {
+    height: verticalScale(270),
+  },
+  pokemonNameDisplayView: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  shinyIndicatorView: {
+    marginTop: verticalScale(1),
+    zIndex: 1,
+  },
+  shinyIcon: {
+    height: verticalScale(22),
+    width: verticalScale(22),
+  },
 });

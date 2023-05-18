@@ -52,11 +52,15 @@ const EventViewScreen = props => {
   const [modalImageIndex, setModalImageIndex] = useState(0);
 
   const [pokemonName, setPokemonName] = useState('');
+  const [pokemonNameDisplay, setPokemonNameDisplay] = useState('');
   const [pokemonType, setPokemonType] = useState([]);
 
   const [showLoader, setShowLoader] = useState(true);
 
   const [gridViewStatus, setGridViewStatus] = useState(false);
+
+  const datVal = modalData?.['Start DateTime']?.split(' ');
+  const dateLength = datVal?.length;
 
   function sortByKey(array, key) {
     return array.sort(function (a, b) {
@@ -78,12 +82,36 @@ const EventViewScreen = props => {
 
   useEffect(() => {
     let pokeName;
+    let pokemonMegaType;
+
+    const megaCategory = [
+      '_51.png',
+      '_52.png',
+      '_51_shiny.png',
+      '_52_shiny.png',
+      'fMEGA.icon.png',
+      'fMEGA.s.icon.png',
+    ];
+
+    const modalImages = modalData?.['Img Src']?.filter(data =>
+      data?.includes('pokemon_icons'),
+    );
+
+    megaCategory.map(dat => {
+      if (modalImages?.[modalImageIndex]?.includes(dat)) {
+        pokemonMegaType = true;
+      }
+    });
+
     fetch(
       `https://pokeapi.co/api/v2/pokemon/${modalData?.pokemonId?.[modalImageIndex]}`,
     ).then(response => {
       response.json().then(res => {
         pokeName = res?.name;
-        setPokemonName(pokeName);
+        setPokemonNameDisplay(pokeName);
+        if (pokemonMegaType) {
+          setPokemonName(pokeName);
+        }
       });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -226,20 +254,38 @@ const EventViewScreen = props => {
     return (
       <>
         <Text style={[styles.eventTimeStyle]}>{strings.event_ranges_from}</Text>
-        <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
-          {`Starts: ${moment(modalData?.['Start DateTime']).format(
-            'DD/MM/YYYY',
-          )}, ${moment(modalData?.['Start DateTime']).format('LT')} ${
-            modalData?.timeZone
-          }`}
-        </Text>
-        <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
-          {`Ends: ${moment(modalData?.['End DateTime']).format(
-            'DD/MM/YYYY',
-          )}, ${moment(modalData?.['End DateTime']).format('LT')} ${
-            modalData?.timeZone
-          }`}
-        </Text>
+        {dateLength === 2 ? (
+          <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
+            {`Starts: ${moment(modalData?.['Start DateTime']).format(
+              'DD/MM/YYYY',
+            )}, ${moment(modalData?.['Start DateTime']).format('LT')} ${
+              modalData?.timeZone
+            }`}
+          </Text>
+        ) : null}
+        {dateLength === 1 ? (
+          <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
+            {`Starts: ${moment(modalData?.['Start DateTime']).format(
+              'DD/MM/YYYY',
+            )}`}
+          </Text>
+        ) : null}
+        {dateLength === 2 ? (
+          <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
+            {`Ends: ${moment(modalData?.['End DateTime']).format(
+              'DD/MM/YYYY',
+            )}, ${moment(modalData?.['End DateTime']).format('LT')} ${
+              modalData?.timeZone
+            }`}
+          </Text>
+        ) : null}
+        {dateLength === 1 ? (
+          <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
+            {`Ends: ${moment(modalData?.['End DateTime']).format(
+              'DD/MM/YYYY',
+            )}`}
+          </Text>
+        ) : null}
       </>
     );
   };
@@ -473,7 +519,7 @@ const EventViewScreen = props => {
 
   const gridViewDisplay = modalImages => {
     return (
-      <View style={{height: verticalScale(270)}}>
+      <View style={styles.gridViewDisplay}>
         <FlatList
           data={modalImages}
           ref={listViewRef}
@@ -504,28 +550,57 @@ const EventViewScreen = props => {
 
   const pokemonNameAndTypeView = () => {
     let pokeName;
+    let pokeShinyType = false;
     const substring1 = 'pokemon_icons';
     const substring2 = '_51.png';
     const substring3 = '_52.png';
+    const substring4 = 'fMEGA'; // Mega and Mega X - DONE
+
+    const shinyCategory = [
+      '_shiny.png',
+      '.s.icon.png',
+      'fHISUIAN.s.icon.png',
+      '_31_shiny.png',
+      '_61_shiny.png',
+      'fMEGA.s.icon.png',
+      '_51_shiny.png',
+      '_52_shiny.png',
+    ];
 
     const modalImages = modalData?.['Img Src']?.filter(data =>
       data?.includes(substring1),
     );
-    if (modalImages?.[modalImageIndex]?.includes(substring2)) {
-      if (pokemonName === 'charizard' || pokemonName === 'mewtwo') {
-        pokeName = `Mega ${pokemonName} X`;
+
+    shinyCategory.map(dat => {
+      if (modalImages?.[modalImageIndex]?.includes(dat)) {
+        pokeShinyType = true;
+      }
+    });
+
+    if (
+      modalImages?.[modalImageIndex]?.includes(substring2) ||
+      modalImages?.[modalImageIndex]?.includes(substring4)
+    ) {
+      if (
+        pokemonNameDisplay === 'charizard' ||
+        pokemonNameDisplay === 'mewtwo'
+      ) {
+        pokeName = `Mega ${pokemonNameDisplay} X`;
       } else {
-        pokeName = `Mega ${pokemonName}`;
+        pokeName = `Mega ${pokemonNameDisplay}`;
       }
     } else if (modalImages?.[modalImageIndex]?.includes(substring3)) {
-      pokeName = `Mega ${pokemonName} Y`;
+      pokeName = `Mega ${pokemonNameDisplay} Y`;
     } else {
-      pokeName = pokemonName;
+      pokeName = pokemonNameDisplay;
     }
     return (
       <View style={[styles.pokemonDescription]}>
         {modalImages?.length !== 0 ? (
-          <Text style={styles.pokemonName}>{toCamelCase(pokeName)}</Text>
+          <View style={styles.pokemonNameDisplayView}>
+            <Text style={styles.pokemonName}>{toCamelCase(pokeName)}</Text>
+            {pokeShinyType ? shinyPokemonIndicatorView() : null}
+          </View>
         ) : null}
         <View
           style={[
@@ -570,6 +645,19 @@ const EventViewScreen = props => {
           </View>
         ) : null}
       </>
+    );
+  };
+
+  const shinyPokemonIndicatorView = () => {
+    return (
+      <View style={styles.shinyIndictorView}>
+        <Image
+          source={imagePaths.shinyIcon}
+          height={1}
+          width={1}
+          style={styles.shinyIcon}
+        />
+      </View>
     );
   };
 

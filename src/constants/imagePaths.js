@@ -16,6 +16,7 @@ export default {
   checkmarkOffIcon: require('../assets/images/icons/checkmarkOffIcon.png'),
   addIcon: require('../assets/images/icons/addIcon.png'),
   minusIcon: require('../assets/images/icons/minusIcon.png'),
+  shinyIcon: require('../assets/images/icons/shinyIcon.png'),
 
   //Images
   calendar1: require('../assets/images/calendar.png'),
