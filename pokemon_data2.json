@@ -1,34 +1,6 @@
 {
     "data": [
         {
-            "Links": "https://leekduck.com/events/season-14-master-league_catch-cup-rising-heroes-edition/",
-            "Summary": "Master League and Catch Cup",
-            "Start DateTime": "2023-05-25 01:30:00",
-            "End DateTime": "2023-06-02 01:30:00",
-            "Duration": [
-                "2023-05-25",
-                "2023-05-26",
-                "2023-05-27",
-                "2023-05-28",
-                "2023-05-29",
-                "2023-05-30",
-                "2023-05-31",
-                "2023-06-01",
-                "2023-06-02"
-            ],
-            "preference": 9,
-            "Img Src": [
-                "https://leekduck.com/assets/img/events/gobattleleague-master-key.jpg"
-            ],
-            "pokemonId": [],
-            "type": [
-                []
-            ],
-            "Bonus": [],
-            "timeZone": "LocalTime",
-            "Description": "The Master League and Catch Cup: Rising Heroes Edition will run from May 24, 2023, at 1:00 p.m. to June 1, 2023, at 1:00 p.m. PT."
-        },
-        {
             "Links": "https://leekduck.com/events/mega-altaria-in-mega-raids-may-2023/",
             "Summary": "Mega Altaria in Mega Raids",
             "Start DateTime": "2023-05-24 10:00:00",
@@ -71,96 +43,101 @@
                 ]
             ],
             "Bonus": [],
-            "timeZone": "IST",
+            "timeZone": "LocalTime",
             "Description": "Mega Altaria returns to Mega Raids on May 24, 2023, at 10 am local time."
         },
         {
-            "Links": "https://leekduck.com/events/season-14-master-league_elements-cup-little-edition/",
-            "Summary": "Master League and Element Cup",
-            "Start DateTime": "2023-05-18 01:30:00",
-            "End DateTime": "2023-05-25 01:30:00",
+            "Links": "https://leekduck.com/events/regigigas-in-5-star-raid-battles-may-2023/",
+            "Summary": "Regigigas in 5-star Raid Battles",
+            "Start DateTime": "2023-05-24 10:00:00",
+            "End DateTime": "2023-06-01 10:00:00",
             "Duration": [
+                "2023-05-24",
+                "2023-05-25",
+                "2023-05-26",
+                "2023-05-27",
+                "2023-05-28",
+                "2023-05-29",
+                "2023-05-30",
+                "2023-05-31",
+                "2023-06-01"
+            ],
+            "preference": 9,
+            "Img Src": [
+                "https://leekduck.com/assets/img/events/regigigas.jpg",
+                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_486_00.png",
+                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_486_00_shiny.png"
+            ],
+            "pokemonId": [
+                "486",
+                "486"
+            ],
+            "type": [
+                [
+                    "normal"
+                ],
+                [
+                    "normal"
+                ]
+            ],
+            "Bonus": [],
+            "timeZone": "LocalTime",
+            "Description": "Regigigas will be in five-star raid battles from May 24, 2023 to June 1, 2023."
+        },
+        {
+            "Links": "https://leekduck.com/events/tapu-fini-in-5-star-raid-battles-may-2023/",
+            "Summary": "Tapu Fini in 5-star Raid Battles",
+            "Start DateTime": "2023-05-09 10:00:00",
+            "End DateTime": "2023-05-24 10:00:00",
+            "Duration": [
+                "2023-05-09",
+                "2023-05-10",
+                "2023-05-11",
+                "2023-05-12",
+                "2023-05-13",
+                "2023-05-14",
+                "2023-05-15",
+                "2023-05-16",
+                "2023-05-17",
                 "2023-05-18",
                 "2023-05-19",
                 "2023-05-20",
                 "2023-05-21",
                 "2023-05-22",
                 "2023-05-23",
-                "2023-05-24",
-                "2023-05-25"
+                "2023-05-24"
             ],
-            "preference": 8,
+            "preference": 16,
             "Img Src": [
-                "https://leekduck.com/assets/img/events/gobattleleague-master-key.jpg"
+                "https://leekduck.com/assets/img/events/tapu-fini.jpg",
+                "https://leekduck.com/assets/img/pokemon_icons/pm788.icon.png",
+                "https://leekduck.com/assets/img/pokemon_icons/pm788.s.icon.png"
             ],
-            "pokemonId": [],
+            "pokemonId": [
+                "788",
+                "788"
+            ],
             "type": [
-                []
+                [
+                    "water",
+                    "fairy"
+                ],
+                [
+                    "water",
+                    "fairy"
+                ]
             ],
             "Bonus": [],
             "timeZone": "LocalTime",
-            "Description": "The Master League and Element Cup: Little Edition will run from May 17, 2023, at 1:00 p.m. to May 24, 2023, at 1:00 p.m. PT."
+            "Description": "Tapu Fini will be in five-star raid battles from May 9, 2023 to May 24, 2023."
         },
         {
-            "Links": "https://leekduck.com/events/pokemon-go-fest-2023-new-york-city-usa/",
-            "Summary": "Pokmon GO Fest 2023",
-            "Start DateTime": "2023-08-18 18:30:00",
-            "End DateTime": "2023-08-21 03:30:00",
+            "Links": "https://leekduck.com/events/july-communityday2023/",
+            "Summary": "July Community Day",
+            "Start DateTime": "2023-07-30 14:00:00",
+            "End DateTime": "2023-07-30 17:00:00",
             "Duration": [
-                "2023-08-18",
-                "2023-08-19",
-                "2023-08-20",
-                "2023-08-21"
-            ],
-            "preference": 4,
-            "Img Src": [
-                "https://leekduck.com/assets/img/events/pokemongofest2023-new-york-city.jpg"
-            ],
-            "pokemonId": [],
-            "type": [
-                []
-            ],
-            "Bonus": [
-                "Up to 18 free Raid Passes per day by spinning Photo Discs at Gyms",
-                "5,000 additional XP awarded for completed raids",
-                "6 additional Candy for catching Pok\u00e9mon in 5-star and Mega Raids",
-                "3 additional Candy XL for catching Pok\u00e9mon in 5-star and Mega Raids (Trainers level 31+)",
-                "1/4 Egg Hatch Distance",
-                "Increased chance of receiving 10 km Eggs from spinning Pok\u00e9Stops and Gyms",
-                "3\u00d7 Hatch Stardust",
-                "3\u00d7 Hatch XP",
-                "3\u00d7 Hatch Candy"
-            ],
-            "timeZone": "IST",
-            "Description": "Pok\u00e9mon GO Fest 2023 is coming to New York City, and we\u2019re planning a big event for the Big Apple! GO Fest 2023: New York City is split into different experiences between two locations: Randall\u2019s Island Park and throughout New York City!"
-        },
-        {
-            "Links": "https://leekduck.com/events/raidhour20230517/",
-            "Summary": "Tapu Fini Raid Hour",
-            "Start DateTime": "2023-05-17 18:00:00",
-            "End DateTime": "2023-05-17 19:00:00",
-            "Duration": [
-                "2023-05-17"
-            ],
-            "preference": 1,
-            "Img Src": [
-                "https://leekduck.com/assets/img/events/raidhour.jpg"
-            ],
-            "pokemonId": [],
-            "type": [
-                []
-            ],
-            "Bonus": [],
-            "timeZone": "IST",
-            "Description": "A Raid Hour featuring Tapu Fini is scheduled from 6 to 7 pm Local Time. During this hour there will be an increased number of five-star Raids."
-        },
-        {
-            "Links": "https://leekduck.com/events/june-communityday2023/",
-            "Summary": "June Community Day",
-            "Start DateTime": "2023-06-10 14:00:00",
-            "End DateTime": "2023-06-10 17:00:00",
-            "Duration": [
-                "2023-06-10"
+                "2023-07-30"
             ],
             "preference": 1,
             "Img Src": [
@@ -175,101 +152,24 @@
             "Description": "Please note the event times above are not confirmed."
         },
         {
-            "Links": "https://leekduck.com/events/pokemon-go-fest-2023-osaka-japan/",
-            "Summary": "Pokmon GO Fest 2023",
-            "Start DateTime": "2023-08-04 05:30:00",
-            "End DateTime": "2023-08-06 14:30:00",
+            "Links": "https://leekduck.com/events/july-communitydayclassic2023/",
+            "Summary": "July Community Day Classic",
+            "Start DateTime": "2023-07-09 14:00:00",
+            "End DateTime": "2023-07-09 17:00:00",
             "Duration": [
-                "2023-08-04",
-                "2023-08-05",
-                "2023-08-06"
+                "2023-07-09"
             ],
-            "preference": 3,
+            "preference": 1,
             "Img Src": [
-                "https://leekduck.com/assets/img/events/pokemongofest2023-osaka.jpg"
+                "https://leekduck.com/assets/img/events/cd-default.jpg"
             ],
             "pokemonId": [],
             "type": [
                 []
-            ],
-            "Bonus": [
-                "Up to 18 free Raid Passes per day by spinning Photo Discs at Gyms",
-                "5,000 additional XP awarded for completed raids",
-                "6 additional Candy for catching Pok\u00e9mon in 5-star and Mega Raids",
-                "3 additional Candy XL for catching Pok\u00e9mon in 5-star and Mega Raids (Trainers level 31+)",
-                "1/4 Egg Hatch Distance",
-                "Increased chance of receiving 10 km Eggs from spinning Pok\u00e9Stops and Gyms",
-                "3\u00d7 Hatch Stardust",
-                "3\u00d7 Hatch XP",
-                "3\u00d7 Hatch Candy"
-            ],
-            "timeZone": "LocalTime",
-            "Description": "Pok\u00e9mon GO Fest 2023 is coming to Osaka, and we have big plans for one of the largest urban areas in the world! Pok\u00e9mon GO Fest 2023: Osaka is split into two different experiences between two locations: Expo \u201970 Commemorative Park and in Suita City &amp; Osaka City*!"
-        },
-        {
-            "Links": "https://leekduck.com/events/season-14-ultra-league_sunshine-cup-great-league-edition/",
-            "Summary": "Ultra League and Sunshine Cup",
-            "Start DateTime": "2023-05-11 01:30:00",
-            "End DateTime": "2023-05-18 01:30:00",
-            "Duration": [
-                "2023-05-11",
-                "2023-05-12",
-                "2023-05-13",
-                "2023-05-14",
-                "2023-05-15",
-                "2023-05-16",
-                "2023-05-17",
-                "2023-05-18"
-            ],
-            "preference": 8,
-            "Img Src": [
-                "https://leekduck.com/assets/img/events/go-battle-league-ultra-league-machamp-swampert.jpg",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_006_00.png"
-            ],
-            "pokemonId": [
-                "6"
-            ],
-            "type": [
-                [
-                    "fire",
-                    "flying"
-                ]
             ],
             "Bonus": [],
-            "timeZone": "IST",
-            "Description": "The Ultra League and Sunshine Cup: Great League Edition will run from May 10, 2023, at 1:00 p.m. to May 17, 2023, at 1:00 p.m. PT."
-        },
-        {
-            "Links": "https://leekduck.com/events/pokemon-go-fest-2023-london-england/",
-            "Summary": "Pokmon GO Fest 2023",
-            "Start DateTime": "2023-08-04 13:30:00",
-            "End DateTime": "2023-08-06 22:30:00",
-            "Duration": [
-                "2023-08-04",
-                "2023-08-05",
-                "2023-08-06"
-            ],
-            "preference": 3,
-            "Img Src": [
-                "https://leekduck.com/assets/img/events/pokemongofest2023-london.jpg"
-            ],
-            "pokemonId": [],
-            "type": [
-                []
-            ],
-            "Bonus": [
-                "Up to 18 free Raid Passes per day by spinning Photo Discs at Gyms",
-                "5,000 additional XP awarded for completed raids",
-                "6 additional Candy for catching Pok\u00e9mon in 5-star and Mega Raids",
-                "3 additional Candy XL for catching Pok\u00e9mon in 5-star and Mega Raids (Trainers level 31+)",
-                "1/4 Egg Hatch Distance",
-                "Increased chance of receiving 10 km Eggs from spinning Pok\u00e9Stops and Gyms",
-                "3\u00d7 Hatch Stardust",
-                "3\u00d7 Hatch XP",
-                "3\u00d7 Hatch Candy"
-            ],
-            "timeZone": "IST",
-            "Description": "Pok\u00e9mon GO Fest 2023 is coming to London, and we\u2019re planning a capital event for England\u2019s capital! GO Fest 2023: London is split into different experiences between two locations: Brockwell Park and throughout Greater London!"
+            "timeZone": "LocalTime",
+            "Description": "July\u2019s Commmunity Day Classic will take place on Saturday, April 29, 2023. Stay tuned for the announcement of the featured Pok\u00e9mon."
         },
         {
             "Links": "https://leekduck.com/events/a-valorous-hero/",
@@ -375,42 +275,64 @@
                 "2x Mysterious Components from Team GO Rocket",
                 "Up to two free Raid Passes per day by spinning Gym Photo Discs"
             ],
-            "timeZone": "IST",
+            "timeZone": "LocalTime",
             "Description": "When a friend needs a hero, will you rise to the occasion?"
         },
         {
-            "Links": "https://leekduck.com/events/pokemonspotlighthour2023-05-23/",
-            "Summary": "Skorupi Spotlight Hour",
-            "Start DateTime": "2023-05-23 18:00:00",
-            "End DateTime": "2023-05-23 19:00:00",
+            "Links": "https://leekduck.com/events/raidhour20230531/",
+            "Summary": "Regigigas Raid Hour",
+            "Start DateTime": "2023-05-31 18:00:00",
+            "End DateTime": "2023-05-31 19:00:00",
             "Duration": [
-                "2023-05-23"
+                "2023-05-31"
             ],
             "preference": 1,
             "Img Src": [
-                "https://leekduck.com/assets/img/events/pokemonspotlighthour.jpg",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_451_00.png"
+                "https://leekduck.com/assets/img/events/raidhour.jpg"
             ],
-            "pokemonId": [
-                "451"
-            ],
+            "pokemonId": [],
             "type": [
-                [
-                    "poison",
-                    "bug"
-                ]
+                []
             ],
             "Bonus": [],
             "timeZone": "LocalTime",
-            "Description": "Pok\u00e9mon Spotlight Hour will feature a different Pok\u00e9mon and special bonus for one hour at 6:00 p.m. local time on Tuesday during the month of May."
+            "Description": "A Raid Hour featuring Regigigas is scheduled from 6 to 7 pm Local Time. During this hour there will be an increased number of five-star Raids."
         },
         {
-            "Links": "https://leekduck.com/events/july-communitydayclassic2023/",
-            "Summary": "July Community Day Classic",
-            "Start DateTime": "2023-07-09 14:00:00",
-            "End DateTime": "2023-07-09 17:00:00",
+            "Links": "https://leekduck.com/events/season-14-master-league_catch-cup-rising-heroes-edition/",
+            "Summary": "Master League and Catch Cup",
+            "Start DateTime": "2023-05-25 01:30:00",
+            "End DateTime": "2023-06-02 01:30:00",
             "Duration": [
-                "2023-07-09"
+                "2023-05-25",
+                "2023-05-26",
+                "2023-05-27",
+                "2023-05-28",
+                "2023-05-29",
+                "2023-05-30",
+                "2023-05-31",
+                "2023-06-01",
+                "2023-06-02"
+            ],
+            "preference": 9,
+            "Img Src": [
+                "https://leekduck.com/assets/img/events/gobattleleague-master-key.jpg"
+            ],
+            "pokemonId": [],
+            "type": [
+                []
+            ],
+            "Bonus": [],
+            "timeZone": "LocalTime",
+            "Description": "The Master League and Catch Cup: Rising Heroes Edition will run from May 24, 2023, at 1:00 p.m. to June 1, 2023, at 1:00 p.m. PT."
+        },
+        {
+            "Links": "https://leekduck.com/events/june-communityday2023/",
+            "Summary": "June Community Day",
+            "Start DateTime": "2023-06-10 14:00:00",
+            "End DateTime": "2023-06-10 17:00:00",
+            "Duration": [
+                "2023-06-10"
             ],
             "preference": 1,
             "Img Src": [
@@ -421,8 +343,48 @@
                 []
             ],
             "Bonus": [],
+            "timeZone": "IST",
+            "Description": "Please note the event times above are not confirmed."
+        },
+        {
+            "Links": "https://leekduck.com/events/raidhour20230517/",
+            "Summary": "Tapu Fini Raid Hour",
+            "Start DateTime": "2023-05-17 18:00:00",
+            "End DateTime": "2023-05-17 19:00:00",
+            "Duration": [
+                "2023-05-17"
+            ],
+            "preference": 1,
+            "Img Src": [
+                "https://leekduck.com/assets/img/events/raidhour.jpg"
+            ],
+            "pokemonId": [],
+            "type": [
+                []
+            ],
+            "Bonus": [],
             "timeZone": "LocalTime",
-            "Description": "July\u2019s Commmunity Day Classic will take place on Saturday, April 29, 2023. Stay tuned for the announcement of the featured Pok\u00e9mon."
+            "Description": "A Raid Hour featuring Tapu Fini is scheduled from 6 to 7 pm Local Time. During this hour there will be an increased number of five-star Raids."
+        },
+        {
+            "Links": "https://leekduck.com/events/raidhour20230524/",
+            "Summary": "Regigigas Raid Hour",
+            "Start DateTime": "2023-05-24 18:00:00",
+            "End DateTime": "2023-05-24 19:00:00",
+            "Duration": [
+                "2023-05-24"
+            ],
+            "preference": 1,
+            "Img Src": [
+                "https://leekduck.com/assets/img/events/raidhour.jpg"
+            ],
+            "pokemonId": [],
+            "type": [
+                []
+            ],
+            "Bonus": [],
+            "timeZone": "LocalTime",
+            "Description": "A Raid Hour featuring Regigigas is scheduled from 6 to 7 pm Local Time. During this hour there will be an increased number of five-star Raids."
         },
         {
             "Links": "https://leekduck.com/events/may-communityday2023/",
@@ -486,32 +448,6 @@
             "Description": "We\u2019re excited to announce that Fennekin, the Fox Pok\u00e9mon, will be featured during May Community Day!"
         },
         {
-            "Links": "https://leekduck.com/events/pokemonspotlighthour2023-05-30/",
-            "Summary": "Houndour Spotlight Hour",
-            "Start DateTime": "2023-05-30 18:00:00",
-            "End DateTime": "2023-05-30 19:00:00",
-            "Duration": [
-                "2023-05-30"
-            ],
-            "preference": 1,
-            "Img Src": [
-                "https://leekduck.com/assets/img/events/pokemonspotlighthour.jpg",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_228_00.png"
-            ],
-            "pokemonId": [
-                "228"
-            ],
-            "type": [
-                [
-                    "dark",
-                    "fire"
-                ]
-            ],
-            "Bonus": [],
-            "timeZone": "LocalTime",
-            "Description": "Pok\u00e9mon Spotlight Hour will feature a different Pok\u00e9mon and special bonus for one hour at 6:00 p.m. local time on Tuesday during the month of May."
-        },
-        {
             "Links": "https://leekduck.com/events/pokemon-go-fest-2023-global/",
             "Summary": "Pokmon GO Fest",
             "Start DateTime": "2023-08-26 10:00:00",
@@ -533,399 +469,37 @@
             "Description": "After exciting weekend events in London, Osaka, and New York City, Pok\u00e9mon GO Fest 2023 is going worldwide! Pok\u00e9mon GO Fest 2023: Global is a virtual, ticketed event that Trainers can participate in wherever they play\u2014some features will also be available to Trainers without a ticket."
         },
         {
-            "Links": "https://leekduck.com/events/july-communityday2023/",
-            "Summary": "July Community Day",
-            "Start DateTime": "2023-07-30 14:00:00",
-            "End DateTime": "2023-07-30 17:00:00",
+            "Links": "https://leekduck.com/events/pokemon-go-fest-2023-new-york-city-usa/",
+            "Summary": "Pokmon GO Fest 2023",
+            "Start DateTime": "2023-08-18 18:30:00",
+            "End DateTime": "2023-08-21 03:30:00",
             "Duration": [
-                "2023-07-30"
+                "2023-08-18",
+                "2023-08-19",
+                "2023-08-20",
+                "2023-08-21"
             ],
-            "preference": 1,
+            "preference": 4,
             "Img Src": [
-                "https://leekduck.com/assets/img/events/cd-default.jpg"
+                "https://leekduck.com/assets/img/events/pokemongofest2023-new-york-city.jpg"
             ],
             "pokemonId": [],
             "type": [
                 []
             ],
-            "Bonus": [],
+            "Bonus": [
+                "Up to 18 free Raid Passes per day by spinning Photo Discs at Gyms",
+                "5,000 additional XP awarded for completed raids",
+                "6 additional Candy for catching Pok\u00e9mon in 5-star and Mega Raids",
+                "3 additional Candy XL for catching Pok\u00e9mon in 5-star and Mega Raids (Trainers level 31+)",
+                "1/4 Egg Hatch Distance",
+                "Increased chance of receiving 10 km Eggs from spinning Pok\u00e9Stops and Gyms",
+                "3\u00d7 Hatch Stardust",
+                "3\u00d7 Hatch XP",
+                "3\u00d7 Hatch Candy"
+            ],
             "timeZone": "LocalTime",
-            "Description": "Please note the event times above are not confirmed."
-        },
-        {
-            "Links": "https://leekduck.com/events/raidhour20230531/",
-            "Summary": "Regigigas Raid Hour",
-            "Start DateTime": "2023-05-31 18:00:00",
-            "End DateTime": "2023-05-31 19:00:00",
-            "Duration": [
-                "2023-05-31"
-            ],
-            "preference": 1,
-            "Img Src": [
-                "https://leekduck.com/assets/img/events/raidhour.jpg"
-            ],
-            "pokemonId": [],
-            "type": [
-                []
-            ],
-            "Bonus": [],
-            "timeZone": "LocalTime",
-            "Description": "A Raid Hour featuring Regigigas is scheduled from 6 to 7 pm Local Time. During this hour there will be an increased number of five-star Raids."
-        },
-        {
-            "Links": "https://leekduck.com/events/mega-pinsir-in-mega-raids-may-2023/",
-            "Summary": "Mega Pinsir in Mega Raids",
-            "Start DateTime": "2023-05-11 10:00:00",
-            "End DateTime": "2023-05-24 10:00:00",
-            "Duration": [
-                "2023-05-11",
-                "2023-05-12",
-                "2023-05-13",
-                "2023-05-14",
-                "2023-05-15",
-                "2023-05-16",
-                "2023-05-17",
-                "2023-05-18",
-                "2023-05-19",
-                "2023-05-20",
-                "2023-05-21",
-                "2023-05-22",
-                "2023-05-23",
-                "2023-05-24"
-            ],
-            "preference": 14,
-            "Img Src": [
-                "https://leekduck.com/assets/img/events/mega-default.jpg",
-                "https://leekduck.com/assets/img/pokemon_icons/pm127.fMEGA.icon.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pm127.fMEGA.s.icon.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_127_00_shiny.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_127_00.png"
-            ],
-            "pokemonId": [
-                "127",
-                "127",
-                "127",
-                "127"
-            ],
-            "type": [
-                [
-                    "bug",
-                    "flying"
-                ],
-                [
-                    "bug",
-                    "flying"
-                ],
-                [
-                    "bug"
-                ],
-                [
-                    "bug"
-                ]
-            ],
-            "Bonus": [],
-            "timeZone": "LocalTime",
-            "Description": "Mega Pinsir debuts in Mega Raids on May 11, 2023, at 10 am local time."
-        },
-        {
-            "Links": "https://leekduck.com/events/raidhour20230524/",
-            "Summary": "Regigigas Raid Hour",
-            "Start DateTime": "2023-05-24 18:00:00",
-            "End DateTime": "2023-05-24 19:00:00",
-            "Duration": [
-                "2023-05-24"
-            ],
-            "preference": 1,
-            "Img Src": [
-                "https://leekduck.com/assets/img/events/raidhour.jpg"
-            ],
-            "pokemonId": [],
-            "type": [
-                []
-            ],
-            "Bonus": [],
-            "timeZone": "LocalTime",
-            "Description": "A Raid Hour featuring Regigigas is scheduled from 6 to 7 pm Local Time. During this hour there will be an increased number of five-star Raids."
-        },
-        {
-            "Links": "https://leekduck.com/events/pokemonspotlighthour2023-05-16/",
-            "Summary": "Bellsprout Spotlight Hour",
-            "Start DateTime": "2023-05-16 18:00:00",
-            "End DateTime": "2023-05-16 19:00:00",
-            "Duration": [
-                "2023-05-16"
-            ],
-            "preference": 1,
-            "Img Src": [
-                "https://leekduck.com/assets/img/events/pokemonspotlighthour.jpg",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_069_00.png"
-            ],
-            "pokemonId": [
-                "69"
-            ],
-            "type": [
-                [
-                    "grass",
-                    "poison"
-                ]
-            ],
-            "Bonus": [],
-            "timeZone": "LocalTime",
-            "Description": "Pok\u00e9mon Spotlight Hour will feature a different Pok\u00e9mon and special bonus for one hour at 6:00 p.m. local time on Tuesday during the month of May."
-        },
-        {
-            "Links": "https://leekduck.com/events/august-communityday2023/",
-            "Summary": "August Community Day",
-            "Start DateTime": "2023-08-13 14:00:00",
-            "End DateTime": "2023-08-13 17:00:00",
-            "Duration": [
-                "2023-08-13"
-            ],
-            "preference": 1,
-            "Img Src": [
-                "https://leekduck.com/assets/img/events/cd-default.jpg"
-            ],
-            "pokemonId": [],
-            "type": [
-                []
-            ],
-            "Bonus": [],
-            "timeZone": "LocalTime",
-            "Description": "Please note the event times above are not confirmed."
-        },
-        {
-            "Links": "https://leekduck.com/events/tapu-fini-in-5-star-raid-battles-may-2023/",
-            "Summary": "Tapu Fini in 5-star Raid Battles",
-            "Start DateTime": "2023-05-09 10:00:00",
-            "End DateTime": "2023-05-24 10:00:00",
-            "Duration": [
-                "2023-05-09",
-                "2023-05-10",
-                "2023-05-11",
-                "2023-05-12",
-                "2023-05-13",
-                "2023-05-14",
-                "2023-05-15",
-                "2023-05-16",
-                "2023-05-17",
-                "2023-05-18",
-                "2023-05-19",
-                "2023-05-20",
-                "2023-05-21",
-                "2023-05-22",
-                "2023-05-23",
-                "2023-05-24"
-            ],
-            "preference": 16,
-            "Img Src": [
-                "https://leekduck.com/assets/img/events/tapu-fini.jpg",
-                "https://leekduck.com/assets/img/pokemon_icons/pm788.icon.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pm788.s.icon.png"
-            ],
-            "pokemonId": [
-                "788",
-                "788"
-            ],
-            "type": [
-                [
-                    "water",
-                    "fairy"
-                ],
-                [
-                    "water",
-                    "fairy"
-                ]
-            ],
-            "Bonus": [],
-            "timeZone": "LocalTime",
-            "Description": "Tapu Fini will be in five-star raid battles from May 9, 2023 to May 24, 2023."
-        },
-        {
-            "Links": "https://leekduck.com/events/season-10-rising-heroes-research-breakthrough/",
-            "Summary": "Rising Heroes Research Breakthrough - Season 10",
-            "Start DateTime": "2023-03-02 02:30:00",
-            "End DateTime": "2023-06-02 01:30:00",
-            "Duration": [
-                "2023-03-02",
-                "2023-03-03",
-                "2023-03-04",
-                "2023-03-05",
-                "2023-03-06",
-                "2023-03-07",
-                "2023-03-08",
-                "2023-03-09",
-                "2023-03-10",
-                "2023-03-11",
-                "2023-03-12",
-                "2023-03-13",
-                "2023-03-14",
-                "2023-03-15",
-                "2023-03-16",
-                "2023-03-17",
-                "2023-03-18",
-                "2023-03-19",
-                "2023-03-20",
-                "2023-03-21",
-                "2023-03-22",
-                "2023-03-23",
-                "2023-03-24",
-                "2023-03-25",
-                "2023-03-26",
-                "2023-03-27",
-                "2023-03-28",
-                "2023-03-29",
-                "2023-03-30",
-                "2023-03-31",
-                "2023-04-01",
-                "2023-04-02",
-                "2023-04-03",
-                "2023-04-04",
-                "2023-04-05",
-                "2023-04-06",
-                "2023-04-07",
-                "2023-04-08",
-                "2023-04-09",
-                "2023-04-10",
-                "2023-04-11",
-                "2023-04-12",
-                "2023-04-13",
-                "2023-04-14",
-                "2023-04-15",
-                "2023-04-16",
-                "2023-04-17",
-                "2023-04-18",
-                "2023-04-19",
-                "2023-04-20",
-                "2023-04-21",
-                "2023-04-22",
-                "2023-04-23",
-                "2023-04-24",
-                "2023-04-25",
-                "2023-04-26",
-                "2023-04-27",
-                "2023-04-28",
-                "2023-04-29",
-                "2023-04-30",
-                "2023-05-01",
-                "2023-05-02",
-                "2023-05-03",
-                "2023-05-04",
-                "2023-05-05",
-                "2023-05-06",
-                "2023-05-07",
-                "2023-05-08",
-                "2023-05-09",
-                "2023-05-10",
-                "2023-05-11",
-                "2023-05-12",
-                "2023-05-13",
-                "2023-05-14",
-                "2023-05-15",
-                "2023-05-16",
-                "2023-05-17",
-                "2023-05-18",
-                "2023-05-19",
-                "2023-05-20",
-                "2023-05-21",
-                "2023-05-22",
-                "2023-05-23",
-                "2023-05-24",
-                "2023-05-25",
-                "2023-05-26",
-                "2023-05-27",
-                "2023-05-28",
-                "2023-05-29",
-                "2023-05-30",
-                "2023-05-31",
-                "2023-06-01",
-                "2023-06-02"
-            ],
-            "preference": 93,
-            "Img Src": [
-                "https://leekduck.com/assets/img/events/researchWinter.jpg",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_047_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_127_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_143_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_443_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pm676.fNATURAL.icon.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pm676.fNATURAL.s.icon.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_704_00.png"
-            ],
-            "pokemonId": [
-                "47",
-                "127",
-                "143",
-                "443",
-                "676",
-                "676",
-                "704"
-            ],
-            "type": [
-                [
-                    "bug",
-                    "grass"
-                ],
-                [
-                    "bug"
-                ],
-                [
-                    "normal"
-                ],
-                [
-                    "dragon",
-                    "ground"
-                ],
-                [
-                    "normal"
-                ],
-                [
-                    "normal"
-                ],
-                [
-                    "dragon"
-                ]
-            ],
-            "Bonus": [],
-            "timeZone": "LocalTime",
-            "Description": "During Season 10: Rising Heroes, Trainers will encounter one of the six Pok\u00e9mon in Research Breakthrough encounters."
-        },
-        {
-            "Links": "https://leekduck.com/events/regigigas-in-5-star-raid-battles-may-2023/",
-            "Summary": "Regigigas in 5-star Raid Battles",
-            "Start DateTime": "2023-05-24 10:00:00",
-            "End DateTime": "2023-06-01 10:00:00",
-            "Duration": [
-                "2023-05-24",
-                "2023-05-25",
-                "2023-05-26",
-                "2023-05-27",
-                "2023-05-28",
-                "2023-05-29",
-                "2023-05-30",
-                "2023-05-31",
-                "2023-06-01"
-            ],
-            "preference": 9,
-            "Img Src": [
-                "https://leekduck.com/assets/img/events/regigigas.jpg",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_486_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_486_00_shiny.png"
-            ],
-            "pokemonId": [
-                "486",
-                "486"
-            ],
-            "type": [
-                [
-                    "normal"
-                ],
-                [
-                    "normal"
-                ]
-            ],
-            "Bonus": [],
-            "timeZone": "IST",
-            "Description": "Regigigas will be in five-star raid battles from May 24, 2023 to June 1, 2023."
+            "Description": "Pok\u00e9mon GO Fest 2023 is coming to New York City, and we\u2019re planning a big event for the Big Apple! GO Fest 2023: New York City is split into different experiences between two locations: Randall\u2019s Island Park and throughout New York City!"
         },
         {
             "Links": "https://leekduck.com/events/season-10-rising-heroes/",
@@ -1566,8 +1140,434 @@
                 "Team GO Rocket will appear more frequently at Pok\u00e9Stops",
                 "Extra Stardust earned from Team GO Rocket encounters"
             ],
-            "timeZone": "LocalTime",
+            "timeZone": "IST",
             "Description": "Welcome to Season 10: Rising Heroes!"
+        },
+        {
+            "Links": "https://leekduck.com/events/august-communityday2023/",
+            "Summary": "August Community Day",
+            "Start DateTime": "2023-08-13 14:00:00",
+            "End DateTime": "2023-08-13 17:00:00",
+            "Duration": [
+                "2023-08-13"
+            ],
+            "preference": 1,
+            "Img Src": [
+                "https://leekduck.com/assets/img/events/cd-default.jpg"
+            ],
+            "pokemonId": [],
+            "type": [
+                []
+            ],
+            "Bonus": [],
+            "timeZone": "LocalTime",
+            "Description": "Please note the event times above are not confirmed."
+        },
+        {
+            "Links": "https://leekduck.com/events/mega-pinsir-in-mega-raids-may-2023/",
+            "Summary": "Mega Pinsir in Mega Raids",
+            "Start DateTime": "2023-05-11 10:00:00",
+            "End DateTime": "2023-05-24 10:00:00",
+            "Duration": [
+                "2023-05-11",
+                "2023-05-12",
+                "2023-05-13",
+                "2023-05-14",
+                "2023-05-15",
+                "2023-05-16",
+                "2023-05-17",
+                "2023-05-18",
+                "2023-05-19",
+                "2023-05-20",
+                "2023-05-21",
+                "2023-05-22",
+                "2023-05-23",
+                "2023-05-24"
+            ],
+            "preference": 14,
+            "Img Src": [
+                "https://leekduck.com/assets/img/events/mega-default.jpg",
+                "https://leekduck.com/assets/img/pokemon_icons/pm127.fMEGA.icon.png",
+                "https://leekduck.com/assets/img/pokemon_icons/pm127.fMEGA.s.icon.png",
+                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_127_00_shiny.png",
+                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_127_00.png"
+            ],
+            "pokemonId": [
+                "127",
+                "127",
+                "127",
+                "127"
+            ],
+            "type": [
+                [
+                    "bug",
+                    "flying"
+                ],
+                [
+                    "bug",
+                    "flying"
+                ],
+                [
+                    "bug"
+                ],
+                [
+                    "bug"
+                ]
+            ],
+            "Bonus": [],
+            "timeZone": "LocalTime",
+            "Description": "Mega Pinsir debuts in Mega Raids on May 11, 2023, at 10 am local time."
+        },
+        {
+            "Links": "https://leekduck.com/events/season-14-master-league_elements-cup-little-edition/",
+            "Summary": "Master League and Element Cup",
+            "Start DateTime": "2023-05-18 01:30:00",
+            "End DateTime": "2023-05-25 01:30:00",
+            "Duration": [
+                "2023-05-18",
+                "2023-05-19",
+                "2023-05-20",
+                "2023-05-21",
+                "2023-05-22",
+                "2023-05-23",
+                "2023-05-24",
+                "2023-05-25"
+            ],
+            "preference": 8,
+            "Img Src": [
+                "https://leekduck.com/assets/img/events/gobattleleague-master-key.jpg"
+            ],
+            "pokemonId": [],
+            "type": [
+                []
+            ],
+            "Bonus": [],
+            "timeZone": "LocalTime",
+            "Description": "The Master League and Element Cup: Little Edition will run from May 17, 2023, at 1:00 p.m. to May 24, 2023, at 1:00 p.m. PT."
+        },
+        {
+            "Links": "https://leekduck.com/events/pokemonspotlighthour2023-05-23/",
+            "Summary": "Skorupi Spotlight Hour",
+            "Start DateTime": "2023-05-23 18:00:00",
+            "End DateTime": "2023-05-23 19:00:00",
+            "Duration": [
+                "2023-05-23"
+            ],
+            "preference": 1,
+            "Img Src": [
+                "https://leekduck.com/assets/img/events/pokemonspotlighthour.jpg",
+                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_451_00.png"
+            ],
+            "pokemonId": [
+                "451"
+            ],
+            "type": [
+                [
+                    "poison",
+                    "bug"
+                ]
+            ],
+            "Bonus": [],
+            "timeZone": "IST",
+            "Description": "Pok\u00e9mon Spotlight Hour will feature a different Pok\u00e9mon and special bonus for one hour at 6:00 p.m. local time on Tuesday during the month of May."
+        },
+        {
+            "Links": "https://leekduck.com/events/pokemonspotlighthour2023-05-16/",
+            "Summary": "Bellsprout Spotlight Hour",
+            "Start DateTime": "2023-05-16 18:00:00",
+            "End DateTime": "2023-05-16 19:00:00",
+            "Duration": [
+                "2023-05-16"
+            ],
+            "preference": 1,
+            "Img Src": [
+                "https://leekduck.com/assets/img/events/pokemonspotlighthour.jpg",
+                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_069_00.png"
+            ],
+            "pokemonId": [
+                "69"
+            ],
+            "type": [
+                [
+                    "grass",
+                    "poison"
+                ]
+            ],
+            "Bonus": [],
+            "timeZone": "LocalTime",
+            "Description": "Pok\u00e9mon Spotlight Hour will feature a different Pok\u00e9mon and special bonus for one hour at 6:00 p.m. local time on Tuesday during the month of May."
+        },
+        {
+            "Links": "https://leekduck.com/events/pokemonspotlighthour2023-05-30/",
+            "Summary": "Houndour Spotlight Hour",
+            "Start DateTime": "2023-05-30 18:00:00",
+            "End DateTime": "2023-05-30 19:00:00",
+            "Duration": [
+                "2023-05-30"
+            ],
+            "preference": 1,
+            "Img Src": [
+                "https://leekduck.com/assets/img/events/pokemonspotlighthour.jpg",
+                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_228_00.png"
+            ],
+            "pokemonId": [
+                "228"
+            ],
+            "type": [
+                [
+                    "dark",
+                    "fire"
+                ]
+            ],
+            "Bonus": [],
+            "timeZone": "LocalTime",
+            "Description": "Pok\u00e9mon Spotlight Hour will feature a different Pok\u00e9mon and special bonus for one hour at 6:00 p.m. local time on Tuesday during the month of May."
+        },
+        {
+            "Links": "https://leekduck.com/events/pokemon-go-fest-2023-london-england/",
+            "Summary": "Pokmon GO Fest 2023",
+            "Start DateTime": "2023-08-04 13:30:00",
+            "End DateTime": "2023-08-06 22:30:00",
+            "Duration": [
+                "2023-08-04",
+                "2023-08-05",
+                "2023-08-06"
+            ],
+            "preference": 3,
+            "Img Src": [
+                "https://leekduck.com/assets/img/events/pokemongofest2023-london.jpg"
+            ],
+            "pokemonId": [],
+            "type": [
+                []
+            ],
+            "Bonus": [
+                "Up to 18 free Raid Passes per day by spinning Photo Discs at Gyms",
+                "5,000 additional XP awarded for completed raids",
+                "6 additional Candy for catching Pok\u00e9mon in 5-star and Mega Raids",
+                "3 additional Candy XL for catching Pok\u00e9mon in 5-star and Mega Raids (Trainers level 31+)",
+                "1/4 Egg Hatch Distance",
+                "Increased chance of receiving 10 km Eggs from spinning Pok\u00e9Stops and Gyms",
+                "3\u00d7 Hatch Stardust",
+                "3\u00d7 Hatch XP",
+                "3\u00d7 Hatch Candy"
+            ],
+            "timeZone": "LocalTime",
+            "Description": "Pok\u00e9mon GO Fest 2023 is coming to London, and we\u2019re planning a capital event for England\u2019s capital! GO Fest 2023: London is split into different experiences between two locations: Brockwell Park and throughout Greater London!"
+        },
+        {
+            "Links": "https://leekduck.com/events/pokemon-go-fest-2023-osaka-japan/",
+            "Summary": "Pokmon GO Fest 2023",
+            "Start DateTime": "2023-08-04 05:30:00",
+            "End DateTime": "2023-08-06 14:30:00",
+            "Duration": [
+                "2023-08-04",
+                "2023-08-05",
+                "2023-08-06"
+            ],
+            "preference": 3,
+            "Img Src": [
+                "https://leekduck.com/assets/img/events/pokemongofest2023-osaka.jpg"
+            ],
+            "pokemonId": [],
+            "type": [
+                []
+            ],
+            "Bonus": [
+                "Up to 18 free Raid Passes per day by spinning Photo Discs at Gyms",
+                "5,000 additional XP awarded for completed raids",
+                "6 additional Candy for catching Pok\u00e9mon in 5-star and Mega Raids",
+                "3 additional Candy XL for catching Pok\u00e9mon in 5-star and Mega Raids (Trainers level 31+)",
+                "1/4 Egg Hatch Distance",
+                "Increased chance of receiving 10 km Eggs from spinning Pok\u00e9Stops and Gyms",
+                "3\u00d7 Hatch Stardust",
+                "3\u00d7 Hatch XP",
+                "3\u00d7 Hatch Candy"
+            ],
+            "timeZone": "IST",
+            "Description": "Pok\u00e9mon GO Fest 2023 is coming to Osaka, and we have big plans for one of the largest urban areas in the world! Pok\u00e9mon GO Fest 2023: Osaka is split into two different experiences between two locations: Expo \u201970 Commemorative Park and in Suita City &amp; Osaka City*!"
+        },
+        {
+            "Links": "https://leekduck.com/events/season-10-rising-heroes-research-breakthrough/",
+            "Summary": "Rising Heroes Research Breakthrough - Season 10",
+            "Start DateTime": "2023-03-02 02:30:00",
+            "End DateTime": "2023-06-02 01:30:00",
+            "Duration": [
+                "2023-03-02",
+                "2023-03-03",
+                "2023-03-04",
+                "2023-03-05",
+                "2023-03-06",
+                "2023-03-07",
+                "2023-03-08",
+                "2023-03-09",
+                "2023-03-10",
+                "2023-03-11",
+                "2023-03-12",
+                "2023-03-13",
+                "2023-03-14",
+                "2023-03-15",
+                "2023-03-16",
+                "2023-03-17",
+                "2023-03-18",
+                "2023-03-19",
+                "2023-03-20",
+                "2023-03-21",
+                "2023-03-22",
+                "2023-03-23",
+                "2023-03-24",
+                "2023-03-25",
+                "2023-03-26",
+                "2023-03-27",
+                "2023-03-28",
+                "2023-03-29",
+                "2023-03-30",
+                "2023-03-31",
+                "2023-04-01",
+                "2023-04-02",
+                "2023-04-03",
+                "2023-04-04",
+                "2023-04-05",
+                "2023-04-06",
+                "2023-04-07",
+                "2023-04-08",
+                "2023-04-09",
+                "2023-04-10",
+                "2023-04-11",
+                "2023-04-12",
+                "2023-04-13",
+                "2023-04-14",
+                "2023-04-15",
+                "2023-04-16",
+                "2023-04-17",
+                "2023-04-18",
+                "2023-04-19",
+                "2023-04-20",
+                "2023-04-21",
+                "2023-04-22",
+                "2023-04-23",
+                "2023-04-24",
+                "2023-04-25",
+                "2023-04-26",
+                "2023-04-27",
+                "2023-04-28",
+                "2023-04-29",
+                "2023-04-30",
+                "2023-05-01",
+                "2023-05-02",
+                "2023-05-03",
+                "2023-05-04",
+                "2023-05-05",
+                "2023-05-06",
+                "2023-05-07",
+                "2023-05-08",
+                "2023-05-09",
+                "2023-05-10",
+                "2023-05-11",
+                "2023-05-12",
+                "2023-05-13",
+                "2023-05-14",
+                "2023-05-15",
+                "2023-05-16",
+                "2023-05-17",
+                "2023-05-18",
+                "2023-05-19",
+                "2023-05-20",
+                "2023-05-21",
+                "2023-05-22",
+                "2023-05-23",
+                "2023-05-24",
+                "2023-05-25",
+                "2023-05-26",
+                "2023-05-27",
+                "2023-05-28",
+                "2023-05-29",
+                "2023-05-30",
+                "2023-05-31",
+                "2023-06-01",
+                "2023-06-02"
+            ],
+            "preference": 93,
+            "Img Src": [
+                "https://leekduck.com/assets/img/events/researchWinter.jpg",
+                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_047_00.png",
+                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_127_00.png",
+                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_143_00.png",
+                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_443_00.png",
+                "https://leekduck.com/assets/img/pokemon_icons/pm676.fNATURAL.icon.png",
+                "https://leekduck.com/assets/img/pokemon_icons/pm676.fNATURAL.s.icon.png",
+                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_704_00.png"
+            ],
+            "pokemonId": [
+                "47",
+                "127",
+                "143",
+                "443",
+                "676",
+                "676",
+                "704"
+            ],
+            "type": [
+                [
+                    "bug",
+                    "grass"
+                ],
+                [
+                    "bug"
+                ],
+                [
+                    "normal"
+                ],
+                [
+                    "dragon",
+                    "ground"
+                ],
+                [
+                    "normal"
+                ],
+                [
+                    "normal"
+                ],
+                [
+                    "dragon"
+                ]
+            ],
+            "Bonus": [],
+            "timeZone": "IST",
+            "Description": "During Season 10: Rising Heroes, Trainers will encounter one of the six Pok\u00e9mon in Research Breakthrough encounters."
+        },
+        {
+            "Links": "https://leekduck.com/events/season-14-ultra-league_sunshine-cup-great-league-edition/",
+            "Summary": "Ultra League and Sunshine Cup",
+            "Start DateTime": "2023-05-11 01:30:00",
+            "End DateTime": "2023-05-18 01:30:00",
+            "Duration": [
+                "2023-05-11",
+                "2023-05-12",
+                "2023-05-13",
+                "2023-05-14",
+                "2023-05-15",
+                "2023-05-16",
+                "2023-05-17",
+                "2023-05-18"
+            ],
+            "preference": 8,
+            "Img Src": [
+                "https://leekduck.com/assets/img/events/go-battle-league-ultra-league-machamp-swampert.jpg",
+                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_006_00.png"
+            ],
+            "pokemonId": [
+                "6"
+            ],
+            "type": [
+                [
+                    "fire",
+                    "flying"
+                ]
+            ],
+            "Bonus": [],
+            "timeZone": "IST",
+            "Description": "The Ultra League and Sunshine Cup: Great League Edition will run from May 10, 2023, at 1:00 p.m. to May 17, 2023, at 1:00 p.m. PT."
         }
     ]
 }
