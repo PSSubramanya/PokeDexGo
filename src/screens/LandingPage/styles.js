@@ -71,4 +71,27 @@ export default styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontFamily: fontFamily.primaryFontFamilyMedium,
   },
+  buttonTextStyles: {
+    fontSize: moderateScale(12),
+    fontFamily: fontFamily.primaryFontFamilyMedium,
+    color: colors.purple,
+  },
+  navigationButtonStyle: {
+    height: verticalScale(130),
+    width: horizontalScale(130),
+    margin: verticalScale(12),
+    backgroundColor: colors.white,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: colors.purple,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonIcons: {
+    height: verticalScale(45),
+    width: horizontalScale(45),
+    marginBottom: verticalScale(10),
+    marginTop: verticalScale(10),
+    padding: verticalScale(5),
+  },
 });

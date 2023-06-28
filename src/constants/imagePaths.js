@@ -17,6 +17,14 @@ export default {
   addIcon: require('../assets/images/icons/addIcon.png'),
   minusIcon: require('../assets/images/icons/minusIcon.png'),
   shinyIcon: require('../assets/images/icons/shinyIcon.png'),
+  ashCapIcon: require('../assets/images/icons/ashCapIcon.png'),
+  fieldResearchIcon: require('../assets/images/icons/fieldResearchIcon.png'),
+  pokeEggIcon: require('../assets/images/icons/pokeEggIcon.png'),
+  twoKmEggIcon: require('../assets/images/icons/2KmEgg.png'),
+  fiveKmEggIcon: require('../assets/images/icons/5KmEgg.png'),
+  sevenKmEggIcon: require('../assets/images/icons/7KmEgg.png'),
+  tenKmEggIcon: require('../assets/images/icons/10KmEgg.png'),
+  twelveKmEggIcon: require('../assets/images/icons/12KmEgg.png'),
 
   //Images
   calendar1: require('../assets/images/calendar.png'),
@@ -34,6 +42,7 @@ export default {
   calendarIllustration2: require('../assets/images/illustrations/calendarIllustration2.png'),
   calendarIllustration3: require('../assets/images/illustrations/calendarIllustration3.png'),
   calendarIllustration4: require('../assets/images/illustrations/calendarIllustration4.png'),
+  fieldResearchIllustration: require('../assets/images/illustrations/fieldResearchIllustration.jpeg'),
 
   //gifs
   pichuDancing: require('../assets/images/gifs/pichuGif.webp'),

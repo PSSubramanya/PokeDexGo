@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   StatusBar,
+  FlatList,
 } from 'react-native';
 import {useNetStatusInfo} from '../../ultilities/customHooks/useNetStatusInfo';
 import strings from '../../constants/strings';
@@ -18,12 +19,37 @@ import styles from './styles';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
 import {CircleRightArrow} from '../../assets/images/svg';
 import webscrappedData from '../../ultilities/pokemonData/pokemon_data6.json';
+import eggData from '../../ultilities/pokemonData/egg_data.json';
 
 const LandingPage = ({navigation}) => {
   const dispatch = useDispatch();
   const {networkState} = useNetStatusInfo();
 
+  const navigationScreens = [
+    {
+      name: 'Events',
+      navigationPath: 'HomeScreen',
+      image: imagePaths.calendarIcon,
+    },
+    {
+      name: 'Eggs',
+      navigationPath: 'EggDetailsScreen',
+      image: imagePaths.pokeEggIcon,
+    },
+    {
+      name: 'Field Research',
+      navigationPath: 'HomeScreen',
+      image: imagePaths.fieldResearchIcon,
+    },
+    {
+      name: 'FAQ',
+      navigationPath: 'HomeScreen',
+      image: imagePaths.ashCapIcon,
+    },
+  ];
+
   const [loadData, setLoadData] = useState([]);
+  const [loadEggData, setLoadEggData] = useState([]);
 
   useEffect(() => {
     soundTracks?.pikapika1.play(success => {
@@ -57,6 +83,11 @@ const LandingPage = ({navigation}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loadData]);
 
+  useEffect(() => {
+    let loadedData = eggData?.data;
+    setLoadEggData(loadedData);
+  }, [loadEggData]);
+
   const appIconContainer = () => {
     return (
       <View style={styles.centerAlignmentStyle}>
@@ -73,26 +104,41 @@ const LandingPage = ({navigation}) => {
     );
   };
 
-  const continueButton = () => {
+  const renderItem = ({item}) => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          if (item.name === 'Events') {
+            navigation.navigate(item?.navigationPath, {loadData: loadData});
+          } else if (item?.name === 'Eggs') {
+            navigation.navigate(item?.navigationPath, {loadData: loadEggData});
+          }
+        }}>
+        <View style={styles.navigationButtonStyle}>
+          <Image
+            source={item?.image}
+            height={1}
+            width={1}
+            resizeMode={'contain'}
+            style={styles.buttonIcons}
+          />
+          <Text style={styles.buttonTextStyles}>{item?.name}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  const navigationButtons = () => {
     return (
       <>
         {networkState ? (
           <View style={styles.centerAlignmentStyle}>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('HomeScreen', {loadData: loadData});
-              }}
-              style={commonStyling.centerAlignment}>
-              <Image
-                source={imagePaths.rightArrowCircle}
-                height={1}
-                width={1}
-                style={styles.rightArrowCircle}
-              />
-              <Text style={[styles.smallTextSize, styles.primaryColorStyle]}>
-                {strings.continue}
-              </Text>
-            </TouchableOpacity>
+            <FlatList
+              data={navigationScreens}
+              keyExtractor={item => item}
+              numColumns={2}
+              renderItem={renderItem}
+            />
           </View>
         ) : null}
       </>
@@ -103,7 +149,7 @@ const LandingPage = ({navigation}) => {
     return (
       <View style={styles.mainContainer}>
         {appIconContainer()}
-        {continueButton()}
+        {navigationButtons()}
         {/* <CircleRightArrow /> */}
       </View>
     );

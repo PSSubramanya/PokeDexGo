@@ -1,268 +1,336 @@
 {
-    "data": [
-        {
-            "Distance": "2 km Eggs ",
-            "imgSrc": [
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_069_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_129_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_172_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_174_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_328_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_546_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pm731.icon.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pm734.icon.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pm753.icon.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pm767.icon.png"
-            ],
-            "pokemonName": [
-                "Bellsprout",
-                "Magikarp",
-                "Pichu",
-                "Igglybuff",
-                "Trapinch",
-                "Cottonee",
-                "Pikipek",
-                "Yungoos",
-                "Fomantis",
-                "Wimpod"
-            ],
-            "combatPower": [
-                "543 - 590",
-                "132 - 157",
-                "240 - 270",
-                "269 - 306",
-                "676 - 728",
-                "362 - 400",
-                "476 - 520",
-                "459 - 502",
-                "385 - 423",
-                "255 - 286"
-            ]
-        },
-        {
-            "Distance": "5 km Eggs ",
-            "imgSrc": [
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_066_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_207_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_236_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_433_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_438_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pm722.icon.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pm725.icon.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pm728.icon.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pm747.icon.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_439_00.png"
-            ],
-            "pokemonName": [
-                "Machop",
-                "Gligar",
-                "Tyrogue",
-                "Chingling",
-                "Bonsly",
-                "Rowlet",
-                "Litten",
-                "Popplio",
-                "Mareanie",
-                "Mime Jr."
-            ],
-            "combatPower": [
-                "678 - 730",
-                "1000 - 1061",
-                "249 - 281",
-                "530 - 574",
-                "693 - 744",
-                "558 - 604",
-                "545 - 591",
-                "597 - 645",
-                "511 - 555",
-                "578 - 626"
-            ]
-        },
-        {
-            "Distance": "5 km Eggs (Adventure Sync Rewards)",
-            "imgSrc": [
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_403_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_408_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_410_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_440_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_446_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_592_00.png"
-            ],
-            "pokemonName": [
-                "Shinx",
-                "Cranidos",
-                "Shieldon",
-                "Happiny",
-                "Munchlax",
-                "Frillish"
-            ],
-            "combatPower": [
-                "458 - 500",
-                "974 - 1040",
-                "465 - 509",
-                "178 - 212",
-                "1017 - 1081",
-                "668 - 718"
-            ]
-        },
-        {
-            "Distance": "7 km Eggs ",
-            "imgSrc": [
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_037_61.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_052_61.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_052_31.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pm58.fHISUIAN.icon.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_077_31.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_079_31.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_083_31.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pm100.fHISUIAN.icon.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pm211.fHISUIAN.icon.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pm215.fHISUIAN.icon.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_263_31.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_554_31.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_618_31.png"
-            ],
-            "pokemonName": [
-                "Alolan Vulpix",
-                "Alolan Meowth",
-                "Galarian Meowth",
-                "Hisuian Growlithe",
-                "Galarian Ponyta",
-                "Galarian Slowpoke",
-                "Galarian Farfetch'd",
-                "Hisuian Voltorb",
-                "Hisuian Qwilfish",
-                "Hisuian Sneasel",
-                "Galarian Zigzagoon",
-                "Galarian Darumaka",
-                "Galarian Stunfisk"
-            ],
-            "combatPower": [
-                "463 - 504",
-                "416 - 455",
-                "546 - 591",
-                "703 - 755",
-                "911 - 969",
-                "650 - 700",
-                "898 - 956",
-                "532 - 577",
-                "1155 - 1220",
-                "1107 - 1172",
-                "258 - 290",
-                "768 - 823",
-                "1169 - 1235"
-            ]
-        },
-        {
-            "Distance": "10 km Eggs ",
-            "imgSrc": [
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_447_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_564_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_566_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_610_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_696_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_698_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_704_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pm744.icon.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pm777.icon.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pm782.icon.png"
-            ],
-            "pokemonName": [
-                "Riolu",
-                "Tirtouga",
-                "Archen",
-                "Axew",
-                "Tyrunt",
-                "Amaura",
-                "Goomy",
-                "Rockruff",
-                "Togedemaru",
-                "Jangmo-o"
-            ],
-            "combatPower": [
-                "522 - 567",
-                "796 - 850",
-                "989 - 1052",
-                "729 - 782",
-                "877 - 934",
-                "726 - 779",
-                "514 - 557",
-                "499 - 543",
-                "1168 - 1234",
-                "510 - 553"
-            ]
-        },
-        {
-            "Distance": "10 km Eggs (Adventure Sync Rewards)",
-            "imgSrc": [
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_147_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_374_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_443_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_447_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_704_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pm744.icon.png"
-            ],
-            "pokemonName": [
-                "Dratini",
-                "Beldum",
-                "Gible",
-                "Riolu",
-                "Goomy",
-                "Rockruff"
-            ],
-            "combatPower": [
-                "529 - 574",
-                "513 - 558",
-                "588 - 635",
-                "522 - 567",
-                "514 - 557",
-                "499 - 543"
-            ]
-        },
-        {
-            "Distance": "12 km Eggs ",
-            "imgSrc": [
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_624_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_629_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_559_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_246_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_674_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_551_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_690_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_633_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pm757.icon.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_451_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_359_00.png",
-                "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_686_00.png"
-            ],
-            "pokemonName": [
-                "Pawniard",
-                "Vullaby",
-                "Scraggy",
-                "Larvitar",
-                "Pancham",
-                "Sandile",
-                "Skrelp",
-                "Deino",
-                "Salandit",
-                "Skorupi",
-                "Absol",
-                "Inkay"
-            ],
-            "combatPower": [
-                "765 - 819",
-                "675 - 726",
-                "732 - 784",
-                "548 - 594",
-                "796 - 850",
-                "546 - 592",
-                "561 - 607",
-                "560 - 606",
-                "593 - 641",
-                "531 - 576",
-                "1370 - 1443",
-                "486 - 529"
-            ]
-        }
-    ]
+  "data": [
+    {
+      "Distance": "2 km Eggs ",
+      "imgSrc": [
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_069_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_129_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_172_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_174_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_328_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_546_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pm731.icon.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pm734.icon.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pm753.icon.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pm767.icon.png"
+      ],
+      "pokemonName": [
+        "Bellsprout",
+        "Magikarp",
+        "Pichu",
+        "Igglybuff",
+        "Trapinch",
+        "Cottonee",
+        "Pikipek",
+        "Yungoos",
+        "Fomantis",
+        "Wimpod"
+      ],
+      "combatPower": [
+        "543 - 590",
+        "132 - 157",
+        "240 - 270",
+        "269 - 306",
+        "676 - 728",
+        "362 - 400",
+        "476 - 520",
+        "459 - 502",
+        "385 - 423",
+        "255 - 286"
+      ],
+      "pokeId": [
+        "129",
+        "69",
+        "172",
+        "328",
+        "174",
+        "734",
+        "546",
+        "753",
+        "731",
+        "767"
+      ]
+    },
+    {
+      "Distance": "5 km Eggs ",
+      "imgSrc": [
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_066_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_207_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_236_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_433_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_438_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pm722.icon.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pm725.icon.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pm728.icon.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pm747.icon.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_439_00.png"
+      ],
+      "pokemonName": [
+        "Machop",
+        "Gligar",
+        "Tyrogue",
+        "Chingling",
+        "Bonsly",
+        "Rowlet",
+        "Litten",
+        "Popplio",
+        "Mareanie",
+        "Mime Jr."
+      ],
+
+      "combatPower": [
+        "678 - 730",
+        "1000 - 1061",
+        "249 - 281",
+        "530 - 574",
+        "693 - 744",
+        "558 - 604",
+        "545 - 591",
+        "597 - 645",
+        "511 - 555",
+        "578 - 626"
+      ],
+      "pokeId": [
+        "66",
+        "207",
+        "236",
+        "433",
+        "438",
+        "722",
+        "725",
+        "728",
+        "747",
+        "439"
+      ]
+    },
+    {
+      "Distance": "5 km Eggs (Adventure Sync Rewards)",
+      "imgSrc": [
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_403_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_408_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_410_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_440_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_446_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_592_00.png"
+      ],
+      "pokemonName": [
+        "Shinx",
+        "Cranidos",
+        "Shieldon",
+        "Happiny",
+        "Munchlax",
+        "Frillish"
+      ],
+      "combatPower": [
+        "458 - 500",
+        "974 - 1040",
+        "465 - 509",
+        "178 - 212",
+        "1017 - 1081",
+        "668 - 718"
+      ],
+      "pokeId": ["403", "408", "410", "440", "446", "592"]
+    },
+    {
+      "Distance": "7 km Eggs ",
+      "imgSrc": [
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_037_61.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_052_61.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_052_31.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pm58.fHISUIAN.icon.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_077_31.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_079_31.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_083_31.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pm100.fHISUIAN.icon.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pm211.fHISUIAN.icon.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pm215.fHISUIAN.icon.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_263_31.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_554_31.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_618_31.png"
+      ],
+      "pokemonName": [
+        "Alolan Vulpix",
+        "Alolan Meowth",
+        "Galarian Meowth",
+        "Hisuian Growlithe",
+        "Galarian Ponyta",
+        "Galarian Slowpoke",
+        "Galarian Farfetch'd",
+        "Hisuian Voltorb",
+        "Hisuian Qwilfish",
+        "Hisuian Sneasel",
+        "Galarian Zigzagoon",
+        "Galarian Darumaka",
+        "Galarian Stunfisk"
+      ],
+      "combatPower": [
+        "463 - 504",
+        "416 - 455",
+        "546 - 591",
+        "703 - 755",
+        "911 - 969",
+        "650 - 700",
+        "898 - 956",
+        "532 - 577",
+        "1155 - 1220",
+        "1107 - 1172",
+        "258 - 290",
+        "768 - 823",
+        "1169 - 1235"
+      ],
+      "pokeId": [
+        "37",
+        "52",
+        "52",
+        "58",
+        "77",
+        "79",
+        "83",
+        "100",
+        "211",
+        "215",
+        "263",
+        "554",
+        "618"
+      ]
+    },
+    {
+      "Distance": "10 km Eggs ",
+      "imgSrc": [
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_447_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_564_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_566_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_610_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_696_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_698_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_704_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pm744.icon.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pm777.icon.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pm782.icon.png"
+      ],
+      "pokemonName": [
+        "Riolu",
+        "Tirtouga",
+        "Archen",
+        "Axew",
+        "Tyrunt",
+        "Amaura",
+        "Goomy",
+        "Rockruff",
+        "Togedemaru",
+        "Jangmo-o"
+      ],
+      "combatPower": [
+        "522 - 567",
+        "796 - 850",
+        "989 - 1052",
+        "729 - 782",
+        "877 - 934",
+        "726 - 779",
+        "514 - 557",
+        "499 - 543",
+        "1168 - 1234",
+        "510 - 553"
+      ],
+      "pokeId": [
+        "447",
+        "564",
+        "566",
+        "610",
+        "696",
+        "698",
+        "704",
+        "744",
+        "777",
+        "782"
+      ]
+    },
+    {
+      "Distance": "10 km Eggs (Adventure Sync Rewards)",
+      "imgSrc": [
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_147_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_374_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_443_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_447_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_704_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pm744.icon.png"
+      ],
+      "pokemonName": [
+        "Dratini",
+        "Beldum",
+        "Gible",
+        "Riolu",
+        "Goomy",
+        "Rockruff"
+      ],
+      "combatPower": [
+        "529 - 574",
+        "513 - 558",
+        "588 - 635",
+        "522 - 567",
+        "514 - 557",
+        "499 - 543"
+      ],
+      "pokeId": ["147", "374", "443", "447", "704", "744"]
+    },
+    {
+      "Distance": "12 km Eggs ",
+      "imgSrc": [
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_624_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_629_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_559_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_246_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_674_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_551_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_690_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_633_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pm757.icon.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_451_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_359_00.png",
+        "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_686_00.png"
+      ],
+      "pokemonName": [
+        "Pawniard",
+        "Vullaby",
+        "Scraggy",
+        "Larvitar",
+        "Pancham",
+        "Sandile",
+        "Skrelp",
+        "Deino",
+        "Salandit",
+        "Skorupi",
+        "Absol",
+        "Inkay"
+      ],
+      "combatPower": [
+        "765 - 819",
+        "675 - 726",
+        "732 - 784",
+        "548 - 594",
+        "796 - 850",
+        "546 - 592",
+        "561 - 607",
+        "560 - 606",
+        "593 - 641",
+        "531 - 576",
+        "1370 - 1443",
+        "486 - 529"
+      ],
+      "pokeId": [
+        "624",
+        "629",
+        "559",
+        "246",
+        "674",
+        "551",
+        "690",
+        "633",
+        "757",
+        "451",
+        "359",
+        "686"
+      ]
+    }
+  ]
 }

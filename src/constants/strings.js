@@ -1,5 +1,5 @@
 export default {
-  app_name: 'Pokedex App',
+  app_name: 'Poke Event Guide',
   continue: 'Continue',
   no_event_today: 'No event today',
   no_event_added: 'No event added',
