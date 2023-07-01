@@ -5,6 +5,7 @@ import {
   horizontalScale,
   verticalScale,
   moderateScale,
+  viewportWidth,
 } from '../../ultilities/scale';
 
 // eslint-disable-next-line no-undef
@@ -45,7 +46,9 @@ export default styles = StyleSheet.create({
   },
   gridViewDisplay: {
     marginVertical: verticalScale(30),
-    alignSelf: 'center',
+    width: viewportWidth,
+    alignItems: 'center',
+    flex: 1,
   },
   pokemonNames: {
     textAlign: 'center',

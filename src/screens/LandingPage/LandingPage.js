@@ -42,7 +42,7 @@ const LandingPage = ({navigation}) => {
       image: imagePaths.fieldResearchIcon,
     },
     {
-      name: 'FAQ',
+      name: 'Trainer Info',
       navigationPath: 'HomeScreen',
       image: imagePaths.ashCapIcon,
     },

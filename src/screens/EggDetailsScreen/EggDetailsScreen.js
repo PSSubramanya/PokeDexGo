@@ -12,6 +12,7 @@ import pokemon_alolan_variants from '../../ultilities/pokemonData/pokemon_alolan
 import pokemon_galarian_variants from '../../ultilities/pokemonData/pokemon_galarian_variants';
 import pokemon_hisuian_variants from '../../ultilities/pokemonData/pokemon_hisuian_variants';
 import styles from './styles.js';
+import CarousalSlider from '../../components/CarousalSlider/CarousalSlider.js';
 
 const EggDetailsScreen = props => {
   const {navigation, route} = props;
@@ -31,6 +32,8 @@ const EggDetailsScreen = props => {
 
   const [indexVal, setIndexVal] = useState(0);
   const [displayData, setDisplayData] = useState([]);
+
+  console.log('LOAD DATA LENGTH', loadData.length);
 
   useEffect(() => {
     setDisplayData(loadData[indexVal]);
@@ -187,6 +190,14 @@ const EggDetailsScreen = props => {
 
   console.log('DISPL IMGS', dispImgs);
 
+  const sliderBodyView = () => {
+    return (
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {gridViewDisplay(dispImgs)}
+      </ScrollView>
+    );
+  };
+
   return (
     <View style={styles.mainBody}>
       <Image
@@ -239,9 +250,15 @@ const EggDetailsScreen = props => {
           />
         </TouchableOpacity>
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {gridViewDisplay(dispImgs)}
-      </ScrollView>
+      {/* {sliderBodyView()} */}
+      <CarousalSlider
+        bodyView={sliderBodyView}
+        paginationStyle={true}
+        sliderArrowStyle={false}
+        sliderData={loadData}
+        indexVal={indexVal}
+        setIndexVal={setIndexVal}
+      />
     </View>
   );
 };
