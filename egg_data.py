@@ -9,6 +9,12 @@ import json
 from bottle import *
 from pivottablejs import pivot_ui
 from ast import literal_eval
+import pandas as pd
+import json
+from bottle import *
+import re
+import requests
+from urllib.request import Request,urlopen
 
 
 @dataclass
@@ -17,15 +23,16 @@ class Event:
     pokemonName : list
     combatPower : list
     shiny : list
+    pokeId: list
 
     def to_dict(self):
         metadata = {
                 "imgSrc": self.imgSrc,
                 "pokemonName": self.pokemonName,
+                "pokeId" : self.pokeId,
                 "shiny": self.shiny,
                 "combatPower": self.combatPower,
         }
-
         return metadata
 
     def __str__(self):
@@ -47,6 +54,8 @@ def main():
     combatPowerEgg=[]
     shinyEgg=[]
     shiny=[]
+    pokeId=[]
+    pokeIdEgg=[]
 
     url = "https://leekduck.com/eggs/"
 
@@ -56,9 +65,9 @@ def main():
 
     for item in soup.find_all('h2'):
         distance.append(item.string)
-    distance2=distance.pop()
-
-    for i in range(len(distance)):
+    #distance2=distance.pop()
+    newdis=distance[:7]
+    for i in range(len(newdis)-1):
         soup1=soup.find_all("ul",class_='egg-list-flex')[i]
         soup2=soup1.find_all("li",class_='egg-list-item')
         for li in soup2:
@@ -79,11 +88,39 @@ def main():
             spanCpList=spanCpStr.split('n>')[1]
             spanCpCleaned=str(spanCpList).replace('</div>','')
             combatPower.append(spanCpCleaned.replace('\n','').strip())
-        events[distance[i]]=Event(imgSrc,pokemonName,combatPower,shiny)
+        for h in pokemonName:
+            pokeName=h.lower()
+            if pokeName == 'mime jr.':
+                pokeName = 'mr-mime-galar'
+            elif 'far' in pokeName:
+                pokeName = 'farfetchd-galar'
+            elif 'alolan' in pokeName:
+                pokeNamelist= pokeName.split(' ')
+                pokeNamelist=pokeNamelist[1]
+                pokeName=pokeNamelist+'-alola'
+            elif 'galarian' in pokeName:
+                pokeNamelist= pokeName.split(' ')
+                pokeNamelist=pokeNamelist[1]
+                pokeName=pokeNamelist+'-galar'
+            elif 'hisuian' in pokeName:
+                pokeNamelist= pokeName.split(' ')
+                pokeNamelist=pokeNamelist[1]
+                pokeName=pokeNamelist+'-hisui'
+            url='https://pokeapi.co/api/v2/pokemon/'
+            newurl=url+pokeName
+            req=Request(
+                url=newurl, 
+                headers={'User-Agent': 'Mozilla/5.0'}
+            )
+            responseJSON2=urlopen(req)
+            dataJSONType=json.loads(responseJSON2.read())
+            pokeId.append(dataJSONType['id'])
+        events[distance[i]]=Event(imgSrc,pokemonName,combatPower,shiny,pokeId)
         imgSrc=[]
         pokemonName=[]
         combatPower=[]
         shiny=[]
+        pokeId=[]
     
     df=pd.DataFrame(events,index=[0]).T
     df.columns=['Summary']
@@ -157,10 +194,18 @@ def main():
         summ=summ[0].split(':',1)
         summ=summ[1].rsplit(',',1)
         shinyEgg.append(summ[0])
+    
+    for summary in summaries:
+        summ=summ=summary.split('pokeId')
+        summ=summ[1].split('shiny')
+        summ=summ[0].split(':',1)
+        summ=summ[1].rsplit(',',1)
+        pokeIdEgg.append(summ[0])
 
 
     eggData['imgSrc'] = imgSrcEgg
     eggData['pokemonName'] = pokemonNameEgg
+    eggData['pokeId'] = pokeIdEgg
     eggData['shiny'] = shinyEgg
     eggData['combatPower'] = combatPowerEgg
 
@@ -176,6 +221,7 @@ def main():
         i['pokemonName'] = literal_eval(i['pokemonName'])
         i['combatPower'] = literal_eval(i['combatPower'])
         i['shiny'] = literal_eval(i['shiny'])
+        i['pokeId'] = literal_eval(i['pokeId'])
 
     with open('./egg_data.json',"w") as output_file:
         #output_file.write(pokemon_json.replace('\\','')+'\n')

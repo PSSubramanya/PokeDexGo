@@ -60,9 +60,11 @@ def poke_51_52_61_fMEGA(pokeId,id,url,typeData):
         newurl=url+(typeData+'-alola')
     elif id == 'fHISUIAN':
         newurl = url+(typeData+'-hisui')
-        print(pokeId)
     else:
-        newurl = url+pokeId
+        if pokeId == '263':
+          newurl = url+typeData
+        else:
+          newurl = url+pokeId
     return newurl
 
 def poke_special(pokemonMiniType2,pokeId,url,id):
