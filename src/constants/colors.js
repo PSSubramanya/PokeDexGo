@@ -10,6 +10,7 @@ export default {
   orange: '#FFAE4F',
   vermillion: '#f64307',
   vermillionLight: 'rgba(246, 67, 7, 0.8)',
+  vermillionLighter: 'rgba(246, 67, 7, 0.6)',
   red: '#FF0000',
   grey: '#cccccc',
 

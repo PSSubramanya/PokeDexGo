@@ -127,6 +127,10 @@ export default styles = StyleSheet.create({
     height: verticalScale(180),
     width: horizontalScale(180),
   },
+  selectDatePromptImage: {
+    height: verticalScale(250),
+    width: horizontalScale(250),
+  },
   emptyListText: {
     fontFamily: fontFamily.primaryFontFamilyRegular,
     fontSize: moderateScale(16),
@@ -138,7 +142,7 @@ export default styles = StyleSheet.create({
   calandarView: {
     height: '45%',
   },
-  emptyListView: {
+  topPaddingStyle: {
     marginTop: verticalScale(30),
   },
   cardInnerStyling: {
@@ -190,7 +194,6 @@ export default styles = StyleSheet.create({
   },
   pokemonName: {
     paddingVertical: verticalScale(5),
-    paddingHorizontal: horizontalScale(5),
     color: colors.purple,
     fontFamily: fontFamily.primaryFontFamilyMedium,
     fontSize: moderateScale(12),
@@ -215,10 +218,55 @@ export default styles = StyleSheet.create({
     color: colors.secondaryColor,
   },
   activityIndicatorStyle: {
-    height: verticalScale(220),
-    width: horizontalScale(220),
+    height: verticalScale(200),
+    width: horizontalScale(200),
     zIndex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    marginHorizontal: horizontalScale(40),
+  },
+  paginationTextStyle: {
+    color: colors.purple,
+    fontFamily: fontFamily.primaryFontFamilyMedium,
+    fontSize: moderateScale(12),
+  },
+  paginationRichtext1: {
+    color: colors.vermillion,
+    fontFamily: fontFamily.primaryFontFamilyBold,
+  },
+  paginationRichtext2: {
+    color: colors.purple,
+    fontFamily: fontFamily.primaryFontFamilyBold,
+  },
+  gridImageStyle: {
+    height: verticalScale(80),
+    width: horizontalScale(80),
+    marginHorizontal: horizontalScale(10),
+    // borderWidth: 1,
+    // borderColor: colors.purple,
+    borderRadius: 5,
+    marginVertical: verticalScale(5),
+  },
+  paginationTextBorder: {
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: colors.purple,
+    backgroundColor: colors.white,
+    paddingHorizontal: horizontalScale(5),
+  },
+  gridViewDisplay: {
+    height: verticalScale(270),
+  },
+  pokemonNameDisplayView: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  shinyIndicatorView: {
+    marginTop: verticalScale(1),
+    zIndex: 1,
+  },
+  shinyIcon: {
+    height: verticalScale(22),
+    width: verticalScale(22),
   },
 });

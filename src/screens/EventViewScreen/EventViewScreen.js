@@ -1,4 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
+import {useNetStatusInfo} from '../../ultilities/customHooks/useNetStatusInfo';
 import {useSelector} from 'react-redux';
 import {
   Text,
@@ -21,15 +22,22 @@ import Button from '../../components/Button/Button';
 import colors from '../../constants/colors';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
 import pokeTypesData from '../../ultilities/pokemonData/pokemon_types';
-import {horizontalScale} from '../../ultilities/scale';
+import pokemon_alolan_variants from '../../ultilities/pokemonData/pokemon_alolan_variants';
+import pokemon_galarian_variants from '../../ultilities/pokemonData/pokemon_galarian_variants';
+import pokemon_hisuian_variants from '../../ultilities/pokemonData/pokemon_hisuian_variants';
+import pokemon_mega_images from '../../ultilities/pokemonData/pokemon_mega_images';
+import {horizontalScale, verticalScale} from '../../ultilities/scale';
 import {toCamelCase, checkImageExists} from '../../ultilities/commonFunctions';
 import CardView from '../../components/CardView/CardView';
 import EventDisplayCard from '../../components/EventDisplayCard/EventDisplayCard';
 
 const EventViewScreen = props => {
-  let listViewRef = useRef();
-
   const selectedDate = props?.route?.params?.selectedDate;
+
+  let listViewRef = useRef();
+  const calanderRef = useRef();
+
+  const {networkState} = useNetStatusInfo();
 
   const loadedEventJSONData = useSelector(
     state => state?.eventDataReducer?.eventdataload,
@@ -42,83 +50,104 @@ const EventViewScreen = props => {
   const [modalData, setModalData] = useState({});
 
   const [modalImageIndex, setModalImageIndex] = useState(0);
-  // const [modalImageOffsetIndex, setModalImageOffsetIndex] = useState(0); /* NOTE: Alternate method for scrolling using scrollToOffset */
 
   const [pokemonName, setPokemonName] = useState('');
+  const [pokemonNameDisplay, setPokemonNameDisplay] = useState('');
   const [pokemonType, setPokemonType] = useState([]);
 
   const [showLoader, setShowLoader] = useState(true);
+
+  const [gridViewStatus, setGridViewStatus] = useState(false);
+
+  const datVal = modalData?.['Start DateTime']?.split(' ');
+  const dateLength = datVal?.length;
+
+  function sortByKey(array, key) {
+    return array.sort(function (a, b) {
+      var x = a[key];
+      var y = b[key];
+      return x < y ? -1 : x > y ? 1 : 0;
+    });
+  }
 
   useEffect(() => {
     const displayableEvents = loadedEventJSONData?.data.filter(data =>
       data?.Duration?.includes(moment(selectedStartDate).format('YYYY-MM-DD')),
     );
-    setEventsData(displayableEvents);
+    const sortedArry =
+      sortByKey(displayableEvents, 'preference') ?? displayableEvents;
+    setEventsData(sortedArry);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStartDate]);
 
   useEffect(() => {
     let pokeName;
+    let pokemonMegaType;
+
+    const megaCategory = [
+      '_51.png',
+      '_52.png',
+      '_51_shiny.png',
+      '_52_shiny.png',
+      'fMEGA.icon.png',
+      'fMEGA.s.icon.png',
+    ];
+
+    const modalImages = modalData?.['Img Src']?.filter(data =>
+      data?.includes('pokemon_icons'),
+    );
+
+    megaCategory.map(dat => {
+      if (modalImages?.[modalImageIndex]?.includes(dat)) {
+        pokemonMegaType = true;
+      }
+    });
+
     fetch(
       `https://pokeapi.co/api/v2/pokemon/${modalData?.pokemonId?.[modalImageIndex]}`,
     ).then(response => {
       response.json().then(res => {
         pokeName = res?.name;
-        setPokemonName(pokeName);
+        setPokemonNameDisplay(pokeName);
+        if (pokemonMegaType) {
+          setPokemonName(pokeName);
+        }
       });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [modalImageIndex, modalVisible]);
+  }, [modalImageIndex, modalVisible, gridViewStatus]);
 
-  const fetchShinyGalarianHisuianAlolanPokeImages = (pokeName, type) => {
-    let pokeImage;
-    fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}-${type}`).then(
-      response => {
-        response.json().then(res => {
-          pokeImage = res?.sprites?.other?.['official-artwork']?.front_shiny;
-        });
-      },
-    );
-    return pokeImage;
-  };
+  useEffect(() => {
+    setGridViewStatus(false);
+  }, [modalVisible]);
 
   const showModal = () => {
     setModalVisible(true);
     setModalImageIndex(0);
-    // setModalImageOffsetIndex(0); /* NOTE: Alternate method for scrolling using scrollToOffset */
   };
 
   const hideModal = () => {
     setModalVisible(false);
     setModalImageIndex(0);
-    // setModalImageOffsetIndex(0);  /* NOTE: Alternate method for scrolling using scrollToOffset */
   };
 
-  const leftButtonHandler = id => {
-    listViewRef.current.scrollToIndex({animated: true, index: id});
-
-    /* NOTE: Alternate method for scrolling using scrollToOffset */
+  const leftButtonHandler = (id, modalImages) => {
+    //TODO: Need to fix this limit of 30 items and make scrolling smooth for what so ever number of images we have
+    //TODO: Try to use gridIndex and modalIndex, whenever gridImage is selected, trigger a useEffect which sets modalIndex
+    //TODO: Then scrollToIndex(modalIndex). Hopefully this can solve this issue
     /*
-      const offsetValue = modalImageOffsetIndex - horizontalScale(280);
-      listViewRef.scrollToOffset({
-        offset: offsetValue,
-        animated: true,
-      });
-      setModalImageOffsetIndex(offsetValue);
+      if (modalImages?.length <= 30) {
+        listViewRef.current.scrollToIndex({animated: true, index: id});
+      }
     */
   };
 
-  const rightButtonHandler = id => {
-    listViewRef.current.scrollToIndex({animated: true, index: id});
-
-    /* NOTE: Alternate method for scrolling using scrollToOffset */
+  const rightButtonHandler = (id, modalImages) => {
+    //TODO: Need to fix this limit of 30 items and make scrolling smooth for what so ever number of images we have
     /*
-      const offsetValue = modalImageOffsetIndex + horizontalScale(280);
-      listViewRef.scrollToOffset({
-        offset: offsetValue,
-        animated: true,
-      });
-      setModalImageOffsetIndex(offsetValue);
+      if (modalImages?.length <= 30) {
+        listViewRef.current.scrollToIndex({animated: true, index: id});
+      }
     */
   };
 
@@ -145,7 +174,8 @@ const EventViewScreen = props => {
 
   const renderEmptyListComponent = () => {
     return (
-      <View style={[commonStyling.absoluteCenterStyling, styles.emptyListView]}>
+      <View
+        style={[commonStyling.absoluteCenterStyling, styles.topPaddingStyle]}>
         <Image
           source={imagePaths.calendarIllustration4}
           height={1}
@@ -155,6 +185,24 @@ const EventViewScreen = props => {
         />
         <Text style={[styles.emptyListText, styles.primaryColorStyle]}>
           {strings.no_event_string}
+        </Text>
+      </View>
+    );
+  };
+
+  const renderSelectDatePromptComponent = () => {
+    return (
+      <View
+        style={[commonStyling.absoluteCenterStyling, styles.topPaddingStyle]}>
+        <Image
+          source={imagePaths.noDateSelectedPromptImage1}
+          height={1}
+          width={1}
+          style={styles.selectDatePromptImage}
+          resizeMode={'contain'}
+        />
+        <Text style={[styles.emptyListText, styles.primaryColorStyle]}>
+          {strings.select_date_prompt}
         </Text>
       </View>
     );
@@ -206,20 +254,38 @@ const EventViewScreen = props => {
     return (
       <>
         <Text style={[styles.eventTimeStyle]}>{strings.event_ranges_from}</Text>
-        <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
-          {`Starts: ${moment(modalData?.['Start DateTime']).format(
-            'DD/MM/YYYY',
-          )}, ${moment(modalData?.['Start DateTime']).format('LT')} ${
-            modalData?.timeZone
-          }`}
-        </Text>
-        <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
-          {`Ends: ${moment(modalData?.['End DateTime']).format(
-            'DD/MM/YYYY',
-          )}, ${moment(modalData?.['End DateTime']).format('LT')} ${
-            modalData?.timeZone
-          }`}
-        </Text>
+        {dateLength === 2 ? (
+          <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
+            {`Starts: ${moment(modalData?.['Start DateTime']).format(
+              'DD/MM/YYYY',
+            )}, ${moment(modalData?.['Start DateTime']).format('LT')} ${
+              modalData?.timeZone
+            }`}
+          </Text>
+        ) : null}
+        {dateLength === 1 ? (
+          <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
+            {`Starts: ${moment(modalData?.['Start DateTime']).format(
+              'DD/MM/YYYY',
+            )}`}
+          </Text>
+        ) : null}
+        {dateLength === 2 ? (
+          <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
+            {`Ends: ${moment(modalData?.['End DateTime']).format(
+              'DD/MM/YYYY',
+            )}, ${moment(modalData?.['End DateTime']).format('LT')} ${
+              modalData?.timeZone
+            }`}
+          </Text>
+        ) : null}
+        {dateLength === 1 ? (
+          <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
+            {`Ends: ${moment(modalData?.['End DateTime']).format(
+              'DD/MM/YYYY',
+            )}`}
+          </Text>
+        ) : null}
       </>
     );
   };
@@ -258,7 +324,7 @@ const EventViewScreen = props => {
               if (modalImageIndex > 0) {
                 const tempIndex = modalImageIndex - 1;
                 setModalImageIndex(tempIndex);
-                leftButtonHandler(tempIndex);
+                leftButtonHandler(tempIndex, modalImages);
               }
             }}
             disabled={modalImageIndex > 0 ? false : true}>
@@ -288,7 +354,7 @@ const EventViewScreen = props => {
               if (modalImageIndex < modalImages.length) {
                 const tempIndex = modalImageIndex + 1;
                 setModalImageIndex(tempIndex);
-                rightButtonHandler(tempIndex);
+                rightButtonHandler(tempIndex, modalImages);
               }
             }}
             disabled={modalImageIndex < modalImages.length - 1 ? false : true}>
@@ -309,63 +375,72 @@ const EventViewScreen = props => {
     );
   };
 
+  const noImageViewDisplay = () => {
+    return (
+      <View>
+        <Image
+          source={imagePaths.noImage}
+          height={1}
+          width={1}
+          style={styles.modalImage}
+          resizeMode={'contain'}
+        />
+        <Text style={styles.noImageTextStyle}>
+          {strings.no_images_available.toUpperCase()}
+        </Text>
+      </View>
+    );
+  };
+  const scrollToIndexFailed = error => {
+    const offset = error.averageItemLength * error.index;
+    listViewRef.current.scrollToOffset({offset});
+    setShowLoader(true);
+    setTimeout(() => {
+      listViewRef.current.scrollToIndex({index: error.index});
+      setShowLoader(false);
+    }, 10); // You may choose to skip this line if the above typically works well because your average item height is accurate.
+  };
+
   const carousalData = modalImages => {
     return (
       <>
-        {modalImages?.length > 0 ? (
-          <FlatList
-            data={modalImages}
-            keyExtractor={item => item}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{
-              marginLeft: modalImages?.length > 1 ? horizontalScale(-32) : 0,
-            }}
-            scrollEnabled={false}
-            ref={listViewRef}
-            renderItem={({item, index}) => {
-              return (
-                <Image
-                  source={{uri: item}}
-                  height={1}
-                  width={1}
-                  style={styles.modalImage}
-                  resizeMode={'contain'}
-                  onLoadStart={() => {
-                    setShowLoader(true);
-                  }}
-                  onLoad={() => {
-                    setShowLoader(false);
-                  }}
-                />
-              );
-            }}
-          />
-        ) : (
-          <View>
-            <Image
-              // source={{
-              //   uri: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png',
-              // }}
-              source={imagePaths.noImage}
-              height={1}
-              width={1}
-              style={styles.modalImage}
-              resizeMode={'contain'}
-            />
-            <Text style={styles.noImageTextStyle}>
-              {strings.no_images_available.toUpperCase()}
-            </Text>
-          </View>
-        )}
+        <FlatList
+          data={modalImages}
+          keyExtractor={item => item}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{
+            marginLeft: modalImages?.length > 1 ? horizontalScale(-32) : 0,
+          }}
+          scrollEnabled={false}
+          ref={listViewRef}
+          onScrollToIndexFailed={scrollToIndexFailed}
+          renderItem={({item, index}) => {
+            return (
+              <Image
+                source={{uri: modalImages[modalImageIndex]}}
+                height={1}
+                width={1}
+                style={styles.modalImage}
+                resizeMode={'contain'}
+                // onLoadStart={() => {
+                //   setShowLoader(true);
+                // }}
+                onLoad={() => {
+                  setShowLoader(false);
+                }}
+              />
+            );
+          }}
+        />
       </>
     );
   };
 
-  const paginationView = modalImages => {
+  const paginationView = (modalImages, paginationStyle) => {
     return (
       <>
-        {modalImages?.length > 1 ? (
+        {modalImages?.length > 1 && paginationStyle ? (
           <FlatList
             data={modalImages}
             keyExtractor={item => item}
@@ -391,7 +466,68 @@ const EventViewScreen = props => {
             }}
           />
         ) : null}
+        {modalImages?.length > 1 && !paginationStyle ? (
+          <TouchableOpacity
+            onPress={() => {
+              setGridViewStatus(true);
+            }}
+            style={styles.paginationTextBorder}>
+            <Text style={styles.paginationTextStyle}>
+              <Text style={styles.paginationRichtext1}>
+                {modalImageIndex + 1}{' '}
+              </Text>
+              of
+              <Text style={styles.paginationRichtext2}>
+                {' '}
+                {modalImages?.length}
+              </Text>
+            </Text>
+          </TouchableOpacity>
+        ) : null}
       </>
+    );
+  };
+
+  const renderGridView = ({item, index}) => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          setGridViewStatus(false);
+          setModalImageIndex(index);
+        }}>
+        <Image
+          source={{uri: item}}
+          height={1}
+          width={1}
+          resizeMode={'contain'}
+          style={[
+            styles.gridImageStyle,
+            {
+              borderColor:
+                modalImageIndex === index
+                  ? colors.vermillionLighter
+                  : colors.purple,
+              borderWidth: modalImageIndex === index ? 2 : 1,
+              backgroundColor:
+                modalImageIndex === index ? colors.vermillionLighter : 'white',
+            },
+          ]}
+        />
+      </TouchableOpacity>
+    );
+  };
+
+  const gridViewDisplay = modalImages => {
+    return (
+      <View style={styles.gridViewDisplay}>
+        <FlatList
+          data={modalImages}
+          ref={listViewRef}
+          keyExtractor={item => item}
+          numColumns={3}
+          renderItem={renderGridView}
+        />
+      </View>
     );
   };
 
@@ -414,28 +550,57 @@ const EventViewScreen = props => {
 
   const pokemonNameAndTypeView = () => {
     let pokeName;
+    let pokeShinyType = false;
     const substring1 = 'pokemon_icons';
     const substring2 = '_51.png';
     const substring3 = '_52.png';
+    const substring4 = 'fMEGA'; // Mega and Mega X - DONE
+
+    const shinyCategory = [
+      '_shiny.png',
+      '.s.icon.png',
+      'fHISUIAN.s.icon.png',
+      '_31_shiny.png',
+      '_61_shiny.png',
+      'fMEGA.s.icon.png',
+      '_51_shiny.png',
+      '_52_shiny.png',
+    ];
 
     const modalImages = modalData?.['Img Src']?.filter(data =>
       data?.includes(substring1),
     );
-    if (modalImages?.[modalImageIndex]?.includes(substring2)) {
-      if (pokemonName === 'charizard' || pokemonName === 'mewtwo') {
-        pokeName = `Mega ${pokemonName} X`;
+
+    shinyCategory.map(dat => {
+      if (modalImages?.[modalImageIndex]?.includes(dat)) {
+        pokeShinyType = true;
+      }
+    });
+
+    if (
+      modalImages?.[modalImageIndex]?.includes(substring2) ||
+      modalImages?.[modalImageIndex]?.includes(substring4)
+    ) {
+      if (
+        pokemonNameDisplay === 'charizard' ||
+        pokemonNameDisplay === 'mewtwo'
+      ) {
+        pokeName = `Mega ${pokemonNameDisplay} X`;
       } else {
-        pokeName = `Mega ${pokemonName}`;
+        pokeName = `Mega ${pokemonNameDisplay}`;
       }
     } else if (modalImages?.[modalImageIndex]?.includes(substring3)) {
-      pokeName = `Mega ${pokemonName} Y`;
+      pokeName = `Mega ${pokemonNameDisplay} Y`;
     } else {
-      pokeName = pokemonName;
+      pokeName = pokemonNameDisplay;
     }
     return (
       <View style={[styles.pokemonDescription]}>
         {modalImages?.length !== 0 ? (
-          <Text style={styles.pokemonName}>{toCamelCase(pokeName)}</Text>
+          <View style={styles.pokemonNameDisplayView}>
+            <Text style={styles.pokemonName}>{toCamelCase(pokeName)}</Text>
+            {pokeShinyType ? shinyPokemonIndicatorView() : null}
+          </View>
         ) : null}
         <View
           style={[
@@ -453,24 +618,50 @@ const EventViewScreen = props => {
   const carousalImageSliderSection = modalImages => {
     return (
       <>
-        <View style={styles.eventImageContainer}>
-          {leftChevronIcon(modalImages)}
-          {showLoader ? (
-            <View style={styles.activityIndicatorStyle}>
-              <ActivityIndicator />
+        {!gridViewStatus ? (
+          <>
+            <View style={styles.eventImageContainer}>
+              {leftChevronIcon(modalImages)}
+              {modalImages.length > 0 ? (
+                showLoader ? (
+                  <View style={styles.activityIndicatorStyle}>
+                    <ActivityIndicator />
+                  </View>
+                ) : null
+              ) : (
+                noImageViewDisplay()
+              )}
+              {carousalData(modalImages)}
+              {rightChevronIcon(modalImages)}
             </View>
-          ) : null}
-          {carousalData(modalImages)}
-          {rightChevronIcon(modalImages)}
-        </View>
-        {pokemonNameAndTypeView()}
-        {paginationView(modalImages)}
+            {pokemonNameAndTypeView()}
+            {paginationView(modalImages, false)}
+          </>
+        ) : null}
+
+        {gridViewStatus ? (
+          <View style={commonStyling.absoluteCenterStyling}>
+            {gridViewDisplay(modalImages)}
+          </View>
+        ) : null}
       </>
     );
   };
 
-  const modalContainer = () => {
-    // TODO: Note down more substrings for normal and shiny like eg. pm747 and pm747.s and other substrings for other cases like aolan and galarian cases */
+  const shinyPokemonIndicatorView = () => {
+    return (
+      <View style={styles.shinyIndictorView}>
+        <Image
+          source={imagePaths.shinyIcon}
+          height={1}
+          width={1}
+          style={styles.shinyIcon}
+        />
+      </View>
+    );
+  };
+
+  const pokeImageMappingFunction = () => {
     const substring1 = 'pokemon_icons'; // for normal images - DONE
     const substring2 = '_51.png'; // Mega and Mega X - DONE
     const substring3 = '_52.png'; // Mega Y - DONE
@@ -482,11 +673,16 @@ const EventViewScreen = props => {
     const substring9 = '_31_shiny.png'; // Shiny Glarian
     const substring10 = '_61.png'; // ALOLAN - DONE
     const substring11 = '_61_shiny.png'; // Shiny Alolan
-    const substring12 = 'fMEGA'; // Mega and Mega X - DONE
+    const substring12 = 'fMEGA.icon.png'; // Mega and Mega X - DONE
+    const substring13 = 'fMEGA.s.icon.png'; //Mega Shiny
+    const substring14 = '_51_shiny.png'; //Mega Shiny
+    const substring15 = '_52_shiny.png'; //Mega Shiny
 
     const modalImages = modalData?.['Img Src']?.filter(data =>
       data?.includes(substring1),
     );
+
+    console.log('MEGA data', modalImages);
 
     let displayableModalImages = [];
 
@@ -502,32 +698,39 @@ const EventViewScreen = props => {
       } else if (data?.includes(substring3)) {
         pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-mega-y.jpg`;
         displayableModalImages = [...displayableModalImages, pushedImage];
+      } else if (data?.includes(substring14) || data?.includes(substring13)) {
+        if (pokemonName === 'charizard' || pokemonName === 'mewtwo') {
+          const pokeString = pokemonName + 'X';
+          pushedImage = pokemon_mega_images[pokeString];
+        } else {
+          const pokeString = pokemonName;
+          pushedImage = pokemon_mega_images[pokeString];
+        }
+        displayableModalImages = [...displayableModalImages, pushedImage];
+      } else if (data?.includes(substring15)) {
+        const pokeString = pokemonName + 'Y';
+        pushedImage = pokemon_mega_images[pokeString];
+        displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring6)) {
-        pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-hisuian.jpg`;
+        pushedImage = pokemon_hisuian_variants[modalData?.pokemonId?.[idx]];
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring8)) {
-        pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-galarian.jpg`;
+        pushedImage = pokemon_galarian_variants[modalData?.pokemonId?.[idx]];
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring10)) {
-        pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-alolan.jpg`;
+        pushedImage = pokemon_alolan_variants[modalData?.pokemonId?.[idx]];
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring7)) {
-        pushedImage = fetchShinyGalarianHisuianAlolanPokeImages(
-          pokemonName,
-          'hisui',
-        );
+        const idString = modalData?.pokemonId?.[idx] + 's';
+        pushedImage = pokemon_hisuian_variants[idString];
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring9)) {
-        pushedImage = fetchShinyGalarianHisuianAlolanPokeImages(
-          pokemonName,
-          'galar',
-        );
+        const idString = modalData?.pokemonId?.[idx] + 's';
+        pushedImage = pokemon_galarian_variants[idString];
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring11)) {
-        pushedImage = fetchShinyGalarianHisuianAlolanPokeImages(
-          pokemonName,
-          'alola',
-        );
+        const idString = modalData?.pokemonId?.[idx] + 's';
+        pushedImage = pokemon_alolan_variants[idString];
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring4)) {
         const ret = data;
@@ -596,10 +799,14 @@ const EventViewScreen = props => {
          * Even so some strings may have _00 and _11 attached to it making its length 6 so.
          */
 
-        // pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${modalData?.pokemonId[idx]}.png`;
         displayableModalImages = [...displayableModalImages, pushedImage];
       }
     });
+    return displayableModalImages;
+  };
+
+  const modalContainer = () => {
+    let displayableModalImages = pokeImageMappingFunction();
 
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -631,12 +838,18 @@ const EventViewScreen = props => {
     );
   };
 
+  const setSelectedMonth = () => {
+    setEventsData(null);
+  };
+
   const calandarView = () => {
     return (
       <View style={styles.calandarView}>
         <CalendarView
           setSelectedStartDate={setSelectedStartDate}
           selectedStartDate={selectedStartDate}
+          setSelectedMonth={setSelectedMonth}
+          calanderRef={calanderRef}
         />
       </View>
     );
@@ -646,7 +859,9 @@ const EventViewScreen = props => {
     return (
       <View style={styles.eventsSectionHeader}>
         <Text style={[styles.eventDateText, styles.primaryColorStyle]}>
-          {moment(selectedStartDate).format('MMM Do, YYYY')}
+          {eventsData !== null
+            ? moment(selectedStartDate).format('MMM Do, YYYY')
+            : ''}
         </Text>
         <Text style={[styles.eventNumberText, styles.primaryColorStyle]}>
           {strings.number_of_events} : {eventsData?.length ?? 0}
@@ -675,12 +890,15 @@ const EventViewScreen = props => {
 
   return (
     <Provider>
-      <SafeAreaView style={{}}>
-        {modalPopUp()}
-        {calandarView()}
-        {eventHeaderSection()}
-        {eventsDetailSection()}
-      </SafeAreaView>
+      {networkState ? (
+        <SafeAreaView style={{}}>
+          {modalPopUp()}
+          {calandarView()}
+          {eventsData !== null ? eventHeaderSection() : null}
+          {eventsData !== null ? eventsDetailSection() : null}
+          {eventsData === null ? renderSelectDatePromptComponent() : null}
+        </SafeAreaView>
+      ) : null}
     </Provider>
   );
 };

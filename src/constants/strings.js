@@ -1,5 +1,5 @@
 export default {
-  app_name: 'Pokedex App',
+  app_name: 'Poke Event Guide',
   continue: 'Continue',
   no_event_today: 'No event today',
   no_event_added: 'No event added',
@@ -21,4 +21,6 @@ export default {
   number_of_events: 'Number of events',
   plus: '+',
   event_completed: 'Event Completed',
+  ok: 'ok',
+  select_date_prompt: 'Please select a date to view the events',
 };

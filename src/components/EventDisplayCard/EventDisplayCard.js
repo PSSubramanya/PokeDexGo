@@ -68,7 +68,9 @@ const EventDisplayCard = props => {
         </View>
 
         <View style={styles.cardFooterSection}>
-          <TouchableOpacity
+          {/* TODO: This should be uncommented only implementation of Push Notification in the app */}
+
+          {/* <TouchableOpacity
             onPress={() => {
               const tempNotificationsArray = notifications;
               let tempArray = [];
@@ -94,8 +96,11 @@ const EventDisplayCard = props => {
                 style={styles.notificationIcon}
               />
             </View>
-          </TouchableOpacity>
-          <TouchableOpacity
+          </TouchableOpacity> */}
+
+          {/* TODO: This is only for Filtered Manually Added List of Tasks */}
+
+          {/* <TouchableOpacity
             onPress={() => {
               const tempCheckListArray = checkLists;
               let tempArray = [];
@@ -119,7 +124,7 @@ const EventDisplayCard = props => {
               width={1}
               style={styles.checkmarkIcon}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
     </View>

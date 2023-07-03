@@ -31,3 +31,6 @@ https://github.com/HybridShivam/Pokemon/tree/master/assets/images - SOME MORE VA
     https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_088_61.png - ALOLAN Pokemon - "_61.png"
     https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_088_61_shiny.png - ALOLAN Shiny Pokemon - "_61_shiny.png"
     */
+ 
+// FOR V2 or V3, The past events
+https://p337.info/pokemongo/pages/previous-events/
