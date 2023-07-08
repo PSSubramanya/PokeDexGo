@@ -3,6 +3,8 @@ import LandingPage from './LandingPage/LandingPage';
 import HomeScreen from './HomeScreen/HomeScreen';
 import EventViewScreen from './EventViewScreen/EventViewScreen';
 import EggDetailsScreen from './EggDetailsScreen/EggDetailsScreen';
+import TrainerInfoScreen from './TrainerInfoScreen/TrainerInfoScreen';
+import FieldResearchScreen from './FieldResearchScreen/FieldResearchScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -20,6 +22,11 @@ const StackNavigationScreen = () => {
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="EventViewScreen" component={EventViewScreen} />
         <Stack.Screen name="EggDetailsScreen" component={EggDetailsScreen} />
+        <Stack.Screen name="TrainerInfoScreen" component={TrainerInfoScreen} />
+        <Stack.Screen
+          name="FieldResearchScreen"
+          component={FieldResearchScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

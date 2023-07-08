@@ -1,17 +1,21 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   View,
   Text,
   Image,
   FlatList,
-  TouchableOpacity,
   ScrollView,
+  Dimensions,
+  ActivityIndicator,
 } from 'react-native';
+import Carousel, {Pagination} from 'react-native-snap-carousel';
 import imagePaths from '../../constants/imagePaths.js';
 import pokemon_alolan_variants from '../../ultilities/pokemonData/pokemon_alolan_variants';
 import pokemon_galarian_variants from '../../ultilities/pokemonData/pokemon_galarian_variants';
 import pokemon_hisuian_variants from '../../ultilities/pokemonData/pokemon_hisuian_variants';
 import styles from './styles.js';
+import {horizontalScale} from '../../ultilities/scale';
+// import CustomCarousalSlider from '../../components/CustomCarousalSlider/CustomCarousalSlider.js';
 
 const EggDetailsScreen = props => {
   const {navigation, route} = props;
@@ -26,18 +30,20 @@ const EggDetailsScreen = props => {
     imagePaths.tenKmEggIcon,
     imagePaths.tenKmEggIcon,
     imagePaths.twelveKmEggIcon,
-    ,
   ];
 
+  const carousalSliderRef = React.useRef(null);
+
   const [indexVal, setIndexVal] = useState(0);
+  const [loader, setLoader] = useState(true);
   const [displayData, setDisplayData] = useState([]);
 
   useEffect(() => {
+    setLoader(true);
     setDisplayData(loadData[indexVal]);
+    setLoader(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [indexVal]);
-
-  console.log('EGG DATA', displayData);
 
   const pokeImageMappingFunction = () => {
     const substring1 = '_shiny.png'; // Shiny - DONE
@@ -50,8 +56,6 @@ const EggDetailsScreen = props => {
     const substring8 = '_61_shiny.png'; // Shiny Alolan
 
     const modalImages = displayData?.imgSrc;
-
-    console.log('MEGA data', modalImages);
 
     let displayableModalImages = [];
 
@@ -162,9 +166,23 @@ const EggDetailsScreen = props => {
             resizeMode={'contain'}
             style={styles.gridImageStyle}
           />
+          {displayData?.shiny?.[index] ? (
+            <View style={styles.shinyIconContainer}>
+              <Image
+                source={imagePaths.shinyIcon}
+                height={1}
+                width={1}
+                resizeMode={'contain'}
+                style={styles.shinyIcon}
+              />
+            </View>
+          ) : null}
         </View>
         <Text style={styles.pokemonNames}>
           {displayData?.pokemonName[index]}
+        </Text>
+        <Text style={styles.pokemonNames}>
+          [{displayData?.combatPower[index]}] CP
         </Text>
       </View>
     );
@@ -178,6 +196,7 @@ const EggDetailsScreen = props => {
           keyExtractor={item => item}
           numColumns={3}
           renderItem={renderGridView}
+          nestedScrollEnabled={true}
         />
       </View>
     );
@@ -185,63 +204,88 @@ const EggDetailsScreen = props => {
 
   const dispImgs = pokeImageMappingFunction();
 
-  console.log('DISPL IMGS', dispImgs);
+  /* NOTE: THIS IS FOR CUSTOM CAROUSAL SLIDER */
+
+  /*
+    const sliderBodyView = () => {
+      return (
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {gridViewDisplay(dispImgs)}
+        </ScrollView>
+      );
+    };
+  */
+
+  const SLIDER_WIDTH = Dimensions.get('window').width + horizontalScale(80);
+  const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
+
+  const renderSliderItem = ({item, index}) => {
+    return (
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View>
+          <Image
+            source={eggImages[index]}
+            height={1}
+            width={1}
+            resizeMode={'contain'}
+            style={styles.eggIcon}
+          />
+          <View style={styles.filterSection}>
+            <Text style={styles.eggKmCategory}>{displayData?.Distance}</Text>
+          </View>
+
+          {gridViewDisplay(dispImgs)}
+        </View>
+      </ScrollView>
+    );
+  };
+
+  const carouselSliderView = () => {
+    return (
+      <>
+        {/* NOTE: For now keep the Carousel Slider in this file. Later make it into a reusable component */}
+        <Carousel
+          ref={carousalSliderRef}
+          data={loadData}
+          renderItem={renderSliderItem}
+          sliderWidth={SLIDER_WIDTH}
+          itemWidth={ITEM_WIDTH}
+          layout={'default'}
+          inactiveSlideShift={0}
+          useScrollView={false}
+          onSnapToItem={index => {
+            index = index ?? 0;
+            setIndexVal(index);
+          }}
+        />
+        <Pagination
+          dotsLength={loadData?.length}
+          activeDotIndex={indexVal}
+          // containerStyle={{
+          //   backgroundColor: colors.white,
+          // }}
+          dotStyle={[styles.dotsStyle, styles.activeDotColor]}
+          inactiveDotStyle={[styles.dotsStyle, styles.inactiveDotColor]}
+          inactiveDotOpacity={0.6}
+          inactiveDotScale={0.6}
+        />
+      </>
+    );
+  };
 
   return (
     <View style={styles.mainBody}>
-      <Image
-        source={eggImages[indexVal]}
-        height={1}
-        width={1}
-        resizeMode={'contain'}
-        style={styles.eggIcon}
-      />
-      <View style={styles.filterSection}>
-        <TouchableOpacity
-          onPress={() => {
-            const tempIdx = indexVal;
-            if (tempIdx > 0) {
-              setIndexVal(tempIdx - 1);
-            }
-          }}
-          disabled={indexVal > 0 ? false : true}>
-          <Image
-            source={imagePaths.leftChevronIcon}
-            height={1}
-            width={1}
-            style={[
-              styles.chevronIcon,
-              {
-                opacity: indexVal > 0 ? 1 : 0.5,
-              },
-            ]}
-          />
-        </TouchableOpacity>
-        <Text style={styles.eggKmCategory}>{displayData?.Distance}</Text>
-        <TouchableOpacity
-          onPress={() => {
-            const tempIdx = indexVal;
-            if (tempIdx < loadData.length - 1) {
-              setIndexVal(tempIdx + 1);
-            }
-          }}
-          disabled={indexVal < loadData?.length - 1 ? false : true}>
-          <Image
-            source={imagePaths.rightChevronIcon}
-            height={1}
-            width={1}
-            style={[
-              styles.chevronIcon,
-              {
-                opacity: indexVal < loadData?.length - 1 ? 1 : 0.5,
-              },
-            ]}
-          />
-        </TouchableOpacity>
-      </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {gridViewDisplay(dispImgs)}
-      </ScrollView>
+      {/* NOTE: THIS IS CUSTOM CAROUSAL SLIDER */}
+      {/* <CustomCarousalSlider
+        bodyView={sliderBodyView}
+        paginationStyle={true}
+        sliderArrowStyle={false}
+        sliderData={loadData}
+        indexVal={indexVal}
+        setIndexVal={setIndexVal}
+      /> */}
+
+      {loader ? <ActivityIndicator size={'large'} /> : carouselSliderView()}
     </View>
   );
 };

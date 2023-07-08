@@ -526,6 +526,7 @@ const EventViewScreen = props => {
           keyExtractor={item => item}
           numColumns={3}
           renderItem={renderGridView}
+          nestedScrollEnabled={true}
         />
       </View>
     );

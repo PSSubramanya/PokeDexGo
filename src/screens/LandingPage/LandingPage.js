@@ -38,12 +38,12 @@ const LandingPage = ({navigation}) => {
     },
     {
       name: 'Field Research',
-      navigationPath: 'HomeScreen',
+      navigationPath: 'FieldResearchScreen',
       image: imagePaths.fieldResearchIcon,
     },
     {
-      name: 'FAQ',
-      navigationPath: 'HomeScreen',
+      name: 'Trainer Info',
+      navigationPath: 'TrainerInfoScreen',
       image: imagePaths.ashCapIcon,
     },
   ];
@@ -67,14 +67,14 @@ const LandingPage = ({navigation}) => {
 
   useEffect(() => {
     let loadedData;
-    fetch('https://rahulvhegde.github.io/Data/pokemon_data2.json').then(
-      response => {
-        response.json().then(res => {
-          loadedData = res?.data;
-          setLoadData(loadedData);
-        });
-      },
-    );
+    fetch(
+      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/pokemondata',
+    )?.then(response => {
+      response.json()?.then(res => {
+        loadedData = res?.data;
+        setLoadData(loadedData);
+      });
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [networkState]);
 
@@ -86,6 +86,16 @@ const LandingPage = ({navigation}) => {
   useEffect(() => {
     let loadedData = eggData?.data;
     setLoadEggData(loadedData);
+
+    // let loadedEggData;
+    // fetch(
+    //   'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/eggData',
+    // ).then(response => {
+    //   response.json().then(res => {
+    //     loadedEggData = res?.data;
+    //     setLoadEggData(loadedEggData);
+    //   });
+    // });
   }, [loadEggData]);
 
   const appIconContainer = () => {
@@ -112,6 +122,8 @@ const LandingPage = ({navigation}) => {
             navigation.navigate(item?.navigationPath, {loadData: loadData});
           } else if (item?.name === 'Eggs') {
             navigation.navigate(item?.navigationPath, {loadData: loadEggData});
+          } else {
+            navigation.navigate(item?.navigationPath);
           }
         }}>
         <View style={styles.navigationButtonStyle}>

@@ -49,7 +49,8 @@
         "753",
         "731",
         "767"
-      ]
+      ],
+      "shiny": [true, true, true, true, true, true, false, false, false, false]
     },
     {
       "Distance": "5 km Eggs ",
@@ -101,7 +102,8 @@
         "728",
         "747",
         "439"
-      ]
+      ],
+      "shiny": [false, true, true, true, true, true, false, false, false, true]
     },
     {
       "Distance": "5 km Eggs (Adventure Sync Rewards)",
@@ -129,7 +131,8 @@
         "1017 - 1081",
         "668 - 718"
       ],
-      "pokeId": ["403", "408", "410", "440", "446", "592"]
+      "pokeId": ["403", "408", "410", "440", "446", "592"],
+      "shiny": [true, false, true, true, true, true]
     },
     {
       "Distance": "7 km Eggs ",
@@ -192,6 +195,21 @@
         "263",
         "554",
         "618"
+      ],
+      "shiny": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false
       ]
     },
     {
@@ -243,7 +261,8 @@
         "744",
         "777",
         "782"
-      ]
+      ],
+      "shiny": [true, true, true, true, true, true, false, false, false, false]
     },
     {
       "Distance": "10 km Eggs (Adventure Sync Rewards)",
@@ -271,7 +290,8 @@
         "514 - 557",
         "499 - 543"
       ],
-      "pokeId": ["147", "374", "443", "447", "704", "744"]
+      "pokeId": ["147", "374", "443", "447", "704", "744"],
+      "shiny": [true, true, true, true, true, true]
     },
     {
       "Distance": "12 km Eggs ",
@@ -330,6 +350,20 @@
         "451",
         "359",
         "686"
+      ],
+      "shiny": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false
       ]
     }
   ]

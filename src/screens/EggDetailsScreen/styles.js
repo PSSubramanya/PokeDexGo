@@ -31,12 +31,29 @@ export default styles = StyleSheet.create({
     height: verticalScale(60),
     width: horizontalScale(60),
   },
+  shinyIcon: {
+    height: verticalScale(22),
+    width: horizontalScale(22),
+  },
+  shinyIconContainer: {
+    height: verticalScale(26),
+    width: horizontalScale(26),
+    backgroundColor: colors.white,
+    borderColor: colors.purple,
+    borderWidth: 1,
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    top: verticalScale(-8),
+    right: horizontalScale(-10),
+  },
   gridBorderStyle: {
     height: verticalScale(80),
     width: horizontalScale(80),
     marginHorizontal: horizontalScale(10),
     borderRadius: 5,
-    marginVertical: verticalScale(5),
+    marginVertical: verticalScale(12),
     borderColor: colors.purple,
     borderWidth: 2,
     backgroundColor: colors.white,
@@ -45,7 +62,7 @@ export default styles = StyleSheet.create({
   },
   gridViewDisplay: {
     marginVertical: verticalScale(30),
-    alignSelf: 'center',
+    alignItems: 'center',
   },
   pokemonNames: {
     textAlign: 'center',
@@ -54,6 +71,7 @@ export default styles = StyleSheet.create({
     color: colors.purple,
     width: horizontalScale(100),
     alignSelf: 'center',
+    marginBottom: verticalScale(5),
   },
   chevronIcon: {
     height: verticalScale(20),
@@ -64,5 +82,18 @@ export default styles = StyleSheet.create({
   filterSection: {
     flexDirection: 'row',
     justifyContent: 'center',
+  },
+  dotsStyle: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    // marginHorizontal: 1,
+    backgroundColor: colors.vermillion,
+  },
+  activeDotColor: {
+    backgroundColor: colors.vermillion,
+  },
+  inactiveDotColor: {
+    backgroundColor: colors.purple,
   },
 });
