@@ -10,14 +10,13 @@ import {
 // eslint-disable-next-line no-undef
 export default styles = StyleSheet.create({
   mainBody: {
-    alignSelf: 'center',
-    marginTop: verticalScale(30),
+    flex: 1,
+    justifyContent: 'space-between',
   },
   eggIcon: {
     height: verticalScale(120),
     width: horizontalScale(120),
     marginBottom: verticalScale(10),
-    marginTop: verticalScale(10),
     padding: verticalScale(5),
     alignSelf: 'center',
   },
@@ -95,5 +94,25 @@ export default styles = StyleSheet.create({
   },
   inactiveDotColor: {
     backgroundColor: colors.purple,
+  },
+  filterEggIcon: {
+    height: verticalScale(50),
+    width: horizontalScale(50),
+  },
+  filterOptions: {
+    height: verticalScale(65),
+    borderWidth: 1.5,
+    borderRadius: 5,
+    borderColor: colors.purple,
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-end',
+    marginHorizontal: horizontalScale(4),
+    marginVertical: verticalScale(10),
+  },
+  filterContainer: {
+    backgroundColor: colors.white,
+    borderTopWidth: 1.5,
+    borderColor: colors.grey,
   },
 });

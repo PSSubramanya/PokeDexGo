@@ -7,6 +7,7 @@ import {
   ScrollView,
   Dimensions,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import imagePaths from '../../constants/imagePaths.js';
@@ -15,6 +16,7 @@ import pokemon_galarian_variants from '../../ultilities/pokemonData/pokemon_gala
 import pokemon_hisuian_variants from '../../ultilities/pokemonData/pokemon_hisuian_variants';
 import styles from './styles.js';
 import {horizontalScale} from '../../ultilities/scale';
+import colors from '../../constants/colors.js';
 // import CustomCarousalSlider from '../../components/CustomCarousalSlider/CustomCarousalSlider.js';
 
 const EggDetailsScreen = props => {
@@ -32,6 +34,16 @@ const EggDetailsScreen = props => {
     imagePaths.twelveKmEggIcon,
   ];
 
+  const eggImagesObj = {
+    '2 km Eggs ': imagePaths.twoKmEggIcon,
+    '5 km Eggs ': imagePaths.fiveKmEggIcon,
+    '5 km Eggs (Adventure Sync Rewards)': imagePaths.fiveKmEggIcon,
+    '7 km Eggs ': imagePaths.sevenKmEggIcon,
+    '10 km Eggs ': imagePaths.tenKmEggIcon,
+    '10 km Eggs (Adventure Sync Rewards)': imagePaths.tenKmEggIcon,
+    '12 km Eggs ': imagePaths.twelveKmEggIcon,
+  };
+
   const carousalSliderRef = React.useRef(null);
 
   const [indexVal, setIndexVal] = useState(0);
@@ -41,6 +53,7 @@ const EggDetailsScreen = props => {
   useEffect(() => {
     setLoader(true);
     setDisplayData(loadData[indexVal]);
+    // setDisplayData(loadData[1]);
     setLoader(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [indexVal]);
@@ -219,6 +232,7 @@ const EggDetailsScreen = props => {
   const SLIDER_WIDTH = Dimensions.get('window').width + horizontalScale(80);
   const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 
+  /*
   const renderSliderItem = ({item, index}) => {
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -239,12 +253,66 @@ const EggDetailsScreen = props => {
       </ScrollView>
     );
   };
+  */
+
+  const filterSection = () => {
+    return (
+      <View style={styles.filterContainer}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          {loadData?.map((val, idVal) => {
+            return (
+              <TouchableOpacity
+                onPress={() => {
+                  setDisplayData(loadData[idVal]);
+                  setIndexVal(idVal);
+                }}>
+                <View
+                  style={[
+                    styles.filterOptions,
+                    {
+                      backgroundColor:
+                        idVal === indexVal ? colors.purple : colors.white,
+                    },
+                  ]}>
+                  <Image
+                    source={eggImagesObj[val?.Distance]}
+                    height={1}
+                    width={1}
+                    resizeMode={'contain'}
+                    style={styles.filterEggIcon}
+                  />
+                </View>
+              </TouchableOpacity>
+            );
+          })}
+        </ScrollView>
+      </View>
+    );
+  };
+
+  const eggDataDisplay = () => {
+    return (
+      <ScrollView>
+        <Image
+          source={eggImagesObj[displayData?.Distance]}
+          height={1}
+          width={1}
+          resizeMode={'contain'}
+          style={styles.eggIcon}
+        />
+        <View style={styles.filterSection}>
+          <Text style={styles.eggKmCategory}>{displayData?.Distance}</Text>
+        </View>
+        {gridViewDisplay(dispImgs)}
+      </ScrollView>
+    );
+  };
 
   const carouselSliderView = () => {
     return (
       <>
         {/* NOTE: For now keep the Carousel Slider in this file. Later make it into a reusable component */}
-        <Carousel
+        {/* <Carousel
           ref={carousalSliderRef}
           data={loadData}
           renderItem={renderSliderItem}
@@ -257,8 +325,8 @@ const EggDetailsScreen = props => {
             index = index ?? 0;
             setIndexVal(index);
           }}
-        />
-        <Pagination
+        /> */}
+        {/* <Pagination
           dotsLength={loadData?.length}
           activeDotIndex={indexVal}
           // containerStyle={{
@@ -268,7 +336,7 @@ const EggDetailsScreen = props => {
           inactiveDotStyle={[styles.dotsStyle, styles.inactiveDotColor]}
           inactiveDotOpacity={0.6}
           inactiveDotScale={0.6}
-        />
+        /> */}
       </>
     );
   };
@@ -285,7 +353,9 @@ const EggDetailsScreen = props => {
         setIndexVal={setIndexVal}
       /> */}
 
-      {loader ? <ActivityIndicator size={'large'} /> : carouselSliderView()}
+      {/* {loader ? <ActivityIndicator size={'large'} /> : carouselSliderView()} */}
+      {loader ? <ActivityIndicator size={'large'} /> : eggDataDisplay()}
+      <View>{filterSection()}</View>
     </View>
   );
 };
