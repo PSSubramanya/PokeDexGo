@@ -1,0 +1,81 @@
+{
+  "data": [
+    {
+      "researchName": "Event Tasks",
+      "events": [
+        {
+          "researchtDescription": "Spin 7 PokeStops or Gyms",
+          "imgSrc": [
+            "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_001_00.png",
+            "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_004_00.png",
+            "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_007_00.png"
+          ],
+          "rewardNames": ["Bulbasaur", "Charmander", "Squirtle"],
+          "combatPower": ["442 - 477", "387 - 420", "372 - 405"],
+          "pokeId": ["1", "4", "7"],
+          "pokeItems": [],
+          "quantity": ["0", "0", "0"],
+          "shiny": [true, true, false]
+        },
+        {
+          "researchtDescription": "Use 7 Berries to help catch Pokemon",
+          "imgSrc": [
+            "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_007_00.png",
+            "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_008_00.png",
+            "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_009_00.png"
+          ],
+          "rewardNames": ["Squirtle", "Wortortle", "Blastoise"],
+          "combatPower": ["442 - 477", "387 - 420", "372 - 405"],
+          "pokeId": ["7", "8", "9"],
+          "pokeItems": [],
+          "quantity": ["0", "0", "0"],
+          "shiny": [true, true, false]
+        }
+      ]
+    },
+    {
+      "researchName": "Catching Tasks",
+      "events": [
+        {
+          "researchtDescription": "Catch 10 Pokemons",
+          "imgSrc": [
+            "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_001_00.png",
+            "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_004_00.png",
+            "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_007_00.png",
+            "https://leekduck.com/assets/img/items/Stardust.png",
+            "https://leekduck.com/assets/img/items/Rare%20Candy.png",
+            "https://leekduck.com/assets/img/items/Golden%20Razz%20Berry.png",
+            "https://leekduck.com/assets/img/items/Ultra%20Ball.png"
+          ],
+          "rewardNames": [
+            "Chikorita",
+            "Cintaquil",
+            "Tortodile",
+            "Stardust",
+            "Rainbow Candy",
+            "Rassbery Pineapple",
+            "Pokeball"
+          ],
+          "combatPower": [
+            "442 - 477",
+            "387 - 420",
+            "372 - 405",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "pokeId": ["152", "155", "158", "0", "0", "0", "0"],
+          "pokeItems": [
+            "Stardust",
+            "Rainbow Candy",
+            "Rassbery Pineapple",
+            "Pokeball"
+          ],
+          "quantity": ["0", "0", "0", "200", "3", "2", "10"],
+          "shiny": [true, false, false, null, null, null, null]
+        }
+      ]
+    }
+  ]
+}

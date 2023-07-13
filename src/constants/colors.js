@@ -8,11 +8,15 @@ export default {
   pink: '#F93EA7',
   highlightGreen: '#15EF92',
   orange: '#FFAE4F',
+  orangeMedium: 'rgba(255, 174, 79, 0.5)',
+  orangeLight: 'rgba(255, 174, 79, 0.3)',
+  orangeLighter: 'rgba(255, 174, 79, 0.1)',
   vermillion: '#f64307',
   vermillionLight: 'rgba(246, 67, 7, 0.8)',
   vermillionLighter: 'rgba(246, 67, 7, 0.6)',
   red: '#FF0000',
   grey: '#cccccc',
+  greyLight: '#c0c0c0',
 
   // common colors
   primaryColor: '#514CFA',
