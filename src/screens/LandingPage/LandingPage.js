@@ -84,18 +84,18 @@ const LandingPage = ({navigation}) => {
   }, [loadData]);
 
   useEffect(() => {
-    let loadedData = eggData?.data;
-    setLoadEggData(loadedData);
+    // let loadedData = eggData?.data;
+    // setLoadEggData(loadedData);
 
-    // let loadedEggData;
-    // fetch(
-    //   'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/eggData',
-    // ).then(response => {
-    //   response.json().then(res => {
-    //     loadedEggData = res?.data;
-    //     setLoadEggData(loadedEggData);
-    //   });
-    // });
+    let loadedEggData;
+    fetch(
+      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/eggData',
+    ).then(response => {
+      response.json().then(res => {
+        loadedEggData = res?.data;
+        setLoadEggData(loadedEggData);
+      });
+    });
   }, [loadEggData]);
 
   const appIconContainer = () => {

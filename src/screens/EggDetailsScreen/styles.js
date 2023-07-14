@@ -79,8 +79,8 @@ export default styles = StyleSheet.create({
     marginHorizontal: horizontalScale(10),
   },
   filterSection: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    height: verticalScale(50),
+    justifyContent: 'space-between',
   },
   dotsStyle: {
     width: 10,
@@ -114,5 +114,11 @@ export default styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderTopWidth: 1.5,
     borderColor: colors.grey,
+  },
+  seasonText: {
+    textAlign: 'center',
+    fontSize: moderateScale(12),
+    fontFamily: fontFamily.primaryFontFamilyMedium,
+    color: colors.purple,
   },
 });

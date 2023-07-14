@@ -14,8 +14,6 @@ import imagePaths from '../../constants/imagePaths';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
 import styles from './styles.js';
 
-import eggData from '../../ultilities/pokemonData/egg_data.json';
-
 const FieldResearchScreen = props => {
   // const dispData = mockFieldResearchData?.data;
 
@@ -103,10 +101,33 @@ const FieldResearchScreen = props => {
                 }}
                 // onPress={displayRewards(eventItem)}
               >
-                <View style={styles.researchtDescriptionView}>
-                  <Text style={styles.researchtDescriptionText}>
+                <View
+                  style={
+                    rewardSectionDisplay.includes(
+                      eventItem?.researchtDescription,
+                    )
+                      ? styles.researchtDescriptionView2
+                      : styles.researchtDescriptionView
+                  }>
+                  <Text
+                    style={
+                      rewardSectionDisplay.includes(
+                        eventItem?.researchtDescription,
+                      )
+                        ? styles.researchtDescriptionText2
+                        : styles.researchtDescriptionText
+                    }>
                     {eventItem?.researchtDescription}
                   </Text>
+                  {!rewardSectionDisplay.includes(
+                    eventItem?.researchtDescription,
+                  ) ? (
+                    <View style={styles.eventsItemNumber}>
+                      <Text style={styles.numberOfEventsText}>
+                        {eventItem?.imgSrc?.length}
+                      </Text>
+                    </View>
+                  ) : null}
                 </View>
               </TouchableOpacity>
               {rewardSectionDisplay.includes(

@@ -291,6 +291,7 @@ const EggDetailsScreen = props => {
   };
 
   const eggDataDisplay = () => {
+    const seasonName = displayData?.Season.split(', ');
     return (
       <ScrollView>
         <Image
@@ -302,6 +303,7 @@ const EggDetailsScreen = props => {
         />
         <View style={styles.filterSection}>
           <Text style={styles.eggKmCategory}>{displayData?.Distance}</Text>
+          <Text style={styles.seasonText}>Season: {seasonName[1]}</Text>
         </View>
         {gridViewDisplay(dispImgs)}
       </ScrollView>
