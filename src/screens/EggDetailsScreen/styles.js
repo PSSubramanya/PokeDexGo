@@ -24,7 +24,6 @@ export default styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: moderateScale(15),
     fontFamily: fontFamily.primaryFontFamilyBold,
-    color: colors.purple,
   },
   gridImageStyle: {
     height: verticalScale(60),
@@ -55,7 +54,6 @@ export default styles = StyleSheet.create({
     marginVertical: verticalScale(12),
     borderColor: colors.purple,
     borderWidth: 2,
-    backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -67,7 +65,6 @@ export default styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: moderateScale(12),
     fontFamily: fontFamily.primaryFontFamilyMedium,
-    color: colors.purple,
     width: horizontalScale(100),
     alignSelf: 'center',
     marginBottom: verticalScale(5),
@@ -86,7 +83,6 @@ export default styles = StyleSheet.create({
     width: 10,
     height: 10,
     borderRadius: 5,
-    // marginHorizontal: 1,
     backgroundColor: colors.vermillion,
   },
   activeDotColor: {
@@ -111,14 +107,11 @@ export default styles = StyleSheet.create({
     marginVertical: verticalScale(10),
   },
   filterContainer: {
-    backgroundColor: colors.white,
     borderTopWidth: 1.5,
-    borderColor: colors.grey,
   },
   seasonText: {
     textAlign: 'center',
     fontSize: moderateScale(12),
     fontFamily: fontFamily.primaryFontFamilyMedium,
-    color: colors.purple,
   },
 });

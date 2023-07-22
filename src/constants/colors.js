@@ -21,5 +21,14 @@ export default {
   // common colors
   primaryColor: '#514CFA',
   secondaryColor: 'rgba(53,53,203,1)',
+  primaryColorDarkMode: '#f64307',
+  secondaryColorDarkMode: 'rgba(246, 67, 7, 0.8)',
+  primaryBackgroundColor: '#000000',
+  primaryBackgroundColorDarkMode: '#FFFFFF',
+  primaryTextColor: '#000000',
+  primaryTextColorDarkMode: '#FFFFFF',
+  secondaryBackgroundColor: '#FFFFFF',
+  secondaryBackgroundColorDarkMode: '#363636',
+  tertiaryBackgroundColorDarkMode: '#464646',
   // secondaryColor: 'rgba(203,53,53,1)',
 };

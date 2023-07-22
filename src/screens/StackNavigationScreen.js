@@ -5,6 +5,7 @@ import EventViewScreen from './EventViewScreen/EventViewScreen';
 import EggDetailsScreen from './EggDetailsScreen/EggDetailsScreen';
 import TrainerInfoScreen from './TrainerInfoScreen/TrainerInfoScreen';
 import FieldResearchScreen from './FieldResearchScreen/FieldResearchScreen';
+import RaidBossScreen from './RaidBossScreen/RaidBossScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -27,6 +28,7 @@ const StackNavigationScreen = () => {
           name="FieldResearchScreen"
           component={FieldResearchScreen}
         />
+        <Stack.Screen name="RaidBossScreen" component={RaidBossScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

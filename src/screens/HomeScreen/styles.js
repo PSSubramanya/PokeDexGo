@@ -9,8 +9,13 @@ import {
 
 // eslint-disable-next-line no-undef
 export default styles = StyleSheet.create({
-  mainContainer: {
-    height: '100%',
+  mainBody: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  topSection: {
+    flex: 1,
+    justifyContent: 'center',
   },
   appIcon: {
     height: verticalScale(130),
@@ -141,7 +146,8 @@ export default styles = StyleSheet.create({
     // },
     // shadowRadius: 5,
     // elevation: 5,
-    marginTop: -verticalScale(60),
+    // marginTop: -verticalScale(60),
+    marginBottom: verticalScale(30),
     alignSelf: 'flex-end',
     borderRadius: 10,
     marginRight: horizontalScale(18),
@@ -267,7 +273,7 @@ export default styles = StyleSheet.create({
     fontSize: moderateScale(90),
     fontFamily: fontFamily.primaryFontFamilyBold,
     alignSelf: 'center',
-    color: colors.purple,
+    // color: colors.purple,
   },
   primaryColorStyle: {
     color: colors.secondaryColor,

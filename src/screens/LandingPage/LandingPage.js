@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   Text,
   View,
@@ -14,7 +14,8 @@ import strings from '../../constants/strings';
 import imagePaths from '../../constants/imagePaths';
 import colors from '../../constants/colors';
 import soundTracks from '../../constants/soundTracks';
-import {eventDataLoad} from '../../actions/eventData';
+import {eventDataLoad, darkModeActivation} from '../../actions/eventData';
+import {storeData, getData} from '../../ultilities/commonFunctions';
 import styles from './styles';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
 import {CircleRightArrow} from '../../assets/images/svg';
@@ -23,6 +24,8 @@ import eggData from '../../ultilities/pokemonData/egg_data.json';
 
 const LandingPage = ({navigation}) => {
   const dispatch = useDispatch();
+  const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
+  const darkModeValue = darkMode?.data;
   const {networkState} = useNetStatusInfo();
 
   const navigationScreens = [
@@ -36,10 +39,15 @@ const LandingPage = ({navigation}) => {
       navigationPath: 'EggDetailsScreen',
       image: imagePaths.pokeEggIcon,
     },
+    // {
+    //   name: 'Field Research',
+    //   navigationPath: 'FieldResearchScreen',
+    //   image: imagePaths.fieldResearchIcon,
+    // },
     {
-      name: 'Field Research',
-      navigationPath: 'FieldResearchScreen',
-      image: imagePaths.fieldResearchIcon,
+      name: 'Raid Boss',
+      navigationPath: 'RaidBossScreen',
+      image: imagePaths.raidIcon,
     },
     {
       name: 'Trainer Info',
@@ -50,6 +58,7 @@ const LandingPage = ({navigation}) => {
 
   const [loadData, setLoadData] = useState([]);
   const [loadEggData, setLoadEggData] = useState([]);
+  const [darkModeStatus, setDarkModeStatus] = useState(true);
 
   useEffect(() => {
     soundTracks?.pikapika1.play(success => {
@@ -64,6 +73,24 @@ const LandingPage = ({navigation}) => {
     soundTracks?.pikapika1.setPan(0.5); // NOTE: Position the sound to the full right in a stereo field
     soundTracks?.pikapika1.setNumberOfLoops(0); // NOTE: Loop indefinitely until stop() is called
   }, []);
+
+  useEffect(() => {
+    //NOTE: Try to use AsyncStorage here with right usage
+    const initialDarkModeStatus =
+      getData('darkModeStatus') !== null ||
+      getData('darkModeStatus') !== undefined
+        ? getData('darkModeStatus')
+        : true;
+
+    setDarkModeStatus(initialDarkModeStatus);
+  }, []);
+
+  useEffect(() => {
+    const tempThemeValue = darkModeStatus;
+    dispatch(darkModeActivation(tempThemeValue));
+    storeData('darkModeStatus', tempThemeValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [darkModeStatus]);
 
   useEffect(() => {
     let loadedData;
@@ -107,7 +134,15 @@ const LandingPage = ({navigation}) => {
           width={1}
           style={styles.appIcon}
         />
-        <Text style={[styles.appName, styles.primaryColorStyle]}>
+        <Text
+          style={[
+            styles.appName,
+            {
+              color: darkModeValue
+                ? colors.primaryTextColorDarkMode
+                : colors.secondaryColor,
+            },
+          ]}>
           {strings.app_name}
         </Text>
       </View>
@@ -126,7 +161,15 @@ const LandingPage = ({navigation}) => {
             navigation.navigate(item?.navigationPath);
           }
         }}>
-        <View style={styles.navigationButtonStyle}>
+        <View
+          style={[
+            {
+              backgroundColor: darkModeValue
+                ? colors.tertiaryBackgroundColorDarkMode
+                : colors.secondaryBackgroundColor,
+            },
+            styles.navigationButtonStyle,
+          ]}>
           <Image
             source={item?.image}
             height={1}
@@ -134,7 +177,17 @@ const LandingPage = ({navigation}) => {
             resizeMode={'contain'}
             style={styles.buttonIcons}
           />
-          <Text style={styles.buttonTextStyles}>{item?.name}</Text>
+          <Text
+            style={[
+              {
+                color: darkModeValue
+                  ? colors.primaryTextColorDarkMode
+                  : colors.primaryTextColor,
+              },
+              styles.buttonTextStyles,
+            ]}>
+            {item?.name}
+          </Text>
         </View>
       </TouchableOpacity>
     );
@@ -157,11 +210,43 @@ const LandingPage = ({navigation}) => {
     );
   };
 
+  const darkModeButton = () => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          setDarkModeStatus(!darkModeStatus);
+        }}>
+        <View style={styles.darkModeButton}>
+          <Image
+            source={
+              darkModeValue
+                ? imagePaths.darkModeIcon
+                : imagePaths.brightModeIcon
+            }
+            height={1}
+            width={1}
+            style={styles.darkModeIcon}
+            resizeMode={'contain'}
+          />
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
   const mainContainerBody = () => {
     return (
-      <View style={styles.mainContainer}>
+      <View
+        style={[
+          {
+            backgroundColor: darkModeValue
+              ? colors.secondaryBackgroundColorDarkMode
+              : null,
+          },
+          styles.mainContainer,
+        ]}>
         {appIconContainer()}
         {navigationButtons()}
+        {darkModeButton()}
         {/* <CircleRightArrow /> */}
       </View>
     );

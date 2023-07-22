@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
+import {useSelector} from 'react-redux';
 import {
   View,
   Text,
@@ -23,6 +24,9 @@ const EggDetailsScreen = props => {
   const {navigation, route} = props;
   const {params} = route;
   const {loadData} = params;
+
+  const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
+  const darkModeValue = darkMode?.data;
 
   const eggImages = [
     imagePaths.twoKmEggIcon,
@@ -171,7 +175,13 @@ const EggDetailsScreen = props => {
   const renderGridView = ({item, index}) => {
     return (
       <View>
-        <View style={styles.gridBorderStyle}>
+        <View
+          style={[
+            {
+              backgroundColor: colors.white,
+            },
+            styles.gridBorderStyle,
+          ]}>
           <Image
             source={{uri: item}}
             height={1}
@@ -191,10 +201,26 @@ const EggDetailsScreen = props => {
             </View>
           ) : null}
         </View>
-        <Text style={styles.pokemonNames}>
+        <Text
+          style={[
+            {
+              color: darkModeValue
+                ? colors.primaryTextColorDarkMode
+                : colors.purple,
+            },
+            styles.pokemonNames,
+          ]}>
           {displayData?.pokemonName[index]}
         </Text>
-        <Text style={styles.pokemonNames}>
+        <Text
+          style={[
+            {
+              color: darkModeValue
+                ? colors.primaryTextColorDarkMode
+                : colors.purple,
+            },
+            styles.pokemonNames,
+          ]}>
           [{displayData?.combatPower[index]}] CP
         </Text>
       </View>
@@ -257,7 +283,14 @@ const EggDetailsScreen = props => {
 
   const filterSection = () => {
     return (
-      <View style={styles.filterContainer}>
+      <View
+        style={[
+          {
+            backgroundColor: darkModeValue ? colors.darkGrey : colors.white,
+            borderColor: darkModeValue ? colors.darkGrey : colors.grey,
+          },
+          styles.filterContainer,
+        ]}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           {loadData?.map((val, idVal) => {
             return (
@@ -271,7 +304,11 @@ const EggDetailsScreen = props => {
                     styles.filterOptions,
                     {
                       backgroundColor:
-                        idVal === indexVal ? colors.purple : colors.white,
+                        idVal === indexVal
+                          ? colors.purple
+                          : darkModeValue
+                          ? colors.tertiaryBackgroundColorDarkMode
+                          : colors.white,
                     },
                   ]}>
                   <Image
@@ -293,7 +330,12 @@ const EggDetailsScreen = props => {
   const eggDataDisplay = () => {
     const seasonName = displayData?.Season.split(', ');
     return (
-      <ScrollView>
+      <ScrollView
+        style={{
+          backgroundColor: darkModeValue
+            ? colors.secondaryBackgroundColorDarkMode
+            : null,
+        }}>
         <Image
           source={eggImagesObj[displayData?.Distance]}
           height={1}
@@ -302,8 +344,28 @@ const EggDetailsScreen = props => {
           style={styles.eggIcon}
         />
         <View style={styles.filterSection}>
-          <Text style={styles.eggKmCategory}>{displayData?.Distance}</Text>
-          <Text style={styles.seasonText}>Season: {seasonName[1]}</Text>
+          <Text
+            style={[
+              {
+                color: darkModeValue
+                  ? colors.primaryTextColorDarkMode
+                  : colors.purple,
+              },
+              styles.eggKmCategory,
+            ]}>
+            {displayData?.Distance}
+          </Text>
+          <Text
+            style={[
+              {
+                color: darkModeValue
+                  ? colors.primaryTextColorDarkMode
+                  : colors.purple,
+              },
+              styles.seasonText,
+            ]}>
+            Season: {seasonName[1]}
+          </Text>
         </View>
         {gridViewDisplay(dispImgs)}
       </ScrollView>

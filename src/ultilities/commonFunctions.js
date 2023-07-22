@@ -1,4 +1,5 @@
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   requestCameraPermission,
   requestExternalWritePermission,
@@ -229,4 +230,26 @@ export const pokeImageMappingFunction = displayData => {
     }
   });
   return displayableModalImages;
+};
+
+export const storeData = async (keyString, value) => {
+  try {
+    if (value !== null || value !== undefined) {
+      console.log('STORED DATA 12', keyString, JSON.stringify(value));
+    }
+    await AsyncStorage.setItem(keyString, JSON.stringify(value));
+  } catch (error) {
+    console.log('ERROR IN STORAGE', error);
+  }
+};
+
+export const getData = async keyString => {
+  try {
+    // const savedUser = await AsyncStorage.getItem("user");
+    const savedData = await AsyncStorage.getItem(keyString);
+    const currentData = JSON.parse(savedData);
+    console.log('FETCHED DATA 1', currentData);
+  } catch (error) {
+    console.log('ERROR IN FETCHING', error);
+  }
 };

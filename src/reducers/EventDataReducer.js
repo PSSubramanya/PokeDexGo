@@ -1,4 +1,4 @@
-import {EVENT_DATA_LOAD} from '../constants/types';
+import {EVENT_DATA_LOAD, DARK_MODE_STATUS} from '../constants/types';
 import {combineReducers} from 'redux';
 
 const initialState = {
@@ -17,8 +17,21 @@ const eventdataload = (state = initialState, action) => {
   }
 };
 
+const darkModeValue = (state = initialState, action) => {
+  switch (action.type) {
+    case DARK_MODE_STATUS:
+      return {
+        ...state,
+        data: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
 const eventDataReducer = combineReducers({
   eventdataload,
+  darkModeValue,
 });
 
 export default eventDataReducer;

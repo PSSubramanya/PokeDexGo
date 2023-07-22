@@ -59,6 +59,9 @@ const EventViewScreen = props => {
 
   const [gridViewStatus, setGridViewStatus] = useState(false);
 
+  const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
+  const darkModeValue = darkMode?.data;
+
   const datVal = modalData?.['Start DateTime']?.split(' ');
   const dateLength = datVal?.length;
 
@@ -683,7 +686,7 @@ const EventViewScreen = props => {
       data?.includes(substring1),
     );
 
-    console.log('MEGA data', modalImages);
+    // console.log('MEGA data', modalImages);
 
     let displayableModalImages = [];
 
@@ -859,12 +862,28 @@ const EventViewScreen = props => {
   const eventHeaderSection = () => {
     return (
       <View style={styles.eventsSectionHeader}>
-        <Text style={[styles.eventDateText, styles.primaryColorStyle]}>
+        <Text
+          style={[
+            styles.eventDateText,
+            {
+              color: darkModeValue
+                ? colors.primaryTextColorDarkMode
+                : colors.secondaryColor,
+            },
+          ]}>
           {eventsData !== null
             ? moment(selectedStartDate).format('MMM Do, YYYY')
             : ''}
         </Text>
-        <Text style={[styles.eventNumberText, styles.primaryColorStyle]}>
+        <Text
+          style={[
+            styles.eventNumberText,
+            {
+              color: darkModeValue
+                ? colors.primaryTextColorDarkMode
+                : colors.secondaryColor,
+            },
+          ]}>
           {strings.number_of_events} : {eventsData?.length ?? 0}
         </Text>
       </View>
@@ -892,7 +911,12 @@ const EventViewScreen = props => {
   return (
     <Provider>
       {networkState ? (
-        <SafeAreaView style={{}}>
+        <SafeAreaView
+          style={{
+            backgroundColor: darkModeValue
+              ? colors.secondaryBackgroundColorDarkMode
+              : null,
+          }}>
           {modalPopUp()}
           {calandarView()}
           {eventsData !== null ? eventHeaderSection() : null}

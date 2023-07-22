@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Image, Text, ScrollView} from 'react-native';
+import {useSelector} from 'react-redux';
 import styles from './styles.js';
 import imagePaths from '../../constants/imagePaths.js';
 import strings from '../../constants/strings.js';
@@ -7,6 +8,9 @@ import colors from '../../constants/colors.js';
 import commonStyling from '../../ultilities/commonStyling/commonStyling.js';
 
 const TrainerInfoScreen = props => {
+  const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
+  const darkModeValue = darkMode?.data;
+
   const bulletPoints = [
     {
       id: 1,
@@ -98,7 +102,15 @@ const TrainerInfoScreen = props => {
             },
           ]}
         />
-        <Text style={[styles.bulletPoints, styles.primaryColorStyle]}>
+        <Text
+          style={[
+            styles.bulletPoints,
+            {
+              color: darkModeValue
+                ? colors.primaryTextColorDarkMode
+                : colors.secondaryColor,
+            },
+          ]}>
           {item.description}
         </Text>
       </View>
@@ -106,17 +118,38 @@ const TrainerInfoScreen = props => {
   };
 
   return (
-    <ScrollView>
+    <ScrollView
+      style={{
+        backgroundColor: darkModeValue
+          ? colors?.secondaryBackgroundColorDarkMode
+          : null,
+      }}>
       <Image
         source={imagePaths.appIcon}
         height={1}
         width={1}
         style={styles.appIcon}
       />
-      <Text style={[styles.appName, styles.primaryColorStyle]}>
+      <Text
+        style={[
+          styles.appName,
+          {
+            color: darkModeValue
+              ? colors.primaryTextColorDarkMode
+              : colors.secondaryColor,
+          },
+        ]}>
         {strings.app_name}
       </Text>
-      <Text style={[styles.appVersion, styles.primaryColorStyle]}>
+      <Text
+        style={[
+          styles.appVersion,
+          {
+            color: darkModeValue
+              ? colors.primaryTextColorDarkMode
+              : colors.secondaryColor,
+          },
+        ]}>
         {strings.app_version}
       </Text>
       {bulletPoints.map((item, index) => {
