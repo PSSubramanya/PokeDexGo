@@ -7,6 +7,7 @@ export default {
   bluishGrey: '#2d4150',
   pink: '#F93EA7',
   highlightGreen: '#15EF92',
+  boostedGreen: 'rgba(64, 218, 30, 0.8)',
   orange: '#FFAE4F',
   orangeMedium: 'rgba(255, 174, 79, 0.5)',
   orangeLight: 'rgba(255, 174, 79, 0.3)',
@@ -30,5 +31,6 @@ export default {
   secondaryBackgroundColor: '#FFFFFF',
   secondaryBackgroundColorDarkMode: '#363636',
   tertiaryBackgroundColorDarkMode: '#464646',
+  quaternaryBackgroundColorDarkMode: '#565656',
   // secondaryColor: 'rgba(203,53,53,1)',
 };

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "210276461404",
+    "project_id": "poke-event-guide",
+    "storage_bucket": "poke-event-guide.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:210276461404:android:23293c6f90bf822b3cef99",
+        "android_client_info": {
+          "package_name": "com.pokedexapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "210276461404-ogivick34gq35f87j212anlpr0dr174j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGcmtbAhn-rMGx3iBNXa5SmOoJ9XJvN70"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "210276461404-ogivick34gq35f87j212anlpr0dr174j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

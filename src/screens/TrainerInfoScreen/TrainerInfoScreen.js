@@ -49,7 +49,7 @@ const TrainerInfoScreen = props => {
     },
     {
       id: 8,
-      description: 'We also have the seasonal Field Research data available',
+      description: 'We also have the seasonal Raid Boss data available',
     },
     {
       id: 9,
@@ -88,6 +88,10 @@ const TrainerInfoScreen = props => {
       id: 5,
       description:
         'Many more things to come into the app in the nearby future.',
+    },
+    {
+      id: 6,
+      description: 'We also have the seasonal Field Research data available',
     },
   ];
 

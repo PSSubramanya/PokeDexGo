@@ -1,0 +1,300 @@
+{
+  "data": [
+    {
+      "name": "Diglett",
+      "tier": "Tier 1",
+      "canBeShiny": true,
+      "pokeId": 50,
+      "types": [
+        {
+          "name": "ground",
+          "image": "https://leekduck.com/assets/img/types/ground.png"
+        }
+      ],
+      "combatPower": {
+        "normal": {"min": 349, "max": 386},
+        "boosted": {"min": 437, "max": 483}
+      },
+      "boostedWeather": [
+        {
+          "name": "sunnyclear",
+          "image": "https://leekduck.com/assets/img/weather/sunny.png"
+        }
+      ],
+      "image": "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_050_00.png"
+    },
+    {
+      "name": "Voltorb",
+      "tier": "Tier 1",
+      "canBeShiny": true,
+      "pokeId": 100,
+      "types": [
+        {
+          "name": "electric",
+          "image": "https://leekduck.com/assets/img/types/electric.png"
+        }
+      ],
+      "combatPower": {
+        "normal": {"min": 532, "max": 577},
+        "boosted": {"min": 665, "max": 721}
+      },
+      "boostedWeather": [
+        {
+          "name": "rainy",
+          "image": "https://leekduck.com/assets/img/weather/rainy.png"
+        }
+      ],
+      "image": "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_100_00.png"
+    },
+    {
+      "name": "Phanpy",
+      "tier": "Tier 1",
+      "canBeShiny": true,
+      "pokeId": 231,
+      "types": [
+        {
+          "name": "ground",
+          "image": "https://leekduck.com/assets/img/types/ground.png"
+        }
+      ],
+      "combatPower": {
+        "normal": {"min": 639, "max": 689},
+        "boosted": {"min": 799, "max": 862}
+      },
+      "boostedWeather": [
+        {
+          "name": "sunnyclear",
+          "image": "https://leekduck.com/assets/img/weather/sunny.png"
+        }
+      ],
+      "image": "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_231_00.png"
+    },
+    {
+      "name": "Electrike",
+      "tier": "Tier 1",
+      "canBeShiny": true,
+      "pokeId": 309,
+      "types": [
+        {
+          "name": "electric",
+          "image": "https://leekduck.com/assets/img/types/electric.png"
+        }
+      ],
+      "combatPower": {
+        "normal": {"min": 507, "max": 551},
+        "boosted": {"min": 634, "max": 689}
+      },
+      "boostedWeather": [
+        {
+          "name": "rainy",
+          "image": "https://leekduck.com/assets/img/weather/rainy.png"
+        }
+      ],
+      "image": "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_309_00.png"
+    },
+    {
+      "name": "Blitzle",
+      "tier": "Tier 1",
+      "canBeShiny": true,
+      "pokeId": 522,
+      "types": [
+        {
+          "name": "electric",
+          "image": "https://leekduck.com/assets/img/types/electric.png"
+        }
+      ],
+      "combatPower": {
+        "normal": {"min": 461, "max": 504},
+        "boosted": {"min": 577, "max": 630}
+      },
+      "boostedWeather": [
+        {
+          "name": "rainy",
+          "image": "https://leekduck.com/assets/img/weather/rainy.png"
+        }
+      ],
+      "image": "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_522_00.png"
+    },
+    {
+      "name": "Graveler",
+      "tier": "Tier 3",
+      "canBeShiny": false,
+      "pokeId": 75,
+      "types": [
+        {
+          "name": "rock",
+          "image": "https://leekduck.com/assets/img/types/rock.png"
+        },
+        {
+          "name": "ground",
+          "image": "https://leekduck.com/assets/img/types/ground.png"
+        }
+      ],
+      "combatPower": {
+        "normal": {"min": 1023, "max": 1084},
+        "boosted": {"min": 1278, "max": 1355}
+      },
+      "boostedWeather": [
+        {
+          "name": "partly",
+          "image": "https://leekduck.com/assets/img/weather/partlycloudy.png"
+        },
+        {
+          "name": "sunnyclear",
+          "image": "https://leekduck.com/assets/img/weather/sunny.png"
+        }
+      ],
+      "image": "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_075_00.png"
+    },
+    {
+      "name": "Lanturn",
+      "tier": "Tier 3",
+      "canBeShiny": false,
+      "pokeId": 171,
+      "types": [
+        {
+          "name": "water",
+          "image": "https://leekduck.com/assets/img/types/water.png"
+        },
+        {
+          "name": "electric",
+          "image": "https://leekduck.com/assets/img/types/electric.png"
+        }
+      ],
+      "combatPower": {
+        "normal": {"min": 1125, "max": 1191},
+        "boosted": {"min": 1406, "max": 1489}
+      },
+      "boostedWeather": [
+        {
+          "name": "rainy",
+          "image": "https://leekduck.com/assets/img/weather/rainy.png"
+        }
+      ],
+      "image": "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_171_00.png"
+    },
+    {
+      "name": "Luxio",
+      "tier": "Tier 3",
+      "canBeShiny": false,
+      "pokeId": 404,
+      "types": [
+        {
+          "name": "electric",
+          "image": "https://leekduck.com/assets/img/types/electric.png"
+        }
+      ],
+      "combatPower": {
+        "normal": {"min": 793, "max": 849},
+        "boosted": {"min": 992, "max": 1061}
+      },
+      "boostedWeather": [
+        {
+          "name": "rainy",
+          "image": "https://leekduck.com/assets/img/weather/rainy.png"
+        }
+      ],
+      "image": "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_404_00.png"
+    },
+    {
+      "name": "Hippowdon",
+      "tier": "Tier 3",
+      "canBeShiny": false,
+      "pokeId": 450,
+      "types": [
+        {
+          "name": "ground",
+          "image": "https://leekduck.com/assets/img/types/ground.png"
+        }
+      ],
+      "combatPower": {
+        "normal": {"min": 1684, "max": 1763},
+        "boosted": {"min": 2105, "max": 2204}
+      },
+      "boostedWeather": [
+        {
+          "name": "sunnyclear",
+          "image": "https://leekduck.com/assets/img/weather/sunny.png"
+        }
+      ],
+      "image": "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_450_00.png"
+    },
+    {
+      "name": "Eelektrik",
+      "tier": "Tier 3",
+      "canBeShiny": false,
+      "pokeId": 603,
+      "types": [
+        {
+          "name": "electric",
+          "image": "https://leekduck.com/assets/img/types/electric.png"
+        }
+      ],
+      "combatPower": {
+        "normal": {"min": 921, "max": 980},
+        "boosted": {"min": 1152, "max": 1225}
+      },
+      "boostedWeather": [
+        {
+          "name": "rainy",
+          "image": "https://leekduck.com/assets/img/weather/rainy.png"
+        }
+      ],
+      "image": "https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_603_00.png"
+    },
+    {
+      "name": "Regieleki",
+      "tier": "Tier 5",
+      "canBeShiny": false,
+      "pokeId": 894,
+      "types": [
+        {
+          "name": "electric",
+          "image": "https://leekduck.com/assets/img/types/electric.png"
+        }
+      ],
+      "combatPower": {
+        "normal": {"min": 1524, "max": 1602},
+        "boosted": {"min": 1905, "max": 2002}
+      },
+      "boostedWeather": [
+        {
+          "name": "rainy",
+          "image": "https://leekduck.com/assets/img/weather/rainy.png"
+        }
+      ],
+      "image": "https://leekduck.com/assets/img/pokemon_icons/pm894.icon.png"
+    },
+    {
+      "name": "Mega Blaziken",
+      "tier": "Mega",
+      "canBeShiny": true,
+      "pokeId": 257,
+      "types": [
+        {
+          "name": "fire",
+          "image": "https://leekduck.com/assets/img/types/fire.png"
+        },
+        {
+          "name": "fighting",
+          "image": "https://leekduck.com/assets/img/types/fighting.png"
+        }
+      ],
+      "combatPower": {
+        "normal": {"min": 1550, "max": 1627},
+        "boosted": {"min": 1938, "max": 2034}
+      },
+      "boostedWeather": [
+        {
+          "name": "sunnyclear",
+          "image": "https://leekduck.com/assets/img/weather/sunny.png"
+        },
+        {
+          "name": "cloudy",
+          "image": "https://leekduck.com/assets/img/weather/cloudy.png"
+        }
+      ],
+      "image": "https://leekduck.com/assets/img/pokemon_icons/pm257.fMEGA.icon.png"
+    }
+  ]
+}

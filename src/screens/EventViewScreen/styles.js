@@ -30,7 +30,6 @@ export default styles = StyleSheet.create({
     fontFamily: fontFamily.primaryFontFamilyRegular,
     fontSize: moderateScale(11.5),
     marginTop: verticalScale(15),
-    color: colors.purple,
   },
   cardBodySection: {
     marginLeft: horizontalScale(13),
@@ -56,7 +55,6 @@ export default styles = StyleSheet.create({
     marginLeft: horizontalScale(49),
   },
   modalExternalStyle: {
-    backgroundColor: colors.white,
     padding: horizontalScale(19),
     borderRadius: 10,
   },
@@ -82,7 +80,6 @@ export default styles = StyleSheet.create({
   modalTextStyle: {
     fontFamily: fontFamily.primaryFontFamilyBold,
     fontSize: moderateScale(18),
-    color: colors.purple,
   },
   buttonStyle: {
     width: horizontalScale(110),
@@ -111,7 +108,6 @@ export default styles = StyleSheet.create({
   descriptionView: {
     marginBottom: verticalScale(10),
     marginLeft: horizontalScale(5),
-    backgroundColor: colors.white,
     borderRadius: 5,
     borderColor: colors.purple,
     borderWidth: horizontalScale(1),
@@ -119,7 +115,6 @@ export default styles = StyleSheet.create({
   descriptionText: {
     paddingVertical: verticalScale(5),
     paddingHorizontal: horizontalScale(5),
-    color: colors.purple,
     fontFamily: fontFamily.primaryFontFamilyMedium,
     fontSize: moderateScale(12),
   },
@@ -194,7 +189,6 @@ export default styles = StyleSheet.create({
   },
   pokemonName: {
     paddingVertical: verticalScale(5),
-    color: colors.purple,
     fontFamily: fontFamily.primaryFontFamilyMedium,
     fontSize: moderateScale(12),
     textAlign: 'center',
@@ -210,7 +204,7 @@ export default styles = StyleSheet.create({
   pokemonNameStyle: {
     marginLeft: horizontalScale(5),
     marginRight: horizontalScale(10),
-    color: colors.vermillion,
+    marginTop: verticalScale(1),
     fontFamily: fontFamily.primaryFontFamilyMedium,
     fontSize: moderateScale(12),
   },
@@ -226,7 +220,6 @@ export default styles = StyleSheet.create({
     marginHorizontal: horizontalScale(40),
   },
   paginationTextStyle: {
-    color: colors.purple,
     fontFamily: fontFamily.primaryFontFamilyMedium,
     fontSize: moderateScale(12),
   },
@@ -235,15 +228,12 @@ export default styles = StyleSheet.create({
     fontFamily: fontFamily.primaryFontFamilyBold,
   },
   paginationRichtext2: {
-    color: colors.purple,
     fontFamily: fontFamily.primaryFontFamilyBold,
   },
   gridImageStyle: {
     height: verticalScale(80),
     width: horizontalScale(80),
     marginHorizontal: horizontalScale(10),
-    // borderWidth: 1,
-    // borderColor: colors.purple,
     borderRadius: 5,
     marginVertical: verticalScale(5),
   },
@@ -251,7 +241,7 @@ export default styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     borderColor: colors.purple,
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
     paddingHorizontal: horizontalScale(5),
   },
   gridViewDisplay: {

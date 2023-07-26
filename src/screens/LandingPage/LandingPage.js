@@ -9,6 +9,8 @@ import {
   StatusBar,
   FlatList,
 } from 'react-native';
+import firestore from '@react-native-firebase/firestore';
+import DeviceInfo from 'react-native-device-info';
 import {useNetStatusInfo} from '../../ultilities/customHooks/useNetStatusInfo';
 import strings from '../../constants/strings';
 import imagePaths from '../../constants/imagePaths';
@@ -23,6 +25,8 @@ import webscrappedData from '../../ultilities/pokemonData/pokemon_data6.json';
 import eggData from '../../ultilities/pokemonData/egg_data.json';
 
 const LandingPage = ({navigation}) => {
+  const subscriber = firestore().collection('Users').doc(uniqueDeviceIdValue);
+
   const dispatch = useDispatch();
   const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
   const darkModeValue = darkMode?.data;
@@ -58,7 +62,9 @@ const LandingPage = ({navigation}) => {
 
   const [loadData, setLoadData] = useState([]);
   const [loadEggData, setLoadEggData] = useState([]);
+  const [loadRaidBossData, setRaidBossData] = useState([]);
   const [darkModeStatus, setDarkModeStatus] = useState(true);
+  const [uniqueDeviceIdValue, setUniqueDeviceIdValue] = useState('');
 
   useEffect(() => {
     soundTracks?.pikapika1.play(success => {
@@ -74,7 +80,15 @@ const LandingPage = ({navigation}) => {
     soundTracks?.pikapika1.setNumberOfLoops(0); // NOTE: Loop indefinitely until stop() is called
   }, []);
 
+  // console.log('DEVICE INFO', DeviceInfo.getUniqueID());//getDeviceId()
+  // console.log('DEVICE INFO', DeviceInfo.getUniqueId()); //getDeviceId()
+
   useEffect(() => {
+    DeviceInfo.getUniqueId().then(uniqueId => {
+      const tempId = uniqueId;
+      setUniqueDeviceIdValue(tempId);
+    });
+
     //NOTE: Try to use AsyncStorage here with right usage
     const initialDarkModeStatus =
       getData('darkModeStatus') !== null ||
@@ -84,13 +98,6 @@ const LandingPage = ({navigation}) => {
 
     setDarkModeStatus(initialDarkModeStatus);
   }, []);
-
-  useEffect(() => {
-    const tempThemeValue = darkModeStatus;
-    dispatch(darkModeActivation(tempThemeValue));
-    storeData('darkModeStatus', tempThemeValue);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [darkModeStatus]);
 
   useEffect(() => {
     let loadedData;
@@ -125,6 +132,18 @@ const LandingPage = ({navigation}) => {
     });
   }, [loadEggData]);
 
+  useEffect(() => {
+    let loadedRaidBossData;
+    fetch(
+      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/raidBosses',
+    ).then(response => {
+      response.json().then(res => {
+        loadedRaidBossData = res?.data;
+        setRaidBossData(loadedRaidBossData);
+      });
+    });
+  }, [loadRaidBossData]);
+
   const appIconContainer = () => {
     return (
       <View style={styles.centerAlignmentStyle}>
@@ -157,6 +176,10 @@ const LandingPage = ({navigation}) => {
             navigation.navigate(item?.navigationPath, {loadData: loadData});
           } else if (item?.name === 'Eggs') {
             navigation.navigate(item?.navigationPath, {loadData: loadEggData});
+          } else if (item?.name === 'Raid Boss') {
+            navigation.navigate(item?.navigationPath, {
+              loadData: loadRaidBossData,
+            });
           } else {
             navigation.navigate(item?.navigationPath);
           }
@@ -182,7 +205,7 @@ const LandingPage = ({navigation}) => {
               {
                 color: darkModeValue
                   ? colors.primaryTextColorDarkMode
-                  : colors.primaryTextColor,
+                  : colors.primaryColor,
               },
               styles.buttonTextStyles,
             ]}>
@@ -214,7 +237,42 @@ const LandingPage = ({navigation}) => {
     return (
       <TouchableOpacity
         onPress={() => {
-          setDarkModeStatus(!darkModeStatus);
+          const currentTheme = darkModeStatus;
+          setDarkModeStatus(!currentTheme);
+          dispatch(darkModeActivation(!currentTheme));
+
+          // firestore()
+          //   .collection('Users')
+          //   .doc('themeData')
+          //   .add({
+          //     appTheme: !currentTheme,
+          //   })
+          //   .then(res => {
+          //     console.log(
+          //       'App theme stored FIRESTORE DATA',
+          //       uniqueDeviceIdValue,
+          //       res,
+          //     );
+          //   })
+          //   .catch(err => {
+          //     console.log('ERROR FIRESTORE DATA', err);
+          //   });
+
+          // firestore()
+          //   .collection('Users')
+          //   .add({
+          //     appTheme: !currentTheme,
+          //   })
+          //   .then(res => {
+          //     console.log(
+          //       'App theme stored FIRESTORE DATA',
+          //       uniqueDeviceIdValue,
+          //       res,
+          //     );
+          //   })
+          //   .catch(err => {
+          //     console.log('ERROR FIRESTORE DATA', err);
+          //   });
         }}>
         <View style={styles.darkModeButton}>
           <Image
@@ -246,7 +304,7 @@ const LandingPage = ({navigation}) => {
         ]}>
         {appIconContainer()}
         {navigationButtons()}
-        {darkModeButton()}
+        {/* {darkModeButton()} */}
         {/* <CircleRightArrow /> */}
       </View>
     );
