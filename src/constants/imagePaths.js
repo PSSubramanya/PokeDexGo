@@ -25,6 +25,9 @@ export default {
   sevenKmEggIcon: require('../assets/images/icons/7KmEgg.png'),
   tenKmEggIcon: require('../assets/images/icons/10KmEgg.png'),
   twelveKmEggIcon: require('../assets/images/icons/12KmEgg.png'),
+  raidIcon: require('../assets/images/icons/raidIcon.png'),
+  darkModeIcon: require('../assets/images/icons/darkModeIcon.png'),
+  brightModeIcon: require('../assets/images/icons/brightModeIcon.png'),
 
   //Images
   calendar1: require('../assets/images/calendar.png'),

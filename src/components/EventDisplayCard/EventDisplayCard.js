@@ -1,13 +1,22 @@
 import React, {useState} from 'react';
 import {View, Image, Text, TouchableOpacity} from 'react-native';
+import {useSelector} from 'react-redux';
 import imagePaths from '../../constants/imagePaths';
 import strings from '../../constants/strings';
 import {horizontalScale} from '../../ultilities/scale';
+import colors from '../../constants/colors';
 import moment from 'moment';
 import styles from './styles';
 
 const EventDisplayCard = props => {
   const {item, eventCompletionStatus} = props;
+
+  const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
+  const darkModeValue = darkMode?.data;
+
+  const primaryTextColorStyle = {
+    color: darkModeValue ? colors?.white : colors?.secondaryColor,
+  };
 
   const [notifications, setNotifications] = useState([]);
   const [checkLists, setCheckLists] = useState([]);
@@ -59,10 +68,10 @@ const EventDisplayCard = props => {
 
       <View style={styles.eventCardBodySection}>
         <View style={styles.eventTextSection}>
-          <Text style={[styles.eventTitle, styles.primaryColorStyle]}>
+          <Text style={[styles.eventTitle, primaryTextColorStyle]}>
             {item?.Summary}
           </Text>
-          <Text style={[styles.eventDescription, styles.primaryColorStyle]}>
+          <Text style={[styles.eventDescription, primaryTextColorStyle]}>
             {item?.Description}
           </Text>
         </View>

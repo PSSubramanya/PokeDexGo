@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 
-const CarousalImageSlider = props => {
+const ExpandableCardView = props => {
   return <View />;
 };
-export default CarousalImageSlider;
+export default ExpandableCardView;

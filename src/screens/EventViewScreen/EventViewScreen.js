@@ -59,6 +59,17 @@ const EventViewScreen = props => {
 
   const [gridViewStatus, setGridViewStatus] = useState(false);
 
+  const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
+  const darkModeValue = darkMode?.data;
+
+  const modalTextColorStyle = {
+    color: darkModeValue ? colors.white : colors.purple,
+  };
+
+  const modalBonusBackgroundStyle = {
+    backgroundColor: darkModeValue ? colors.purple : colors.white,
+  };
+
   const datVal = modalData?.['Start DateTime']?.split(' ');
   const dateLength = datVal?.length;
 
@@ -183,7 +194,11 @@ const EventViewScreen = props => {
           style={styles.emptyListImage}
           resizeMode={'contain'}
         />
-        <Text style={[styles.emptyListText, styles.primaryColorStyle]}>
+        <Text
+          style={[
+            styles.emptyListText,
+            {color: darkModeValue ? colors.white : colors.secondaryColor},
+          ]}>
           {strings.no_event_string}
         </Text>
       </View>
@@ -201,7 +216,11 @@ const EventViewScreen = props => {
           style={styles.selectDatePromptImage}
           resizeMode={'contain'}
         />
-        <Text style={[styles.emptyListText, styles.primaryColorStyle]}>
+        <Text
+          style={[
+            styles.emptyListText,
+            {color: darkModeValue ? colors.white : colors.secondaryColor},
+          ]}>
           {strings.select_date_prompt}
         </Text>
       </View>
@@ -239,8 +258,18 @@ const EventViewScreen = props => {
             keyExtractor={item => item}
             renderItem={({item}) => {
               return (
-                <View style={styles.descriptionView}>
-                  <Text style={styles.descriptionText}>{item}</Text>
+                <View
+                  style={[
+                    styles.descriptionView,
+                    {
+                      backgroundColor: darkModeValue
+                        ? colors.purple
+                        : colors.white,
+                    },
+                  ]}>
+                  <Text style={[styles.descriptionText, modalTextColorStyle]}>
+                    {item}
+                  </Text>
                 </View>
               );
             }}
@@ -253,9 +282,11 @@ const EventViewScreen = props => {
   const eventTimeDisplay = () => {
     return (
       <>
-        <Text style={[styles.eventTimeStyle]}>{strings.event_ranges_from}</Text>
+        <Text style={[styles.eventTimeStyle, modalTextColorStyle]}>
+          {strings.event_ranges_from}
+        </Text>
         {dateLength === 2 ? (
-          <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
+          <Text style={[styles.modalDescriptionStyle, modalTextColorStyle]}>
             {`Starts: ${moment(modalData?.['Start DateTime']).format(
               'DD/MM/YYYY',
             )}, ${moment(modalData?.['Start DateTime']).format('LT')} ${
@@ -264,14 +295,14 @@ const EventViewScreen = props => {
           </Text>
         ) : null}
         {dateLength === 1 ? (
-          <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
+          <Text style={[styles.modalDescriptionStyle, modalTextColorStyle]}>
             {`Starts: ${moment(modalData?.['Start DateTime']).format(
               'DD/MM/YYYY',
             )}`}
           </Text>
         ) : null}
         {dateLength === 2 ? (
-          <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
+          <Text style={[styles.modalDescriptionStyle, modalTextColorStyle]}>
             {`Ends: ${moment(modalData?.['End DateTime']).format(
               'DD/MM/YYYY',
             )}, ${moment(modalData?.['End DateTime']).format('LT')} ${
@@ -280,7 +311,7 @@ const EventViewScreen = props => {
           </Text>
         ) : null}
         {dateLength === 1 ? (
-          <Text style={[styles.modalDescriptionStyle, styles.purpleTextColor]}>
+          <Text style={[styles.modalDescriptionStyle, modalTextColorStyle]}>
             {`Ends: ${moment(modalData?.['End DateTime']).format(
               'DD/MM/YYYY',
             )}`}
@@ -471,13 +502,13 @@ const EventViewScreen = props => {
             onPress={() => {
               setGridViewStatus(true);
             }}
-            style={styles.paginationTextBorder}>
-            <Text style={styles.paginationTextStyle}>
+            style={[styles.paginationTextBorder, modalBonusBackgroundStyle]}>
+            <Text style={[styles.paginationTextStyle, modalTextColorStyle]}>
               <Text style={styles.paginationRichtext1}>
                 {modalImageIndex + 1}{' '}
               </Text>
               of
-              <Text style={styles.paginationRichtext2}>
+              <Text style={[styles.paginationRichtext2, modalTextColorStyle]}>
                 {' '}
                 {modalImages?.length}
               </Text>
@@ -526,6 +557,7 @@ const EventViewScreen = props => {
           keyExtractor={item => item}
           numColumns={3}
           renderItem={renderGridView}
+          nestedScrollEnabled={true}
         />
       </View>
     );
@@ -543,7 +575,15 @@ const EventViewScreen = props => {
           style={styles.pokemonTypeImageStyel}
           resizeMode={'contain'}
         />
-        <Text style={styles.pokemonNameStyle}>{toCamelCase(pdata)}</Text>
+        <Text
+          style={[
+            styles.pokemonNameStyle,
+            {
+              color: darkModeValue ? colors.darkBlue : colors.vermillion,
+            },
+          ]}>
+          {toCamelCase(pdata)}
+        </Text>
       </View>
     );
   };
@@ -598,7 +638,9 @@ const EventViewScreen = props => {
       <View style={[styles.pokemonDescription]}>
         {modalImages?.length !== 0 ? (
           <View style={styles.pokemonNameDisplayView}>
-            <Text style={styles.pokemonName}>{toCamelCase(pokeName)}</Text>
+            <Text style={[styles.pokemonName, modalTextColorStyle]}>
+              {toCamelCase(pokeName)}
+            </Text>
             {pokeShinyType ? shinyPokemonIndicatorView() : null}
           </View>
         ) : null}
@@ -682,7 +724,7 @@ const EventViewScreen = props => {
       data?.includes(substring1),
     );
 
-    console.log('MEGA data', modalImages);
+    // console.log('MEGA data', modalImages);
 
     let displayableModalImages = [];
 
@@ -811,8 +853,10 @@ const EventViewScreen = props => {
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.modalInnerStyle}>
-          <Text style={styles.modalTextStyle}>{modalData.Summary}</Text>
-          <Text style={[styles.eventDescription, styles.primaryColorStyle]}>
+          <Text style={[styles.modalTextStyle, modalTextColorStyle]}>
+            {modalData.Summary}
+          </Text>
+          <Text style={[styles.eventDescription, modalTextColorStyle]}>
             {modalData?.Description}
           </Text>
           {eventBonusesDisplay()}
@@ -831,7 +875,14 @@ const EventViewScreen = props => {
           style={styles.modalMarginStyle}
           visible={modalVisible}
           onDismiss={hideModal}
-          contentContainerStyle={styles.modalExternalStyle}>
+          contentContainerStyle={[
+            styles.modalExternalStyle,
+            {
+              backgroundColor: darkModeValue
+                ? colors.quaternaryBackgroundColorDarkMode
+                : colors.white,
+            },
+          ]}>
           {modalContainer()}
         </Modal>
       </Portal>
@@ -858,12 +909,28 @@ const EventViewScreen = props => {
   const eventHeaderSection = () => {
     return (
       <View style={styles.eventsSectionHeader}>
-        <Text style={[styles.eventDateText, styles.primaryColorStyle]}>
+        <Text
+          style={[
+            styles.eventDateText,
+            {
+              color: darkModeValue
+                ? colors.primaryTextColorDarkMode
+                : colors.secondaryColor,
+            },
+          ]}>
           {eventsData !== null
             ? moment(selectedStartDate).format('MMM Do, YYYY')
             : ''}
         </Text>
-        <Text style={[styles.eventNumberText, styles.primaryColorStyle]}>
+        <Text
+          style={[
+            styles.eventNumberText,
+            {
+              color: darkModeValue
+                ? colors.primaryTextColorDarkMode
+                : colors.secondaryColor,
+            },
+          ]}>
           {strings.number_of_events} : {eventsData?.length ?? 0}
         </Text>
       </View>
@@ -891,7 +958,13 @@ const EventViewScreen = props => {
   return (
     <Provider>
       {networkState ? (
-        <SafeAreaView style={{}}>
+        <SafeAreaView
+          style={{
+            backgroundColor: darkModeValue
+              ? colors.secondaryBackgroundColorDarkMode
+              : null,
+            flex: 1,
+          }}>
           {modalPopUp()}
           {calandarView()}
           {eventsData !== null ? eventHeaderSection() : null}

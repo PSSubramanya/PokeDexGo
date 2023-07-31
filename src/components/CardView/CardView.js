@@ -1,9 +1,12 @@
 import React, {useEffect, useRef} from 'react';
-import colors from '../../constants/colors';
+import {useSelector} from 'react-redux';
 import {StyleSheet, View, Animated} from 'react-native';
+import colors from '../../constants/colors';
 import styles from './styles';
 
 const CardView = ({innerView, style}) => {
+  const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
+  const darkModeValue = darkMode?.data;
   //   const decayAnimationVariable = useRef(new Animated.Value(-500)).current;
 
   //   const handleDecayAnimation = () => {
@@ -40,7 +43,20 @@ const CardView = ({innerView, style}) => {
   //     </Animated.View>
   //   );
 
-  return <View style={[styles.cardView, style]}>{innerView}</View>;
+  return (
+    <View
+      style={[
+        styles.cardView,
+        style,
+        {
+          backgroundColor: darkModeValue
+            ? colors.quaternaryBackgroundColorDarkMode
+            : colors.white,
+        },
+      ]}>
+      {innerView}
+    </View>
+  );
 };
 
 export default CardView;

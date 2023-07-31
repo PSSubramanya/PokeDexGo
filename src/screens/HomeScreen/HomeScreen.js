@@ -30,11 +30,19 @@ import {
   verticalScale,
   moderateScale,
 } from '../../ultilities/scale';
+import colors from '../../constants/colors';
 
 const HomeScreen = props => {
   const {navigation, route} = props;
   const {params} = route;
   const {loadData} = params; //props?.route?.params?.selectedDate;
+
+  const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
+  const darkModeValue = darkMode?.data;
+
+  const primaryTextColorStyle = {
+    color: darkModeValue ? colors?.white : colors?.purple,
+  };
 
   const dateToday = new Date();
 
@@ -377,12 +385,7 @@ const HomeScreen = props => {
   const homeScreenBody = () => {
     return (
       <View>
-        <View
-          style={[
-            styles.flexRow,
-            styles.mainContainer,
-            styles.centerContainer,
-          ]}>
+        <View style={[styles.flexRow, styles.centerContainer]}>
           <TouchableOpacity
             onPress={() => {
               var a = selectedStartDate;
@@ -404,7 +407,7 @@ const HomeScreen = props => {
                   style={[
                     styles.mediumFont,
                     styles.mediumFontSize,
-                    styles.primaryColorStyle,
+                    primaryTextColorStyle,
                   ]}>
                   {moment(selectedStartDate.toString()).format('MMM')}
                 </Text>
@@ -412,7 +415,7 @@ const HomeScreen = props => {
                   style={[
                     styles.mediumFont,
                     styles.mediumFontSize,
-                    styles.primaryColorStyle,
+                    primaryTextColorStyle,
                   ]}>
                   {' '}
                   {moment(selectedStartDate.toString()).format('DD')}
@@ -422,15 +425,17 @@ const HomeScreen = props => {
                 style={[
                   styles.boldFont,
                   styles.largeFontSize,
-                  styles.primaryColorStyle,
+                  primaryTextColorStyle,
                 ]}>
                 {moment(selectedStartDate.toString()).format('YYYY')}
               </Text>
             </View>
             {numberOfEvents > 0 ? (
               <View style={commonStyling.absoluteCenterStyling}>
-                <Text style={styles.numberOfEvents}>{numberOfEvents}</Text>
-                <Text style={[styles.noEventTitle, styles.primaryColorStyle]}>
+                <Text style={[primaryTextColorStyle, styles.numberOfEvents]}>
+                  {numberOfEvents}
+                </Text>
+                <Text style={[styles.noEventTitle, primaryTextColorStyle]}>
                   {strings.events_today}
                 </Text>
               </View>
@@ -442,7 +447,7 @@ const HomeScreen = props => {
                   width={1}
                   style={styles.appIcon}
                 />
-                <Text style={[styles.noEventTitle, styles.primaryColorStyle]}>
+                <Text style={[styles.noEventTitle, primaryTextColorStyle]}>
                   {strings.no_event_today}
                 </Text>
               </View>
@@ -474,22 +479,20 @@ const HomeScreen = props => {
             />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.viewEventIcon}
           onPress={() => {
             navigation.navigate('EventViewScreen', {
               selectedDate: selectedStartDate,
             });
           }}>
-          {/* <View> */}
           <Image
             source={imagePaths.calendarIcon}
             height={1}
             width={1}
             style={[styles.calendarIcon]}
           />
-          {/* </View> */}
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     );
   };
@@ -497,9 +500,34 @@ const HomeScreen = props => {
   return (
     <Provider>
       {networkState ? (
-        <SafeAreaView style={{}}>
+        <SafeAreaView
+          style={[
+            {
+              backgroundColor: darkModeValue
+                ? colors.secondaryBackgroundColorDarkMode
+                : null,
+            },
+            styles.mainBody,
+          ]}>
           {modalPopUp()}
-          <View>{!viewCalendar ? homeScreenBody() : addEventScreenView()}</View>
+          <View style={styles.topSection}>
+            {!viewCalendar ? homeScreenBody() : addEventScreenView()}
+          </View>
+
+          <TouchableOpacity
+            style={styles.viewEventIcon}
+            onPress={() => {
+              navigation.navigate('EventViewScreen', {
+                selectedDate: selectedStartDate,
+              });
+            }}>
+            <Image
+              source={imagePaths.calendarIcon}
+              height={1}
+              width={1}
+              style={[styles.calendarIcon]}
+            />
+          </TouchableOpacity>
         </SafeAreaView>
       ) : null}
     </Provider>

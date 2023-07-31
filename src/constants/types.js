@@ -1,1 +1,2 @@
 export const EVENT_DATA_LOAD = 'EVENT_DATA_LOAD';
+export const DARK_MODE_STATUS = 'DARK_MODE_STATUS';

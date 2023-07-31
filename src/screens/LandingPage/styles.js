@@ -74,13 +74,13 @@ export default styles = StyleSheet.create({
   buttonTextStyles: {
     fontSize: moderateScale(12),
     fontFamily: fontFamily.primaryFontFamilyMedium,
-    color: colors.purple,
+    // color: colors.purple,
   },
   navigationButtonStyle: {
     height: verticalScale(130),
     width: horizontalScale(130),
     margin: verticalScale(12),
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
     borderRadius: 10,
     borderWidth: 2,
     borderColor: colors.purple,
@@ -93,5 +93,21 @@ export default styles = StyleSheet.create({
     marginBottom: verticalScale(10),
     marginTop: verticalScale(10),
     padding: verticalScale(5),
+  },
+  darkModeButton: {
+    height: verticalScale(60),
+    width: horizontalScale(60),
+    backgroundColor: 'white',
+    borderWidth: 2,
+    borderColor: colors.purple,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'flex-end',
+    marginRight: horizontalScale(10),
+  },
+  darkModeIcon: {
+    height: verticalScale(40),
+    width: horizontalScale(40),
   },
 });
