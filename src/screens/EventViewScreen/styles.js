@@ -135,7 +135,7 @@ export default styles = StyleSheet.create({
     marginTop: verticalScale(10),
   },
   calandarView: {
-    height: '45%',
+    marginBottom: verticalScale(10),
   },
   topPaddingStyle: {
     marginTop: verticalScale(30),
