@@ -4,8 +4,15 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 platform :ios, '12.4'
 install! 'cocoapods', :deterministic_uuids => false
 
+# use_modular_headers!
+# use_frameworks! :linkage => :static
+
 target 'PokedexApp' do
   config = use_native_modules!
+
+  # pod 'FirebaseCoreInternal'
+  # # pod 'GoogleUtilities', :modular_headers => true
+  # pod 'GoogleUtilities'
 
   # Flags change depending on the env values.
   flags = get_default_flags()

@@ -81,6 +81,7 @@ export default styles = StyleSheet.create({
     color: colors.purple,
     fontFamily: fontFamily.primaryFontFamilyMedium,
     fontSize: moderateScale(12),
+    alignSelf: 'center',
   },
   completedTextView: {
     flexDirection: 'row',

@@ -250,7 +250,7 @@ const RaidBossScreen = props => {
                     </View>
                     <Text style={styles.boostedText}>
                       CP : {item?.combatPower?.normal?.min} -
-                      {item?.combatPower?.normal?.max}
+                      {item?.combatPower?.boosted?.max}
                     </Text>
                   </View>
                 </View>
