@@ -28,6 +28,10 @@ export default {
   raidIcon: require('../assets/images/icons/raidIcon.png'),
   darkModeIcon: require('../assets/images/icons/darkModeIcon.png'),
   brightModeIcon: require('../assets/images/icons/brightModeIcon.png'),
+  greenArrowIcon1: require('../assets/images/icons/greenArrow1.png'),
+  greenArrowIcon2: require('../assets/images/icons/greenArrow2.png'),
+  greenArrowIcon3: require('../assets/images/icons/greenArrow3.png'),
+  candyIcon: require('../assets/images/icons/candyIcon.png'),
 
   //Images
   calendar1: require('../assets/images/calendar.png'),

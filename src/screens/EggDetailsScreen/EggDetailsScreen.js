@@ -18,6 +18,8 @@ import pokemon_hisuian_variants from '../../ultilities/pokemonData/pokemon_hisui
 import styles from './styles.js';
 import {horizontalScale} from '../../ultilities/scale';
 import colors from '../../constants/colors.js';
+import commonStyling from '../../ultilities/commonStyling/commonStyling.js';
+import evolutiionData from '../../ultilities/pokemonData/pokemon_evolution_chart.json';
 // import CustomCarousalSlider from '../../components/CustomCarousalSlider/CustomCarousalSlider.js';
 
 const EggDetailsScreen = props => {
@@ -53,6 +55,9 @@ const EggDetailsScreen = props => {
   const [indexVal, setIndexVal] = useState(0);
   const [loader, setLoader] = useState(true);
   const [displayData, setDisplayData] = useState([]);
+  const [showEvolutionChart, setShowEvolutionChart] = useState(false);
+  const [evolutionChart, setEvolutionChart] = useState([]);
+  const [selectedShiny, setSelectedShiny] = useState(false);
 
   useEffect(() => {
     setLoader(true);
@@ -61,6 +66,10 @@ const EggDetailsScreen = props => {
     setLoader(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [indexVal]);
+
+  // useEffect(() => {
+  //   console.log('indexInList CHART VALUE', evolutionChart);
+  // }, [evolutionChart]);
 
   const pokeImageMappingFunction = () => {
     const substring1 = '_shiny.png'; // Shiny - DONE
@@ -172,35 +181,95 @@ const EggDetailsScreen = props => {
     return displayableModalImages;
   };
 
+  const getEvolutionChartForSelectedPokemon = selectedIdx => {
+    let tempArray = [];
+    let tempIndex = 0;
+    let indexInList = 0;
+    let selectedFinalId = selectedIdx;
+
+    // while (tempIndex < 10) {
+    while (selectedFinalId !== undefined) {
+      console.log('indexInList start', tempIndex);
+      indexInList = evolutiionData?.data.findIndex(item => {
+        return item?.pokemon_id === selectedFinalId;
+      });
+
+      console.log(
+        'indexInList middle',
+        tempIndex,
+        indexInList,
+        selectedFinalId,
+      );
+
+      tempArray = [...tempArray, evolutiionData?.data?.[indexInList]];
+      tempIndex = tempIndex + 1;
+
+      selectedFinalId =
+        tempArray?.[tempArray.length - 1]?.evolutions?.[0]?.pokemon_id;
+
+      console.log('indexInList end', selectedFinalId, tempIndex, tempArray);
+    }
+
+    tempArray.pop();
+    const finalAdditionToArray =
+      tempArray?.[tempArray.length - 1]?.evolutions?.[0];
+
+    tempArray = [...tempArray, finalAdditionToArray];
+
+    setEvolutionChart(tempArray);
+
+    console.log('indexInList final', indexInList, tempArray);
+  };
+
   const renderGridView = ({item, index}) => {
     return (
       <View>
-        <View
-          style={[
-            {
-              backgroundColor: colors.white,
-            },
-            styles.gridBorderStyle,
-          ]}>
-          <Image
-            source={{uri: item}}
-            height={1}
-            width={1}
-            resizeMode={'contain'}
-            style={styles.gridImageStyle}
-          />
-          {displayData?.shiny?.[index] ? (
-            <View style={styles.shinyIconContainer}>
-              <Image
-                source={imagePaths.shinyIcon}
-                height={1}
-                width={1}
-                resizeMode={'contain'}
-                style={styles.shinyIcon}
-              />
-            </View>
-          ) : null}
-        </View>
+        <TouchableOpacity
+          onLongPress={() => {
+            const str = item;
+            const imageString = str.split(
+              'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/',
+            );
+            const finalId = parseInt(imageString[1].split('.png'));
+            getEvolutionChartForSelectedPokemon(finalId);
+            setShowEvolutionChart(true);
+
+            if (displayData?.shiny?.[index]) {
+              setSelectedShiny(true);
+            } else {
+              setSelectedShiny(false);
+            }
+          }}
+          onPressOut={() => {
+            setShowEvolutionChart(false);
+          }}>
+          <View
+            style={[
+              {
+                backgroundColor: colors.white,
+              },
+              styles.gridBorderStyle,
+            ]}>
+            <Image
+              source={{uri: item}}
+              height={1}
+              width={1}
+              resizeMode={'contain'}
+              style={styles.gridImageStyle}
+            />
+            {displayData?.shiny?.[index] ? (
+              <View style={styles.shinyIconContainer}>
+                <Image
+                  source={imagePaths.shinyIcon}
+                  height={1}
+                  width={1}
+                  resizeMode={'contain'}
+                  style={styles.shinyIcon}
+                />
+              </View>
+            ) : null}
+          </View>
+        </TouchableOpacity>
         <Text
           style={[
             {
@@ -327,6 +396,68 @@ const EggDetailsScreen = props => {
     );
   };
 
+  const greenArrowIcon = () => {
+    return (
+      <Image
+        source={imagePaths?.greenArrowIcon2}
+        height={1}
+        width={1}
+        resizeMode={'contain'}
+        style={styles.arrowIcon}
+      />
+    );
+  };
+
+  const evolutionChartDisplay = (val, ind, item) => {
+    console.log('EVOLUTION INDEX', val, ind, item);
+    return (
+      <View
+        style={[
+          {
+            backgroundColor: colors.white,
+          },
+          styles.evolutionGridBorderStyle,
+        ]}>
+        <Image
+          // source={{
+          //   uri: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/66.png',
+          // }}
+          source={{
+            uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${val}.png`,
+          }}
+          height={1}
+          width={1}
+          resizeMode={'contain'}
+          style={[styles.evolutionGridImageStyle]}
+        />
+        {ind !== evolutionChart?.length - 1 ? (
+          <View style={[commonStyling.flexRow, styles?.candyIconPositioning]}>
+            <Image
+              source={imagePaths?.candyIcon}
+              height={1}
+              width={1}
+              resizeMode={'contain'}
+              style={styles.candyIcon}
+            />
+            <Text style={styles.candyText1}>{item}</Text>
+          </View>
+        ) : null}
+
+        {selectedShiny ? (
+          <View style={styles.shinyIconContainer}>
+            <Image
+              source={imagePaths.shinyIcon}
+              height={1}
+              width={1}
+              resizeMode={'contain'}
+              style={styles.shinyIcon}
+            />
+          </View>
+        ) : null}
+      </View>
+    );
+  };
+
   const eggDataDisplay = () => {
     const seasonName = displayData?.Season.split(', ');
     return (
@@ -405,6 +536,19 @@ const EggDetailsScreen = props => {
     );
   };
 
+  const renderEvolutionView = ({item, index}) => {
+    return (
+      <>
+        {evolutionChartDisplay(
+          item?.pokemon_id,
+          index,
+          item?.evolutions?.[0]?.candy_required,
+        )}
+        {index !== evolutionChart?.length - 1 ? greenArrowIcon() : null}
+      </>
+    );
+  };
+
   return (
     <View style={styles.mainBody}>
       {/* NOTE: THIS IS CUSTOM CAROUSAL SLIDER */}
@@ -419,6 +563,24 @@ const EggDetailsScreen = props => {
 
       {/* {loader ? <ActivityIndicator size={'large'} /> : carouselSliderView()} */}
       {loader ? <ActivityIndicator size={'large'} /> : eggDataDisplay()}
+      {showEvolutionChart ? (
+        <View style={[styles.evolutionChartContainer]}>
+          <Text style={styles.evolutionText}>Evolution chart</Text>
+          <View>
+            <FlatList
+              data={evolutionChart}
+              keyExtractor={item => item}
+              renderItem={renderEvolutionView}
+              numColumns={3}
+            />
+            {/* {evolutionChartDisplay()}
+            {greenArrowIcon()}
+            {evolutionChartDisplay()}
+            {greenArrowIcon()}
+            {evolutionChartDisplay()} */}
+          </View>
+        </View>
+      ) : null}
       <View>{filterSection()}</View>
     </View>
   );
