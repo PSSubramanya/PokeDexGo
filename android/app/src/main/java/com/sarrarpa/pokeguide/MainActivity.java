@@ -1,4 +1,4 @@
-package com.pokedexapp;
+package com.sarrarpa.pokeguide;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

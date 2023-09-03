@@ -1,4 +1,4 @@
-package com.pokedexapp.newarchitecture.modules;
+package com.sarrarpa.pokeguide.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;
