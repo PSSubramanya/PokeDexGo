@@ -824,18 +824,24 @@ const EventViewScreen = props => {
 
         let newStr3;
 
-        if (newStr2.includes('.icon.png')) {
-          newStr3 = newStr2.replace('.icon.png', '');
-        } else if (newStr2.includes('.png')) {
-          newStr3 = newStr2.replace('.png', '');
+        if (newStr2 === undefined) {
+          pushedImage =
+            'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png';
+        } else {
+          if (newStr2.includes('.icon.png')) {
+            newStr3 = newStr2.replace('.icon.png', '');
+          } else if (newStr2.includes('.png')) {
+            newStr3 = newStr2.replace('.png', '');
+          }
+
+          const finalString = newStr3;
+          if (finalString?.length > 6) {
+            pushedImage = data;
+          } else {
+            pushedImage = tempImage;
+          }
         }
 
-        const finalString = newStr3;
-        if (finalString?.length > 6) {
-          pushedImage = data;
-        } else {
-          pushedImage = tempImage;
-        }
         /** NOTE:
          * Why length > 6 is used as condition above because when the image string is split, it comes to a number of 3 digits max.
          * Even so some strings may have _00 and _11 attached to it making its length 6 so.
