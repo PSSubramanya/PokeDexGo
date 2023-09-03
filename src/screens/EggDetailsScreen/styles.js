@@ -144,6 +144,11 @@ export default styles = StyleSheet.create({
     marginTop: verticalScale(40),
     fontFamily: fontFamily.primaryFontFamilyMedium,
   },
+  noEvolutionText: {
+    color: 'white',
+    marginVertical: verticalScale(40),
+    fontFamily: fontFamily.primaryFontFamilyMedium,
+  },
   evolutionChartContainer: {
     backgroundColor: colors.quaternaryBackgroundColorDarkMode,
     marginHorizontal: horizontalScale(20),

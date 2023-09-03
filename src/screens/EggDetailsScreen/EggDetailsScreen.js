@@ -17,6 +17,7 @@ import pokemon_galarian_variants from '../../ultilities/pokemonData/pokemon_gala
 import pokemon_hisuian_variants from '../../ultilities/pokemonData/pokemon_hisuian_variants';
 import styles from './styles.js';
 import {horizontalScale} from '../../ultilities/scale';
+import {toCamelCase} from '../../ultilities/commonFunctions.js';
 import colors from '../../constants/colors.js';
 import commonStyling from '../../ultilities/commonStyling/commonStyling.js';
 import evolutiionData from '../../ultilities/pokemonData/pokemon_evolution_chart.json';
@@ -181,44 +182,95 @@ const EggDetailsScreen = props => {
     return displayableModalImages;
   };
 
-  const getEvolutionChartForSelectedPokemon = selectedIdx => {
+  const getEvolutionChartForSelectedPokemon = (
+    selectedValue,
+    specialCategoryValue,
+  ) => {
     let tempArray = [];
     let tempIndex = 0;
     let indexInList = 0;
-    let selectedFinalId = selectedIdx;
+    let selectedFinalIdentifier = selectedValue;
 
-    // while (tempIndex < 10) {
-    while (selectedFinalId !== undefined) {
-      console.log('indexInList start', tempIndex);
-      indexInList = evolutiionData?.data.findIndex(item => {
-        return item?.pokemon_id === selectedFinalId;
-      });
+    if (specialCategoryValue === '') {
+      while (selectedFinalIdentifier !== undefined) {
+        console.log('indexInList start', tempIndex);
+        indexInList = evolutiionData?.data.findIndex(item => {
+          return item?.pokemon_id === selectedFinalIdentifier;
+        });
 
-      console.log(
-        'indexInList middle',
-        tempIndex,
-        indexInList,
-        selectedFinalId,
-      );
+        console.log(
+          'indexInList middle',
+          tempIndex,
+          indexInList,
+          selectedFinalIdentifier,
+        );
 
-      tempArray = [...tempArray, evolutiionData?.data?.[indexInList]];
-      tempIndex = tempIndex + 1;
+        tempArray = [...tempArray, evolutiionData?.data?.[indexInList]];
+        tempIndex = tempIndex + 1;
 
-      selectedFinalId =
-        tempArray?.[tempArray.length - 1]?.evolutions?.[0]?.pokemon_id;
+        selectedFinalIdentifier =
+          tempArray?.[tempArray.length - 1]?.evolutions?.[0]?.pokemon_id;
 
-      console.log('indexInList end', selectedFinalId, tempIndex, tempArray);
+        console.log(
+          'indexInList end',
+          selectedFinalIdentifier,
+          tempIndex,
+          tempArray,
+        );
+      }
+    } else {
+      while (selectedFinalIdentifier !== undefined) {
+        indexInList = evolutiionData?.data.findIndex(item => {
+          return (
+            item?.pokemon_name === selectedFinalIdentifier &&
+            item?.form === specialCategoryValue
+          );
+        });
+
+        tempArray = [...tempArray, evolutiionData?.data?.[indexInList]];
+        tempIndex = tempIndex + 1;
+
+        selectedFinalIdentifier =
+          tempArray?.[tempArray.length - 1]?.evolutions?.[0]?.pokemon_name;
+
+        console.log(
+          'indexInList start',
+          tempIndex,
+          indexInList,
+          specialCategoryValue,
+          tempArray,
+          selectedFinalIdentifier,
+        );
+      }
     }
 
+    tempIndex = 0;
     tempArray.pop();
-    const finalAdditionToArray =
-      tempArray?.[tempArray.length - 1]?.evolutions?.[0];
+    let finalAdditionToArray;
+
+    finalAdditionToArray = tempArray?.[tempArray.length - 1]?.evolutions?.[0];
 
     tempArray = [...tempArray, finalAdditionToArray];
 
     setEvolutionChart(tempArray);
 
-    console.log('indexInList final', indexInList, tempArray);
+    console.log(
+      'indexInList final 2 => ',
+      tempArray.length,
+      indexInList,
+      tempArray,
+    );
+
+    //Take slowpoke into consideration
+    // Case1: No evolution - DONE
+    // Case2: 1 evolution - DONE
+    // Case3: 2 evolutions - DONE
+    // Case4: 1st evolution 2/more variant - NEED DATA with example
+    // Case5: 2nd evolution 2/more variant - NEED DATA with example
+    // Case6: 1st evolution multiple forms (Eevee) - NEED DATA
+    // Case7: Special category evolution (Regional) - DONE
+    // Case8: Special category 1st evolution 2/more variant - NEED DATA with example
+    // Case9: Special category 2nd evolution 2/more variant - NEED DATA with example
   };
 
   const renderGridView = ({item, index}) => {
@@ -226,12 +278,60 @@ const EggDetailsScreen = props => {
       <View>
         <TouchableOpacity
           onLongPress={() => {
+            console.log('ABCDEF', item);
+            const alolanTerm = '-alolan.jpg';
+            const galarTerm = '-galarian.jpg';
+            const hisuianTerm = '-hisuian.jpg';
+
+            let specialCategoryValue = '';
+
+            const isSpecialCategory =
+              item?.includes(alolanTerm) ||
+              item?.includes(galarTerm) ||
+              item?.includes(hisuianTerm);
+
+            if (isSpecialCategory) {
+              specialCategoryValue = item?.includes(alolanTerm)
+                ? 'Alola'
+                : item?.includes(galarTerm)
+                ? 'Galarian'
+                : 'Hisuian';
+            }
+
+            const splittingTerm1 = 'https://img.pokemondb.net/artwork/large/';
+            const splittingTerm2 =
+              'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/';
+
             const str = item;
-            const imageString = str.split(
-              'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/',
+            let imageString;
+            let finalIdentifier;
+            if (isSpecialCategory) {
+              imageString = str.split(splittingTerm1);
+            } else {
+              imageString = str.split(splittingTerm2);
+            }
+
+            if (isSpecialCategory) {
+              if (imageString[1]?.includes(alolanTerm)) {
+                finalIdentifier = imageString[1].split(alolanTerm);
+                finalIdentifier = toCamelCase(finalIdentifier[0]);
+              } else if (imageString[1]?.includes(galarTerm)) {
+                finalIdentifier = imageString[1].split(galarTerm);
+                finalIdentifier = toCamelCase(finalIdentifier[0]);
+              } else if (imageString[1]?.includes(hisuianTerm)) {
+                finalIdentifier = imageString[1].split(hisuianTerm);
+                finalIdentifier = toCamelCase(finalIdentifier[0]);
+              }
+            } else {
+              finalIdentifier = parseInt(imageString[1].split('.png'));
+            }
+
+            console.log('FINAL IF', finalIdentifier);
+
+            getEvolutionChartForSelectedPokemon(
+              finalIdentifier,
+              specialCategoryValue,
             );
-            const finalId = parseInt(imageString[1].split('.png'));
-            getEvolutionChartForSelectedPokemon(finalId);
             setShowEvolutionChart(true);
 
             if (displayData?.shiny?.[index]) {
@@ -408,8 +508,43 @@ const EggDetailsScreen = props => {
     );
   };
 
-  const evolutionChartDisplay = (val, ind, item) => {
-    console.log('EVOLUTION INDEX', val, ind, item);
+  const evolutionChartDisplay = (val, ind) => {
+    const pokemonId = val?.pokemon_id;
+    const pokemonNameValue = val?.pokemon_name.toLowerCase();
+    let variantCategoryValue = '';
+
+    let isVariantCategory =
+      val?.form === 'Alola' ||
+      val?.form === 'Galarian' ||
+      val?.form === 'Hisuian';
+
+    if (val?.form === 'Alola') {
+      variantCategoryValue = '-alolan.jpg';
+    } else if (val?.form === 'Galarian') {
+      variantCategoryValue = '-galarian.jpg';
+    } else if (val?.form === 'Hisuian') {
+      variantCategoryValue = '-hisuian.jpg';
+    } else {
+      variantCategoryValue = '-alolan.jpg';
+    }
+
+    // case1: pokemonNameValue==="perrserker",pokemonNameValue==="obstagoon"
+
+    const sourceImage = isVariantCategory
+      ? pokemonNameValue === 'perrserker' || pokemonNameValue === 'obstagoon'
+        ? `https://img.pokemondb.net/artwork/large/${pokemonNameValue}.jpg`
+        : `https://img.pokemondb.net/artwork/large/${pokemonNameValue}${variantCategoryValue}`
+      : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
+
+    console.log(
+      'EVOLUTION INDEX',
+      val,
+      ind,
+      val?.evolutions?.[0]?.candy_required,
+      val?.pokemon_name,
+      `https://img.pokemondb.net/artwork/large/${pokemonNameValue}${variantCategoryValue}`,
+      sourceImage,
+    );
     return (
       <View
         style={[
@@ -419,11 +554,8 @@ const EggDetailsScreen = props => {
           styles.evolutionGridBorderStyle,
         ]}>
         <Image
-          // source={{
-          //   uri: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/66.png',
-          // }}
           source={{
-            uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${val}.png`,
+            uri: sourceImage,
           }}
           height={1}
           width={1}
@@ -439,7 +571,9 @@ const EggDetailsScreen = props => {
               resizeMode={'contain'}
               style={styles.candyIcon}
             />
-            <Text style={styles.candyText1}>{item}</Text>
+            <Text style={styles.candyText1}>
+              {val?.evolutions?.[0]?.candy_required}
+            </Text>
           </View>
         ) : null}
 
@@ -537,13 +671,10 @@ const EggDetailsScreen = props => {
   };
 
   const renderEvolutionView = ({item, index}) => {
+    console.log('ABCDitem', item);
     return (
       <>
-        {evolutionChartDisplay(
-          item?.pokemon_id,
-          index,
-          item?.evolutions?.[0]?.candy_required,
-        )}
+        {evolutionChartDisplay(item, index)}
         {index !== evolutionChart?.length - 1 ? greenArrowIcon() : null}
       </>
     );
@@ -567,17 +698,19 @@ const EggDetailsScreen = props => {
         <View style={[styles.evolutionChartContainer]}>
           <Text style={styles.evolutionText}>Evolution chart</Text>
           <View>
-            <FlatList
-              data={evolutionChart}
-              keyExtractor={item => item}
-              renderItem={renderEvolutionView}
-              numColumns={3}
-            />
-            {/* {evolutionChartDisplay()}
-            {greenArrowIcon()}
-            {evolutionChartDisplay()}
-            {greenArrowIcon()}
-            {evolutionChartDisplay()} */}
+            {evolutionChart.length !== 1 ? (
+              <FlatList
+                data={evolutionChart}
+                keyExtractor={item => item}
+                renderItem={renderEvolutionView}
+                numColumns={3}
+              />
+            ) : null}
+            {evolutionChart.length === 1 ? (
+              <Text style={styles.noEvolutionText}>
+                NO EVOLUTION FOR THIS POKEMON
+              </Text>
+            ) : null}
           </View>
         </View>
       ) : null}

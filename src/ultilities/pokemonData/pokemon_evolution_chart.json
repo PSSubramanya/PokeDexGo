@@ -3926,7 +3926,7 @@
         "evolutions": [
           {
             "candy_required": 50,
-            "form": "Galarian_standard",
+            "form": "Galarian",
             "pokemon_id": 555,
             "pokemon_name": "Darmanitan"
           }
