@@ -562,20 +562,9 @@ const EggDetailsScreen = props => {
           resizeMode={'contain'}
           style={[styles.evolutionGridImageStyle]}
         />
-        {ind !== evolutionChart?.length - 1 ? (
-          <View style={[commonStyling.flexRow, styles?.candyIconPositioning]}>
-            <Image
-              source={imagePaths?.candyIcon}
-              height={1}
-              width={1}
-              resizeMode={'contain'}
-              style={styles.candyIcon}
-            />
-            <Text style={styles.candyText1}>
-              {val?.evolutions?.[0]?.candy_required}
-            </Text>
-          </View>
-        ) : null}
+        <Text style={styles.evolutionChartPokemonName}>
+          {toCamelCase(pokemonNameValue)}
+        </Text>
 
         {selectedShiny ? (
           <View style={styles.shinyIconContainer}>
@@ -675,7 +664,23 @@ const EggDetailsScreen = props => {
     return (
       <>
         {evolutionChartDisplay(item, index)}
-        {index !== evolutionChart?.length - 1 ? greenArrowIcon() : null}
+        <View style={styles.evolutionProgressStyle}>
+          {index !== evolutionChart?.length - 1 ? (
+            <View style={[commonStyling.flexRow, styles?.candyIconPositioning]}>
+              <Image
+                source={imagePaths?.candyIcon}
+                height={1}
+                width={1}
+                resizeMode={'contain'}
+                style={styles.candyIcon}
+              />
+              <Text style={styles.candyText1}>
+                {item?.evolutions?.[0]?.candy_required}
+              </Text>
+            </View>
+          ) : null}
+          {index !== evolutionChart?.length - 1 ? greenArrowIcon() : null}
+        </View>
       </>
     );
   };

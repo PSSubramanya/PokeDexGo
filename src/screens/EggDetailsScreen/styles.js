@@ -32,14 +32,15 @@ export default styles = StyleSheet.create({
   evolutionGridImageStyle: {
     height: verticalScale(50),
     width: horizontalScale(50),
+    marginTop: verticalScale(20),
   },
   shinyIcon: {
     height: verticalScale(22),
     width: horizontalScale(22),
   },
   arrowIcon: {
-    height: verticalScale(30),
-    width: horizontalScale(30),
+    height: verticalScale(40),
+    width: horizontalScale(40),
     alignSelf: 'center',
   },
   candyIcon: {
@@ -168,8 +169,19 @@ export default styles = StyleSheet.create({
     color: colors?.white,
     marginTop: verticalScale(3),
   },
+  evolutionChartPokemonName: {
+    textAlign: 'center',
+    fontSize: moderateScale(10),
+    fontFamily: fontFamily.primaryFontFamilyMedium,
+    color: colors?.white,
+    marginTop: verticalScale(10),
+  },
   candyIconPositioning: {
-    position: 'absolute',
-    top: verticalScale(65),
+    // position: 'absolute',
+    // top: verticalScale(65),
+    marginBottom: verticalScale(-8),
+  },
+  evolutionProgressStyle: {
+    marginTop: verticalScale(20),
   },
 });

@@ -32,6 +32,7 @@ export default {
   greenArrowIcon2: require('../assets/images/icons/greenArrow2.png'),
   greenArrowIcon3: require('../assets/images/icons/greenArrow3.png'),
   candyIcon: require('../assets/images/icons/candyIcon.png'),
+  redoIcon: require('../assets/images/icons/redoIcon.png'),
 
   //Images
   calendar1: require('../assets/images/calendar.png'),
