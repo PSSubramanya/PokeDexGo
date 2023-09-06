@@ -19,6 +19,7 @@ export default {
   562: 'https://img.pokemondb.net/artwork/large/yamask-galarian.jpg',
   618: 'https://img.pokemondb.net/artwork/large/stunfisk-galarian.jpg',
   862: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/862.png',
+  863: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/863.png',
 
   '52s':
     'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10161.png',
@@ -60,4 +61,6 @@ export default {
     'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10180.png',
   '862s':
     'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/862.png',
+  '863s':
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/863.png',
 };

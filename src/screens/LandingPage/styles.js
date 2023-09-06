@@ -110,4 +110,26 @@ export default styles = StyleSheet.create({
     height: verticalScale(40),
     width: horizontalScale(40),
   },
+  redoIcon: {
+    height: verticalScale(40),
+    width: horizontalScale(40),
+    marginRight: horizontalScale(58),
+  },
+  reloadDataText: {
+    textAlign: 'center',
+    fontSize: moderateScale(10),
+    fontFamily: fontFamily.primaryFontFamilyMedium,
+    color: colors?.white,
+    marginTop: verticalScale(10),
+  },
+  redoIconContainer: {
+    top: verticalScale(30),
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  redoIconView: {
+    height: verticalScale(40),
+    width: horizontalScale(40),
+  },
 });

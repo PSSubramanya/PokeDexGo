@@ -513,31 +513,21 @@ const EggDetailsScreen = props => {
     const pokemonNameValue = val?.pokemon_name.toLowerCase();
     let variantCategoryValue = '';
 
-    let isVariantCategory =
-      val?.form === 'Alola' ||
-      val?.form === 'Galarian' ||
-      val?.form === 'Hisuian';
+    let sourceImage = '';
 
     if (val?.form === 'Alola') {
-      variantCategoryValue = '-alolan.jpg';
+      sourceImage = pokemon_alolan_variants[pokemonId];
     } else if (val?.form === 'Galarian') {
-      variantCategoryValue = '-galarian.jpg';
+      sourceImage = pokemon_galarian_variants[pokemonId];
     } else if (val?.form === 'Hisuian') {
-      variantCategoryValue = '-hisuian.jpg';
+      sourceImage = pokemon_hisuian_variants[pokemonId];
     } else {
-      variantCategoryValue = '-alolan.jpg';
+      sourceImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
     }
-
-    // case1: pokemonNameValue==="perrserker",pokemonNameValue==="obstagoon"
-
-    const sourceImage = isVariantCategory
-      ? pokemonNameValue === 'perrserker' || pokemonNameValue === 'obstagoon'
-        ? `https://img.pokemondb.net/artwork/large/${pokemonNameValue}.jpg`
-        : `https://img.pokemondb.net/artwork/large/${pokemonNameValue}${variantCategoryValue}`
-      : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
 
     console.log(
       'EVOLUTION INDEX',
+      pokemonNameValue,
       val,
       ind,
       val?.evolutions?.[0]?.candy_required,

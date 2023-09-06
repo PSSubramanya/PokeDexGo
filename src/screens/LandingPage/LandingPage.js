@@ -64,6 +64,7 @@ const LandingPage = ({navigation}) => {
   const [loadEggData, setLoadEggData] = useState([]);
   const [loadRaidBossData, setRaidBossData] = useState([]);
   const [darkModeStatus, setDarkModeStatus] = useState(true);
+  const [reloadData, setReloadData] = useState(true);
   const [uniqueDeviceIdValue, setUniqueDeviceIdValue] = useState('');
 
   useEffect(() => {
@@ -110,7 +111,7 @@ const LandingPage = ({navigation}) => {
       });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [networkState]);
+  }, [networkState, reloadData]);
 
   useEffect(() => {
     dispatch(eventDataLoad(loadData));
@@ -130,7 +131,7 @@ const LandingPage = ({navigation}) => {
         setLoadEggData(loadedEggData);
       });
     });
-  }, [loadEggData]);
+  }, [loadEggData, reloadData]);
 
   useEffect(() => {
     let loadedRaidBossData;
@@ -142,7 +143,7 @@ const LandingPage = ({navigation}) => {
         setRaidBossData(loadedRaidBossData);
       });
     });
-  }, [loadRaidBossData]);
+  }, [loadRaidBossData, reloadData]);
 
   const appIconContainer = () => {
     return (
@@ -291,6 +292,30 @@ const LandingPage = ({navigation}) => {
     );
   };
 
+  const redoIcon = () => {
+    return (
+      <>
+        {loadData?.length === 0 ? (
+          <View style={styles.redoIconContainer}>
+            <TouchableOpacity
+              onPress={() => {
+                setReloadData(true);
+              }}
+              style={styles.redoIconView}>
+              <Image
+                source={imagePaths.redoIcon}
+                height={1}
+                width={1}
+                style={styles.redoIcon}
+              />
+            </TouchableOpacity>
+            <Text style={styles?.reloadDataText}>Reload Data</Text>
+          </View>
+        ) : null}
+      </>
+    );
+  };
+
   const mainContainerBody = () => {
     return (
       <View
@@ -302,8 +327,9 @@ const LandingPage = ({navigation}) => {
           },
           styles.mainContainer,
         ]}>
-        {appIconContainer()}
-        {navigationButtons()}
+        {loadData?.length !== 0 ? appIconContainer() : null}
+        {loadData?.length !== 0 ? navigationButtons() : null}
+        {redoIcon()}
         {/* {darkModeButton()} */}
         {/* <CircleRightArrow /> */}
       </View>

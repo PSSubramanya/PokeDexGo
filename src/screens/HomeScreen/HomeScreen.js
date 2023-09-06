@@ -22,7 +22,6 @@ import CalendarView from '../../components/CalendarView/CalendarView';
 import CardView from '../../components/CardView/CardView';
 import {chooseFile} from '../../ultilities/commonFunctions';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
-import {eventDataLoad} from '../../actions/eventData';
 
 // remove this later
 import fontFamily from '../../ultilities/fontFamily';
@@ -89,8 +88,6 @@ const HomeScreen = props => {
   const showModal = () => setModalVisible(true);
 
   const hideModal = () => setModalVisible(false);
-
-  console.log('loadData - DATA', loadData, loadedEventJSONData);
 
   const cardContainerView = () => {
     return (
@@ -389,22 +386,20 @@ const HomeScreen = props => {
     return (
       <View>
         <View style={[styles.flexRow, styles.centerContainer]}>
-          {loadData?.length !== 0 ? (
-            <TouchableOpacity
-              onPress={() => {
-                var a = selectedStartDate;
-                // no_of_days is an integer value
-                var b = new Date(a.setDate(a.getDate() - 1));
-                setSelectedStartDate(b);
-              }}>
-              <Image
-                source={imagePaths.leftChevronIcon}
-                height={1}
-                width={1}
-                style={[styles.chevronIcon, styles.rightChevronIcon]}
-              />
-            </TouchableOpacity>
-          ) : null}
+          <TouchableOpacity
+            onPress={() => {
+              var a = selectedStartDate;
+              // no_of_days is an integer value
+              var b = new Date(a.setDate(a.getDate() - 1));
+              setSelectedStartDate(b);
+            }}>
+            <Image
+              source={imagePaths.leftChevronIcon}
+              height={1}
+              width={1}
+              style={[styles.chevronIcon, styles.rightChevronIcon]}
+            />
+          </TouchableOpacity>
           <View style={{marginBottom: 50}}>
             <View style={styles.centerContainer}>
               <View style={styles.flexRow}>
@@ -457,28 +452,6 @@ const HomeScreen = props => {
                 </Text>
               </View>
             )}
-            {loadData?.length === 0 ? (
-              <View
-                style={{
-                  top: 30,
-                  alignContent: 'center',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <TouchableOpacity
-                  onPress={() => {
-                    //
-                  }}
-                  style={{height: 40, width: 40}}>
-                  <Image
-                    source={imagePaths.redoIcon}
-                    height={1}
-                    width={1}
-                    style={[styles.chevronIcon, styles.rightChevronIcon]}
-                  />
-                </TouchableOpacity>
-              </View>
-            ) : null}
             {/* TODO: THIS FOR V2 or V3 */}
             {/* <View style={commonStyling.absoluteCenterStyling}>
             <Button
@@ -491,22 +464,20 @@ const HomeScreen = props => {
             />
           </View> */}
           </View>
-          {loadData?.length !== 0 ? (
-            <TouchableOpacity
-              onPress={() => {
-                var a = selectedStartDate;
-                // no_of_days is an integer value
-                var b = new Date(a.setDate(a.getDate() + 1));
-                setSelectedStartDate(b);
-              }}>
-              <Image
-                source={imagePaths.rightChevronIcon}
-                height={1}
-                width={1}
-                style={[styles.chevronIcon, styles.leftChevronIcon]}
-              />
-            </TouchableOpacity>
-          ) : null}
+          <TouchableOpacity
+            onPress={() => {
+              var a = selectedStartDate;
+              // no_of_days is an integer value
+              var b = new Date(a.setDate(a.getDate() + 1));
+              setSelectedStartDate(b);
+            }}>
+            <Image
+              source={imagePaths.rightChevronIcon}
+              height={1}
+              width={1}
+              style={[styles.chevronIcon, styles.leftChevronIcon]}
+            />
+          </TouchableOpacity>
         </View>
         {/* <TouchableOpacity
           style={styles.viewEventIcon}
