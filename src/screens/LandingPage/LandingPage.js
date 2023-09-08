@@ -8,7 +8,9 @@ import {
   SafeAreaView,
   StatusBar,
   FlatList,
+  Linking,
 } from 'react-native';
+import {Modal, Portal} from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
 import DeviceInfo from 'react-native-device-info';
 import {useNetStatusInfo} from '../../ultilities/customHooks/useNetStatusInfo';
@@ -49,7 +51,7 @@ const LandingPage = ({navigation}) => {
     //   image: imagePaths.fieldResearchIcon,
     // },
     {
-      name: 'Raid Boss',
+      name: 'Raid Bosses',
       navigationPath: 'RaidBossScreen',
       image: imagePaths.raidIcon,
     },
@@ -65,6 +67,7 @@ const LandingPage = ({navigation}) => {
   const [loadRaidBossData, setRaidBossData] = useState([]);
   const [darkModeStatus, setDarkModeStatus] = useState(true);
   const [reloadData, setReloadData] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
   const [uniqueDeviceIdValue, setUniqueDeviceIdValue] = useState('');
 
   useEffect(() => {
@@ -145,9 +148,55 @@ const LandingPage = ({navigation}) => {
     });
   }, [loadRaidBossData, reloadData]);
 
+  const showModal = () => {
+    setModalVisible(true);
+  };
+
+  const hideModal = () => {
+    setModalVisible(false);
+  };
+
+  const modalContainer = () => {
+    return (
+      <View style={styles.modalInnerStyle}>
+        <Text style={styles.queryText}>
+          For any questions or concerns, please get in touch with the following
+          email address:
+        </Text>
+        <TouchableOpacity
+          onPress={() => {
+            Linking.openURL('mailto:sarrarpa69@gmail.com');
+          }}>
+          <Text style={[styles.queryText, styles.emailText]}>
+            sarrarpa69@gmail.com
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
+  const infoButton = () => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          setModalVisible(true);
+        }}
+        style={styles.infoIconButton}>
+        <Image
+          source={imagePaths?.questionMarkIcon}
+          height={1}
+          width={1}
+          style={styles.infoIcon}
+          resizeMode={'contain'}
+        />
+      </TouchableOpacity>
+    );
+  };
+
   const appIconContainer = () => {
     return (
       <View style={styles.centerAlignmentStyle}>
+        {infoButton()}
         <Image
           source={imagePaths.appIcon}
           height={1}
@@ -177,7 +226,7 @@ const LandingPage = ({navigation}) => {
             navigation.navigate(item?.navigationPath, {loadData: loadData});
           } else if (item?.name === 'Eggs') {
             navigation.navigate(item?.navigationPath, {loadData: loadEggData});
-          } else if (item?.name === 'Raid Boss') {
+          } else if (item?.name === 'Raid Bosses') {
             navigation.navigate(item?.navigationPath, {
               loadData: loadRaidBossData,
             });
@@ -300,19 +349,39 @@ const LandingPage = ({navigation}) => {
             <TouchableOpacity
               onPress={() => {
                 setReloadData(true);
-              }}
-              style={styles.redoIconView}>
+              }}>
               <Image
-                source={imagePaths.redoIcon}
+                source={imagePaths.appIcon}
                 height={1}
                 width={1}
                 style={styles.redoIcon}
               />
             </TouchableOpacity>
-            <Text style={styles?.reloadDataText}>Reload Data</Text>
+            <Text style={styles?.reloadDataText}>Loading Data</Text>
           </View>
         ) : null}
       </>
+    );
+  };
+
+  const modalPopUp = () => {
+    return (
+      <Portal>
+        <Modal
+          style={styles.modalMarginStyle}
+          visible={modalVisible}
+          onDismiss={hideModal}
+          contentContainerStyle={[
+            styles.modalExternalStyle,
+            {
+              backgroundColor: darkModeValue
+                ? colors.quaternaryBackgroundColorDarkMode
+                : colors.white,
+            },
+          ]}>
+          {modalContainer()}
+        </Modal>
+      </Portal>
     );
   };
 
@@ -330,6 +399,7 @@ const LandingPage = ({navigation}) => {
         {loadData?.length !== 0 ? appIconContainer() : null}
         {loadData?.length !== 0 ? navigationButtons() : null}
         {redoIcon()}
+        {modalPopUp()}
         {/* {darkModeButton()} */}
         {/* <CircleRightArrow /> */}
       </View>

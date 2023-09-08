@@ -159,7 +159,12 @@ export default styles = StyleSheet.create({
   },
   eventNumberText: {
     fontFamily: fontFamily.primaryFontFamilyRegular,
-    fontSize: moderateScale(12),
+    fontSize: moderateScale(16),
+  },
+  eventNumberText2: {
+    fontFamily: fontFamily.primaryFontFamilyBold,
+    marginLeft: horizontalScale(5),
+    color: colors?.white,
   },
   paginationView: {
     flexDirection: 'row',

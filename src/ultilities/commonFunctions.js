@@ -385,6 +385,9 @@ export const individualPokemonImageMapping = (displayData, pokeId, name) => {
     if (finalString?.length > 6) {
       pushedImage = modalImages;
       return pushedImage;
+    } else if (pokeId.toString() === '201') {
+      pushedImage = modalImages;
+      return pushedImage;
     } else {
       pushedImage = tempImage;
       return pushedImage;

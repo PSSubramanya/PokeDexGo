@@ -803,6 +803,9 @@ const EventViewScreen = props => {
           finalString,
         )}.png`;
         displayableModalImages = [...displayableModalImages, pushedImage];
+      } else if (modalData?.pokemonId[idx] === '201') {
+        pushedImage = data;
+        displayableModalImages = [...displayableModalImages, pushedImage];
       } else {
         const tempImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${modalData?.pokemonId[idx]}.png`;
 
@@ -928,17 +931,22 @@ const EventViewScreen = props => {
             ? moment(selectedStartDate).format('MMM Do, YYYY')
             : ''}
         </Text>
-        <Text
-          style={[
-            styles.eventNumberText,
-            {
-              color: darkModeValue
-                ? colors.primaryTextColorDarkMode
-                : colors.secondaryColor,
-            },
-          ]}>
-          {strings.number_of_events} : {eventsData?.length ?? 0}
-        </Text>
+        <View style={commonStyling?.flexRow}>
+          <Text
+            style={[
+              styles.eventNumberText,
+              {
+                color: darkModeValue
+                  ? colors.primaryTextColorDarkMode
+                  : colors.secondaryColor,
+              },
+            ]}>
+            {strings.number_of_events} :
+          </Text>
+          <Text style={[styles.eventNumberText, styles.eventNumberText2]}>
+            {eventsData?.length ?? 0}
+          </Text>
+        </View>
       </View>
     );
   };

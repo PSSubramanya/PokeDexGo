@@ -45,7 +45,7 @@ const TrainerInfoScreen = props => {
     {
       id: 7,
       description:
-        'This app also provides egg hatching data for 2,5,7,10,12 Kms of the current season.',
+        'This app also provides egg hatching data for 2, 5, 7, 10, 12 kms of the current season.',
     },
     {
       id: 8,
