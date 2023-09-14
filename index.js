@@ -57,7 +57,7 @@ const RNRedux = () => {
         <Modal
           style={styles.modalMarginStyle}
           visible={modalVisible}
-          contentContainerStyle={styles.modalExternalStyle}>
+          contentContainerStyle={[styles.modalExternalStyle]}>
           {modalContainer()}
         </Modal>
       </Portal>

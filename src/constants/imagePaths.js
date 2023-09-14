@@ -1,6 +1,7 @@
 export default {
   //AppIcon
-  appIcon: require('../assets/images/icons/pokemonAppIcon.png'),
+  // appIcon: require('../assets/images/icons/pokemonAppIcon.png'),
+  appIcon: require('../assets/images/icons/pokeAppIcon.png'),
 
   //Icons
   cancelIcon: require('../assets/images/icons/cancelIcon.png'),

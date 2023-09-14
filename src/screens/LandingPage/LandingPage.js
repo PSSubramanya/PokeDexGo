@@ -69,6 +69,19 @@ const LandingPage = ({navigation}) => {
   const [reloadData, setReloadData] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
   const [uniqueDeviceIdValue, setUniqueDeviceIdValue] = useState('');
+  const [countDownTimer, setCountDownTimer] = useState(10);
+
+  const decreaseTimer = () => {
+    setCountDownTimer(prev => prev - 1);
+  };
+
+  useEffect(() => {
+    countDownTimer > 0
+      ? setTimeout(() => {
+          decreaseTimer();
+        }, 1000)
+      : setReloadData(true);
+  }, [countDownTimer]);
 
   useEffect(() => {
     soundTracks?.pikapika1.play(success => {
@@ -344,7 +357,7 @@ const LandingPage = ({navigation}) => {
   const redoIcon = () => {
     return (
       <>
-        {loadData?.length === 0 ? (
+        {networkState && loadData?.length === 0 ? (
           <View style={styles.redoIconContainer}>
             <TouchableOpacity
               onPress={() => {
@@ -358,6 +371,7 @@ const LandingPage = ({navigation}) => {
               />
             </TouchableOpacity>
             <Text style={styles?.reloadDataText}>Loading Data</Text>
+            <Text style={styles?.reloadDataText}>{countDownTimer}</Text>
           </View>
         ) : null}
       </>

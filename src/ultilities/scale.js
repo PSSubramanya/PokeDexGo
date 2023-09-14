@@ -5,8 +5,11 @@ const {width, height} = Dimensions.get('window');
  * Guideline sizes are based on the designs for iPhone X screen mobile device
  * iPhone X Resolution: 375 x 812 dp.
  */
+
+console.log('WIDTH', width, 'HEIGHT', height, 'ASPECT RATIO', width / height);
+const aspectRatio = width / height;
 const guidelineBaseWidth = 375;
-const guidelineBaseHeight = 812;
+const guidelineBaseHeight = aspectRatio < 0.52 ? 812 : 680;
 // const guidelineBaseWidth = 375;
 // const guidelineBaseHeight = 680;
 

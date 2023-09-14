@@ -50,7 +50,7 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalText: {
-    fontSize: moderateScale(18),
+    fontSize: moderateScale(14),
     fontFamily: fontFamily.primaryFontFamilyMedium,
     color: colors.purple,
   },
