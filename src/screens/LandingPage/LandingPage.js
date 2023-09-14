@@ -11,7 +11,7 @@ import {
   Linking,
 } from 'react-native';
 import {Modal, Portal} from 'react-native-paper';
-import firestore from '@react-native-firebase/firestore';
+// import firestore from '@react-native-firebase/firestore';
 import DeviceInfo from 'react-native-device-info';
 import {useNetStatusInfo} from '../../ultilities/customHooks/useNetStatusInfo';
 import strings from '../../constants/strings';
@@ -27,7 +27,7 @@ import webscrappedData from '../../ultilities/pokemonData/pokemon_data6.json';
 import eggData from '../../ultilities/pokemonData/egg_data.json';
 
 const LandingPage = ({navigation}) => {
-  const subscriber = firestore().collection('Users').doc(uniqueDeviceIdValue);
+  // const subscriber = firestore().collection('Users').doc(uniqueDeviceIdValue);
 
   const dispatch = useDispatch();
   const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
