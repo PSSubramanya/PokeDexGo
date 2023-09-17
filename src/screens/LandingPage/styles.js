@@ -19,6 +19,12 @@ export default styles = StyleSheet.create({
     marginBottom: verticalScale(30),
     marginTop: verticalScale(30),
   },
+  serverErrorIcon: {
+    height: verticalScale(80),
+    width: horizontalScale(80),
+    marginBottom: verticalScale(20),
+    marginTop: verticalScale(30),
+  },
   appName: {
     fontSize: moderateScale(20),
     fontFamily: fontFamily.primaryFontFamilyMedium,
@@ -149,5 +155,11 @@ export default styles = StyleSheet.create({
   infoIcon: {
     height: verticalScale(25),
     width: horizontalScale(25),
+  },
+  modalHeaderText: {
+    fontSize: moderateScale(12),
+    fontFamily: fontFamily.primaryFontFamilyBold,
+    color: colors.secondaryRedColor,
+    marginBottom: verticalScale(20),
   },
 });

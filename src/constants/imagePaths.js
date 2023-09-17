@@ -36,6 +36,7 @@ export default {
   redoIcon: require('../assets/images/icons/redoIcon.png'),
   infoIcon: require('../assets/images/icons/ibutton.png'),
   questionMarkIcon: require('../assets/images/icons/questionmark.png'),
+  serverErrorIcon: require('../assets/images/icons/serverErrorIcon.png'),
 
   //Images
   calendar1: require('../assets/images/calendar.png'),

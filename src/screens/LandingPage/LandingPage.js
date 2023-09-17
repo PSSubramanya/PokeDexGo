@@ -67,6 +67,8 @@ const LandingPage = ({navigation}) => {
   const [reloadData, setReloadData] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
   const [uniqueDeviceIdValue, setUniqueDeviceIdValue] = useState('');
+  const [modalDisplayText, setModalDisplayText] = useState('');
+  const [modalTypeValue, setModalType] = useState('');
   const [countDownTimer, setCountDownTimer] = useState(10);
 
   useEffect(() => {
@@ -75,11 +77,14 @@ const LandingPage = ({navigation}) => {
   }, [darkModeStatus]);
 
   useEffect(() => {
-    countDownTimer > 0
-      ? setTimeout(() => {
-          decreaseTimer();
-        }, 1000)
-      : setReloadData(true);
+    if (loadData?.length === 0) {
+      countDownTimer > 0
+        ? setTimeout(() => {
+            decreaseTimer();
+          }, 1000)
+        : serverMaintainanceError();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countDownTimer]);
 
   useEffect(() => {
@@ -108,7 +113,7 @@ const LandingPage = ({navigation}) => {
           // Do something with the retrieved data, e.g., display it in your component.
           const serializedValue = JSON.parse(themVal);
           setDarkModeStatus(serializedValue);
-        } else if (themVal === false) {
+        } else {
           // Handle the case where data doesn't exist.
         }
       })
@@ -119,16 +124,42 @@ const LandingPage = ({navigation}) => {
 
   useEffect(() => {
     let loadedData;
-    fetch(
-      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/pokemondata',
-    )?.then(response => {
-      response.json()?.then(res => {
-        loadedData = res?.data;
-        setLoadData(loadedData);
+
+    retrieveData('eventsData')
+      .then(themVal => {
+        if (themVal) {
+          // Do something with the retrieved data, e.g., display it in your component.
+          const serializedValue = JSON.parse(themVal);
+          loadedData = serializedValue;
+          setLoadData(loadedData);
+          console.log('SERIALISED EVENTS DATA VALUE', loadedData);
+        } else {
+          // Handle the case where data doesn't exist.
+          fetch(
+            'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/pokemondata',
+          )
+            ?.then(response => {
+              response.json()?.then(res => {
+                loadedData = res?.data;
+                setLoadData(loadedData);
+                storeData('eventsData', loadedData);
+                hideModal();
+                console.log(
+                  'SERIALISED EVENTS DATA VALUE from API',
+                  loadedData,
+                );
+              });
+            })
+            .catch(err => {
+              console.log('SERIALISED EVENTS DATA VALUE ERROR', err);
+            });
+        }
+      })
+      .catch(err => {
+        console.log('events data fetch ERROR.', err);
       });
-    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [networkState, reloadData]);
+  }, [networkState]);
 
   useEffect(() => {
     dispatch(eventDataLoad(loadData));
@@ -136,34 +167,72 @@ const LandingPage = ({navigation}) => {
   }, [loadData]);
 
   useEffect(() => {
-    // let loadedData = eggData?.data;
-    // setLoadEggData(loadedData);
-
     let loadedEggData;
-    fetch(
-      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/eggData',
-    ).then(response => {
-      response.json().then(res => {
-        loadedEggData = res?.data;
-        setLoadEggData(loadedEggData);
+
+    retrieveData('eggsData')
+      .then(eggVal => {
+        if (eggVal) {
+          const serializedValue = JSON.parse(eggVal);
+          loadedEggData = serializedValue;
+          setLoadEggData(loadedEggData);
+          console.log('SERIALISED EGG DATA VALUE', loadedEggData);
+        } else {
+          fetch(
+            'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/eggData',
+          ).then(response => {
+            response.json().then(res => {
+              loadedEggData = res?.data;
+              setLoadEggData(loadedEggData);
+              storeData('eggsData', loadedEggData);
+              hideModal();
+            });
+          });
+        }
+      })
+      .catch(err => {
+        console.log('eggs data ERROR.', err);
       });
-    });
-  }, [loadEggData, reloadData]);
+  }, [networkState]);
 
   useEffect(() => {
     let loadedRaidBossData;
-    fetch(
-      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/raidBosses',
-    ).then(response => {
-      response.json().then(res => {
-        loadedRaidBossData = res?.data;
-        setRaidBossData(loadedRaidBossData);
+
+    retrieveData('raidsData')
+      .then(raidVal => {
+        if (raidVal) {
+          // Do something with the retrieved data, e.g., display it in your component.
+          const serializedValue = JSON.parse(raidVal);
+          loadedRaidBossData = serializedValue;
+          setRaidBossData(loadedRaidBossData);
+          console.log('SERIALISED RAID DATA VALUE', loadedRaidBossData);
+        } else {
+          // Handle the case where data doesn't exist.
+          fetch(
+            'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/raidBosses',
+          ).then(response => {
+            response.json().then(res => {
+              loadedRaidBossData = res?.data;
+              setRaidBossData(loadedRaidBossData);
+              storeData('raidsData', loadedRaidBossData);
+              hideModal();
+            });
+          });
+        }
+      })
+      .catch(err => {
+        console.log('raids data ERROR.', err);
       });
-    });
-  }, [loadRaidBossData, reloadData]);
+  }, [networkState]);
 
   const decreaseTimer = () => {
     setCountDownTimer(prev => prev - 1);
+  };
+
+  const serverMaintainanceError = () => {
+    const serverErrorModalText = 'SERVER UNDER MAINTAINANCE';
+    setModalType('server-error');
+    setModalDisplayText(serverErrorModalText);
+    showModal();
   };
 
   const showModal = () => {
@@ -174,20 +243,33 @@ const LandingPage = ({navigation}) => {
     setModalVisible(false);
   };
 
-  const modalContainer = () => {
+  const modalContainer = (modalText, modalType) => {
     return (
       <View style={styles.modalInnerStyle}>
-        <Text style={styles.queryText}>
-          For any questions or concerns, please get in touch with the following
-          email address:
-        </Text>
+        {modalType === 'server-error' ? (
+          <Image
+            source={imagePaths.serverErrorIcon}
+            height={1}
+            width={1}
+            resizeMode="contain"
+            style={[styles.serverErrorIcon]}
+          />
+        ) : null}
+        {modalType === 'server-error' ? (
+          <Text style={styles.modalHeaderText}>SOMETHING WENT WRONG</Text>
+        ) : null}
+        <Text style={styles.queryText}>{modalText}</Text>
         <TouchableOpacity
           onPress={() => {
-            Linking.openURL('mailto:sarrarpa69@gmail.com');
+            if (modalType === 'email') {
+              Linking.openURL('mailto:sarrarpa69@gmail.com');
+            }
           }}>
-          <Text style={[styles.queryText, styles.emailText]}>
-            sarrarpa69@gmail.com
-          </Text>
+          {modalType === 'email' ? (
+            <Text style={[styles.queryText, styles.emailText]}>
+              sarrarpa69@gmail.com
+            </Text>
+          ) : null}
         </TouchableOpacity>
       </View>
     );
@@ -197,6 +279,10 @@ const LandingPage = ({navigation}) => {
     return (
       <TouchableOpacity
         onPress={() => {
+          const modalQueryDisplayText =
+            'For any questions or concerns, please get in touch with the following email address:';
+          setModalType('email');
+          setModalDisplayText(modalQueryDisplayText);
           showModal();
         }}
         style={styles.infoIconButton}>
@@ -385,7 +471,7 @@ const LandingPage = ({navigation}) => {
     );
   };
 
-  const modalPopUp = () => {
+  const modalPopUp = (modalDisplayText, type) => {
     return (
       <Portal>
         <Modal
@@ -400,7 +486,7 @@ const LandingPage = ({navigation}) => {
                 : colors.white,
             },
           ]}>
-          {modalContainer()}
+          {modalContainer(modalDisplayText, type)}
         </Modal>
       </Portal>
     );
@@ -420,8 +506,8 @@ const LandingPage = ({navigation}) => {
         {loadData?.length !== 0 ? appIconContainer() : null}
         {loadData?.length !== 0 ? navigationButtons() : null}
         {redoIcon()}
-        {modalPopUp()}
-        {darkModeButton()}
+        {modalPopUp(modalDisplayText, modalTypeValue)}
+        {/* {darkModeButton()} */}
         {/* <CircleRightArrow /> */}
       </View>
     );
