@@ -1,5 +1,6 @@
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
+import {AsyncStorage} from 'react-native';
 import {
   requestCameraPermission,
   requestExternalWritePermission,
@@ -233,25 +234,31 @@ export const pokeImageMappingFunction = displayData => {
   return displayableModalImages;
 };
 
-export const storeData = async (keyString, value) => {
+export const storeData = async (key, value) => {
   try {
-    if (value !== null || value !== undefined) {
-      console.log('STORED DATA 12', keyString, JSON.stringify(value));
-    }
-    await AsyncStorage.setItem(keyString, JSON.stringify(value));
+    const serializeData = JSON.stringify(value);
+    await AsyncStorage.setItem(key, serializeData);
+    console.log(
+      `themValVALUE Data stored successfully for key 1: ${key} - ${value}`,
+    );
   } catch (error) {
-    console.log('ERROR IN STORAGE', error);
+    console.error(`themValVALUE Error storing data for key ${key}: ${error}`);
   }
 };
 
-export const getData = async keyString => {
+export const retrieveData = async key => {
   try {
-    // const savedUser = await AsyncStorage.getItem("user");
-    const savedData = await AsyncStorage.getItem(keyString);
-    const currentData = JSON.parse(savedData);
-    console.log('FETCHED DATA 1', currentData);
+    const value = await AsyncStorage.getItem(key);
+    if (value !== null) {
+      console.log(`themValVALUE Retrieved data for key 1 ${key}: ${value}`);
+      return value;
+    } else {
+      console.log(`themValVALUE No data found for key: ${key}`);
+    }
   } catch (error) {
-    console.log('ERROR IN FETCHING', error);
+    console.error(
+      `themValVALUE Error retrieving data for key ${key}: ${error}`,
+    );
   }
 };
 

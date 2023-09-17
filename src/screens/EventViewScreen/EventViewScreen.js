@@ -900,6 +900,7 @@ const EventViewScreen = props => {
 
   const setSelectedMonth = () => {
     setEventsData(null);
+    setSelectedStartDate(null);
   };
 
   const calandarView = () => {

@@ -19,7 +19,7 @@ import imagePaths from '../../constants/imagePaths';
 import colors from '../../constants/colors';
 import soundTracks from '../../constants/soundTracks';
 import {eventDataLoad, darkModeActivation} from '../../actions/eventData';
-import {storeData, getData} from '../../ultilities/commonFunctions';
+import {storeData, retrieveData} from '../../ultilities/commonFunctions';
 import styles from './styles';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
 import {CircleRightArrow} from '../../assets/images/svg';
@@ -30,8 +30,6 @@ const LandingPage = ({navigation}) => {
   // const subscriber = firestore().collection('Users').doc(uniqueDeviceIdValue);
 
   const dispatch = useDispatch();
-  const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
-  const darkModeValue = darkMode?.data;
   const {networkState} = useNetStatusInfo();
 
   const navigationScreens = [
@@ -71,9 +69,10 @@ const LandingPage = ({navigation}) => {
   const [uniqueDeviceIdValue, setUniqueDeviceIdValue] = useState('');
   const [countDownTimer, setCountDownTimer] = useState(10);
 
-  const decreaseTimer = () => {
-    setCountDownTimer(prev => prev - 1);
-  };
+  useEffect(() => {
+    dispatch(darkModeActivation(darkModeStatus));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [darkModeStatus]);
 
   useEffect(() => {
     countDownTimer > 0
@@ -97,23 +96,25 @@ const LandingPage = ({navigation}) => {
     soundTracks?.pikapika1.setNumberOfLoops(0); // NOTE: Loop indefinitely until stop() is called
   }, []);
 
-  // console.log('DEVICE INFO', DeviceInfo.getUniqueID());//getDeviceId()
-  // console.log('DEVICE INFO', DeviceInfo.getUniqueId()); //getDeviceId()
-
   useEffect(() => {
     DeviceInfo.getUniqueId().then(uniqueId => {
       const tempId = uniqueId;
       setUniqueDeviceIdValue(tempId);
     });
 
-    //NOTE: Try to use AsyncStorage here with right usage
-    const initialDarkModeStatus =
-      getData('darkModeStatus') !== null ||
-      getData('darkModeStatus') !== undefined
-        ? getData('darkModeStatus')
-        : true;
-
-    setDarkModeStatus(initialDarkModeStatus);
+    retrieveData('themeStatus')
+      .then(themVal => {
+        if (themVal) {
+          // Do something with the retrieved data, e.g., display it in your component.
+          const serializedValue = JSON.parse(themVal);
+          setDarkModeStatus(serializedValue);
+        } else if (themVal === false) {
+          // Handle the case where data doesn't exist.
+        }
+      })
+      .catch(err => {
+        console.log('themVal ERROR.', err);
+      });
   }, []);
 
   useEffect(() => {
@@ -161,6 +162,10 @@ const LandingPage = ({navigation}) => {
     });
   }, [loadRaidBossData, reloadData]);
 
+  const decreaseTimer = () => {
+    setCountDownTimer(prev => prev - 1);
+  };
+
   const showModal = () => {
     setModalVisible(true);
   };
@@ -192,7 +197,7 @@ const LandingPage = ({navigation}) => {
     return (
       <TouchableOpacity
         onPress={() => {
-          setModalVisible(true);
+          showModal();
         }}
         style={styles.infoIconButton}>
         <Image
@@ -220,7 +225,7 @@ const LandingPage = ({navigation}) => {
           style={[
             styles.appName,
             {
-              color: darkModeValue
+              color: darkModeStatus
                 ? colors.primaryTextColorDarkMode
                 : colors.secondaryColor,
             },
@@ -250,7 +255,7 @@ const LandingPage = ({navigation}) => {
         <View
           style={[
             {
-              backgroundColor: darkModeValue
+              backgroundColor: darkModeStatus
                 ? colors.tertiaryBackgroundColorDarkMode
                 : colors.secondaryBackgroundColor,
             },
@@ -266,7 +271,7 @@ const LandingPage = ({navigation}) => {
           <Text
             style={[
               {
-                color: darkModeValue
+                color: darkModeStatus
                   ? colors.primaryTextColorDarkMode
                   : colors.primaryColor,
               },
@@ -303,6 +308,7 @@ const LandingPage = ({navigation}) => {
           const currentTheme = darkModeStatus;
           setDarkModeStatus(!currentTheme);
           dispatch(darkModeActivation(!currentTheme));
+          storeData('themeStatus', !currentTheme);
 
           // firestore()
           //   .collection('Users')
@@ -340,7 +346,7 @@ const LandingPage = ({navigation}) => {
         <View style={styles.darkModeButton}>
           <Image
             source={
-              darkModeValue
+              darkModeStatus
                 ? imagePaths.darkModeIcon
                 : imagePaths.brightModeIcon
             }
@@ -370,8 +376,9 @@ const LandingPage = ({navigation}) => {
                 style={styles.redoIcon}
               />
             </TouchableOpacity>
-            <Text style={styles?.reloadDataText}>Loading Data</Text>
-            <Text style={styles?.reloadDataText}>{countDownTimer}</Text>
+            <Text style={styles?.reloadDataText}>
+              Loading Data in {countDownTimer} seconds
+            </Text>
           </View>
         ) : null}
       </>
@@ -388,7 +395,7 @@ const LandingPage = ({navigation}) => {
           contentContainerStyle={[
             styles.modalExternalStyle,
             {
-              backgroundColor: darkModeValue
+              backgroundColor: darkModeStatus
                 ? colors.quaternaryBackgroundColorDarkMode
                 : colors.white,
             },
@@ -404,7 +411,7 @@ const LandingPage = ({navigation}) => {
       <View
         style={[
           {
-            backgroundColor: darkModeValue
+            backgroundColor: darkModeStatus
               ? colors.secondaryBackgroundColorDarkMode
               : null,
           },
@@ -414,7 +421,7 @@ const LandingPage = ({navigation}) => {
         {loadData?.length !== 0 ? navigationButtons() : null}
         {redoIcon()}
         {modalPopUp()}
-        {/* {darkModeButton()} */}
+        {darkModeButton()}
         {/* <CircleRightArrow /> */}
       </View>
     );
@@ -422,7 +429,10 @@ const LandingPage = ({navigation}) => {
 
   return (
     <SafeAreaView style={{}}>
-      <StatusBar barStyle={'dark-content'} backgroundColor={colors.darkBlue} />
+      <StatusBar
+        barStyle={'dark-content'}
+        backgroundColor={colors.secondaryBackgroundColorDarkMode}
+      />
       {mainContainerBody()}
     </SafeAreaView>
   );
