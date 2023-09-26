@@ -13,6 +13,7 @@ import mockFieldResearchData from '../../ultilities/pokemonData/mock_field_resea
 import imagePaths from '../../constants/imagePaths';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
 import styles from './styles.js';
+import colors from '../../constants/colors';
 
 const FieldResearchScreen = props => {
   // const dispData = mockFieldResearchData?.data;
@@ -29,7 +30,13 @@ const FieldResearchScreen = props => {
 
   const handleSpringAnimation = (rewardsArray, selectedReward) => {
     const allowAnimation = rewardsArray?.includes(selectedReward);
-    console.log('allowAnimation', allowAnimation, rewardsArray);
+    console.log(
+      'allowAnimation',
+      allowAnimation,
+      rewardsArray,
+      selectedReward,
+      rewardsArray?.[-1],
+    );
     springAnimationVariable.setValue(0.75);
     Animated.spring(springAnimationVariable, {
       toValue: allowAnimation ? 1 : 0,
@@ -38,28 +45,9 @@ const FieldResearchScreen = props => {
     }).start();
   };
 
-  const displayRewards = eventItem => {
-    const tempRewardsSectionDisplay = rewardSectionDisplay;
-    let tempArray = [];
-
-    if (tempRewardsSectionDisplay.includes(eventItem?.researchtDescription)) {
-      tempArray = tempRewardsSectionDisplay.filter(
-        obj => obj !== eventItem?.researchtDescription,
-      );
-      setRewardSectionDisplay(tempArray);
-    } else {
-      tempArray = [
-        ...tempRewardsSectionDisplay,
-        eventItem?.researchtDescription,
-      ];
-      setRewardSectionDisplay(tempArray);
-      handleSpringAnimation(tempArray, eventItem?.researchtDescription);
-    }
-  };
-
   const fieldResearchCardContainer = item => {
     return (
-      <View style={{}}>
+      <View style={{backgroundColor: colors?.secondaryBackgroundColorDarkMode}}>
         <View style={styles.researchHeaderStyle}>
           <Text style={styles.researchHeaderText}>{item?.researchName}</Text>
         </View>
@@ -88,19 +76,22 @@ const FieldResearchScreen = props => {
                     );
                     setRewardSectionDisplay(tempArray);
                   } else {
+                    // NOTE: THIS BELOW FIRST COMMENTED CODE SNIPPET IS TO MAKE MULTIPLE EVENTS OPEN SIMULTANEOUSLY
+                    // NOTE: THE ANIMATION HAS ISSUE HERE SO TEMPORARILY COMMENTED
+                    /*
                     tempArray = [
                       ...tempRewardsSectionDisplay,
                       eventItem?.researchtDescription,
                     ];
+                    */
+                    tempArray = [eventItem?.researchtDescription];
                     setRewardSectionDisplay(tempArray);
                     handleSpringAnimation(
                       tempArray,
                       eventItem?.researchtDescription,
                     );
                   }
-                }}
-                // onPress={displayRewards(eventItem)}
-              >
+                }}>
                 <View
                   style={
                     rewardSectionDisplay.includes(
@@ -138,7 +129,7 @@ const FieldResearchScreen = props => {
                     styles.researchtDescriptionBody,
                     {
                       // transform: [{translateY: springAnimationVariable}],
-                      transform: [{scale: springAnimationVariable}],
+                      transform: [{scaleY: springAnimationVariable}],
                     },
                   ]}>
                   <Text style={styles.possibleRewardsText}>
@@ -209,7 +200,11 @@ const FieldResearchScreen = props => {
   };
 
   return (
-    <View style={{}}>
+    <View
+      style={{
+        backgroundColor: colors?.secondaryBackgroundColorDarkMode,
+        flex: 1,
+      }}>
       <FlatList
         data={displayData}
         keyExtractor={item => item}
@@ -220,21 +215,3 @@ const FieldResearchScreen = props => {
   );
 };
 export default FieldResearchScreen;
-
-/*
-{item?.Bonus?.length > 1 ? (
-            <View style={[styles.bonusTextView, {width: horizontalScale(110)}]}>
-              <Text numberOfLines={1} style={styles.bonusTextStyle}>
-                {item?.Bonus?.[1]}
-              </Text>
-            </View>
-          ) : null}
-          {item?.Bonus?.length > 2 ? (
-            <View style={[styles.bonusTextView]}>
-              <Text numberOfLines={1} style={styles.bonusTextStyle}>
-                {item?.Bonus?.length - 2}
-                {strings.plus}
-              </Text>
-            </View>
-          ) : null}
-*/
