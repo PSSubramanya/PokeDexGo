@@ -150,7 +150,6 @@ const LandingPage = ({navigation}) => {
             loadedData = serializedValue;
             setLoadData(loadedData);
             console.log('SERIALISED EVENTS DATA VALUE', loadedData);
-            // }
           }
         })
         .catch(err => {
@@ -227,7 +226,6 @@ const LandingPage = ({navigation}) => {
             loadedRaidBossData = serializedValue;
             setRaidBossData(loadedRaidBossData);
             console.log('SERIALISED RAID DATA VALUE', loadedRaidBossData);
-            // }
           }
         })
         .catch(err => {
