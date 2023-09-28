@@ -127,55 +127,36 @@ const LandingPage = ({navigation}) => {
     const eventDataURL =
       'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/pokemondata';
 
-    retrieveData('eventsData')
-      .then(themVal => {
-        if (themVal) {
-          if (loadData?.length !== 0) {
-            fetch(eventDataURL)
-              ?.then(response => {
-                response.json()?.then(res => {
-                  loadedData = res?.data;
-                  setLoadData(loadedData);
-                  storeData('eventsData', loadedData);
-                  hideModal();
-                  console.log(
-                    'SERIALISED EVENTS DATA VALUE from API',
-                    loadedData,
-                  );
-                });
-              })
-              .catch(err => {
-                console.log('SERIALISED EVENTS DATA VALUE ERROR', err);
-              });
-          } else {
+    fetch(eventDataURL)
+      ?.then(response => {
+        response.json()?.then(res => {
+          loadedData = res?.data;
+          setLoadData(loadedData);
+          storeData('eventsData', loadedData);
+          hideModal();
+          console.log('SERIALISED EVENTS DATA VALUE from API', loadedData);
+        });
+      })
+      .catch(err => {
+        console.log('SERIALISED EVENTS DATA VALUE ERROR', err);
+      });
+
+    if (loadData?.length === 0) {
+      retrieveData('eventsData')
+        .then(themVal => {
+          if (themVal) {
             // Do something with the retrieved data, e.g., display it in your component.
             const serializedValue = JSON.parse(themVal);
             loadedData = serializedValue;
             setLoadData(loadedData);
             console.log('SERIALISED EVENTS DATA VALUE', loadedData);
+            // }
           }
-        } else {
-          fetch(eventDataURL)
-            ?.then(response => {
-              response.json()?.then(res => {
-                loadedData = res?.data;
-                setLoadData(loadedData);
-                storeData('eventsData', loadedData);
-                hideModal();
-                console.log(
-                  'SERIALISED EVENTS DATA VALUE from API',
-                  loadedData,
-                );
-              });
-            })
-            .catch(err => {
-              console.log('SERIALISED EVENTS DATA VALUE ERROR', err);
-            });
-        }
-      })
-      .catch(err => {
-        console.log('events data fetch ERROR.', err);
-      });
+        })
+        .catch(err => {
+          console.log('events data fetch ERROR.', err);
+        });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [networkState]);
 
@@ -189,46 +170,33 @@ const LandingPage = ({navigation}) => {
     const eggDataURL =
       'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/eggData';
 
-    retrieveData('eggsData')
-      .then(eggVal => {
-        if (eggVal) {
-          if (loadEggData?.length !== 0) {
-            fetch(eggDataURL)
-              .then(response => {
-                response.json().then(res => {
-                  loadedEggData = res?.data;
-                  setLoadEggData(loadedEggData);
-                  storeData('eggsData', loadedEggData);
-                  hideModal();
-                });
-              })
-              .catch(err => {
-                console.log('SERIALISED EGG DATA VALUE ERROR', err);
-              });
-          } else {
+    fetch(eggDataURL)
+      .then(response => {
+        response.json().then(res => {
+          loadedEggData = res?.data;
+          setLoadEggData(loadedEggData);
+          storeData('eggsData', loadedEggData);
+          hideModal();
+        });
+      })
+      .catch(err => {
+        console.log('SERIALISED EGG DATA VALUE ERROR', err);
+      });
+
+    if (loadEggData?.length === 0) {
+      retrieveData('eggsData')
+        .then(eggVal => {
+          if (eggVal) {
             const serializedValue = JSON.parse(eggVal);
             loadedEggData = serializedValue;
             setLoadEggData(loadedEggData);
             console.log('SERIALISED EGG DATA VALUE', loadedEggData);
           }
-        } else {
-          fetch(eggDataURL)
-            .then(response => {
-              response.json().then(res => {
-                loadedEggData = res?.data;
-                setLoadEggData(loadedEggData);
-                storeData('eggsData', loadedEggData);
-                hideModal();
-              });
-            })
-            .catch(err => {
-              console.log('SERIALISED EGG DATA VALUE ERROR', err);
-            });
-        }
-      })
-      .catch(err => {
-        console.log('eggs data ERROR.', err);
-      });
+        })
+        .catch(err => {
+          console.log('eggs data ERROR.', err);
+        });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [networkState]);
 
@@ -237,47 +205,36 @@ const LandingPage = ({navigation}) => {
     const raidBossURL =
       'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/raidBosses';
 
-    retrieveData('raidsData')
-      .then(raidVal => {
-        if (raidVal) {
-          if (loadRaidBossData?.length !== 0) {
-            fetch(raidBossURL)
-              .then(response => {
-                response.json().then(res => {
-                  loadedRaidBossData = res?.data;
-                  setRaidBossData(loadedRaidBossData);
-                  storeData('raidsData', loadedRaidBossData);
-                  hideModal();
-                });
-              })
-              .catch(err => {
-                console.log('SERIALISED RAID DATA VALUE ERROR', err);
-              });
-          } else {
+    fetch(raidBossURL)
+      .then(response => {
+        response.json().then(res => {
+          loadedRaidBossData = res?.data;
+          setRaidBossData(loadedRaidBossData);
+          storeData('raidsData', loadedRaidBossData);
+          hideModal();
+        });
+      })
+      .catch(err => {
+        console.log('SERIALISED RAID DATA VALUE ERROR', err);
+      });
+
+    if (loadRaidBossData?.length === 0) {
+      retrieveData('raidsData')
+        .then(raidVal => {
+          if (raidVal) {
             // Do something with the retrieved data, e.g., display it in your component.
             const serializedValue = JSON.parse(raidVal);
             loadedRaidBossData = serializedValue;
             setRaidBossData(loadedRaidBossData);
             console.log('SERIALISED RAID DATA VALUE', loadedRaidBossData);
+            // }
           }
-        } else {
-          fetch(raidBossURL)
-            .then(response => {
-              response.json().then(res => {
-                loadedRaidBossData = res?.data;
-                setRaidBossData(loadedRaidBossData);
-                storeData('raidsData', loadedRaidBossData);
-                hideModal();
-              });
-            })
-            .catch(err => {
-              console.log('SERIALISED RAID DATA VALUE ERROR', err);
-            });
-        }
-      })
-      .catch(err => {
-        console.log('raids data ERROR.', err);
-      });
+        })
+        .catch(err => {
+          console.log('raids data ERROR.', err);
+        });
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [networkState]);
 
