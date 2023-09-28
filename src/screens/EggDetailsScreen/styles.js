@@ -175,6 +175,7 @@ export default styles = StyleSheet.create({
     fontFamily: fontFamily.primaryFontFamilyMedium,
     color: colors?.white,
     marginTop: verticalScale(10),
+    width: horizontalScale(100),
   },
   candyIconPositioning: {
     // position: 'absolute',

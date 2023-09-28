@@ -271,6 +271,8 @@ const EggDetailsScreen = props => {
     // Case7: Special category evolution (Regional) - DONE
     // Case8: Special category 1st evolution 2/more variant - NEED DATA with example
     // Case9: Special category 2nd evolution 2/more variant - NEED DATA with example
+    // Case10: Male - Female types
+    // Case11: Type variation like Kubfu for example
   };
 
   const renderGridView = ({item, index}) => {
@@ -324,6 +326,9 @@ const EggDetailsScreen = props => {
               }
             } else {
               finalIdentifier = parseInt(imageString[1].split('.png'));
+            }
+            if (finalIdentifier === 'Farfetchd') {
+              finalIdentifier = 'Farfetch’d';
             }
 
             console.log('FINAL IF', finalIdentifier);
@@ -508,33 +513,7 @@ const EggDetailsScreen = props => {
     );
   };
 
-  const evolutionChartDisplay = (val, ind) => {
-    const pokemonId = val?.pokemon_id;
-    const pokemonNameValue = val?.pokemon_name.toLowerCase();
-    let variantCategoryValue = '';
-
-    let sourceImage = '';
-
-    if (val?.form === 'Alola') {
-      sourceImage = pokemon_alolan_variants[pokemonId];
-    } else if (val?.form === 'Galarian') {
-      sourceImage = pokemon_galarian_variants[pokemonId];
-    } else if (val?.form === 'Hisuian') {
-      sourceImage = pokemon_hisuian_variants[pokemonId];
-    } else {
-      sourceImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
-    }
-
-    console.log(
-      'EVOLUTION INDEX',
-      pokemonNameValue,
-      val,
-      ind,
-      val?.evolutions?.[0]?.candy_required,
-      val?.pokemon_name,
-      `https://img.pokemondb.net/artwork/large/${pokemonNameValue}${variantCategoryValue}`,
-      sourceImage,
-    );
+  const renderEvolutionBox = (srcImage, pokeNameVal) => {
     return (
       <View
         style={[
@@ -545,7 +524,7 @@ const EggDetailsScreen = props => {
         ]}>
         <Image
           source={{
-            uri: sourceImage,
+            uri: srcImage,
           }}
           height={1}
           width={1}
@@ -553,7 +532,7 @@ const EggDetailsScreen = props => {
           style={[styles.evolutionGridImageStyle]}
         />
         <Text style={styles.evolutionChartPokemonName}>
-          {toCamelCase(pokemonNameValue)}
+          {toCamelCase(pokeNameVal)}
         </Text>
 
         {selectedShiny ? (
@@ -567,6 +546,51 @@ const EggDetailsScreen = props => {
             />
           </View>
         ) : null}
+      </View>
+    );
+  };
+
+  const evolutionChartDisplay = (val, ind) => {
+    const pokemonId = val?.pokemon_id;
+    const pokemonNameValue = val?.pokemon_name.toLowerCase();
+    const isFemaleGender = val?.gender_required;
+    let variantCategoryValue = '';
+
+    let sourceImage = '';
+
+    console.log('Evolution CHART AAAA', val, pokemonId);
+
+    if (val?.form === 'Alola') {
+      sourceImage = pokemon_alolan_variants[pokemonId];
+    } else if (val?.form === 'Galarian') {
+      sourceImage = pokemon_galarian_variants[pokemonId];
+    } else if (val?.form === 'Hisuian') {
+      sourceImage = pokemon_hisuian_variants[pokemonId];
+    } else {
+      if (isFemaleGender === 'Female') {
+        //TODO: DO THIS FOR FEMALE CATEGORY
+        sourceImage = `https://img.pokemondb.net/artwork/large/${pokemonNameValue}-female.jpg`;
+      } else {
+        sourceImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
+      }
+    }
+
+    console.log(
+      'EVOLUTION INDEX',
+      pokemonNameValue,
+      val,
+      ind,
+      val?.evolutions?.[0]?.candy_required,
+      val?.pokemon_name,
+      `https://img.pokemondb.net/artwork/large/${pokemonNameValue}${variantCategoryValue}`,
+      sourceImage,
+    );
+
+    return (
+      <View>
+        {renderEvolutionBox(sourceImage, pokemonNameValue)}
+        {/* TODO: DO THIS FOR FEMALE CATEGORY */}
+        {/* {renderEvolutionBox(sourceImage, pokemonNameValue)} */}
       </View>
     );
   };

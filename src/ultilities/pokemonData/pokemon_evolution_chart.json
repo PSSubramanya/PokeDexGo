@@ -6582,6 +6582,170 @@
         "form": "Normal",
         "pokemon_id": 891,
         "pokemon_name": "Kubfu"
+      },
+      {
+        "evolutions": [
+          {
+            "candy_required": 25,
+            "form": "Normal",
+            "pokemon_id": 907,
+            "pokemon_name": "Floragato"
+          }
+        ],
+        "form": "Normal",
+        "pokemon_id": 906,
+        "pokemon_name": "Sprigatito"
+      },
+      {
+        "evolutions": [
+          {
+            "candy_required": 100,
+            "form": "Normal",
+            "pokemon_id": 908,
+            "pokemon_name": "Meowscarada"
+          }
+        ],
+        "form": "Normal",
+        "pokemon_id": 907,
+        "pokemon_name": "Floragato"
+      },
+      {
+        "evolutions": [
+          {
+            "candy_required": 25,
+            "form": "Normal",
+            "pokemon_id": 910,
+            "pokemon_name": "Crocalor"
+          }
+        ],
+        "form": "Normal",
+        "pokemon_id": 909,
+        "pokemon_name": "Fuecoco"
+      },
+      {
+        "evolutions": [
+          {
+            "candy_required": 100,
+            "form": "Normal",
+            "pokemon_id": 911,
+            "pokemon_name": "Skeledirge"
+          }
+        ],
+        "form": "Normal",
+        "pokemon_id": 910,
+        "pokemon_name": "Crocalor"
+      },
+      {
+        "evolutions": [
+          {
+            "candy_required": 25,
+            "form": "Normal",
+            "pokemon_id": 913,
+            "pokemon_name": "Quaxwell"
+          }
+        ],
+        "form": "Normal",
+        "pokemon_id": 912,
+        "pokemon_name": "Quaxly"
+      },
+      {
+        "evolutions": [
+          {
+            "candy_required": 100,
+            "form": "Normal",
+            "pokemon_id": 914,
+            "pokemon_name": "Quaquaval"
+          }
+        ],
+        "form": "Normal",
+        "pokemon_id": 913,
+        "pokemon_name": "Quaxwell"
+      },
+      {
+        "evolutions": [
+          {
+            "candy_required": 50,
+            "form": "Normal",
+            "gender_required": "Male",
+            "pokemon_id": 916,
+            "pokemon_name": "Oinkologne"
+          },
+          {
+            "candy_required": 50,
+            "form": "Normal",
+            "gender_required": "Female",
+            "pokemon_id": 916,
+            "pokemon_name": "Oinkologne"
+          }
+        ],
+        "form": "Normal",
+        "pokemon_id": 915,
+        "pokemon_name": "Lechonk"
+      },
+      {
+        "evolutions": [
+          {
+            "candy_required": 50,
+            "form": "Normal",
+            "pokemon_id": 920,
+            "pokemon_name": "Lokix"
+          }
+        ],
+        "form": "Normal",
+        "pokemon_id": 919,
+        "pokemon_name": "Nymble"
+      },
+      {
+        "evolutions": [
+          {
+            "candy_required": 25,
+            "form": "Normal",
+            "pokemon_id": 922,
+            "pokemon_name": "Pawmo"
+          }
+        ],
+        "form": "Normal",
+        "pokemon_id": 921,
+        "pokemon_name": "Pawmi"
+      },
+      {
+        "evolutions": [
+          {
+            "candy_required": 100,
+            "form": "Normal",
+            "pokemon_id": 923,
+            "pokemon_name": "Pawmot"
+          }
+        ],
+        "form": "Normal",
+        "pokemon_id": 922,
+        "pokemon_name": "Pawmo"
+      },
+      {
+        "evolutions": [
+          {
+            "candy_required": 25,
+            "form": "Normal",
+            "pokemon_id": 997,
+            "pokemon_name": "Arctibax"
+          }
+        ],
+        "form": "Normal",
+        "pokemon_id": 996,
+        "pokemon_name": "Frigibax"
+      },
+      {
+        "evolutions": [
+          {
+            "candy_required": 100,
+            "form": "Normal",
+            "pokemon_id": 998,
+            "pokemon_name": "Baxcalibur"
+          }
+        ],
+        "form": "Normal",
+        "pokemon_id": 997,
+        "pokemon_name": "Arctibax"
       }
     ]
   }
