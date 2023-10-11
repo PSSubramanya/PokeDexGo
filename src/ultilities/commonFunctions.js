@@ -301,16 +301,19 @@ export const individualPokemonImageMapping = (displayData, pokeId, name) => {
   ) {
     if (pokemonName === 'charizard' || pokemonName === 'mewtwo') {
       const pokeString = pokemonName + 'X';
-      pushedImage = pokemon_mega_images[pokeString];
+      const staticInageIdFromDb = pokemon_mega_images[pokeString];
+      pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${staticInageIdFromDb}.png`;
       return pushedImage;
     } else {
       const pokeString = pokemonName;
-      pushedImage = pokemon_mega_images[pokeString];
+      const staticInageIdFromDb = pokemon_mega_images[pokeString];
+      pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${staticInageIdFromDb}.png`;
       return pushedImage;
     }
   } else if (modalImages?.includes(substring14)) {
     const pokeString = pokemonName + 'Y';
-    pushedImage = pokemon_mega_images[pokeString];
+    const staticInageIdFromDb = pokemon_mega_images[pokeString];
+    pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${staticInageIdFromDb}.png`;
     return pushedImage;
   } else if (modalImages?.includes(substring3)) {
     pushedImage = pokemon_hisuian_variants[pokeId];

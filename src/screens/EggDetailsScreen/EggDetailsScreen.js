@@ -569,7 +569,11 @@ const EggDetailsScreen = props => {
     } else {
       if (isFemaleGender === 'Female') {
         //TODO: DO THIS FOR FEMALE CATEGORY
-        sourceImage = `https://img.pokemondb.net/artwork/large/${pokemonNameValue}-female.jpg`;
+        if (pokemonNameValue === 'salazzle') {
+          sourceImage = `https://img.pokemondb.net/artwork/large/${pokemonNameValue}.jpg`;
+        } else {
+          sourceImage = `https://img.pokemondb.net/artwork/large/${pokemonNameValue}-female.jpg`;
+        }
       } else {
         sourceImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
       }

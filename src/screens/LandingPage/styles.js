@@ -150,7 +150,9 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'flex-end',
-    marginRight: horizontalScale(10),
+    position: 'absolute',
+    top: verticalScale(10),
+    right: horizontalScale(5),
   },
   infoIcon: {
     height: verticalScale(25),
@@ -159,7 +161,19 @@ export default styles = StyleSheet.create({
   modalHeaderText: {
     fontSize: moderateScale(12),
     fontFamily: fontFamily.primaryFontFamilyBold,
-    color: colors.secondaryRedColor,
     marginBottom: verticalScale(20),
+  },
+  updateButton: {
+    backgroundColor: colors?.primaryColor,
+    marginTop: verticalScale(30),
+    width: horizontalScale(100),
+    height: verticalScale(40),
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5,
+  },
+  updateText: {
+    color: colors?.white,
+    fontFamily: fontFamily.primaryFontFamilyMedium,
   },
 });

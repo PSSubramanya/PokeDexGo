@@ -23,6 +23,7 @@ export default {
   event_completed: 'Event Completed',
   ok: 'ok',
   select_date_prompt: 'Please select a date to view the events',
-  app_version: 'Version 1.0',
+  version: 'Version',
+  version_number: '1.0',
   futureImplementations: 'Upcoming implementations',
 };

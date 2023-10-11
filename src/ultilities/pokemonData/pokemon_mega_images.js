@@ -1,98 +1,50 @@
 export default {
-  venusaur:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10033.png',
-  charizardX:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10034.png',
-  charizardY:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10035.png',
-  blastoise:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10036.png',
-  beedrill:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10090.png',
-  pidgeot:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10073.png',
-  alakazam:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10037.png',
-  slowbro:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10071.png',
-  gengar:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10038.png',
-  kangaskhan:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10039.png',
-  pinsir:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10040.png',
-  gyarados:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10041.png',
-  aerodactyl:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10042.png',
-  mewtwoX:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10043.png',
-  mewtwoY:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10044.png',
-  ampharos:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10045.png',
-  steelix:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10072.png',
-  scizor:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10046.png',
-  heracross:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10047.png',
-  houndoom:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10048.png',
-  tyranitar:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10049.png',
-  sceptile:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10065.png',
-  blaziken:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10050.png',
-  swampert:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10064.png',
-  gardevoir:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10051.png',
-  sableye:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10066.png',
-  mawile:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10052.png',
-  aggron:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10053.png',
-  medicham:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10054.png',
-  manectric:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10055.png',
-  sharpedo:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10070.png',
-  camerupt:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10087.png',
-  altaria:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10067.png',
-  banette:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10056.png',
-  absol:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10057.png',
-  glalie:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10074.png',
-  salamence:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10089.png',
-  metagross:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10076.png',
-  latias:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10062.png',
-  latios:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10063.png',
-  rayquaza:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10079.png',
-  lopunny:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10088.png',
-  garchomp:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10058.png',
-  lucario:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10059.png',
-  abomasnow:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10060.png',
-  gallade:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10068.png',
-  audino:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10069.png',
-  diancie:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/10075.png',
+  venusaur: 10033,
+  charizardX: 10034,
+  charizardY: 10035,
+  blastoise: 10036,
+  beedrill: 10090,
+  pidgeot: 10073,
+  alakazam: 10037,
+  slowbro: 10071,
+  gengar: 10038,
+  kangaskhan: 10039,
+  pinsir: 10040,
+  gyarados: 10041,
+  aerodactyl: 10042,
+  mewtwoX: 10043,
+  mewtwoY: 10044,
+  ampharos: 10045,
+  steelix: 10072,
+  scizor: 10046,
+  heracross: 10047,
+  houndoom: 10048,
+  tyranitar: 10049,
+  sceptile: 10065,
+  blaziken: 10050,
+  swampert: 10064,
+  gardevoir: 10051,
+  sableye: 10066,
+  mawile: 10052,
+  aggron: 10053,
+  medicham: 10054,
+  manectric: 10055,
+  sharpedo: 10070,
+  camerupt: 10087,
+  altaria: 10067,
+  banette: 10056,
+  absol: 10057,
+  glalie: 10074,
+  salamence: 10089,
+  metagross: 10076,
+  latias: 10062,
+  latios: 10063,
+  rayquaza: 10079,
+  lopunny: 10088,
+  garchomp: 10058,
+  lucario: 10059,
+  abomasnow: 10060,
+  gallade: 10068,
+  audino: 10069,
+  diancie: 10075,
 };

@@ -9,6 +9,7 @@ import {
   StatusBar,
   FlatList,
   Linking,
+  Platform,
 } from 'react-native';
 import {Modal, Portal} from 'react-native-paper';
 // import firestore from '@react-native-firebase/firestore';
@@ -70,6 +71,41 @@ const LandingPage = ({navigation}) => {
   const [modalDisplayText, setModalDisplayText] = useState('');
   const [modalTypeValue, setModalType] = useState('');
   const [countDownTimer, setCountDownTimer] = useState(10);
+  const [forceUpdateModal, setForceUpdateModal] = useState(false);
+
+  useEffect(() => {
+    const installedVersion = DeviceInfo.getVersion();
+    console.log(
+      'APP VERSION',
+      installedVersion,
+      typeof installedVersion,
+      installedVersion === strings?.version_number,
+    );
+
+    //TODO: Write the code here to get the force update
+
+    // async function checkLatestAppVersion() {
+    // function checkLatestAppVersion() {
+    // const latestVersion = await fetchLatestVersion();
+    const latestVersion = strings?.version_number; // Make an API request to your server to get the latest version.
+
+    // Get the currently installed app version.
+    // const installedVersion = DeviceInfo.getVersion();
+
+    if (latestVersion > installedVersion) {
+      setForceUpdateModal(true);
+      setModalType('force-update');
+      setModalDisplayText(
+        'A new version of the app is available. Please update to continue using the app.',
+      );
+    } else {
+      setForceUpdateModal(false);
+    }
+    // }
+
+    // Call the version check function when your app starts or when appropriate.
+    // checkLatestAppVersion();
+  }, []);
 
   useEffect(() => {
     dispatch(darkModeActivation(darkModeStatus));
@@ -258,6 +294,17 @@ const LandingPage = ({navigation}) => {
   const modalContainer = (modalText, modalType) => {
     return (
       <View style={styles.modalInnerStyle}>
+        {forceUpdateModal && modalType === 'force-update' ? (
+          <View>
+            <Text
+              style={[
+                styles.modalHeaderText,
+                {color: colors.white, textTransform: 'uppercase'},
+              ]}>
+              Update Required
+            </Text>
+          </View>
+        ) : null}
         {modalType === 'server-error' ? (
           <Image
             source={imagePaths.serverErrorIcon}
@@ -268,9 +315,27 @@ const LandingPage = ({navigation}) => {
           />
         ) : null}
         {modalType === 'server-error' ? (
-          <Text style={styles.modalHeaderText}>SOMETHING WENT WRONG</Text>
+          <Text
+            style={[styles.modalHeaderText, {color: colors.secondaryRedColor}]}>
+            SOMETHING WENT WRONG
+          </Text>
         ) : null}
         <Text style={styles.queryText}>{modalText}</Text>
+        {forceUpdateModal && modalType === 'force-update' ? (
+          <TouchableOpacity
+            style={styles?.updateButton}
+            onPress={() => {
+              if (Platform?.OS === 'android') {
+                Linking.openURL(
+                  'https://play.google.com/store/apps/details?id=com.sarrarpa.pokeguide',
+                ); // Android
+              } else if (Platform?.OS === 'ios') {
+                // Linking.openURL('https://apps.apple.com/app/idyourappid'); // iOS
+              }
+            }}>
+            <Text style={styles?.updateText}>UPDATE</Text>
+          </TouchableOpacity>
+        ) : null}
         <TouchableOpacity
           onPress={() => {
             if (modalType === 'email') {
@@ -312,7 +377,6 @@ const LandingPage = ({navigation}) => {
   const appIconContainer = () => {
     return (
       <View style={styles.centerAlignmentStyle}>
-        {infoButton()}
         <Image
           source={imagePaths.appIcon}
           height={1}
@@ -488,7 +552,7 @@ const LandingPage = ({navigation}) => {
       <Portal>
         <Modal
           style={styles.modalMarginStyle}
-          visible={modalVisible}
+          visible={modalVisible || forceUpdateModal}
           onDismiss={hideModal}
           contentContainerStyle={[
             styles.modalExternalStyle,
@@ -515,6 +579,7 @@ const LandingPage = ({navigation}) => {
           },
           styles.mainContainer,
         ]}>
+        {infoButton()}
         {loadData?.length !== 0 ? appIconContainer() : null}
         {loadData?.length !== 0 ? navigationButtons() : null}
         {redoIcon()}

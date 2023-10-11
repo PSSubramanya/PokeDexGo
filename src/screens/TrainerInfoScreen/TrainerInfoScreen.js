@@ -145,7 +145,7 @@ const TrainerInfoScreen = props => {
               : colors.secondaryColor,
           },
         ]}>
-        {strings.app_version}
+        {strings.version} {strings?.version_number}
       </Text>
       {bulletPoints.map((item, index) => {
         return renderAppPoints(item);

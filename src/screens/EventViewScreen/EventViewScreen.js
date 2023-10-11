@@ -88,6 +88,10 @@ const EventViewScreen = props => {
     const sortedArry =
       sortByKey(displayableEvents, 'preference') ?? displayableEvents;
     setEventsData(sortedArry);
+
+    if (selectedStartDate === null) {
+      setEventsData(null);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStartDate]);
 
@@ -732,35 +736,47 @@ const EventViewScreen = props => {
       let pushedImage;
       if (data?.includes(substring2) || data?.includes(substring12)) {
         if (pokemonName === 'charizard' || pokemonName === 'mewtwo') {
-          pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-mega-x.jpg`;
+          const pokeString = pokemonName + 'X';
+          const staticInageIdFromDb = pokemon_mega_images[pokeString];
+          pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${staticInageIdFromDb}.png`;
         } else {
-          pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-mega.jpg`;
+          const pokeString = pokemonName;
+          const staticInageIdFromDb = pokemon_mega_images[pokeString];
+          pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${staticInageIdFromDb}.png`;
         }
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring3)) {
-        pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-mega-y.jpg`;
+        const pokeString = pokemonName + 'Y';
+        const staticInageIdFromDb = pokemon_mega_images[pokeString];
+        pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${staticInageIdFromDb}.png`;
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring14) || data?.includes(substring13)) {
         if (pokemonName === 'charizard' || pokemonName === 'mewtwo') {
           const pokeString = pokemonName + 'X';
-          pushedImage = pokemon_mega_images[pokeString];
+          const staticInageIdFromDb = pokemon_mega_images[pokeString];
+          pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${staticInageIdFromDb}.png`;
         } else {
           const pokeString = pokemonName;
-          pushedImage = pokemon_mega_images[pokeString];
+          const staticInageIdFromDb = pokemon_mega_images[pokeString];
+          pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${staticInageIdFromDb}.png`;
         }
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring15)) {
         const pokeString = pokemonName + 'Y';
-        pushedImage = pokemon_mega_images[pokeString];
+        const staticInageIdFromDb = pokemon_mega_images[pokeString];
+        pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${staticInageIdFromDb}.png`;
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring6)) {
-        pushedImage = pokemon_hisuian_variants[modalData?.pokemonId?.[idx]];
+        const idString = modalData?.pokemonId?.[idx] + 'ev';
+        pushedImage = pokemon_hisuian_variants[idString];
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring8)) {
-        pushedImage = pokemon_galarian_variants[modalData?.pokemonId?.[idx]];
+        const idString = modalData?.pokemonId?.[idx] + 'ev';
+        pushedImage = pokemon_galarian_variants[idString];
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring10)) {
-        pushedImage = pokemon_alolan_variants[modalData?.pokemonId?.[idx]];
+        const idString = modalData?.pokemonId?.[idx] + 'ev';
+        pushedImage = pokemon_alolan_variants[idString];
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring7)) {
         const idString = modalData?.pokemonId?.[idx] + 's';
@@ -969,6 +985,8 @@ const EventViewScreen = props => {
       </ScrollView>
     );
   };
+
+  console.log('EVVVVVV', eventsData);
 
   return (
     <Provider>
