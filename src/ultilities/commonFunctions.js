@@ -121,117 +121,43 @@ export function checkImageExists(path) {
  */
 
 export const pokeImageMappingFunction = displayData => {
+  const pokeStr = displayData?.split(
+    'https://leekduck.com/assets/img/pokemon_icons_crop/pm',
+  );
+
+  const finalStr = pokeStr[1]?.split('.icon.png');
+
   const pokeSubstring = 'pokemon_icons';
-  const substring1 = '_shiny.png'; // Shiny - DONE
-  const substring2 = '.s.icon.png'; // Shiny - DONE
-  const substring3 = 'fHISUIAN.icon.png'; // HISUIAN - DONE
-  const substring4 = 'fHISUIAN.s.icon.png'; // HISUIAN Shiny
-  const substring5 = '_31.png'; // GALARIAN - DONE
-  const substring6 = '_31_shiny.png'; // Shiny Glarian
-  const substring7 = '_61.png'; // ALOLAN - DONE
-  const substring8 = '_61_shiny.png'; // Shiny Alolan
+  const substring3 = 'fHISUIAN'; // HISUIAN - DONE
+  const substring5 = 'fGALARIAN'; // GALARIAN - DONE
+  const substring7 = 'fALOLA'; // ALOLAN - DONE
 
-  const modalImages = displayData?.imgSrc;
+  if (!displayData?.includes(pokeSubstring)) {
+    return displayData;
+  } else if (finalStr?.[0]?.includes(substring3)) {
+    const finalDisplayStr = finalStr[0].split('.fHISUIAN');
+    const requestString = finalDisplayStr[0] + 'ev';
+    console.log('F-HISUIAN', requestString);
+    return pokemon_hisuian_variants[requestString];
+  } else if (finalStr?.[0]?.includes(substring5)) {
+    const finalDisplayStr = finalStr[0].split('.fGALARIAN');
+    const requestString = finalDisplayStr[0] + 'ev';
+    console.log('F-GALARIAN', requestString);
+    return pokemon_galarian_variants[requestString];
+  } else if (finalStr?.[0]?.includes(substring7)) {
+    const finalDisplayStr = finalStr[0].split('.fALOLA');
+    const requestString = finalDisplayStr[0] + 'ev';
+    console.log('F-ALOLAN', requestString);
+    return pokemon_alolan_variants[requestString];
+  } else {
+    const finalDisplayStr = finalStr[0]?.split('.');
 
-  let displayableModalImages = [];
-
-  modalImages?.map((data, idx) => {
-    let pushedImage;
-    if (!data?.includes(pokeSubstring)) {
-      pushedImage = data;
-      displayableModalImages = [...displayableModalImages, pushedImage];
-    } else if (data?.includes(substring3)) {
-      pushedImage = pokemon_hisuian_variants[displayData?.pokeId?.[idx]];
-      displayableModalImages = [...displayableModalImages, pushedImage];
-    } else if (data?.includes(substring5)) {
-      pushedImage = pokemon_galarian_variants[displayData?.pokeId?.[idx]];
-      displayableModalImages = [...displayableModalImages, pushedImage];
-    } else if (data?.includes(substring7)) {
-      pushedImage = pokemon_alolan_variants[displayData?.pokeId?.[idx]];
-      displayableModalImages = [...displayableModalImages, pushedImage];
-    } else if (data?.includes(substring4)) {
-      const idString = displayData?.pokeId?.[idx] + 's';
-      pushedImage = pokemon_hisuian_variants[idString];
-      displayableModalImages = [...displayableModalImages, pushedImage];
-    } else if (data?.includes(substring6)) {
-      const idString = displayData?.pokeId?.[idx] + 's';
-      pushedImage = pokemon_galarian_variants[idString];
-      displayableModalImages = [...displayableModalImages, pushedImage];
-    } else if (data?.includes(substring8)) {
-      const idString = displayData?.pokeId?.[idx] + 's';
-      pushedImage = pokemon_alolan_variants[idString];
-      displayableModalImages = [...displayableModalImages, pushedImage];
-    } else if (data?.includes(substring1)) {
-      const ret = data;
-      const newStr1 = ret.replace(
-        'https://leekduck.com/assets/img/pokemon_icons/pokemon_icon_',
-        '',
-      );
-      const newStr2 = newStr1.replace('_shiny.png', '');
-      const newstr3 = newStr2.substr(-3);
-      const finalString = newStr2.replace(newstr3, '');
-
-      // eslint-disable-next-line radix
-      pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${parseInt(
-        finalString,
-      )}.png`;
-      displayableModalImages = [...displayableModalImages, pushedImage];
-    } else if (data?.includes(substring2)) {
-      const ret = data;
-      const newStr1 = ret.replace(
-        'https://leekduck.com/assets/img/pokemon_icons/',
-        '',
-      );
-      const newStr2 = newStr1.replace('.s.icon.png', '');
-      const finalString = newStr2?.replace('pm', '');
-
-      // eslint-disable-next-line radix
-      pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${parseInt(
-        finalString,
-      )}.png`;
-      displayableModalImages = [...displayableModalImages, pushedImage];
+    if (finalDisplayStr.length > 1) {
+      return displayData;
     } else {
-      const tempImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${displayData?.pokeId?.[idx]}.png`;
-
-      // TODO: TRY TO GET THIS DONE IF POSSIBLE - Try using axios or checkImageExists(url) to get this done
-
-      const ret = data;
-      const newStr1 = ret.replace(
-        'https://leekduck.com/assets/img/pokemon_icons/',
-        '',
-      );
-
-      let newStr2;
-
-      if (newStr1.includes('pm')) {
-        newStr2 = newStr1.replace('pm', '');
-      } else if (newStr1.includes('pokemon_icon_')) {
-        newStr2 = newStr1.replace('pokemon_icon_', '');
-      }
-
-      let newStr3;
-
-      if (newStr2.includes('.icon.png')) {
-        newStr3 = newStr2.replace('.icon.png', '');
-      } else if (newStr2.includes('.png')) {
-        newStr3 = newStr2.replace('.png', '');
-      }
-
-      const finalString = newStr3;
-      if (finalString?.length > 6) {
-        pushedImage = data;
-      } else {
-        pushedImage = tempImage;
-      }
-      /** NOTE:
-       * Why length > 6 is used as condition above because when the image string is split, it comes to a number of 3 digits max.
-       * Even so some strings may have _00 and _11 attached to it making its length 6 so.
-       */
-
-      displayableModalImages = [...displayableModalImages, pushedImage];
+      return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${finalStr[0]}.png`;
     }
-  });
-  return displayableModalImages;
+  }
 };
 
 export const storeData = async (key, value) => {
@@ -285,15 +211,21 @@ export const individualPokemonImageMapping = (displayData, pokeId, name) => {
   let pushedImage;
   if (modalImages?.includes(substring9) || modalImages?.includes(substring11)) {
     if (pokemonName === 'charizard' || pokemonName === 'mewtwo') {
-      pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-mega-x.jpg`;
+      const pokeString = pokemonName + 'X';
+      const staticInageIdFromDb = pokemon_mega_images[pokeString];
+      pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${staticInageIdFromDb}.png`;
       return pushedImage;
     } else {
-      pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-mega.jpg`;
+      const pokeString = pokemonName;
+      const staticInageIdFromDb = pokemon_mega_images[pokeString];
+      pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${staticInageIdFromDb}.png`;
       console.log('MEGA BOYS', pushedImage);
       return pushedImage;
     }
   } else if (modalImages?.includes(substring10)) {
-    pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-mega-y.jpg`;
+    const pokeString = pokemonName + 'Y';
+    const staticInageIdFromDb = pokemon_mega_images[pokeString];
+    pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${staticInageIdFromDb}.png`;
     return pushedImage;
   } else if (
     modalImages?.includes(substring13) ||
@@ -316,13 +248,16 @@ export const individualPokemonImageMapping = (displayData, pokeId, name) => {
     pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${staticInageIdFromDb}.png`;
     return pushedImage;
   } else if (modalImages?.includes(substring3)) {
-    pushedImage = pokemon_hisuian_variants[pokeId];
+    const idString = pokeId + 'ev';
+    pushedImage = pokemon_hisuian_variants[idString];
     return pushedImage;
   } else if (modalImages?.includes(substring5)) {
-    pushedImage = pokemon_galarian_variants[pokeId];
+    const idString = pokeId + 'ev';
+    pushedImage = pokemon_galarian_variants[idString];
     return pushedImage;
   } else if (modalImages?.includes(substring7)) {
-    pushedImage = pokemon_alolan_variants[pokeId];
+    const idString = pokeId + 'ev';
+    pushedImage = pokemon_alolan_variants[idString];
     return pushedImage;
   } else if (modalImages?.includes(substring4)) {
     const idString = pokeId + 's';

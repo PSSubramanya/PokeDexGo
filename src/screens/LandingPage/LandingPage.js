@@ -44,21 +44,21 @@ const LandingPage = ({navigation}) => {
       navigationPath: 'EggDetailsScreen',
       image: imagePaths.pokeEggIcon,
     },
-    // {
-    //   name: 'Field Research',
-    //   navigationPath: 'FieldResearchScreen',
-    //   image: imagePaths.fieldResearchIcon,
-    // },
+    {
+      name: 'Field Research',
+      navigationPath: 'FieldResearchScreen',
+      image: imagePaths.fieldResearchIcon,
+    },
     {
       name: 'Raid Bosses',
       navigationPath: 'RaidBossScreen',
       image: imagePaths.raidIcon,
     },
-    {
-      name: 'Trainer Info',
-      navigationPath: 'TrainerInfoScreen',
-      image: imagePaths.ashCapIcon,
-    },
+    // {
+    //   name: 'Trainer Info',
+    //   navigationPath: 'TrainerInfoScreen',
+    //   image: imagePaths.ashCapIcon,
+    // },
   ];
 
   const [loadData, setLoadData] = useState([]);
@@ -74,37 +74,31 @@ const LandingPage = ({navigation}) => {
   const [forceUpdateModal, setForceUpdateModal] = useState(false);
 
   useEffect(() => {
+    let versionData;
+    const appVersionCheckURL =
+      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/version';
     const installedVersion = DeviceInfo.getVersion();
-    console.log(
-      'APP VERSION',
-      installedVersion,
-      typeof installedVersion,
-      installedVersion === strings?.version_number,
-    );
 
-    //TODO: Write the code here to get the force update
+    fetch(appVersionCheckURL)
+      ?.then(response => {
+        response.json()?.then(res => {
+          versionData = res?.data;
+          const latestVersion = versionData[0]?.version;
 
-    // async function checkLatestAppVersion() {
-    // function checkLatestAppVersion() {
-    // const latestVersion = await fetchLatestVersion();
-    const latestVersion = strings?.version_number; // Make an API request to your server to get the latest version.
-
-    // Get the currently installed app version.
-    // const installedVersion = DeviceInfo.getVersion();
-
-    if (latestVersion > installedVersion) {
-      setForceUpdateModal(true);
-      setModalType('force-update');
-      setModalDisplayText(
-        'A new version of the app is available. Please update to continue using the app.',
-      );
-    } else {
-      setForceUpdateModal(false);
-    }
-    // }
-
-    // Call the version check function when your app starts or when appropriate.
-    // checkLatestAppVersion();
+          if (latestVersion > installedVersion) {
+            setForceUpdateModal(true);
+            setModalType('force-update');
+            setModalDisplayText(
+              'A new version of the app is available. Please update to continue using the app.',
+            );
+          } else {
+            setForceUpdateModal(false);
+          }
+        });
+      })
+      .catch(err => {
+        console.log(' APP VERSION ERROR', err);
+      });
   }, []);
 
   useEffect(() => {

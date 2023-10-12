@@ -134,19 +134,29 @@ const RaidBossScreen = props => {
               <View style={styles.rewardsSection}>
                 <View style={commonStyling?.flexRow}>
                   <View style={styles.rewardCircle}>
-                    <Image
-                      source={{
-                        uri: individualPokemonImageMapping(
-                          item?.image,
-                          item?.pokeId,
-                          item?.name,
-                        ),
-                      }}
-                      height={1}
-                      width={1}
-                      resizeMode={'contain'}
-                      style={styles.raidBossImageDisplay}
-                    />
+                    <TouchableOpacity
+                      onPress={() => {
+                        navigation.navigate('BattleCountersScreen', {
+                          pokeImage: item?.image,
+                          pokeName: item?.name,
+                          pokeId: item?.pokeId,
+                          pokeData: item,
+                        });
+                      }}>
+                      <Image
+                        source={{
+                          uri: individualPokemonImageMapping(
+                            item?.image,
+                            item?.pokeId,
+                            item?.name,
+                          ),
+                        }}
+                        height={1}
+                        width={1}
+                        resizeMode={'contain'}
+                        style={styles.raidBossImageDisplay}
+                      />
+                    </TouchableOpacity>
                     {item?.canBeShiny ? (
                       <View style={styles.shinyIconContainer}>
                         <Image
