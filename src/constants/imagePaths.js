@@ -1,6 +1,7 @@
 export default {
   //AppIcon
-  appIcon: require('../assets/images/icons/pokemonAppIcon.png'),
+  // appIcon: require('../assets/images/icons/pokemonAppIcon.png'),
+  appIcon: require('../assets/images/icons/pokeAppIcon.png'),
 
   //Icons
   cancelIcon: require('../assets/images/icons/cancelIcon.png'),
@@ -28,6 +29,14 @@ export default {
   raidIcon: require('../assets/images/icons/raidIcon.png'),
   darkModeIcon: require('../assets/images/icons/darkModeIcon.png'),
   brightModeIcon: require('../assets/images/icons/brightModeIcon.png'),
+  greenArrowIcon1: require('../assets/images/icons/greenArrow1.png'),
+  greenArrowIcon2: require('../assets/images/icons/greenArrow2.png'),
+  greenArrowIcon3: require('../assets/images/icons/greenArrow3.png'),
+  candyIcon: require('../assets/images/icons/candyIcon.png'),
+  redoIcon: require('../assets/images/icons/redoIcon.png'),
+  infoIcon: require('../assets/images/icons/ibutton.png'),
+  questionMarkIcon: require('../assets/images/icons/questionmark.png'),
+  serverErrorIcon: require('../assets/images/icons/serverErrorIcon.png'),
 
   //Images
   calendar1: require('../assets/images/calendar.png'),

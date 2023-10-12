@@ -29,9 +29,24 @@ export default styles = StyleSheet.create({
     height: verticalScale(60),
     width: horizontalScale(60),
   },
+  evolutionGridImageStyle: {
+    height: verticalScale(50),
+    width: horizontalScale(50),
+    marginTop: verticalScale(20),
+  },
   shinyIcon: {
     height: verticalScale(22),
     width: horizontalScale(22),
+  },
+  arrowIcon: {
+    height: verticalScale(40),
+    width: horizontalScale(40),
+    alignSelf: 'center',
+  },
+  candyIcon: {
+    height: verticalScale(20),
+    width: horizontalScale(20),
+    alignSelf: 'center',
   },
   shinyIconContainer: {
     height: verticalScale(26),
@@ -49,6 +64,17 @@ export default styles = StyleSheet.create({
   gridBorderStyle: {
     height: verticalScale(80),
     width: horizontalScale(80),
+    marginHorizontal: horizontalScale(10),
+    borderRadius: 5,
+    marginVertical: verticalScale(12),
+    borderColor: colors.purple,
+    borderWidth: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  evolutionGridBorderStyle: {
+    height: verticalScale(70),
+    width: horizontalScale(70),
     marginHorizontal: horizontalScale(10),
     borderRadius: 5,
     marginVertical: verticalScale(12),
@@ -113,5 +139,50 @@ export default styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: moderateScale(12),
     fontFamily: fontFamily.primaryFontFamilyMedium,
+  },
+  evolutionText: {
+    color: 'white',
+    marginTop: verticalScale(40),
+    fontFamily: fontFamily.primaryFontFamilyMedium,
+  },
+  noEvolutionText: {
+    color: 'white',
+    marginVertical: verticalScale(40),
+    fontFamily: fontFamily.primaryFontFamilyMedium,
+  },
+  evolutionChartContainer: {
+    backgroundColor: colors.quaternaryBackgroundColorDarkMode,
+    marginHorizontal: horizontalScale(20),
+    borderRadius: 8,
+    alignItems: 'center',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    zIndex: 1,
+    top: 20,
+    width: horizontalScale(360),
+  },
+  candyText1: {
+    textAlign: 'center',
+    fontSize: moderateScale(10),
+    fontFamily: fontFamily.primaryFontFamilyMedium,
+    color: colors?.white,
+    marginTop: verticalScale(3),
+  },
+  evolutionChartPokemonName: {
+    textAlign: 'center',
+    fontSize: moderateScale(10),
+    fontFamily: fontFamily.primaryFontFamilyMedium,
+    color: colors?.white,
+    marginTop: verticalScale(10),
+    width: horizontalScale(100),
+  },
+  candyIconPositioning: {
+    // position: 'absolute',
+    // top: verticalScale(65),
+    marginBottom: verticalScale(-8),
+  },
+  evolutionProgressStyle: {
+    marginTop: verticalScale(20),
   },
 });

@@ -386,7 +386,7 @@ const HomeScreen = props => {
     return (
       <View>
         <View style={[styles.flexRow, styles.centerContainer]}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => {
               var a = selectedStartDate;
               // no_of_days is an integer value
@@ -399,9 +399,9 @@ const HomeScreen = props => {
               width={1}
               style={[styles.chevronIcon, styles.rightChevronIcon]}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <View style={{marginBottom: 50}}>
-            <View style={styles.centerContainer}>
+            {/* <View style={styles.centerContainer}>
               <View style={styles.flexRow}>
                 <Text
                   style={[
@@ -429,13 +429,22 @@ const HomeScreen = props => {
                 ]}>
                 {moment(selectedStartDate.toString()).format('YYYY')}
               </Text>
-            </View>
+            </View> */}
             {numberOfEvents > 0 ? (
-              <View style={commonStyling.absoluteCenterStyling}>
-                <Text style={[primaryTextColorStyle, styles.numberOfEvents]}>
+              <View
+                style={[
+                  commonStyling.absoluteCenterStyling,
+                  styles.eventsDisplayStyling,
+                ]}>
+                <Text
+                  style={[
+                    primaryTextColorStyle,
+                    styles.numberOfEvents,
+                    {marginTop: -10},
+                  ]}>
                   {numberOfEvents}
                 </Text>
-                <Text style={[styles.noEventTitle, primaryTextColorStyle]}>
+                <Text style={[styles.eventTitle, primaryTextColorStyle]}>
                   {strings.events_today}
                 </Text>
               </View>
@@ -452,6 +461,66 @@ const HomeScreen = props => {
                 </Text>
               </View>
             )}
+            {/* DATE FROM HERE */}
+            <View style={{flexDirection: 'row', marginTop: 25}}>
+              <TouchableOpacity
+                onPress={() => {
+                  var a = selectedStartDate;
+                  // no_of_days is an integer value
+                  var b = new Date(a.setDate(a.getDate() - 1));
+                  setSelectedStartDate(b);
+                }}>
+                <Image
+                  source={imagePaths.leftChevronIcon}
+                  height={1}
+                  width={1}
+                  style={[styles.chevronIcon, styles.rightChevronIcon]}
+                />
+              </TouchableOpacity>
+              <View style={styles.centerContainer}>
+                <View style={styles.flexRow}>
+                  <Text
+                    style={[
+                      styles.mediumFont,
+                      styles.mediumFontSize,
+                      primaryTextColorStyle,
+                    ]}>
+                    {moment(selectedStartDate.toString()).format('MMM')}
+                  </Text>
+                  <Text
+                    style={[
+                      styles.mediumFont,
+                      styles.mediumFontSize,
+                      primaryTextColorStyle,
+                    ]}>
+                    {' '}
+                    {moment(selectedStartDate.toString()).format('DD')}
+                  </Text>
+                </View>
+                <Text
+                  style={[
+                    styles.boldFont,
+                    styles.largeFontSize,
+                    primaryTextColorStyle,
+                  ]}>
+                  {moment(selectedStartDate.toString()).format('YYYY')}
+                </Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  var a = selectedStartDate;
+                  // no_of_days is an integer value
+                  var b = new Date(a.setDate(a.getDate() + 1));
+                  setSelectedStartDate(b);
+                }}>
+                <Image
+                  source={imagePaths.rightChevronIcon}
+                  height={1}
+                  width={1}
+                  style={[styles.chevronIcon, styles.leftChevronIcon]}
+                />
+              </TouchableOpacity>
+            </View>
             {/* TODO: THIS FOR V2 or V3 */}
             {/* <View style={commonStyling.absoluteCenterStyling}>
             <Button
@@ -464,7 +533,7 @@ const HomeScreen = props => {
             />
           </View> */}
           </View>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => {
               var a = selectedStartDate;
               // no_of_days is an integer value
@@ -477,7 +546,7 @@ const HomeScreen = props => {
               width={1}
               style={[styles.chevronIcon, styles.leftChevronIcon]}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         {/* <TouchableOpacity
           style={styles.viewEventIcon}

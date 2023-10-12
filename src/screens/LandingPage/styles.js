@@ -19,6 +19,12 @@ export default styles = StyleSheet.create({
     marginBottom: verticalScale(30),
     marginTop: verticalScale(30),
   },
+  serverErrorIcon: {
+    height: verticalScale(80),
+    width: horizontalScale(80),
+    marginBottom: verticalScale(20),
+    marginTop: verticalScale(30),
+  },
   appName: {
     fontSize: moderateScale(20),
     fontFamily: fontFamily.primaryFontFamilyMedium,
@@ -50,7 +56,7 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalText: {
-    fontSize: moderateScale(18),
+    fontSize: moderateScale(14),
     fontFamily: fontFamily.primaryFontFamilyMedium,
     color: colors.purple,
   },
@@ -109,5 +115,51 @@ export default styles = StyleSheet.create({
   darkModeIcon: {
     height: verticalScale(40),
     width: horizontalScale(40),
+  },
+  redoIcon: {
+    height: verticalScale(60),
+    width: horizontalScale(60),
+  },
+  reloadDataText: {
+    textAlign: 'center',
+    fontSize: moderateScale(15),
+    fontFamily: fontFamily.primaryFontFamilyMedium,
+    color: colors?.white,
+    marginTop: verticalScale(10),
+  },
+  redoIconContainer: {
+    top: verticalScale(30),
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  queryText: {
+    fontSize: moderateScale(12),
+    fontFamily: fontFamily.primaryFontFamilyMedium,
+    color: colors.white,
+    textAlign: 'center',
+  },
+  emailText: {
+    fontFamily: fontFamily.primaryFontFamilyBold,
+    marginTop: verticalScale(10),
+  },
+  infoIconButton: {
+    height: verticalScale(25),
+    width: horizontalScale(25),
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'flex-end',
+    marginRight: horizontalScale(10),
+  },
+  infoIcon: {
+    height: verticalScale(25),
+    width: horizontalScale(25),
+  },
+  modalHeaderText: {
+    fontSize: moderateScale(12),
+    fontFamily: fontFamily.primaryFontFamilyBold,
+    color: colors.secondaryRedColor,
+    marginBottom: verticalScale(20),
   },
 });

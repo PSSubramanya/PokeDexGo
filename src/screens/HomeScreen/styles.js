@@ -56,10 +56,16 @@ export default styles = StyleSheet.create({
   noEventTitle: {
     fontSize: moderateScale(15),
     fontFamily: fontFamily.primaryFontFamilyMedium,
+    marginTop: verticalScale(20),
+  },
+  eventTitle: {
+    fontSize: moderateScale(15),
+    fontFamily: fontFamily.primaryFontFamilyMedium,
   },
   centerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'color',
   },
   smallTextSize: {
     fontSize: moderateScale(12),
@@ -128,9 +134,11 @@ export default styles = StyleSheet.create({
   },
   rightChevronIcon: {
     marginRight: horizontalScale(58),
+    marginTop: verticalScale(10),
   },
   leftChevronIcon: {
     marginLeft: horizontalScale(58),
+    marginTop: verticalScale(10),
   },
   viewEventIcon: {
     height: verticalScale(54),
@@ -277,5 +285,14 @@ export default styles = StyleSheet.create({
   },
   primaryColorStyle: {
     color: colors.secondaryColor,
+  },
+  eventsDisplayStyling: {
+    height: verticalScale(180),
+    width: horizontalScale(180),
+    alignSelf: 'center',
+    borderWidth: 3,
+    borderColor: colors?.purple,
+    borderRadius: 30,
+    backgroundColor: colors?.w,
   },
 });

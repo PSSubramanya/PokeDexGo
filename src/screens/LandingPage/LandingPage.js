@@ -8,8 +8,10 @@ import {
   SafeAreaView,
   StatusBar,
   FlatList,
+  Linking,
 } from 'react-native';
-import firestore from '@react-native-firebase/firestore';
+import {Modal, Portal} from 'react-native-paper';
+// import firestore from '@react-native-firebase/firestore';
 import DeviceInfo from 'react-native-device-info';
 import {useNetStatusInfo} from '../../ultilities/customHooks/useNetStatusInfo';
 import strings from '../../constants/strings';
@@ -17,7 +19,7 @@ import imagePaths from '../../constants/imagePaths';
 import colors from '../../constants/colors';
 import soundTracks from '../../constants/soundTracks';
 import {eventDataLoad, darkModeActivation} from '../../actions/eventData';
-import {storeData, getData} from '../../ultilities/commonFunctions';
+import {storeData, retrieveData} from '../../ultilities/commonFunctions';
 import styles from './styles';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
 import {CircleRightArrow} from '../../assets/images/svg';
@@ -25,11 +27,9 @@ import webscrappedData from '../../ultilities/pokemonData/pokemon_data6.json';
 import eggData from '../../ultilities/pokemonData/egg_data.json';
 
 const LandingPage = ({navigation}) => {
-  const subscriber = firestore().collection('Users').doc(uniqueDeviceIdValue);
+  // const subscriber = firestore().collection('Users').doc(uniqueDeviceIdValue);
 
   const dispatch = useDispatch();
-  const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
-  const darkModeValue = darkMode?.data;
   const {networkState} = useNetStatusInfo();
 
   const navigationScreens = [
@@ -49,7 +49,7 @@ const LandingPage = ({navigation}) => {
     //   image: imagePaths.fieldResearchIcon,
     // },
     {
-      name: 'Raid Boss',
+      name: 'Raid Bosses',
       navigationPath: 'RaidBossScreen',
       image: imagePaths.raidIcon,
     },
@@ -64,7 +64,28 @@ const LandingPage = ({navigation}) => {
   const [loadEggData, setLoadEggData] = useState([]);
   const [loadRaidBossData, setRaidBossData] = useState([]);
   const [darkModeStatus, setDarkModeStatus] = useState(true);
+  const [reloadData, setReloadData] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
   const [uniqueDeviceIdValue, setUniqueDeviceIdValue] = useState('');
+  const [modalDisplayText, setModalDisplayText] = useState('');
+  const [modalTypeValue, setModalType] = useState('');
+  const [countDownTimer, setCountDownTimer] = useState(10);
+
+  useEffect(() => {
+    dispatch(darkModeActivation(darkModeStatus));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [darkModeStatus]);
+
+  useEffect(() => {
+    if (loadData?.length === 0) {
+      countDownTimer > 0
+        ? setTimeout(() => {
+            decreaseTimer();
+          }, 1000)
+        : serverMaintainanceError();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [countDownTimer]);
 
   useEffect(() => {
     soundTracks?.pikapika1.play(success => {
@@ -80,35 +101,61 @@ const LandingPage = ({navigation}) => {
     soundTracks?.pikapika1.setNumberOfLoops(0); // NOTE: Loop indefinitely until stop() is called
   }, []);
 
-  // console.log('DEVICE INFO', DeviceInfo.getUniqueID());//getDeviceId()
-  // console.log('DEVICE INFO', DeviceInfo.getUniqueId()); //getDeviceId()
-
   useEffect(() => {
     DeviceInfo.getUniqueId().then(uniqueId => {
       const tempId = uniqueId;
       setUniqueDeviceIdValue(tempId);
     });
 
-    //NOTE: Try to use AsyncStorage here with right usage
-    const initialDarkModeStatus =
-      getData('darkModeStatus') !== null ||
-      getData('darkModeStatus') !== undefined
-        ? getData('darkModeStatus')
-        : true;
-
-    setDarkModeStatus(initialDarkModeStatus);
+    retrieveData('themeStatus')
+      .then(themVal => {
+        if (themVal) {
+          // Do something with the retrieved data, e.g., display it in your component.
+          const serializedValue = JSON.parse(themVal);
+          setDarkModeStatus(serializedValue);
+        } else {
+          // Handle the case where data doesn't exist.
+        }
+      })
+      .catch(err => {
+        console.log('themVal ERROR.', err);
+      });
   }, []);
 
   useEffect(() => {
     let loadedData;
-    fetch(
-      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/pokemondata',
-    )?.then(response => {
-      response.json()?.then(res => {
-        loadedData = res?.data;
-        setLoadData(loadedData);
+    const eventDataURL =
+      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/pokemondata';
+
+    fetch(eventDataURL)
+      ?.then(response => {
+        response.json()?.then(res => {
+          loadedData = res?.data;
+          setLoadData(loadedData);
+          storeData('eventsData', loadedData);
+          hideModal();
+          console.log('SERIALISED EVENTS DATA VALUE from API', loadedData);
+        });
+      })
+      .catch(err => {
+        console.log('SERIALISED EVENTS DATA VALUE ERROR', err);
       });
-    });
+
+    if (loadData?.length === 0) {
+      retrieveData('eventsData')
+        .then(themVal => {
+          if (themVal) {
+            // Do something with the retrieved data, e.g., display it in your component.
+            const serializedValue = JSON.parse(themVal);
+            loadedData = serializedValue;
+            setLoadData(loadedData);
+            console.log('SERIALISED EVENTS DATA VALUE', loadedData);
+          }
+        })
+        .catch(err => {
+          console.log('events data fetch ERROR.', err);
+        });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [networkState]);
 
@@ -118,35 +165,154 @@ const LandingPage = ({navigation}) => {
   }, [loadData]);
 
   useEffect(() => {
-    // let loadedData = eggData?.data;
-    // setLoadEggData(loadedData);
-
     let loadedEggData;
-    fetch(
-      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/eggData',
-    ).then(response => {
-      response.json().then(res => {
-        loadedEggData = res?.data;
-        setLoadEggData(loadedEggData);
+    const eggDataURL =
+      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/eggData';
+
+    fetch(eggDataURL)
+      .then(response => {
+        response.json().then(res => {
+          loadedEggData = res?.data;
+          setLoadEggData(loadedEggData);
+          storeData('eggsData', loadedEggData);
+          hideModal();
+        });
+      })
+      .catch(err => {
+        console.log('SERIALISED EGG DATA VALUE ERROR', err);
       });
-    });
-  }, [loadEggData]);
+
+    if (loadEggData?.length === 0) {
+      retrieveData('eggsData')
+        .then(eggVal => {
+          if (eggVal) {
+            const serializedValue = JSON.parse(eggVal);
+            loadedEggData = serializedValue;
+            setLoadEggData(loadedEggData);
+            console.log('SERIALISED EGG DATA VALUE', loadedEggData);
+          }
+        })
+        .catch(err => {
+          console.log('eggs data ERROR.', err);
+        });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [networkState]);
 
   useEffect(() => {
     let loadedRaidBossData;
-    fetch(
-      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/raidBosses',
-    ).then(response => {
-      response.json().then(res => {
-        loadedRaidBossData = res?.data;
-        setRaidBossData(loadedRaidBossData);
+    const raidBossURL =
+      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/raidBosses';
+
+    fetch(raidBossURL)
+      .then(response => {
+        response.json().then(res => {
+          loadedRaidBossData = res?.data;
+          setRaidBossData(loadedRaidBossData);
+          storeData('raidsData', loadedRaidBossData);
+          hideModal();
+        });
+      })
+      .catch(err => {
+        console.log('SERIALISED RAID DATA VALUE ERROR', err);
       });
-    });
-  }, [loadRaidBossData]);
+
+    if (loadRaidBossData?.length === 0) {
+      retrieveData('raidsData')
+        .then(raidVal => {
+          if (raidVal) {
+            // Do something with the retrieved data, e.g., display it in your component.
+            const serializedValue = JSON.parse(raidVal);
+            loadedRaidBossData = serializedValue;
+            setRaidBossData(loadedRaidBossData);
+            console.log('SERIALISED RAID DATA VALUE', loadedRaidBossData);
+          }
+        })
+        .catch(err => {
+          console.log('raids data ERROR.', err);
+        });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [networkState]);
+
+  const decreaseTimer = () => {
+    setCountDownTimer(prev => prev - 1);
+  };
+
+  const serverMaintainanceError = () => {
+    const serverErrorModalText = 'SERVER UNDER MAINTAINANCE';
+    setModalType('server-error');
+    setModalDisplayText(serverErrorModalText);
+    showModal();
+  };
+
+  const showModal = () => {
+    setModalVisible(true);
+  };
+
+  const hideModal = () => {
+    setModalVisible(false);
+  };
+
+  const modalContainer = (modalText, modalType) => {
+    return (
+      <View style={styles.modalInnerStyle}>
+        {modalType === 'server-error' ? (
+          <Image
+            source={imagePaths.serverErrorIcon}
+            height={1}
+            width={1}
+            resizeMode="contain"
+            style={[styles.serverErrorIcon]}
+          />
+        ) : null}
+        {modalType === 'server-error' ? (
+          <Text style={styles.modalHeaderText}>SOMETHING WENT WRONG</Text>
+        ) : null}
+        <Text style={styles.queryText}>{modalText}</Text>
+        <TouchableOpacity
+          onPress={() => {
+            if (modalType === 'email') {
+              Linking.openURL('mailto:sarrarpa69@gmail.com');
+            }
+          }}>
+          {modalType === 'email' ? (
+            <Text style={[styles.queryText, styles.emailText]}>
+              sarrarpa69@gmail.com
+            </Text>
+          ) : null}
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
+  const infoButton = () => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          const modalQueryDisplayText =
+            'For any questions or concerns, please get in touch with the following email address:';
+          setModalType('email');
+          setModalDisplayText(modalQueryDisplayText);
+          showModal();
+        }}
+        style={styles.infoIconButton}>
+        <Image
+          source={imagePaths?.questionMarkIcon}
+          height={1}
+          width={1}
+          style={styles.infoIcon}
+          resizeMode={'contain'}
+        />
+      </TouchableOpacity>
+    );
+  };
 
   const appIconContainer = () => {
     return (
       <View style={styles.centerAlignmentStyle}>
+        {infoButton()}
         <Image
           source={imagePaths.appIcon}
           height={1}
@@ -157,7 +323,7 @@ const LandingPage = ({navigation}) => {
           style={[
             styles.appName,
             {
-              color: darkModeValue
+              color: darkModeStatus
                 ? colors.primaryTextColorDarkMode
                 : colors.secondaryColor,
             },
@@ -176,7 +342,7 @@ const LandingPage = ({navigation}) => {
             navigation.navigate(item?.navigationPath, {loadData: loadData});
           } else if (item?.name === 'Eggs') {
             navigation.navigate(item?.navigationPath, {loadData: loadEggData});
-          } else if (item?.name === 'Raid Boss') {
+          } else if (item?.name === 'Raid Bosses') {
             navigation.navigate(item?.navigationPath, {
               loadData: loadRaidBossData,
             });
@@ -187,7 +353,7 @@ const LandingPage = ({navigation}) => {
         <View
           style={[
             {
-              backgroundColor: darkModeValue
+              backgroundColor: darkModeStatus
                 ? colors.tertiaryBackgroundColorDarkMode
                 : colors.secondaryBackgroundColor,
             },
@@ -203,7 +369,7 @@ const LandingPage = ({navigation}) => {
           <Text
             style={[
               {
-                color: darkModeValue
+                color: darkModeStatus
                   ? colors.primaryTextColorDarkMode
                   : colors.primaryColor,
               },
@@ -240,6 +406,7 @@ const LandingPage = ({navigation}) => {
           const currentTheme = darkModeStatus;
           setDarkModeStatus(!currentTheme);
           dispatch(darkModeActivation(!currentTheme));
+          storeData('themeStatus', !currentTheme);
 
           // firestore()
           //   .collection('Users')
@@ -277,7 +444,7 @@ const LandingPage = ({navigation}) => {
         <View style={styles.darkModeButton}>
           <Image
             source={
-              darkModeValue
+              darkModeStatus
                 ? imagePaths.darkModeIcon
                 : imagePaths.brightModeIcon
             }
@@ -291,19 +458,67 @@ const LandingPage = ({navigation}) => {
     );
   };
 
+  const redoIcon = () => {
+    return (
+      <>
+        {networkState && loadData?.length === 0 ? (
+          <View style={styles.redoIconContainer}>
+            <TouchableOpacity
+              onPress={() => {
+                setReloadData(true);
+              }}>
+              <Image
+                source={imagePaths.appIcon}
+                height={1}
+                width={1}
+                style={styles.redoIcon}
+              />
+            </TouchableOpacity>
+            <Text style={styles?.reloadDataText}>
+              Loading Data in {countDownTimer} seconds
+            </Text>
+          </View>
+        ) : null}
+      </>
+    );
+  };
+
+  const modalPopUp = (modalDisplayText, type) => {
+    return (
+      <Portal>
+        <Modal
+          style={styles.modalMarginStyle}
+          visible={modalVisible}
+          onDismiss={hideModal}
+          contentContainerStyle={[
+            styles.modalExternalStyle,
+            {
+              backgroundColor: darkModeStatus
+                ? colors.quaternaryBackgroundColorDarkMode
+                : colors.white,
+            },
+          ]}>
+          {modalContainer(modalDisplayText, type)}
+        </Modal>
+      </Portal>
+    );
+  };
+
   const mainContainerBody = () => {
     return (
       <View
         style={[
           {
-            backgroundColor: darkModeValue
+            backgroundColor: darkModeStatus
               ? colors.secondaryBackgroundColorDarkMode
               : null,
           },
           styles.mainContainer,
         ]}>
-        {appIconContainer()}
-        {navigationButtons()}
+        {loadData?.length !== 0 ? appIconContainer() : null}
+        {loadData?.length !== 0 ? navigationButtons() : null}
+        {redoIcon()}
+        {modalPopUp(modalDisplayText, modalTypeValue)}
         {/* {darkModeButton()} */}
         {/* <CircleRightArrow /> */}
       </View>
@@ -312,7 +527,10 @@ const LandingPage = ({navigation}) => {
 
   return (
     <SafeAreaView style={{}}>
-      <StatusBar barStyle={'dark-content'} backgroundColor={colors.darkBlue} />
+      <StatusBar
+        barStyle={'dark-content'}
+        backgroundColor={colors.secondaryBackgroundColorDarkMode}
+      />
       {mainContainerBody()}
     </SafeAreaView>
   );

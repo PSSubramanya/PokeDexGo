@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "210276461404",
-    "project_id": "poke-event-guide",
-    "storage_bucket": "poke-event-guide.appspot.com"
+    "project_number": "900188683194",
+    "project_id": "poke-event-guide-676e0",
+    "storage_bucket": "poke-event-guide-676e0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:210276461404:android:23293c6f90bf822b3cef99",
+        "mobilesdk_app_id": "1:900188683194:android:71ab5705edc6b8b2f6fb83",
         "android_client_info": {
-          "package_name": "com.pokedexapp"
+          "package_name": "com.sarrarpa.pokeguide"
         }
       },
       "oauth_client": [
         {
-          "client_id": "210276461404-ogivick34gq35f87j212anlpr0dr174j.apps.googleusercontent.com",
+          "client_id": "900188683194-9rmhdnmiipupi6sbgcj5kmh3c0qdeobo.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDGcmtbAhn-rMGx3iBNXa5SmOoJ9XJvN70"
+          "current_key": "AIzaSyC7kqdh9vffv98E0bDUmoIkJlHqnuQPGAA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "210276461404-ogivick34gq35f87j212anlpr0dr174j.apps.googleusercontent.com",
+              "client_id": "900188683194-9rmhdnmiipupi6sbgcj5kmh3c0qdeobo.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

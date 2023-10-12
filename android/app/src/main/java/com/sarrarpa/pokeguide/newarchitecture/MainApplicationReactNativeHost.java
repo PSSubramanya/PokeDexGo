@@ -1,4 +1,4 @@
-package com.pokedexapp.newarchitecture;
+package com.sarrarpa.pokeguide.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.pokedexapp.BuildConfig;
-import com.pokedexapp.newarchitecture.components.MainComponentsRegistry;
-import com.pokedexapp.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.sarrarpa.pokeguide.BuildConfig;
+import com.sarrarpa.pokeguide.newarchitecture.components.MainComponentsRegistry;
+import com.sarrarpa.pokeguide.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 
