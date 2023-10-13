@@ -82,6 +82,7 @@ const BattleCountersScreen = props => {
 
   const fetchPokemonImages = pokemonItem => {
     let displayImageURL;
+    let finalDisplayImage;
     const pokemonNameString = pokemonItem?.item?.Name;
     const pokeSubString = pokemonNameString?.split(' ');
     console.log(
@@ -93,9 +94,15 @@ const BattleCountersScreen = props => {
 
     const finalPokemonStringForImage =
       pokeSubString[pokeSubString.length - 1]?.toLowerCase();
+
     if (
       pokeSubString[pokeSubString.length - 1] === '(Ordinary)' ||
-      pokeSubString[pokeSubString.length - 1] === '(Unbound)'
+      pokeSubString[pokeSubString.length - 1] === '(Unbound)' ||
+      pokeSubString[pokeSubString.length - 1] === '(Shock)' ||
+      pokeSubString[pokeSubString.length - 1] === '(Normal)' ||
+      pokeSubString[pokeSubString.length - 1] === '(Douse)' ||
+      pokeSubString[pokeSubString.length - 1] === '(Chill)' ||
+      pokeSubString[pokeSubString.length - 1] === '(Burn)'
     ) {
       displayImageURL = `https://img.pokemondb.net/artwork/large/${pokeSubString[0].toLowerCase()}.jpg`;
     } else if (pokeSubString[0] === 'Mega') {
@@ -120,7 +127,12 @@ const BattleCountersScreen = props => {
     } else if (pokeSubString[0] === 'Primal') {
       displayImageURL = `https://img.pokemondb.net/artwork/large/${finalPokemonStringForImage}-primal.jpg`;
     } else {
-      displayImageURL = `https://img.pokemondb.net/artwork/large/${finalPokemonStringForImage}.jpg`;
+      if (finalPokemonStringForImage === "sirfetch'd") {
+        displayImageURL =
+          'https://img.pokemondb.net/artwork/large/sirfetchd.jpg';
+      } else {
+        displayImageURL = `https://img.pokemondb.net/artwork/large/${finalPokemonStringForImage}.jpg`;
+      }
     }
     return displayImageURL;
   };
@@ -174,7 +186,7 @@ const BattleCountersScreen = props => {
                 <View
                   style={[
                     {
-                      // backgroundColor: colors.white,
+                      // backgroundColor: colors.white, //TODO: NEED TO REMOVE WHITE BACKGROUND HERE
                     },
                     styles.gridBorderStyle,
                   ]}>
@@ -232,7 +244,7 @@ const BattleCountersScreen = props => {
                 <View
                   style={[
                     {
-                      // backgroundColor: colors.white,
+                      // backgroundColor: colors.white, //TODO: NEED TO REMOVE WHITE BACKGROUND HERE
                     },
                     styles.gridBorderStyle,
                   ]}>
@@ -290,7 +302,7 @@ const BattleCountersScreen = props => {
                 <View
                   style={[
                     {
-                      // backgroundColor: colors.white,
+                      // backgroundColor: colors.white, //TODO: NEED TO REMOVE WHITE BACKGROUND HERE
                     },
                     styles.gridBorderStyle,
                   ]}>
