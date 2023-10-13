@@ -800,10 +800,14 @@ const EventViewScreen = props => {
         const newstr3 = newStr2.substr(-3);
         const finalString = newStr2.replace(newstr3, '');
 
-        // eslint-disable-next-line radix
-        pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${parseInt(
-          finalString,
-        )}.png`;
+        if (finalString === '201') {
+          pushedImage = data;
+        } else {
+          // eslint-disable-next-line radix
+          pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${parseInt(
+            finalString,
+          )}.png`;
+        }
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring5)) {
         const ret = data;
