@@ -64,6 +64,7 @@ const LandingPage = ({navigation}) => {
   const [loadData, setLoadData] = useState([]);
   const [loadEggData, setLoadEggData] = useState([]);
   const [loadRaidBossData, setRaidBossData] = useState([]);
+  const [loadFieldResearchData, setFieldResearchData] = useState([]);
   const [darkModeStatus, setDarkModeStatus] = useState(true);
   const [reloadData, setReloadData] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
@@ -266,6 +267,46 @@ const LandingPage = ({navigation}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [networkState]);
 
+  useEffect(() => {
+    let loadedFieldResearchData;
+    const fieldResearchURL =
+      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/fieldResearch';
+
+    fetch(fieldResearchURL)
+      .then(response => {
+        response.json().then(res => {
+          loadedFieldResearchData = res?.data;
+          setFieldResearchData(loadedFieldResearchData);
+          storeData('fieldResearchData', loadedFieldResearchData);
+          hideModal();
+        });
+      })
+      .catch(err => {
+        console.log('SERIALISED FIELD RESEARCH DATA VALUE ERROR', err);
+      });
+
+    if (loadFieldResearchData?.length === 0) {
+      retrieveData('fieldResearchData')
+        .then(researchVal => {
+          if (researchVal) {
+            // Do something with the retrieved data, e.g., display it in your component.
+            const serializedValue = JSON.parse(researchVal);
+            loadedFieldResearchData = serializedValue;
+            setFieldResearchData(loadedFieldResearchData);
+            console.log(
+              'SERIALISED FIELD RESEACH DATA VALUE',
+              loadedFieldResearchData,
+            );
+          }
+        })
+        .catch(err => {
+          console.log('field research data ERROR.', err);
+        });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [networkState]);
+
   const decreaseTimer = () => {
     setCountDownTimer(prev => prev - 1);
   };
@@ -403,6 +444,10 @@ const LandingPage = ({navigation}) => {
           } else if (item?.name === 'Raid Bosses') {
             navigation.navigate(item?.navigationPath, {
               loadData: loadRaidBossData,
+            });
+          } else if (item?.name === 'Field Research') {
+            navigation.navigate(item?.navigationPath, {
+              loadData: loadFieldResearchData,
             });
           } else {
             navigation.navigate(item?.navigationPath);

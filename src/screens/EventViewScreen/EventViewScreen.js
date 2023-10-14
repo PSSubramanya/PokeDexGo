@@ -167,6 +167,11 @@ const EventViewScreen = props => {
   };
 
   const renderItem = ({item}) => {
+    const specialCase =
+      item?.Summary.toLowerCase().includes('spotlight') ||
+      item?.Summary?.toLowerCase().includes('community day');
+
+    console.log('CHECKKKKKKK', item?.Summary, specialCase);
     return (
       <View style={styles.eventsList}>
         <TouchableOpacity
@@ -180,7 +185,13 @@ const EventViewScreen = props => {
           }}>
           <CardView
             innerView={eventCardContainer(item)}
-            style={styles.cardInnerStyling}
+            style={[
+              styles.cardInnerStyling,
+              {
+                borderWidth: specialCase ? 2 : 0,
+                borderColor: specialCase ? colors.goldColor : null,
+              },
+            ]}
           />
         </TouchableOpacity>
       </View>

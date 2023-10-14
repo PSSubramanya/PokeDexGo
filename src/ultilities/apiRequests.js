@@ -1,4 +1,4 @@
-const postAPIRequest = (headerkey, url, params) => {
+export const postAPIRequest = (headerkey, url, params) => {
   fetch(url, {
     method: 'POST',
     headers: {
@@ -9,7 +9,10 @@ const postAPIRequest = (headerkey, url, params) => {
     body: JSON.stringify(params),
   })
     .then(response => response.json())
-    .then(response => console.log(JSON.stringify(response)));
+    .then(response => {
+      console.log('AYE_YOOO HELLLO', JSON.stringify(response));
+      return JSON.stringify(response);
+    });
 };
 
 // 1FhguFyZBH7UdPGHm6mjEsgk

@@ -16,6 +16,10 @@ import styles from './styles.js';
 import colors from '../../constants/colors';
 
 const FieldResearchScreen = props => {
+  const {navigation, route} = props;
+  const {params} = route;
+  const {loadData} = params;
+
   let eventTasks = [];
   let catchingTasks = [];
   let throwingTasks = [];
@@ -34,7 +38,7 @@ const FieldResearchScreen = props => {
   const [rewardSectionDisplay, setRewardSectionDisplay] = useState([]);
 
   useEffect(() => {
-    const dispData = researchData; //mockFieldResearchData?.data;
+    const dispData = loadData; //mockFieldResearchData?.data;
     setDisplayData(dispData);
 
     dispData?.map((dat, idx) => {
