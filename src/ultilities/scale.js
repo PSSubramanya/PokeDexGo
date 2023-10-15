@@ -26,4 +26,5 @@ export {
   moderateScale,
   viewportWidth,
   viewportHeight,
+  aspectRatio,
 };

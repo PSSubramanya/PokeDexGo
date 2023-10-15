@@ -587,7 +587,7 @@ const EventViewScreen = props => {
           }}
           height={1}
           width={1}
-          style={styles.pokemonTypeImageStyel}
+          style={styles.pokemonTypeImageStyle}
           resizeMode={'contain'}
         />
         <Text

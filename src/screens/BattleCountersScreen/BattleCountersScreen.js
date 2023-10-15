@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   ScrollView,
   View,
@@ -14,8 +14,15 @@ import {
 } from '../../ultilities/commonFunctions.js';
 // import {postAPIRequest} from '../../ultilities/apiRequests.js';
 import pokemon_mega_images from '../../ultilities/pokemonData/pokemon_mega_images.js';
+import pokeTypesData from '../../ultilities/pokemonData/pokemon_types.js';
 import styles from './styles.js';
 import colors from '../../constants/colors.js';
+import {
+  horizontalScale,
+  verticalScale,
+  // viewportHeight,
+  aspectRatio,
+} from '../../ultilities/scale.js';
 import imagePaths from '../../constants/imagePaths.js';
 import commonStyling from '../../ultilities/commonStyling/commonStyling.js';
 
@@ -28,10 +35,22 @@ const BattleCountersScreen = props => {
   const round2Pokemons = [];
   const round3Pokemons = [];
 
+  const viewCurrentPosition = useRef(null); //viewRef
+  const viewRef = useRef(null);
+
   const [counterPokemons, setCounterPokemons] = useState([]);
   const [round1Mons, setRound1Pokemons] = useState([]);
   const [round2Mons, setRound2Pokemons] = useState([]);
   const [round3Mons, setRound3Pokemons] = useState([]);
+  const [attackIndexNumber, setAttackIndexNumber] = useState(0);
+  const [selectedID, setSelectedID] = useState(0);
+  const [attackModalStatus, setAttackModalStatus] = useState(false);
+  const [fastAttack, setFastAttack] = useState('');
+  const [chargedAttack, setChargedAttack] = useState('');
+  const [currentPosition, setCurrentPosition] = useState(0);
+
+  const [position, setPosition] = useState({x: 0, y: 0});
+  const [dimensions, setDimensions] = useState({width: 0, height: 0});
 
   useEffect(() => {
     // TODO: ADD this also to cache if possible
@@ -99,10 +118,19 @@ const BattleCountersScreen = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [counterPokemons]);
 
+  // const measureView = () => {
+  //   viewRef.current.measure((fx, fy, width, height, px, py) => {
+  //     setCurrentPosition(py);
+  //     setPosition({x: px, y: py});
+  //     setDimensions({width, height});
+  //     console.log('CURRENT POSITIONS', fx, fy, width, height, px, py);
+  //   });
+  // };
+
   const fetchPokemonImages = pokemonItem => {
     let displayImageURL;
     let finalDisplayImage;
-    const pokemonNameString = pokemonItem?.item?.Name;
+    const pokemonNameString = pokemonItem?.Name;
     const pokeSubString = pokemonNameString?.split(' ');
     console.log(
       'JKSCBJKASBC',
@@ -154,14 +182,35 @@ const BattleCountersScreen = props => {
     return displayImageURL;
   };
 
-  const renderItem = (pokeItem, idNo) => {
-    const displayImage = fetchPokemonImages(pokeItem);
-    const pokemonNameString = pokeItem?.item?.Name;
+  const attackType = attackName => {
+    const spliAttackName = attackName?.split('(')[1];
+    return pokeTypesData[
+      spliAttackName?.substring(0, spliAttackName?.length - 1)
+    ];
+  };
+
+  const renderItem = ({item, index}) => {
+    const displayImage = fetchPokemonImages(item);
+    const pokemonNameString = item?.Name;
     const pokeSubString = pokemonNameString?.split(' ');
     return (
       <View>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setAttackModalStatus(true);
+            console.log('verticalScale(180)', item, item?.['#'], index);
+            setAttackIndexNumber(index);
+            setSelectedID(item?.['#']);
+            setFastAttack(item?.['Fast Attack']);
+            setChargedAttack(item?.['Charged Attack']);
+            // measureView();
+          }}
+          onPressOut={() => {
+            setAttackModalStatus(false);
+            setAttackIndexNumber(0);
+          }}>
           <View
+            ref={viewRef}
             style={[
               {
                 backgroundColor: colors.white, //TODO: NEED TO REMOVE WHITE BACKGROUND HERE
@@ -190,7 +239,7 @@ const BattleCountersScreen = props => {
             ) : null}
           </View>
         </TouchableOpacity>
-        <Text style={styles?.pokeName}>{pokeItem?.item?.Name}</Text>
+        <Text style={styles?.pokeName}>{item?.Name}</Text>
         <View
           style={[
             commonStyling?.flexRow,
@@ -198,7 +247,7 @@ const BattleCountersScreen = props => {
           ]}>
           <Text style={[styles?.scoreText]}>Score: </Text>
           <Text style={[styles?.scoreText, styles?.scoreDisplay]}>
-            {pokeItem?.item?.Score}
+            {item?.Score}
           </Text>
         </View>
       </View>
@@ -228,6 +277,63 @@ const BattleCountersScreen = props => {
         </Text>
       </View>
       <Text style={[styles?.textTitles, styles?.groupAlignment]}>Group 1</Text>
+      {attackModalStatus && selectedID <= 6 ? (
+        <View
+          style={[
+            styles.attacksContainer,
+            {
+              // top:
+              //   attackIndexNumber > 2
+              //     ? verticalScale(aspectRatio < 0.6 ? 330 : 360)
+              //     : verticalScale(aspectRatio < 0.6 ? 180 : 200),
+              // top:
+              //   attackIndexNumber > 2
+              //     ? verticalScale(330) //330
+              //     : verticalScale(180), //180
+              left:
+                attackIndexNumber % 3 === 0
+                  ? horizontalScale(10)
+                  : attackIndexNumber % 3 === 1
+                  ? horizontalScale(120)
+                  : horizontalScale(230),
+            },
+          ]}>
+          <View>
+            <Text style={styles.attackHeading}>Attacks</Text>
+            <View style={styles?.attacksView}>
+              <View style={commonStyling?.flexRow}>
+                <Image
+                  source={{
+                    uri: attackType(fastAttack),
+                  }}
+                  height={1}
+                  width={1}
+                  style={styles.pokemonTypeImageStyle}
+                  resizeMode={'contain'}
+                />
+                <Text style={styles?.attackText}>
+                  {fastAttack?.split('(')?.[0]}
+                </Text>
+              </View>
+              <View style={commonStyling?.flexRow}>
+                <Image
+                  source={{
+                    uri: attackType(chargedAttack),
+                  }}
+                  height={1}
+                  width={1}
+                  style={styles.pokemonTypeImageStyle}
+                  resizeMode={'contain'}
+                />
+                <Text style={styles?.attackText}>
+                  {chargedAttack?.split('(')?.[0]}
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      ) : null}
+
       <View style={styles?.groupView}>
         <FlatList
           data={round1Mons}
@@ -237,6 +343,58 @@ const BattleCountersScreen = props => {
         />
       </View>
       <Text style={[styles?.textTitles, styles?.groupAlignment]}>Group 2</Text>
+      {attackModalStatus && selectedID > 6 && selectedID <= 12 ? (
+        <View
+          style={[
+            styles.attacksContainer,
+            {
+              // top:
+              //   attackIndexNumber > 2
+              //     ? verticalScale(aspectRatio < 0.6 ? 680 : 720)
+              //     : verticalScale(aspectRatio < 0.6 ? 530 : 570),
+              left:
+                attackIndexNumber % 3 === 0
+                  ? horizontalScale(10)
+                  : attackIndexNumber % 3 === 1
+                  ? horizontalScale(120)
+                  : horizontalScale(230),
+            },
+          ]}>
+          <View>
+            <Text style={styles.attackHeading}>Attacks</Text>
+            <View style={styles?.attacksView}>
+              <View style={commonStyling?.flexRow}>
+                <Image
+                  source={{
+                    uri: attackType(fastAttack),
+                  }}
+                  height={1}
+                  width={1}
+                  style={styles.pokemonTypeImageStyle}
+                  resizeMode={'contain'}
+                />
+                <Text style={styles?.attackText}>
+                  {fastAttack?.split('(')?.[0]}
+                </Text>
+              </View>
+              <View style={commonStyling?.flexRow}>
+                <Image
+                  source={{
+                    uri: attackType(chargedAttack),
+                  }}
+                  height={1}
+                  width={1}
+                  style={styles.pokemonTypeImageStyle}
+                  resizeMode={'contain'}
+                />
+                <Text style={styles?.attackText}>
+                  {chargedAttack?.split('(')?.[0]}
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      ) : null}
       <View style={styles?.groupView}>
         <FlatList
           data={round2Mons}
@@ -246,6 +404,58 @@ const BattleCountersScreen = props => {
         />
       </View>
       <Text style={[styles?.textTitles, styles?.groupAlignment]}>Group 3</Text>
+      {attackModalStatus && selectedID > 12 && selectedID <= 18 ? (
+        <View
+          style={[
+            styles.attacksContainer,
+            {
+              // top:
+              //   attackIndexNumber > 2
+              //     ? verticalScale(aspectRatio < 0.6 ? 1010 : 1120)
+              //     : verticalScale(aspectRatio < 0.6 ? 880 : 960),
+              left:
+                attackIndexNumber % 3 === 0
+                  ? horizontalScale(10)
+                  : attackIndexNumber % 3 === 1
+                  ? horizontalScale(120)
+                  : horizontalScale(230),
+            },
+          ]}>
+          <View>
+            <Text style={styles.attackHeading}>Attacks</Text>
+            <View style={styles?.attacksView}>
+              <View style={commonStyling?.flexRow}>
+                <Image
+                  source={{
+                    uri: attackType(fastAttack),
+                  }}
+                  height={1}
+                  width={1}
+                  style={styles.pokemonTypeImageStyle}
+                  resizeMode={'contain'}
+                />
+                <Text style={styles?.attackText}>
+                  {fastAttack?.split('(')?.[0]}
+                </Text>
+              </View>
+              <View style={commonStyling?.flexRow}>
+                <Image
+                  source={{
+                    uri: attackType(chargedAttack),
+                  }}
+                  height={1}
+                  width={1}
+                  style={styles.pokemonTypeImageStyle}
+                  resizeMode={'contain'}
+                />
+                <Text style={styles?.attackText}>
+                  {chargedAttack?.split('(')?.[0]}
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      ) : null}
       <View style={styles?.groupView}>
         <FlatList
           data={round3Mons}

@@ -101,4 +101,34 @@ export default styles = StyleSheet.create({
     marginHorizontal: horizontalScale(20),
     alignItems: 'center',
   },
+  attacksContainer: {
+    height: verticalScale(100),
+    width: horizontalScale(140),
+    zIndex: 1,
+    marginBottom: -verticalScale(10),
+    backgroundColor: colors?.quaternaryBackgroundColorDarkMode,
+    position: 'absolute',
+    borderRadius: moderateScale(5),
+  },
+  attackHeading: {
+    color: colors?.white,
+    fontFamily: fontFamily?.primaryFontFamilyMedium,
+    marginTop: verticalScale(10),
+    marginLeft: horizontalScale(10),
+  },
+  pokemonTypeImageStyle: {
+    height: verticalScale(20),
+    width: horizontalScale(20),
+  },
+  attackText: {
+    fontSize: moderateScale(10),
+    fontFamily: fontFamily?.primaryFontFamilyMedium,
+    marginVertical: verticalScale(5),
+    marginLeft: horizontalScale(5),
+    color: colors?.white,
+  },
+  attacksView: {
+    marginTop: verticalScale(10),
+    marginLeft: horizontalScale(5),
+  },
 });

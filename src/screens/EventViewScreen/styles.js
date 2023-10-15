@@ -202,7 +202,7 @@ export default styles = StyleSheet.create({
     paddingHorizontal: horizontalScale(18),
     paddingBottom: verticalScale(10),
   },
-  pokemonTypeImageStyel: {
+  pokemonTypeImageStyle: {
     height: verticalScale(20),
     width: horizontalScale(20),
   },
