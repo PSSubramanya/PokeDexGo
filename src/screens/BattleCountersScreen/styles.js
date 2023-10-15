@@ -103,9 +103,8 @@ export default styles = StyleSheet.create({
   },
   attacksContainer: {
     height: verticalScale(100),
-    width: horizontalScale(140),
+    width: horizontalScale(120),
     zIndex: 1,
-    marginBottom: -verticalScale(10),
     backgroundColor: colors?.quaternaryBackgroundColorDarkMode,
     position: 'absolute',
     borderRadius: moderateScale(5),
