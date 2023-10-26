@@ -189,6 +189,68 @@ const BattleCountersScreen = props => {
     ];
   };
 
+  const renderGroupHeaderAndAttacksContainer = (
+    groupName,
+    attacksDisplayCondition,
+  ) => {
+    return (
+      <View style={{flexDirection: 'row', zIndex: 1}}>
+        <Text style={[styles?.textTitles, styles?.groupAlignment]}>
+          {groupName}
+        </Text>
+        {attacksDisplayCondition ? (
+          <View
+            style={[
+              styles.attacksContainer,
+              {
+                top: attackIndexNumber > 2 ? verticalScale(130) : null,
+                left:
+                  attackIndexNumber % 3 === 0
+                    ? horizontalScale(10)
+                    : attackIndexNumber % 3 === 1
+                    ? horizontalScale(120)
+                    : horizontalScale(230),
+              },
+            ]}>
+            <View>
+              <Text style={styles.attackHeading}>Attacks</Text>
+              <View style={styles?.attacksView}>
+                <View style={commonStyling?.flexRow}>
+                  <Image
+                    source={{
+                      uri: attackType(fastAttack),
+                    }}
+                    height={1}
+                    width={1}
+                    style={styles.pokemonTypeImageStyle}
+                    resizeMode={'contain'}
+                  />
+                  <Text style={styles?.attackText}>
+                    {fastAttack?.split('(')?.[0]}
+                  </Text>
+                </View>
+                <View style={commonStyling?.flexRow}>
+                  <Image
+                    source={{
+                      uri: attackType(chargedAttack),
+                    }}
+                    height={1}
+                    width={1}
+                    style={styles.pokemonTypeImageStyle}
+                    resizeMode={'contain'}
+                  />
+                  <Text style={styles?.attackText}>
+                    {chargedAttack?.split('(')?.[0]}
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        ) : null}
+      </View>
+    );
+  };
+
   const renderItem = ({item, index}) => {
     const displayImage = fetchPokemonImages(item);
     const pokemonNameString = item?.Name;
@@ -276,61 +338,10 @@ const BattleCountersScreen = props => {
           This section shows top 18 pokemon counters against {pokeName}
         </Text>
       </View>
-      <View style={{flexDirection: 'row'}}>
-        <Text style={[styles?.textTitles, styles?.groupAlignment]}>
-          Group 1
-        </Text>
-        {attackModalStatus && selectedID <= 6 ? (
-          <View
-            style={[
-              styles.attacksContainer,
-              {
-                top: attackIndexNumber > 2 ? verticalScale(130) : null,
-                left:
-                  attackIndexNumber % 3 === 0
-                    ? horizontalScale(10)
-                    : attackIndexNumber % 3 === 1
-                    ? horizontalScale(120)
-                    : horizontalScale(230),
-              },
-            ]}>
-            <View>
-              <Text style={styles.attackHeading}>Attacks</Text>
-              <View style={styles?.attacksView}>
-                <View style={commonStyling?.flexRow}>
-                  <Image
-                    source={{
-                      uri: attackType(fastAttack),
-                    }}
-                    height={1}
-                    width={1}
-                    style={styles.pokemonTypeImageStyle}
-                    resizeMode={'contain'}
-                  />
-                  <Text style={styles?.attackText}>
-                    {fastAttack?.split('(')?.[0]}
-                  </Text>
-                </View>
-                <View style={commonStyling?.flexRow}>
-                  <Image
-                    source={{
-                      uri: attackType(chargedAttack),
-                    }}
-                    height={1}
-                    width={1}
-                    style={styles.pokemonTypeImageStyle}
-                    resizeMode={'contain'}
-                  />
-                  <Text style={styles?.attackText}>
-                    {chargedAttack?.split('(')?.[0]}
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        ) : null}
-      </View>
-
+      {renderGroupHeaderAndAttacksContainer(
+        'Group 1',
+        attackModalStatus && selectedID <= 6,
+      )}
       <View style={styles?.groupView}>
         <FlatList
           data={round1Mons}
@@ -339,60 +350,10 @@ const BattleCountersScreen = props => {
           renderItem={renderItem}
         />
       </View>
-      <View style={{flexDirection: 'row'}}>
-        <Text style={[styles?.textTitles, styles?.groupAlignment]}>
-          Group 2
-        </Text>
-        {attackModalStatus && selectedID > 6 && selectedID <= 12 ? (
-          <View
-            style={[
-              styles.attacksContainer,
-              {
-                top: attackIndexNumber > 2 ? verticalScale(130) : null,
-                left:
-                  attackIndexNumber % 3 === 0
-                    ? horizontalScale(10)
-                    : attackIndexNumber % 3 === 1
-                    ? horizontalScale(120)
-                    : horizontalScale(230),
-              },
-            ]}>
-            <View>
-              <Text style={styles.attackHeading}>Attacks</Text>
-              <View style={styles?.attacksView}>
-                <View style={commonStyling?.flexRow}>
-                  <Image
-                    source={{
-                      uri: attackType(fastAttack),
-                    }}
-                    height={1}
-                    width={1}
-                    style={styles.pokemonTypeImageStyle}
-                    resizeMode={'contain'}
-                  />
-                  <Text style={styles?.attackText}>
-                    {fastAttack?.split('(')?.[0]}
-                  </Text>
-                </View>
-                <View style={commonStyling?.flexRow}>
-                  <Image
-                    source={{
-                      uri: attackType(chargedAttack),
-                    }}
-                    height={1}
-                    width={1}
-                    style={styles.pokemonTypeImageStyle}
-                    resizeMode={'contain'}
-                  />
-                  <Text style={styles?.attackText}>
-                    {chargedAttack?.split('(')?.[0]}
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        ) : null}
-      </View>
+      {renderGroupHeaderAndAttacksContainer(
+        'Group 2',
+        attackModalStatus && selectedID > 6 && selectedID <= 12,
+      )}
       <View style={styles?.groupView}>
         <FlatList
           data={round2Mons}
@@ -401,60 +362,10 @@ const BattleCountersScreen = props => {
           renderItem={renderItem}
         />
       </View>
-      <View style={{flexDirection: 'row'}}>
-        <Text style={[styles?.textTitles, styles?.groupAlignment]}>
-          Group 3
-        </Text>
-        {attackModalStatus && selectedID > 12 && selectedID <= 18 ? (
-          <View
-            style={[
-              styles.attacksContainer,
-              {
-                top: attackIndexNumber > 2 ? verticalScale(130) : null,
-                left:
-                  attackIndexNumber % 3 === 0
-                    ? horizontalScale(10)
-                    : attackIndexNumber % 3 === 1
-                    ? horizontalScale(120)
-                    : horizontalScale(230),
-              },
-            ]}>
-            <View>
-              <Text style={styles.attackHeading}>Attacks</Text>
-              <View style={styles?.attacksView}>
-                <View style={commonStyling?.flexRow}>
-                  <Image
-                    source={{
-                      uri: attackType(fastAttack),
-                    }}
-                    height={1}
-                    width={1}
-                    style={styles.pokemonTypeImageStyle}
-                    resizeMode={'contain'}
-                  />
-                  <Text style={styles?.attackText}>
-                    {fastAttack?.split('(')?.[0]}
-                  </Text>
-                </View>
-                <View style={commonStyling?.flexRow}>
-                  <Image
-                    source={{
-                      uri: attackType(chargedAttack),
-                    }}
-                    height={1}
-                    width={1}
-                    style={styles.pokemonTypeImageStyle}
-                    resizeMode={'contain'}
-                  />
-                  <Text style={styles?.attackText}>
-                    {chargedAttack?.split('(')?.[0]}
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        ) : null}
-      </View>
+      {renderGroupHeaderAndAttacksContainer(
+        'Group 3',
+        attackModalStatus && selectedID > 12 && selectedID <= 18,
+      )}
       <View style={styles?.groupView}>
         <FlatList
           data={round3Mons}
