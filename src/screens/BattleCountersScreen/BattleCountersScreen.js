@@ -39,6 +39,7 @@ const BattleCountersScreen = props => {
   const viewRef = useRef(null);
 
   const [counterPokemons, setCounterPokemons] = useState([]);
+  const [displayCounterPokemons, setDisplayCounterPokemons] = useState([]);
   const [round1Mons, setRound1Pokemons] = useState([]);
   const [round2Mons, setRound2Pokemons] = useState([]);
   const [round3Mons, setRound3Pokemons] = useState([]);
@@ -54,7 +55,64 @@ const BattleCountersScreen = props => {
 
   useEffect(() => {
     // TODO: ADD this also to cache if possible
+    if (
+      round1Mons.length === 0 ||
+      round2Mons.length === 0 ||
+      round3Mons.length === 0 ||
+      counterPokemons.length === 0 ||
+      displayCounterPokemons.length === 0
+    ) {
+      fetchCounterPokemonData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    round1Mons,
+    round2Mons,
+    round3Mons,
+    counterPokemons,
+    displayCounterPokemons,
+  ]);
 
+  useEffect(() => {
+    const displayablePokemons = counterPokemons?.filter(
+      pokeDataVal => pokeDataVal?.pokemon === pokeName,
+    );
+    const setPokemons = displayablePokemons?.[0]?.counter;
+    setDisplayCounterPokemons(setPokemons);
+    console.log(
+      'COUNTER POKEMONS DATA VALUE from API',
+      displayablePokemons?.[0]?.counter,
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [counterPokemons]);
+
+  useEffect(() => {
+    displayCounterPokemons?.map((mons, ids) => {
+      console.log('THE-MONS', mons, ids);
+      if (ids < 6) {
+        round1Pokemons.push(mons);
+      } else if (ids >= 6 && ids < 12) {
+        round2Pokemons.push(mons);
+      } else if (ids >= 12 && ids < 18) {
+        round3Pokemons.push(mons);
+      }
+    });
+    setRound1Pokemons(round1Pokemons);
+    setRound2Pokemons(round2Pokemons);
+    setRound3Pokemons(round3Pokemons);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [displayCounterPokemons]);
+
+  // const measureView = () => {
+  //   viewRef.current.measure((fx, fy, width, height, px, py) => {
+  //     setCurrentPosition(py);
+  //     setPosition({x: px, y: py});
+  //     setDimensions({width, height});
+  //     console.log('CURRENT POSITIONS', fx, fy, width, height, px, py);
+  //   });
+  // };
+
+  const fetchCounterPokemonData = () => {
     let loadedCounterData;
     const pokemonCountersURL =
       'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/counters';
@@ -64,16 +122,7 @@ const BattleCountersScreen = props => {
         response.json()?.then(res => {
           loadedCounterData = res?.data;
           storeData('pokemonCounterData', loadedCounterData); //TODO: Try to add this for cache here
-
-          const displayablePokemons = loadedCounterData?.filter(
-            pokeDataVal => pokeDataVal?.pokemon === pokeName,
-          );
-          const setPokemons = displayablePokemons?.[0]?.counter;
-          setCounterPokemons(setPokemons);
-          console.log(
-            'COUNTER POKEMONS DATA VALUE from API',
-            displayablePokemons?.[0]?.counter,
-          );
+          setCounterPokemons(loadedCounterData);
         });
       })
       .catch(err => {
@@ -98,34 +147,7 @@ const BattleCountersScreen = props => {
           console.log('counter pokemons data fetch ERROR.', err);
         });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    counterPokemons?.map((mons, ids) => {
-      console.log('THE-MONS', mons, ids);
-      if (ids < 6) {
-        round1Pokemons.push(mons);
-      } else if (ids >= 6 && ids < 12) {
-        round2Pokemons.push(mons);
-      } else if (ids >= 12 && ids < 18) {
-        round3Pokemons.push(mons);
-      }
-    });
-    setRound1Pokemons(round1Pokemons);
-    setRound2Pokemons(round2Pokemons);
-    setRound3Pokemons(round3Pokemons);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [counterPokemons]);
-
-  // const measureView = () => {
-  //   viewRef.current.measure((fx, fy, width, height, px, py) => {
-  //     setCurrentPosition(py);
-  //     setPosition({x: px, y: py});
-  //     setDimensions({width, height});
-  //     console.log('CURRENT POSITIONS', fx, fy, width, height, px, py);
-  //   });
-  // };
+  };
 
   const fetchPokemonImages = pokemonItem => {
     let displayImageURL;
@@ -168,7 +190,11 @@ const BattleCountersScreen = props => {
     } else if (pokeSubString?.[0] === 'Primal') {
       displayImageURL = `https://img.pokemondb.net/artwork/large/${finalPokemonStringForImage}-primal.jpg`;
     } else {
-      if (finalPokemonStringForImage === "sirfetch'd") {
+      if (pokeSubString?.[1]?.includes('Origin')) {
+        displayImageURL = `https://img.pokemondb.net/artwork/large/${pokeSubString[0].toLowerCase()}-origin.jpg`;
+      } else if (pokeSubString?.[1]?.includes('Altered')) {
+        displayImageURL = `https://img.pokemondb.net/artwork/large/${pokeSubString[0].toLowerCase()}-altered.jpg`;
+      } else if (finalPokemonStringForImage === "sirfetch'd") {
         displayImageURL =
           'https://img.pokemondb.net/artwork/large/sirfetchd.jpg';
       } else {
