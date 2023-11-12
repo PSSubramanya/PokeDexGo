@@ -396,10 +396,23 @@ const LandingPage = ({navigation}) => {
           setModalType('email');
           setModalDisplayText(modalQueryDisplayText);
           showModal();
-        }}
-        style={styles.infoIconButton}>
+        }}>
         <Image
           source={imagePaths?.questionMarkIcon}
+          height={1}
+          width={1}
+          style={styles.infoIcon}
+          resizeMode={'contain'}
+        />
+      </TouchableOpacity>
+    );
+  };
+
+  const notificationButton = () => {
+    return (
+      <TouchableOpacity>
+        <Image
+          source={imagePaths?.notificationsOnIcon}
           height={1}
           width={1}
           style={styles.infoIcon}
@@ -618,7 +631,10 @@ const LandingPage = ({navigation}) => {
           },
           styles.mainContainer,
         ]}>
-        {infoButton()}
+        <View style={styles?.iconContainer}>
+          {notificationButton()}
+          {infoButton()}
+        </View>
         {loadData?.length !== 0 ? appIconContainer() : null}
         {loadData?.length !== 0 ? navigationButtons() : null}
         {redoIcon()}

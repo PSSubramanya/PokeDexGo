@@ -157,6 +157,7 @@ export default styles = StyleSheet.create({
   infoIcon: {
     height: verticalScale(25),
     width: horizontalScale(25),
+    marginHorizontal: horizontalScale(5),
   },
   modalHeaderText: {
     fontSize: moderateScale(12),
@@ -175,5 +176,14 @@ export default styles = StyleSheet.create({
   updateText: {
     color: colors?.white,
     fontFamily: fontFamily.primaryFontFamilyMedium,
+  },
+  iconContainer: {
+    flexDirection: 'row',
+    position: 'absolute',
+    top: 0,
+    height: verticalScale(40),
+    width: '100%',
+    paddingTop: verticalScale(10),
+    justifyContent: 'flex-end',
   },
 });
