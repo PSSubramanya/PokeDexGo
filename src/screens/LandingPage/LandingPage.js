@@ -18,6 +18,7 @@ import {Modal, Portal} from 'react-native-paper';
 import DeviceInfo from 'react-native-device-info';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {useNetStatusInfo} from '../../ultilities/customHooks/useNetStatusInfo';
+import {usePushNotification} from '../../ultilities/customHooks/usePushNotification';
 import strings from '../../constants/strings';
 import imagePaths from '../../constants/imagePaths';
 import colors from '../../constants/colors';
@@ -35,6 +36,7 @@ const LandingPage = ({navigation}) => {
 
   const dispatch = useDispatch();
   const {networkState} = useNetStatusInfo();
+  const {sendLocalNotificationWithSound} = usePushNotification(navigation);
 
   const navigationScreens = [
     {
@@ -76,7 +78,17 @@ const LandingPage = ({navigation}) => {
   const [modalTypeValue, setModalType] = useState('');
   const [countDownTimer, setCountDownTimer] = useState(10);
   const [forceUpdateModal, setForceUpdateModal] = useState(false);
-  const [permissions, setPermissions] = useState({});
+
+  useEffect(() => {
+    /* NOTE: Trigger this function in Events page ,
+    then do it such that it gets triggered in schedule,
+    if required doa multi notification trigger in the usePusNotification */
+    sendLocalNotificationWithSound(
+      'Community Day',
+      'November Community Day Classic',
+      "November's Comunity Day Classic is set for Saturday, November 25,2023. Stay tuned for the announcement of the featured Pokemon!",
+    );
+  }, []);
 
   useEffect(() => {
     let versionData;
@@ -312,288 +324,6 @@ const LandingPage = ({navigation}) => {
   }, [networkState]);
 
   /* NOTE: HERE STARTS NOTIFICATION CODE */
-  useEffect(() => {
-    PushNotificationIOS.addEventListener('register', onRegistered);
-    PushNotificationIOS.addEventListener(
-      'registrationError',
-      onRegistrationError,
-    );
-    PushNotificationIOS.addEventListener('notification', onRemoteNotification);
-    PushNotificationIOS.addEventListener(
-      'localNotification',
-      onLocalNotification,
-    );
-
-    PushNotificationIOS.requestPermissions({
-      alert: true,
-      badge: true,
-      sound: true,
-      critical: true,
-    }).then(
-      data => {
-        console.log('PushNotificationIOS.requestPermissions', data);
-      },
-      data => {
-        console.log('PushNotificationIOS.requestPermissions failed', data);
-      },
-    );
-
-    return () => {
-      PushNotificationIOS.removeEventListener('register');
-      PushNotificationIOS.removeEventListener('registrationError');
-      PushNotificationIOS.removeEventListener('notification');
-      PushNotificationIOS.removeEventListener('localNotification');
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const sendNotification = () => {
-    DeviceEventEmitter.emit('remoteNotificationReceived', {
-      remote: true,
-      aps: {
-        alert: {title: 'title', subtitle: 'subtitle', body: 'body'},
-        badge: 1,
-        sound: 'default',
-        category: 'REACT_NATIVE',
-        'content-available': 1,
-        'mutable-content': 1,
-      },
-    });
-  };
-
-  const sendSilentNotification = () => {
-    DeviceEventEmitter.emit('remoteNotificationReceived', {
-      remote: true,
-      aps: {
-        category: 'REACT_NATIVE',
-        'content-available': 1,
-      },
-    });
-  };
-
-  const sendLocalNotification = () => {
-    PushNotificationIOS.presentLocalNotification({
-      alertTitle: 'Sample Title',
-      alertBody: 'Sample local notification',
-      applicationIconBadgeNumber: 1,
-    });
-  };
-
-  const sendLocalNotificationWithSound = () => {
-    PushNotificationIOS.addNotificationRequest({
-      id: 'notificationWithSound',
-      title: 'Sample Title',
-      subtitle: 'Sample Subtitle',
-      body: 'Sample local notification with custom sound',
-      sound: 'customSound.wav',
-      badge: 1,
-    });
-  };
-
-  const scheduleLocalNotification = () => {
-    PushNotificationIOS.scheduleLocalNotification({
-      alertBody: 'Test Local Notification',
-      fireDate: new Date(new Date().valueOf() + 2000).toISOString(),
-    });
-  };
-
-  const addNotificationRequest = () => {
-    PushNotificationIOS.addNotificationRequest({
-      id: 'test',
-      title: 'title',
-      subtitle: 'subtitle',
-      body: 'body',
-      category: 'test',
-      threadId: 'thread-id',
-      fireDate: new Date(new Date().valueOf() + 2000),
-      repeats: true,
-      userInfo: {
-        image: 'https://www.github.com/Naturalclar.png',
-      },
-    });
-  };
-
-  const addCriticalNotificationRequest = () => {
-    PushNotificationIOS.addNotificationRequest({
-      id: 'critical',
-      title: 'Critical Alert',
-      subtitle: 'subtitle',
-      body: 'This is a critical alert',
-      category: 'test',
-      threadId: 'thread-id',
-      isCritical: true,
-      fireDate: new Date(new Date().valueOf() + 2000),
-      repeats: true,
-    });
-  };
-
-  const addMultipleRequests = () => {
-    PushNotificationIOS.addNotificationRequest({
-      id: 'test-1',
-      title: 'First',
-      subtitle: 'subtitle',
-      body: 'First Notification out of 3',
-      category: 'test',
-      threadId: 'thread-id',
-      fireDate: new Date(new Date().valueOf() + 10000),
-      repeats: true,
-    });
-
-    PushNotificationIOS.addNotificationRequest({
-      id: 'test-2',
-      title: 'Second',
-      subtitle: 'subtitle',
-      body: 'Second Notification out of 3',
-      category: 'test',
-      threadId: 'thread-id',
-      fireDate: new Date(new Date().valueOf() + 12000),
-      repeats: true,
-    });
-
-    PushNotificationIOS.addNotificationRequest({
-      id: 'test-3',
-      title: 'Third',
-      subtitle: 'subtitle',
-      body: 'Third Notification out of 3',
-      category: 'test',
-      threadId: 'thread-id',
-      fireDate: new Date(new Date().valueOf() + 14000),
-      repeats: true,
-    });
-  };
-
-  const getPendingNotificationRequests = () => {
-    PushNotificationIOS.getPendingNotificationRequests(requests => {
-      Alert.alert('Push Notification Received', JSON.stringify(requests), [
-        {
-          text: 'Dismiss',
-          onPress: null,
-        },
-      ]);
-    });
-  };
-
-  const setNotificationCategories = async () => {
-    PushNotificationIOS.setNotificationCategories([
-      {
-        id: 'test',
-        actions: [
-          {id: 'open', title: 'Open', options: {foreground: true}},
-          {
-            id: 'ignore',
-            title: 'Desruptive',
-            options: {foreground: true, destructive: true},
-          },
-          {
-            id: 'text',
-            title: 'Text Input',
-            options: {foreground: true},
-            textInput: {buttonTitle: 'Send'},
-          },
-        ],
-      },
-    ]);
-    Alert.alert(
-      'setNotificationCategories',
-      `Set notification category complete`,
-      [
-        {
-          text: 'Dismiss',
-          onPress: null,
-        },
-      ],
-    );
-  };
-
-  const removeAllPendingNotificationRequests = () => {
-    PushNotificationIOS.removeAllPendingNotificationRequests();
-  };
-
-  const removePendingNotificationRequests = () => {
-    PushNotificationIOS.removePendingNotificationRequests(['test-1', 'test-2']);
-  };
-
-  const onRegistered = deviceToken => {
-    Alert.alert('Registered For Remote Push', `Device Token: ${deviceToken}`, [
-      {
-        text: 'Dismiss',
-        onPress: null,
-      },
-    ]);
-  };
-
-  const onRegistrationError = error => {
-    Alert.alert(
-      'Failed To Register For Remote Push',
-      `Error (${error.code}): ${error.message}`,
-      [
-        {
-          text: 'Dismiss',
-          onPress: null,
-        },
-      ],
-    );
-  };
-
-  const onRemoteNotification = notification => {
-    const isClicked = notification.getData().userInteraction === 1;
-
-    const result = `
-      Title:  ${notification.getTitle()};\n
-      Subtitle:  ${notification.getSubtitle()};\n
-      Message: ${notification.getMessage()};\n
-      badge: ${notification.getBadgeCount()};\n
-      sound: ${notification.getSound()};\n
-      category: ${notification.getCategory()};\n
-      content-available: ${notification.getContentAvailable()};\n
-      Notification is clicked: ${String(isClicked)}.`;
-
-    if (notification.getTitle() == undefined) {
-      Alert.alert('Silent push notification Received', result, [
-        {
-          text: 'Send local push',
-          onPress: sendLocalNotification,
-        },
-      ]);
-    } else {
-      Alert.alert('Push Notification Received', result, [
-        {
-          text: 'Dismiss',
-          onPress: null,
-        },
-      ]);
-    }
-    notification.finish('UIBackgroundFetchResultNoData');
-  };
-
-  const onLocalNotification = notification => {
-    const isClicked = notification.getData().userInteraction === 1;
-
-    Alert.alert(
-      'Local Notification Received',
-      `Alert title:  ${notification.getTitle()},
-      Alert subtitle:  ${notification.getSubtitle()},
-      Alert message:  ${notification.getMessage()},
-      Badge: ${notification.getBadgeCount()},
-      Sound: ${notification.getSound()},
-      Thread Id:  ${notification.getThreadID()},
-      Action Id:  ${notification.getActionIdentifier()},
-      User Text:  ${notification.getUserText()},
-      Notification is clicked: ${String(isClicked)}.`,
-      [
-        {
-          text: 'Dismiss',
-          onPress: null,
-        },
-      ],
-    );
-  };
-
-  const showPermissions = () => {
-    PushNotificationIOS.checkPermissions(permissions => {
-      setPermissions({permissions});
-    });
-  };
 
   /* NOTE: HERE ENDS NOTIFICATION CODE*/
 
@@ -700,14 +430,7 @@ const LandingPage = ({navigation}) => {
 
   const notificationButton = () => {
     return (
-      <TouchableOpacity
-        onPress={() => {
-          // scheduleLocalNotification();
-          // sendSilentNotification();
-          // sendLocalNotificationWithSound();
-          sendLocalNotification();
-          // sendNotification();
-        }}>
+      <TouchableOpacity onPress={() => {}}>
         <Image
           source={imagePaths?.notificationsOnIcon}
           height={1}
