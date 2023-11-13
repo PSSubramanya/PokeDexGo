@@ -380,6 +380,8 @@ PODS:
     - React-perflogger (= 0.70.4)
   - RNCAsyncStorage (1.19.1):
     - React-Core
+  - RNCPushNotificationIOS (1.11.0):
+    - React-Core
   - RNDeviceInfo (10.8.0):
     - React-Core
   - RNScreens (3.18.2):
@@ -458,6 +460,7 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
+  - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSound (from `../node_modules/react-native-sound`)
@@ -556,6 +559,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
+  RNCPushNotificationIOS:
+    :path: "../node_modules/@react-native-community/push-notification-ios"
   RNDeviceInfo:
     :path: "../node_modules/react-native-device-info"
   RNScreens:
@@ -616,6 +621,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 5407e26b5aaafa9b01a08e33653255f8247e7c31
   ReactCommon: abf3605a56f98b91671d0d1327addc4ffb87af77
   RNCAsyncStorage: f47fe18526970a69c34b548883e1aeceb115e3e1
+  RNCPushNotificationIOS: 64218f3c776c03d7408284a819b2abfda1834bc8
   RNDeviceInfo: 5795b418ed3451ebcaf39384e6cf51f60cb931c9
   RNScreens: 34cc502acf1b916c582c60003dc3089fa01dc66d
   RNSound: 6c156f925295bdc83e8e422e7d8b38d33bc71852
