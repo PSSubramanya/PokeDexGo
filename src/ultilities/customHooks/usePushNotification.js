@@ -1,35 +1,40 @@
 import React, {useState, useEffect} from 'react';
-import {DeviceEventEmitter, Alert} from 'react-native';
+import {DeviceEventEmitter, Alert, Platform} from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 
 export const usePushNotification = navigation => {
   const [permissions, setPermissions] = useState({});
 
   useEffect(() => {
-    PushNotificationIOS.addEventListener('register', onRegistered);
-    PushNotificationIOS.addEventListener(
-      'registrationError',
-      onRegistrationError,
-    );
-    PushNotificationIOS.addEventListener('notification', onRemoteNotification);
-    PushNotificationIOS.addEventListener(
-      'localNotification',
-      onLocalNotification,
-    );
+    if (Platform.OS === 'ios') {
+      PushNotificationIOS.addEventListener('register', onRegistered);
+      PushNotificationIOS.addEventListener(
+        'registrationError',
+        onRegistrationError,
+      );
+      PushNotificationIOS.addEventListener(
+        'notification',
+        onRemoteNotification,
+      );
+      PushNotificationIOS.addEventListener(
+        'localNotification',
+        onLocalNotification,
+      );
 
-    PushNotificationIOS.requestPermissions({
-      alert: true,
-      badge: true,
-      sound: true,
-      critical: true,
-    }).then(
-      data => {
-        console.log('PushNotificationIOS.requestPermissions', data);
-      },
-      data => {
-        console.log('PushNotificationIOS.requestPermissions failed', data);
-      },
-    );
+      PushNotificationIOS.requestPermissions({
+        alert: true,
+        badge: true,
+        sound: true,
+        critical: true,
+      }).then(
+        data => {
+          console.log('PushNotificationIOS.requestPermissions', data);
+        },
+        data => {
+          console.log('PushNotificationIOS.requestPermissions failed', data);
+        },
+      );
+    }
 
     return () => {
       PushNotificationIOS.removeEventListener('register');
@@ -68,11 +73,13 @@ export const usePushNotification = navigation => {
     notificationTitle,
     notificationDescription,
   ) => {
-    PushNotificationIOS.presentLocalNotification({
-      alertTitle: notificationTitle, //'Sample Title',
-      alertBody: notificationDescription, //'Sample local notification',
-      applicationIconBadgeNumber: 1,
-    });
+    if (Platform.OS === 'ios') {
+      PushNotificationIOS.presentLocalNotification({
+        alertTitle: notificationTitle, //'Sample Title',
+        alertBody: notificationDescription, //'Sample local notification',
+        applicationIconBadgeNumber: 1,
+      });
+    }
   };
 
   /* NOTE: The one we are using in the app */
@@ -88,123 +95,137 @@ export const usePushNotification = navigation => {
     notificationSubtitle,
     notificationDescription,
   ) => {
-    PushNotificationIOS.addNotificationRequest({
-      id: 'notificationWithSound',
-      title: notificationTitle,
-      subtitle: notificationSubtitle,
-      body: notificationDescription,
-      sound: 'customSound.wav',
-      badge: 1,
-      fireDate: new Date(new Date().valueOf() + 2000),
-      userInfo: {
-        image: 'https://www.github.com/Naturalclar.png',
-      },
-    });
+    if (Platform.OS === 'ios') {
+      PushNotificationIOS.addNotificationRequest({
+        id: 'notificationWithSound',
+        title: notificationTitle,
+        subtitle: notificationSubtitle,
+        body: notificationDescription,
+        sound: 'customSound.wav',
+        badge: 1,
+        fireDate: new Date(new Date().valueOf() + 2000),
+        userInfo: {
+          image: 'https://www.github.com/Naturalclar.png',
+        },
+      });
+    }
   };
 
   const scheduleLocalNotification = () => {
-    PushNotificationIOS.scheduleLocalNotification({
-      alertBody: 'TESTING LOCAL NOTIFICATION',
-      fireDate: new Date(new Date().valueOf() + 2000),
-    });
+    if (Platform.OS === 'ios') {
+      PushNotificationIOS.scheduleLocalNotification({
+        alertBody: 'TESTING LOCAL NOTIFICATION',
+        fireDate: new Date(new Date().valueOf() + 2000),
+      });
+    }
   };
 
   const addNotificationRequest = () => {
-    PushNotificationIOS.addNotificationRequest({
-      id: 'test',
-      title: 'title',
-      subtitle: 'subtitle',
-      body: 'body',
-      category: 'test',
-      threadId: 'thread-id',
-      fireDate: new Date(new Date().valueOf() + 2000),
-      repeats: true,
-      userInfo: {
-        image: 'https://www.github.com/Naturalclar.png',
-      },
-    });
+    if (Platform.OS === 'ios') {
+      PushNotificationIOS.addNotificationRequest({
+        id: 'test',
+        title: 'title',
+        subtitle: 'subtitle',
+        body: 'body',
+        category: 'test',
+        threadId: 'thread-id',
+        fireDate: new Date(new Date().valueOf() + 2000),
+        repeats: true,
+        userInfo: {
+          image: 'https://www.github.com/Naturalclar.png',
+        },
+      });
+    }
   };
 
   const addCriticalNotificationRequest = () => {
-    PushNotificationIOS.addNotificationRequest({
-      id: 'critical',
-      title: 'Critical Alert',
-      subtitle: 'subtitle',
-      body: 'This is a critical alert',
-      category: 'test',
-      threadId: 'thread-id',
-      isCritical: true,
-      fireDate: new Date(new Date().valueOf() + 2000),
-      repeats: true,
-    });
+    if (Platform.OS === 'ios') {
+      PushNotificationIOS.addNotificationRequest({
+        id: 'critical',
+        title: 'Critical Alert',
+        subtitle: 'subtitle',
+        body: 'This is a critical alert',
+        category: 'test',
+        threadId: 'thread-id',
+        isCritical: true,
+        fireDate: new Date(new Date().valueOf() + 2000),
+        repeats: true,
+      });
+    }
   };
 
   const addMultipleRequests = () => {
-    PushNotificationIOS.addNotificationRequest({
-      id: 'test-1',
-      title: 'First',
-      subtitle: 'subtitle',
-      body: 'First Notification out of 3',
-      category: 'test',
-      threadId: 'thread-id',
-      fireDate: new Date(new Date().valueOf() + 10000),
-      repeats: true,
-    });
+    if (Platform.OS === 'ios') {
+      PushNotificationIOS.addNotificationRequest({
+        id: 'test-1',
+        title: 'First',
+        subtitle: 'subtitle',
+        body: 'First Notification out of 3',
+        category: 'test',
+        threadId: 'thread-id',
+        fireDate: new Date(new Date().valueOf() + 10000),
+        repeats: true,
+      });
 
-    PushNotificationIOS.addNotificationRequest({
-      id: 'test-2',
-      title: 'Second',
-      subtitle: 'subtitle',
-      body: 'Second Notification out of 3',
-      category: 'test',
-      threadId: 'thread-id',
-      fireDate: new Date(new Date().valueOf() + 12000),
-      repeats: true,
-    });
+      PushNotificationIOS.addNotificationRequest({
+        id: 'test-2',
+        title: 'Second',
+        subtitle: 'subtitle',
+        body: 'Second Notification out of 3',
+        category: 'test',
+        threadId: 'thread-id',
+        fireDate: new Date(new Date().valueOf() + 12000),
+        repeats: true,
+      });
 
-    PushNotificationIOS.addNotificationRequest({
-      id: 'test-3',
-      title: 'Third',
-      subtitle: 'subtitle',
-      body: 'Third Notification out of 3',
-      category: 'test',
-      threadId: 'thread-id',
-      fireDate: new Date(new Date().valueOf() + 14000),
-      repeats: true,
-    });
+      PushNotificationIOS.addNotificationRequest({
+        id: 'test-3',
+        title: 'Third',
+        subtitle: 'subtitle',
+        body: 'Third Notification out of 3',
+        category: 'test',
+        threadId: 'thread-id',
+        fireDate: new Date(new Date().valueOf() + 14000),
+        repeats: true,
+      });
+    }
   };
 
   const getPendingNotificationRequests = () => {
-    PushNotificationIOS.getPendingNotificationRequests(requests => {
-      Alert.alert('Push Notification Received', JSON.stringify(requests), [
-        {
-          text: 'Dismiss',
-          onPress: null,
-        },
-      ]);
-    });
+    if (Platform.OS === 'ios') {
+      PushNotificationIOS.getPendingNotificationRequests(requests => {
+        Alert.alert('Push Notification Received', JSON.stringify(requests), [
+          {
+            text: 'Dismiss',
+            onPress: null,
+          },
+        ]);
+      });
+    }
   };
 
   const setNotificationCategories = async () => {
-    PushNotificationIOS.setNotificationCategories([
-      {
-        id: 'test',
-        actions: [
-          {id: 'open', title: 'Open', options: {foreground: true}},
-          {
-            id: 'ignore',
-            title: 'Desruptive',
-            options: {foreground: true, destructive: true},
-          },
-          {
-            id: 'text',
-            title: 'Text Input',
-            options: {foreground: true},
-            textInput: {buttonTitle: 'Send'},
-          },
-        ],
-      },
-    ]);
+    if (Platform.OS === 'ios') {
+      PushNotificationIOS.setNotificationCategories([
+        {
+          id: 'test',
+          actions: [
+            {id: 'open', title: 'Open', options: {foreground: true}},
+            {
+              id: 'ignore',
+              title: 'Desruptive',
+              options: {foreground: true, destructive: true},
+            },
+            {
+              id: 'text',
+              title: 'Text Input',
+              options: {foreground: true},
+              textInput: {buttonTitle: 'Send'},
+            },
+          ],
+        },
+      ]);
+    }
     Alert.alert(
       'setNotificationCategories',
       `Set notification category complete`,
@@ -218,11 +239,18 @@ export const usePushNotification = navigation => {
   };
 
   const removeAllPendingNotificationRequests = () => {
-    PushNotificationIOS.removeAllPendingNotificationRequests();
+    if (Platform.OS === 'ios') {
+      PushNotificationIOS.removeAllPendingNotificationRequests();
+    }
   };
 
   const removePendingNotificationRequests = () => {
-    PushNotificationIOS.removePendingNotificationRequests(['test-1', 'test-2']);
+    if (Platform.OS === 'ios') {
+      PushNotificationIOS.removePendingNotificationRequests([
+        'test-1',
+        'test-2',
+      ]);
+    }
   };
 
   const onRegistered = deviceToken => {
@@ -307,9 +335,11 @@ export const usePushNotification = navigation => {
   };
 
   const showPermissions = () => {
-    PushNotificationIOS.checkPermissions(permissions => {
-      setPermissions({permissions});
-    });
+    if (Platform.OS === 'ios') {
+      PushNotificationIOS.checkPermissions(permissions => {
+        setPermissions({permissions});
+      });
+    }
   };
 
   return {

@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {useNetStatusInfo} from '../../ultilities/customHooks/useNetStatusInfo';
+import {usePushNotification} from '../../ultilities/customHooks/usePushNotification';
 import {useSelector} from 'react-redux';
 import {
   Text,
@@ -32,12 +33,14 @@ import CardView from '../../components/CardView/CardView';
 import EventDisplayCard from '../../components/EventDisplayCard/EventDisplayCard';
 
 const EventViewScreen = props => {
+  const {navigation} = props;
   const selectedDate = props?.route?.params?.selectedDate;
 
   let listViewRef = useRef();
   const calanderRef = useRef();
 
   const {networkState} = useNetStatusInfo();
+  // const {sendLocalNotificationWithSound} = usePushNotification(navigation);
 
   const loadedEventJSONData = useSelector(
     state => state?.eventDataReducer?.eventdataload,
@@ -80,6 +83,17 @@ const EventViewScreen = props => {
       return x < y ? -1 : x > y ? 1 : 0;
     });
   }
+
+  useEffect(() => {
+    /* NOTE: Trigger this function in Events page ,
+    then do it such that it gets triggered in schedule,
+    if required doa multi notification trigger in the usePusNotification */
+    // sendLocalNotificationWithSound(
+    //   'Community Day',
+    //   'November Community Day Classic',
+    //   "November's Comunity Day Classic is set for Saturday, November 25,2023. Stay tuned for the announcement of the featured Pokemon!",
+    // );
+  }, []);
 
   useEffect(() => {
     const displayableEvents = loadedEventJSONData?.data.filter(data =>

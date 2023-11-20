@@ -150,6 +150,9 @@ export const pokeImageMappingFunction = displayData => {
     console.log('F-ALOLAN', requestString);
     return pokemon_alolan_variants[requestString];
   } else {
+    if (finalStr === undefined) {
+      return displayData;
+    }
     const finalDisplayStr = finalStr[0]?.split('.');
 
     if (finalDisplayStr.length > 1) {

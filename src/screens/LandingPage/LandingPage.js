@@ -10,15 +10,13 @@ import {
   FlatList,
   Linking,
   Platform,
-  DeviceEventEmitter,
-  Alert,
 } from 'react-native';
 import {Modal, Portal} from 'react-native-paper';
 // import firestore from '@react-native-firebase/firestore';
 import DeviceInfo from 'react-native-device-info';
-import PushNotificationIOS from '@react-native-community/push-notification-ios';
+// import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {useNetStatusInfo} from '../../ultilities/customHooks/useNetStatusInfo';
-import {usePushNotification} from '../../ultilities/customHooks/usePushNotification';
+// import {usePushNotification} from '../../ultilities/customHooks/usePushNotification';
 import strings from '../../constants/strings';
 import imagePaths from '../../constants/imagePaths';
 import colors from '../../constants/colors';
@@ -36,7 +34,7 @@ const LandingPage = ({navigation}) => {
 
   const dispatch = useDispatch();
   const {networkState} = useNetStatusInfo();
-  const {sendLocalNotificationWithSound} = usePushNotification(navigation);
+  // const {sendLocalNotificationWithSound} = usePushNotification(navigation);
 
   const navigationScreens = [
     {
@@ -83,11 +81,11 @@ const LandingPage = ({navigation}) => {
     /* NOTE: Trigger this function in Events page ,
     then do it such that it gets triggered in schedule,
     if required doa multi notification trigger in the usePusNotification */
-    sendLocalNotificationWithSound(
-      'Community Day',
-      'November Community Day Classic',
-      "November's Comunity Day Classic is set for Saturday, November 25,2023. Stay tuned for the announcement of the featured Pokemon!",
-    );
+    // sendLocalNotificationWithSound(
+    //   'Community Day',
+    //   'November Community Day Classic',
+    //   "November's Comunity Day Classic is set for Saturday, November 25,2023. Stay tuned for the announcement of the featured Pokemon!",
+    // );
   }, []);
 
   useEffect(() => {
