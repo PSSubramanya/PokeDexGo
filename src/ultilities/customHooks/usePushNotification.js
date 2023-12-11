@@ -324,26 +324,38 @@ export const usePushNotification = navigation => {
     }
   };
 
-  const localNotif = soundName => {
-    console.log('NOTIFICATION- LOCAL START');
+  const localNotif = (
+    notificationTitle,
+    notificationSubtitle,
+    notificationDescription,
+    notificationImageUrl,
+    soundName,
+  ) => {
+    PushNotification.createChannel(
+      {
+        channelId: '1',
+        channelName: 'name',
+      },
+      created => console.log(`createdChannel returned '${created}'`),
+    );
     PushNotification.localNotification({
       /* Android Only Properties */
-      channelId: 'default-channel-id', // (required) channelId, if the channel doesn't exist, notification will not trigger.
-      channelName: 'Default channel', // Name',
+      channelId: '1', // (required) channelId, if the channel doesn't exist, notification will not trigger.
+      channelName: 'name',
       channelDescription: 'Channel Description',
       largeIcon: 'ic_launcher', // (optional) default: "ic_launcher". Use "" for no large icon.
-      largeIconUrl: 'https://www.example.tld/picture.jpg', // (optional) default: undefined
-      smallIcon: 'ic_notification', // (optional) default: "ic_notification" with fallback for "ic_launcher". Use "" for default small icon.
-      bigText:
-        'My big text that will be shown when notification is expanded. Styling can be done using HTML tags(see android docs for details)', // (optional) default: "message" prop
-      subText: 'This is a subText', // (optional) default: none
-      bigPictureUrl: 'https://www.example.tld/picture.jpg', // (optional) default: undefined
+      largeIconUrl: 'ic_launcher', //'https://www.example.tld/picture.jpg', // (optional) default: undefined
+      smallIcon: 'ic_launcher', //'ic_notification', // (optional) default: "ic_notification" with fallback for "ic_launcher". Use "" for default small icon.
+      bigText: notificationDescription,
+      title: notificationSubtitle,
+      subText: notificationTitle,
+      bigPictureUrl: notificationImageUrl, // 'https://www.example.tld/picture.jpg', // (optional) default: undefined
       bigLargeIcon: 'ic_launcher', // (optional) default: undefined
-      bigLargeIconUrl: 'https://www.example.tld/bigicon.jpg', // (optional) default: undefined
+      bigLargeIconUrl: notificationImageUrl, //'https://www.example.tld/bigicon.jpg', // (optional) default: undefined
       color: 'red', // (optional) default: system default
       vibrate: true, // (optional) default: true
       vibration: 300, // vibration length in milliseconds, ignored if vibrate=false, default: 1000
-      message: 'My Notification Message', // (required)
+      message: notificationDescription, // (required)
       // picture: 'https://www.example.tld/picture.jpg', // (optional) Display an picture with the notification, alias of `bigPictureUrl` for Android. default: undefined
       // userInfo: {}, // (optional) default: {} (using null throws a JSON value '<null>' error)
       // playSound: false, // (optional) default: true
@@ -352,7 +364,6 @@ export const usePushNotification = navigation => {
       // repeatType: 'day', // (optional) Repeating interval. Check 'Repeating Notifications' section for more info.
       importance: 4,
     });
-    console.log('NOTIFICATION- LOCAL END');
   };
 
   return {

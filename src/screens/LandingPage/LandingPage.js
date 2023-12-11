@@ -16,7 +16,7 @@ import {Modal, Portal} from 'react-native-paper';
 import DeviceInfo from 'react-native-device-info';
 // import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {useNetStatusInfo} from '../../ultilities/customHooks/useNetStatusInfo';
-// import {usePushNotification} from '../../ultilities/customHooks/usePushNotification';
+import {usePushNotification} from '../../ultilities/customHooks/usePushNotification';
 import strings from '../../constants/strings';
 import imagePaths from '../../constants/imagePaths';
 import colors from '../../constants/colors';
@@ -34,7 +34,7 @@ const LandingPage = ({navigation}) => {
 
   const dispatch = useDispatch();
   const {networkState} = useNetStatusInfo();
-  // const {localNotif} = usePushNotification(navigation);
+  const {localNotif} = usePushNotification(navigation);
 
   const navigationScreens = [
     {
@@ -419,7 +419,6 @@ const LandingPage = ({navigation}) => {
     return (
       <TouchableOpacity
         onPress={() => {
-          // localNotif();
           // navigation.navigate('PdfViewScreen');
         }}>
         <Image
