@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {DeviceEventEmitter, Alert, Platform} from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
+import PushNotification from 'react-native-push-notification';
 
 export const usePushNotification = navigation => {
   const [permissions, setPermissions] = useState({});
@@ -73,13 +74,11 @@ export const usePushNotification = navigation => {
     notificationTitle,
     notificationDescription,
   ) => {
-    if (Platform.OS === 'ios') {
-      PushNotificationIOS.presentLocalNotification({
-        alertTitle: notificationTitle, //'Sample Title',
-        alertBody: notificationDescription, //'Sample local notification',
-        applicationIconBadgeNumber: 1,
-      });
-    }
+    PushNotificationIOS.presentLocalNotification({
+      alertTitle: notificationTitle, //'Sample Title',
+      alertBody: notificationDescription, //'Sample local notification',
+      applicationIconBadgeNumber: 1,
+    });
   };
 
   /* NOTE: The one we are using in the app */
@@ -94,138 +93,128 @@ export const usePushNotification = navigation => {
     notificationTitle,
     notificationSubtitle,
     notificationDescription,
+    notificationImageUrl,
   ) => {
-    if (Platform.OS === 'ios') {
-      PushNotificationIOS.addNotificationRequest({
-        id: 'notificationWithSound',
-        title: notificationTitle,
-        subtitle: notificationSubtitle,
-        body: notificationDescription,
-        sound: 'customSound.wav',
-        badge: 1,
-        fireDate: new Date(new Date().valueOf() + 2000),
-        userInfo: {
-          image: 'https://www.github.com/Naturalclar.png',
-        },
-      });
-    }
+    const defaultImage = 'https://www.github.com/Naturalclar.png';
+
+    PushNotificationIOS.addNotificationRequest({
+      id: 'notificationWithSound',
+      title: notificationTitle,
+      subtitle: notificationSubtitle,
+      body: notificationDescription,
+      sound: 'customSound.wav',
+      badge: 1,
+      fireDate: new Date(new Date().valueOf() + 2000),
+      userInfo: {
+        image: notificationImageUrl ?? defaultImage,
+      },
+    });
   };
 
   const scheduleLocalNotification = () => {
-    if (Platform.OS === 'ios') {
-      PushNotificationIOS.scheduleLocalNotification({
-        alertBody: 'TESTING LOCAL NOTIFICATION',
-        fireDate: new Date(new Date().valueOf() + 2000),
-      });
-    }
+    PushNotificationIOS.scheduleLocalNotification({
+      alertBody: 'TESTING LOCAL NOTIFICATION',
+      fireDate: new Date(new Date().valueOf() + 2000),
+    });
   };
 
   const addNotificationRequest = () => {
-    if (Platform.OS === 'ios') {
-      PushNotificationIOS.addNotificationRequest({
-        id: 'test',
-        title: 'title',
-        subtitle: 'subtitle',
-        body: 'body',
-        category: 'test',
-        threadId: 'thread-id',
-        fireDate: new Date(new Date().valueOf() + 2000),
-        repeats: true,
-        userInfo: {
-          image: 'https://www.github.com/Naturalclar.png',
-        },
-      });
-    }
+    PushNotificationIOS.addNotificationRequest({
+      id: 'test',
+      title: 'title',
+      subtitle: 'subtitle',
+      body: 'body',
+      category: 'test',
+      threadId: 'thread-id',
+      fireDate: new Date(new Date().valueOf() + 2000),
+      repeats: true,
+      userInfo: {
+        image: 'https://www.github.com/Naturalclar.png',
+      },
+    });
   };
 
   const addCriticalNotificationRequest = () => {
-    if (Platform.OS === 'ios') {
-      PushNotificationIOS.addNotificationRequest({
-        id: 'critical',
-        title: 'Critical Alert',
-        subtitle: 'subtitle',
-        body: 'This is a critical alert',
-        category: 'test',
-        threadId: 'thread-id',
-        isCritical: true,
-        fireDate: new Date(new Date().valueOf() + 2000),
-        repeats: true,
-      });
-    }
+    PushNotificationIOS.addNotificationRequest({
+      id: 'critical',
+      title: 'Critical Alert',
+      subtitle: 'subtitle',
+      body: 'This is a critical alert',
+      category: 'test',
+      threadId: 'thread-id',
+      isCritical: true,
+      fireDate: new Date(new Date().valueOf() + 2000),
+      repeats: true,
+    });
   };
 
   const addMultipleRequests = () => {
-    if (Platform.OS === 'ios') {
-      PushNotificationIOS.addNotificationRequest({
-        id: 'test-1',
-        title: 'First',
-        subtitle: 'subtitle',
-        body: 'First Notification out of 3',
-        category: 'test',
-        threadId: 'thread-id',
-        fireDate: new Date(new Date().valueOf() + 10000),
-        repeats: true,
-      });
+    PushNotificationIOS.addNotificationRequest({
+      id: 'test-1',
+      title: 'First',
+      subtitle: 'subtitle',
+      body: 'First Notification out of 3',
+      category: 'test',
+      threadId: 'thread-id',
+      fireDate: new Date(new Date().valueOf() + 10000),
+      repeats: true,
+    });
 
-      PushNotificationIOS.addNotificationRequest({
-        id: 'test-2',
-        title: 'Second',
-        subtitle: 'subtitle',
-        body: 'Second Notification out of 3',
-        category: 'test',
-        threadId: 'thread-id',
-        fireDate: new Date(new Date().valueOf() + 12000),
-        repeats: true,
-      });
+    PushNotificationIOS.addNotificationRequest({
+      id: 'test-2',
+      title: 'Second',
+      subtitle: 'subtitle',
+      body: 'Second Notification out of 3',
+      category: 'test',
+      threadId: 'thread-id',
+      fireDate: new Date(new Date().valueOf() + 12000),
+      repeats: true,
+    });
 
-      PushNotificationIOS.addNotificationRequest({
-        id: 'test-3',
-        title: 'Third',
-        subtitle: 'subtitle',
-        body: 'Third Notification out of 3',
-        category: 'test',
-        threadId: 'thread-id',
-        fireDate: new Date(new Date().valueOf() + 14000),
-        repeats: true,
-      });
-    }
+    PushNotificationIOS.addNotificationRequest({
+      id: 'test-3',
+      title: 'Third',
+      subtitle: 'subtitle',
+      body: 'Third Notification out of 3',
+      category: 'test',
+      threadId: 'thread-id',
+      fireDate: new Date(new Date().valueOf() + 14000),
+      repeats: true,
+    });
   };
 
   const getPendingNotificationRequests = () => {
-    if (Platform.OS === 'ios') {
-      PushNotificationIOS.getPendingNotificationRequests(requests => {
-        Alert.alert('Push Notification Received', JSON.stringify(requests), [
-          {
-            text: 'Dismiss',
-            onPress: null,
-          },
-        ]);
-      });
-    }
+    PushNotificationIOS.getPendingNotificationRequests(requests => {
+      Alert.alert('Push Notification Received', JSON.stringify(requests), [
+        {
+          text: 'Dismiss',
+          onPress: null,
+        },
+      ]);
+    });
   };
 
   const setNotificationCategories = async () => {
-    if (Platform.OS === 'ios') {
-      PushNotificationIOS.setNotificationCategories([
-        {
-          id: 'test',
-          actions: [
-            {id: 'open', title: 'Open', options: {foreground: true}},
-            {
-              id: 'ignore',
-              title: 'Desruptive',
-              options: {foreground: true, destructive: true},
-            },
-            {
-              id: 'text',
-              title: 'Text Input',
-              options: {foreground: true},
-              textInput: {buttonTitle: 'Send'},
-            },
-          ],
-        },
-      ]);
-    }
+    PushNotificationIOS.setNotificationCategories([
+      {
+        id: 'test',
+        actions: [
+          {id: 'open', title: 'Open', options: {foreground: true}},
+          {
+            id: 'ignore',
+            title: 'Desruptive',
+            options: {foreground: true, destructive: true},
+          },
+          {
+            id: 'text',
+            title: 'Text Input',
+            options: {foreground: true},
+            textInput: {buttonTitle: 'Send'},
+          },
+        ],
+      },
+    ]);
+
     Alert.alert(
       'setNotificationCategories',
       `Set notification category complete`,
@@ -239,18 +228,11 @@ export const usePushNotification = navigation => {
   };
 
   const removeAllPendingNotificationRequests = () => {
-    if (Platform.OS === 'ios') {
-      PushNotificationIOS.removeAllPendingNotificationRequests();
-    }
+    PushNotificationIOS.removeAllPendingNotificationRequests();
   };
 
   const removePendingNotificationRequests = () => {
-    if (Platform.OS === 'ios') {
-      PushNotificationIOS.removePendingNotificationRequests([
-        'test-1',
-        'test-2',
-      ]);
-    }
+    PushNotificationIOS.removePendingNotificationRequests(['test-1', 'test-2']);
   };
 
   const onRegistered = deviceToken => {
@@ -342,6 +324,37 @@ export const usePushNotification = navigation => {
     }
   };
 
+  const localNotif = soundName => {
+    console.log('NOTIFICATION- LOCAL START');
+    PushNotification.localNotification({
+      /* Android Only Properties */
+      channelId: 'default-channel-id', // (required) channelId, if the channel doesn't exist, notification will not trigger.
+      channelName: 'Default channel', // Name',
+      channelDescription: 'Channel Description',
+      largeIcon: 'ic_launcher', // (optional) default: "ic_launcher". Use "" for no large icon.
+      largeIconUrl: 'https://www.example.tld/picture.jpg', // (optional) default: undefined
+      smallIcon: 'ic_notification', // (optional) default: "ic_notification" with fallback for "ic_launcher". Use "" for default small icon.
+      bigText:
+        'My big text that will be shown when notification is expanded. Styling can be done using HTML tags(see android docs for details)', // (optional) default: "message" prop
+      subText: 'This is a subText', // (optional) default: none
+      bigPictureUrl: 'https://www.example.tld/picture.jpg', // (optional) default: undefined
+      bigLargeIcon: 'ic_launcher', // (optional) default: undefined
+      bigLargeIconUrl: 'https://www.example.tld/bigicon.jpg', // (optional) default: undefined
+      color: 'red', // (optional) default: system default
+      vibrate: true, // (optional) default: true
+      vibration: 300, // vibration length in milliseconds, ignored if vibrate=false, default: 1000
+      message: 'My Notification Message', // (required)
+      // picture: 'https://www.example.tld/picture.jpg', // (optional) Display an picture with the notification, alias of `bigPictureUrl` for Android. default: undefined
+      // userInfo: {}, // (optional) default: {} (using null throws a JSON value '<null>' error)
+      // playSound: false, // (optional) default: true
+      soundName: 'default', // (optional) Sound to play when the notification is shown. Value of 'default' plays the default sound. It can be set to a custom sound such as 'android.resource://com.xyz/raw/my_sound'. It will look for the 'my_sound' audio file in 'res/raw' directory and play it. default: 'default' (default sound is played)
+      // number: 10, // (optional) Valid 32 bit integer specified as string. default: none (Cannot be zero)
+      // repeatType: 'day', // (optional) Repeating interval. Check 'Repeating Notifications' section for more info.
+      importance: 4,
+    });
+    console.log('NOTIFICATION- LOCAL END');
+  };
+
   return {
     sendNotification,
     sendSilentNotification,
@@ -361,5 +374,6 @@ export const usePushNotification = navigation => {
     onLocalNotification,
     showPermissions,
     permissions,
+    localNotif,
   };
 };

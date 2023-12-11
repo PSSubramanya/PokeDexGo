@@ -11,6 +11,7 @@ import {
   FlatList,
   ScrollView,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
 import {Modal, Portal, Provider} from 'react-native-paper';
 
@@ -40,7 +41,9 @@ const EventViewScreen = props => {
   const calanderRef = useRef();
 
   const {networkState} = useNetStatusInfo();
-  // const {sendLocalNotificationWithSound} = usePushNotification(navigation);
+
+  const {sendLocalNotificationWithSound, localNotif} =
+    usePushNotification(navigation);
 
   const loadedEventJSONData = useSelector(
     state => state?.eventDataReducer?.eventdataload,
@@ -61,6 +64,8 @@ const EventViewScreen = props => {
   const [showLoader, setShowLoader] = useState(true);
 
   const [gridViewStatus, setGridViewStatus] = useState(false);
+
+  const [currentTime, setCurrentTime] = useState(new Date());
 
   const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
   const darkModeValue = darkMode?.data;
@@ -85,14 +90,13 @@ const EventViewScreen = props => {
   }
 
   useEffect(() => {
-    /* NOTE: Trigger this function in Events page ,
-    then do it such that it gets triggered in schedule,
-    if required doa multi notification trigger in the usePusNotification */
-    // sendLocalNotificationWithSound(
-    //   'Community Day',
-    //   'November Community Day Classic',
-    //   "November's Comunity Day Classic is set for Saturday, November 25,2023. Stay tuned for the announcement of the featured Pokemon!",
-    // );
+    const updateCurrentTime = () => {
+      setCurrentTime(new Date());
+    };
+
+    const intervalId = setInterval(updateCurrentTime, 1000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   useEffect(() => {
@@ -108,6 +112,37 @@ const EventViewScreen = props => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStartDate]);
+
+  useEffect(() => {
+    // console.log('TODAY-EVENTS2', JSON.stringify(eventsData));
+    let notificationTitleString = '';
+    eventsData?.map((evDat, evIdx) => {
+      // console.log('TODAY-EVENTS2 - ', evIdx, ' - EVNTS2', evDat);
+
+      if (evDat?.Summary.toLowerCase().includes('spotlight')) {
+        notificationTitleString = 'Spotlight';
+      } else if (evDat?.Summary?.toLowerCase().includes('community day')) {
+        notificationTitleString = 'Community day';
+      } else {
+        notificationTitleString = 'Event Alert';
+      }
+
+      if (
+        moment(currentTime).format('YYYY-MM-DD HH:mm:ss') ===
+        evDat?.['Start DateTime']
+      ) {
+        if (Platform.OS === 'ios') {
+          sendLocalNotificationWithSound(
+            notificationTitleString,
+            evDat?.Summary,
+            evDat?.Description,
+            evDat?.['Img Src']?.[0],
+          );
+        }
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentTime]);
 
   useEffect(() => {
     let pokeName;
@@ -185,7 +220,7 @@ const EventViewScreen = props => {
       item?.Summary.toLowerCase().includes('spotlight') ||
       item?.Summary?.toLowerCase().includes('community day');
 
-    console.log('CHECKKKKKKK', item?.Summary, specialCase);
+    // console.log('CHECKKKKKKK', item?.Summary, specialCase);
     return (
       <View style={styles.eventsList}>
         <TouchableOpacity
@@ -1015,7 +1050,7 @@ const EventViewScreen = props => {
     );
   };
 
-  console.log('EVVVVVV', eventsData);
+  // console.log('EVVVVVV', eventsData);
 
   return (
     <Provider>

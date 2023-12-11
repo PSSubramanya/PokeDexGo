@@ -34,7 +34,7 @@ const LandingPage = ({navigation}) => {
 
   const dispatch = useDispatch();
   const {networkState} = useNetStatusInfo();
-  // const {sendLocalNotificationWithSound} = usePushNotification(navigation);
+  // const {localNotif} = usePushNotification(navigation);
 
   const navigationScreens = [
     {
@@ -76,17 +76,6 @@ const LandingPage = ({navigation}) => {
   const [modalTypeValue, setModalType] = useState('');
   const [countDownTimer, setCountDownTimer] = useState(10);
   const [forceUpdateModal, setForceUpdateModal] = useState(false);
-
-  useEffect(() => {
-    /* NOTE: Trigger this function in Events page ,
-    then do it such that it gets triggered in schedule,
-    if required doa multi notification trigger in the usePusNotification */
-    // sendLocalNotificationWithSound(
-    //   'Community Day',
-    //   'November Community Day Classic',
-    //   "November's Comunity Day Classic is set for Saturday, November 25,2023. Stay tuned for the announcement of the featured Pokemon!",
-    // );
-  }, []);
 
   useEffect(() => {
     let versionData;
@@ -428,7 +417,11 @@ const LandingPage = ({navigation}) => {
 
   const notificationButton = () => {
     return (
-      <TouchableOpacity onPress={() => {}}>
+      <TouchableOpacity
+        onPress={() => {
+          // localNotif();
+          // navigation.navigate('PdfViewScreen');
+        }}>
         <Image
           source={imagePaths?.notificationsOnIcon}
           height={1}

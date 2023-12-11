@@ -1,6 +1,6 @@
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
-import {AsyncStorage} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+// import {AsyncStorage} from 'react-native';
 import {
   requestCameraPermission,
   requestExternalWritePermission,
