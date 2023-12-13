@@ -21,6 +21,7 @@ import imagePaths from '../../constants/imagePaths';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
 import pokemonTypesData from '../../ultilities/pokemonData/pokemon_types';
 import styles from './styles.js';
+import {NotificationService} from '../../ultilities/services/notifications/notificationService.js';
 
 const RaidBossScreen = props => {
   const {navigation, route} = props;
@@ -43,6 +44,8 @@ const RaidBossScreen = props => {
 
   const [displayData, setDisplayData] = useState([]);
   const [loader, setLoader] = useState(true);
+
+  NotificationService(navigation);
 
   useEffect(() => {
     // const dispData = mockFieldResearchData?.data;

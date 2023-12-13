@@ -6,10 +6,13 @@ import imagePaths from '../../constants/imagePaths.js';
 import strings from '../../constants/strings.js';
 import colors from '../../constants/colors.js';
 import commonStyling from '../../ultilities/commonStyling/commonStyling.js';
+import {NotificationService} from '../../ultilities/services/notifications/notificationService.js';
 
 const TrainerInfoScreen = props => {
+  const {navigation} = props;
   const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
   const darkModeValue = darkMode?.data;
+  NotificationService(navigation);
 
   const bulletPoints = [
     {

@@ -8,9 +8,14 @@
 
 import React from 'react';
 import StackNavigationScreen from './src/screens/StackNavigationScreen';
+import {NotificationProvider} from './src/ultilities/customHooks/notificationContext';
 
 const App = () => {
-  return <StackNavigationScreen />;
+  return (
+    <NotificationProvider>
+      <StackNavigationScreen />
+    </NotificationProvider>
+  );
 };
 
 export default App;

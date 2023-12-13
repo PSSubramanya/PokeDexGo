@@ -5,8 +5,12 @@ import {View, Platform} from 'react-native';
 // import PDFView from 'react-native-pdf-view';
 import {WebView} from 'react-native-webview';
 import styles from './styles.js';
+import {NotificationService} from '../../ultilities/services/notifications/notificationService.js';
 
 const PdfViewScreen = props => {
+  const {navigation} = props;
+  NotificationService(navigation);
+
   return (
     <View style={styles.container}>
       {/* <WebView

@@ -14,6 +14,7 @@ import imagePaths from '../../constants/imagePaths';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
 import styles from './styles.js';
 import colors from '../../constants/colors';
+import {NotificationService} from '../../ultilities/services/notifications/notificationService';
 
 const FieldResearchScreen = props => {
   const {navigation, route} = props;
@@ -36,6 +37,8 @@ const FieldResearchScreen = props => {
 
   const [displayData, setDisplayData] = useState([]);
   const [rewardSectionDisplay, setRewardSectionDisplay] = useState([]);
+
+  NotificationService(navigation);
 
   useEffect(() => {
     const dispData = loadData; //mockFieldResearchData?.data;

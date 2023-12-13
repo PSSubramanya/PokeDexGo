@@ -25,6 +25,7 @@ import {
 } from '../../ultilities/scale.js';
 import imagePaths from '../../constants/imagePaths.js';
 import commonStyling from '../../ultilities/commonStyling/commonStyling.js';
+import {NotificationService} from '../../ultilities/services/notifications/notificationService.js';
 
 const BattleCountersScreen = props => {
   const {navigation, route} = props;
@@ -52,6 +53,8 @@ const BattleCountersScreen = props => {
 
   const [position, setPosition] = useState({x: 0, y: 0});
   const [dimensions, setDimensions] = useState({width: 0, height: 0});
+
+  NotificationService(navigation);
 
   useEffect(() => {
     // TODO: ADD this also to cache if possible

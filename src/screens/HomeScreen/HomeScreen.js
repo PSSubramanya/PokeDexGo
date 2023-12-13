@@ -31,6 +31,7 @@ import {
   moderateScale,
 } from '../../ultilities/scale';
 import colors from '../../constants/colors';
+import {NotificationService} from '../../ultilities/services/notifications/notificationService';
 
 const HomeScreen = props => {
   const {navigation, route} = props;
@@ -69,6 +70,8 @@ const HomeScreen = props => {
   const [selectedTimePart, setSelectedTimePart] = useState('hour');
 
   const [modalVisible, setModalVisible] = useState(false);
+
+  NotificationService(navigation);
 
   useEffect(() => {
     const displayableEvents = loadedEventJSONData?.data.filter(data =>

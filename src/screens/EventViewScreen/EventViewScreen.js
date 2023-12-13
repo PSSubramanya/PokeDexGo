@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {useNetStatusInfo} from '../../ultilities/customHooks/useNetStatusInfo';
-import {usePushNotification} from '../../ultilities/customHooks/usePushNotification';
 import {useSelector} from 'react-redux';
 import {
   Text,
@@ -32,6 +31,7 @@ import {horizontalScale, verticalScale} from '../../ultilities/scale';
 import {toCamelCase, checkImageExists} from '../../ultilities/commonFunctions';
 import CardView from '../../components/CardView/CardView';
 import EventDisplayCard from '../../components/EventDisplayCard/EventDisplayCard';
+import {NotificationService} from '../../ultilities/services/notifications/notificationService';
 
 const EventViewScreen = props => {
   const {navigation} = props;
@@ -41,9 +41,6 @@ const EventViewScreen = props => {
   const calanderRef = useRef();
 
   const {networkState} = useNetStatusInfo();
-
-  const {sendLocalNotificationWithSound, localNotif} =
-    usePushNotification(navigation);
 
   const loadedEventJSONData = useSelector(
     state => state?.eventDataReducer?.eventdataload,
@@ -64,8 +61,6 @@ const EventViewScreen = props => {
   const [showLoader, setShowLoader] = useState(true);
 
   const [gridViewStatus, setGridViewStatus] = useState(false);
-
-  const [currentTime, setCurrentTime] = useState(new Date());
 
   const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
   const darkModeValue = darkMode?.data;
@@ -89,15 +84,15 @@ const EventViewScreen = props => {
     });
   }
 
-  useEffect(() => {
-    const updateCurrentTime = () => {
-      setCurrentTime(new Date());
-    };
+  // useEffect(() => {
+  //   const updateCurrentTime = () => {
+  //     setCurrentTime(new Date());
+  //   };
 
-    const intervalId = setInterval(updateCurrentTime, 1000);
+  //   const intervalId = setInterval(updateCurrentTime, 1000);
 
-    return () => clearInterval(intervalId);
-  }, []);
+  //   return () => clearInterval(intervalId);
+  // }, []);
 
   useEffect(() => {
     const displayableEvents = loadedEventJSONData?.data.filter(data =>
@@ -113,43 +108,8 @@ const EventViewScreen = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStartDate]);
 
-  useEffect(() => {
-    // console.log('TODAY-EVENTS2', JSON.stringify(eventsData));
-    let notificationTitleString = '';
-    eventsData?.map((evDat, evIdx) => {
-      // console.log('TODAY-EVENTS2 - ', evIdx, ' - EVNTS2', evDat);
-
-      if (evDat?.Summary.toLowerCase().includes('spotlight')) {
-        notificationTitleString = 'Spotlight';
-      } else if (evDat?.Summary?.toLowerCase().includes('community day')) {
-        notificationTitleString = 'Community day';
-      } else {
-        notificationTitleString = 'Event Alert';
-      }
-
-      if (
-        moment(currentTime).format('YYYY-MM-DD HH:mm:ss') ===
-        evDat?.['Start DateTime']
-      ) {
-        if (Platform.OS === 'ios') {
-          sendLocalNotificationWithSound(
-            notificationTitleString,
-            evDat?.Summary,
-            evDat?.Description,
-            evDat?.['Img Src']?.[0],
-          );
-        } else if (Platform.OS === 'android') {
-          localNotif(
-            notificationTitleString,
-            evDat?.Summary,
-            evDat?.Description,
-            evDat?.['Img Src']?.[0],
-          );
-        }
-      }
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentTime]);
+  NotificationService(navigation); //NOTE: THIS FUNCTION IS TO CALL NOTIFICATIONS
+  //TODO: Navigation needs to be done somehow on click
 
   useEffect(() => {
     let pokeName;

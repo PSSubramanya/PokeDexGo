@@ -28,6 +28,7 @@ import commonStyling from '../../ultilities/commonStyling/commonStyling';
 import {CircleRightArrow} from '../../assets/images/svg';
 import webscrappedData from '../../ultilities/pokemonData/pokemon_data6.json';
 import eggData from '../../ultilities/pokemonData/egg_data.json';
+import {NotificationService} from '../../ultilities/services/notifications/notificationService';
 
 const LandingPage = ({navigation}) => {
   // const subscriber = firestore().collection('Users').doc(uniqueDeviceIdValue);
@@ -76,6 +77,8 @@ const LandingPage = ({navigation}) => {
   const [modalTypeValue, setModalType] = useState('');
   const [countDownTimer, setCountDownTimer] = useState(10);
   const [forceUpdateModal, setForceUpdateModal] = useState(false);
+
+  NotificationService(navigation);
 
   useEffect(() => {
     let versionData;
