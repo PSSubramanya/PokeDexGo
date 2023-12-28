@@ -10,6 +10,8 @@ import useAppStatus from '../../customHooks/useAppState';
 import moment from 'moment';
 
 export const NotificationService = navigation => {
+  let notificationTitleString = '';
+
   const {sendLocalNotificationWithSound, localNotif} =
     usePushNotification(navigation);
 
@@ -22,8 +24,8 @@ export const NotificationService = navigation => {
   const currentAppState = appState.current;
   const previousAppState = prevAppState.current;
 
-  console.log('CURRENT APP-STATES', currentAppState);
-  console.log('PREVIOUS APP-STATES', previousAppState);
+  // console.log('CURRENT APP-STATES', currentAppState);
+  // console.log('PREVIOUS APP-STATES', previousAppState);
 
   const mockDataVal = {
     data: [
@@ -125,7 +127,7 @@ export const NotificationService = navigation => {
       {
         Links: 'https://leekduck.com/events/party-up-event/',
         Summary: 'Party Up!',
-        'Start DateTime': '2023-12-13 23:24:00',
+        'Start DateTime': '2023-12-14 00:17:00',
         'End DateTime': '2023-12-21 20:00:00',
         Duration: [
           '2023-11-22',
@@ -1160,7 +1162,7 @@ export const NotificationService = navigation => {
       {
         Links: 'https://leekduck.com/events/pokemonspotlighthour2023-11-28/',
         Summary: 'Lechonk Spotlight Hour',
-        'Start DateTime': '2023-12-13 01:29:00',
+        'Start DateTime': '2023-12-14 00:45:00',
         'End DateTime': '2023-11-28 01:11:00',
         Duration: ['2023-11-28'],
         preference: 1,
@@ -1219,9 +1221,42 @@ export const NotificationService = navigation => {
 
   const loadedEventJSONData = mockDataVal;
 
-  useEffect(() => {
-    let notificationTitleString = '';
+  // useEffect(() => {
+  //   const updateCurrentTime = () => {
+  //     setCurrentTime(new Date());
+  //   };
 
+  //   const intervalId = setInterval(updateCurrentTime, 1000);
+
+  //   return () => clearInterval(intervalId);
+  // }, []);
+
+  useEffect(() => {
+    if (previousAppState === 'active') {
+      // BackgroundTask.schedule();
+      console.log('IM IN THE BACKGROUNDDDDD12345');
+      notificationTrigger();
+    } else {
+      console.log('IM IN THE FOREGROUNDDDDD12345');
+      notificationTrigger();
+    }
+
+    // notificationTrigger();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentTime]);
+
+  useEffect(() => {
+    // if (previousAppState === 'active') {
+    //   // BackgroundTask.schedule();
+    //   console.log('IM IN THE BACKGROUNDDDDD12345');
+    //   notificationTrigger();
+    // } else {
+    //   console.log('IM IN THE FOREGROUNDDDDD12345');
+    //   notificationTrigger();
+    // }
+  }, [currentAppState, previousAppState]);
+
+  const notificationTrigger = () => {
     loadedEventJSONData?.data?.map((evDat, evIdx) => {
       if (evDat?.Summary.toLowerCase().includes('spotlight')) {
         notificationTitleString = 'Spotlight';
@@ -1251,13 +1286,7 @@ export const NotificationService = navigation => {
           );
         }
       }
-
-      // if (previousAppState === 'active') {
-      //   BackgroundTask.schedule();
-      // }
     });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentTime]);
+  };
   return {NotificationService};
 };
