@@ -331,6 +331,7 @@ export const usePushNotification = navigation => {
     notificationImageUrl,
     soundName,
   ) => {
+    console.log('IM HEREEEEE 123');
     PushNotification.createChannel(
       {
         channelId: '1',
@@ -338,6 +339,7 @@ export const usePushNotification = navigation => {
       },
       created => console.log(`createdChannel returned '${created}'`),
     );
+    console.log('IM HEREEEEE TOO 123');
     PushNotification.localNotification({
       /* Android Only Properties */
       channelId: '1', // (required) channelId, if the channel doesn't exist, notification will not trigger.
@@ -364,6 +366,7 @@ export const usePushNotification = navigation => {
       // repeatType: 'day', // (optional) Repeating interval. Check 'Repeating Notifications' section for more info.
       importance: 4,
     });
+    console.log('IM HEREEEEE THREE 123');
   };
 
   return {

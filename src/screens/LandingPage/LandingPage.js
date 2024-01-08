@@ -194,7 +194,7 @@ const LandingPage = ({navigation}) => {
         });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [networkState]);
+  }, [networkState, countDownTimer]);
 
   useEffect(() => {
     dispatch(eventDataLoad(loadData));
@@ -423,6 +423,7 @@ const LandingPage = ({navigation}) => {
       <TouchableOpacity
         onPress={() => {
           // navigation.navigate('PdfViewScreen');
+          localNotif('asd', 'asd', 'asd');
         }}>
         <Image
           source={imagePaths?.notificationsOnIcon}
