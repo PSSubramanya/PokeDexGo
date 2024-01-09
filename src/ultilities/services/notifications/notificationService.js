@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect, useRef} from 'react';
 import {AppState, Platform} from 'react-native';
-// import BackgroundTimer from 'react-native-background-timer';
 
 // import BackgroundTask from 'react-native-background-task';
 import {useCurrentTime} from '../../customHooks/notificationContext';
@@ -12,7 +11,7 @@ import moment from 'moment';
 export const NotificationService = navigation => {
   let notificationTitleString = '';
 
-  const {sendLocalNotificationWithSound, localNotif} =
+  const {sendLocalNotificationWithSound, onDisplayNotification} =
     usePushNotification(navigation);
 
   const currentTime = useCurrentTime();
@@ -892,7 +891,7 @@ export const NotificationService = navigation => {
       {
         Links: 'https://leekduck.com/events/pokemonspotlighthour2024-01-09/',
         Summary: 'Eevee Spotlight Hour',
-        'Start DateTime': '2024-01-09 18:00:00',
+        'Start DateTime': '2024-01-09 22:29:00',
         'End DateTime': '2024-01-09 19:00:00',
         Duration: ['2024-01-09'],
         preference: 1,
@@ -1117,7 +1116,7 @@ export const NotificationService = navigation => {
         Links:
           'https://leekduck.com/events/pokemon-showcase-rockruff-lycanroc-2024-01-07/',
         Summary: 'Rockruff and Lycanroc PokStop Showcases',
-        'Start DateTime': '2024-01-09 00:20:00',
+        'Start DateTime': '2024-01-09 22:30:00',
         'End DateTime': '2024-01-10 20:00:00',
         Duration: ['2024-01-07', '2024-01-08', '2024-01-09', '2024-01-10'],
         preference: 4,
@@ -2843,16 +2842,17 @@ export const NotificationService = navigation => {
   // }, []);
 
   useEffect(() => {
+    notificationTrigger();
+
     if (previousAppState === 'active') {
       // BackgroundTask.schedule();
-      console.log('IM IN THE BACKGROUNDDDDD12345');
+      console.log('IM IN THE FOREGROUNDDDDD12345');
       // notificationTrigger();
     } else {
-      console.log('IM IN THE FOREGROUNDDDDD12345');
+      console.log('IM IN THE BACKGROUNDDDDD12345');
       // notificationTrigger();
     }
 
-    notificationTrigger();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTime]);
 
@@ -2877,14 +2877,6 @@ export const NotificationService = navigation => {
         notificationTitleString = 'Event Alert';
       }
 
-      console.log(
-        'currentTime 111123456',
-        moment(currentTime).format('YYYY-MM-DD HH:mm:ss'),
-        evDat?.['Start DateTime'],
-        moment(currentTime).format('YYYY-MM-DD HH:mm:ss') ===
-          evDat?.['Start DateTime'],
-      );
-
       if (
         moment(currentTime).format('YYYY-MM-DD HH:mm:ss') ===
         evDat?.['Start DateTime']
@@ -2897,7 +2889,7 @@ export const NotificationService = navigation => {
             evDat?.['Img Src']?.[0],
           );
         } else if (Platform.OS === 'android') {
-          localNotif(
+          onDisplayNotification(
             notificationTitleString,
             evDat?.Summary,
             evDat?.Description,

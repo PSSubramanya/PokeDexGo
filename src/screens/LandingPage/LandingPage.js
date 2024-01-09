@@ -423,7 +423,6 @@ const LandingPage = ({navigation}) => {
       <TouchableOpacity
         onPress={() => {
           // navigation.navigate('PdfViewScreen');
-          localNotif('asd', 'asd', 'asd');
         }}>
         <Image
           source={imagePaths?.notificationsOnIcon}

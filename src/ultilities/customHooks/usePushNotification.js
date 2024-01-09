@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {DeviceEventEmitter, Alert, Platform} from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import PushNotification from 'react-native-push-notification';
+import notifee, {AndroidStyle} from '@notifee/react-native';
 
 export const usePushNotification = navigation => {
   const [permissions, setPermissions] = useState({});
@@ -369,6 +370,44 @@ export const usePushNotification = navigation => {
     console.log('IM HEREEEEE THREE 123');
   };
 
+  async function onDisplayNotification(
+    notificationTitle,
+    notificationSubtitle,
+    notificationDescription,
+    notificationImageUrl,
+    soundName,
+  ) {
+    // Request permissions (required for iOS)
+    await notifee.requestPermission();
+
+    // Create a channel (required for Android)
+    const channelId = await notifee.createChannel({
+      id: 'default',
+      name: 'Default Channel',
+    });
+
+    // Display a notification
+    await notifee.displayNotification({
+      title: notificationTitle,
+      subtitle: notificationSubtitle,
+      body: notificationDescription,
+      android: {
+        channelId,
+        smallIcon: 'ic_launcher', // optional, defaults to 'ic_launcher'.
+        style: {
+          type: AndroidStyle.BIGPICTURE,
+          picture: notificationImageUrl,
+          // picture:
+          //   'https://qph.cf2.quoracdn.net/main-qimg-88a14491cefee50fa13e38063b99a066-lq',
+        },
+        // pressAction is needed if you want the notification to open the app when pressed
+        pressAction: {
+          id: 'default',
+        },
+      },
+    });
+  }
+
   return {
     sendNotification,
     sendSilentNotification,
@@ -389,5 +428,6 @@ export const usePushNotification = navigation => {
     showPermissions,
     permissions,
     localNotif,
+    onDisplayNotification,
   };
 };
