@@ -75,7 +75,7 @@ export const NotificationService = navigation => {
         Links:
           'https://leekduck.com/events/tornadius-therian-forme-in-5-star-raid-battles-january-2024/',
         Summary: 'Tornadus (Therian Forme) in 5-star Raid Battles',
-        'Start DateTime': '2024-01-12 16:08:00',
+        'Start DateTime': '2024-01-12 23:22:00',
         'End DateTime': '2024-01-17 10:00:00',
         Duration: [
           '2024-01-10',
@@ -1117,7 +1117,7 @@ export const NotificationService = navigation => {
         Links:
           'https://leekduck.com/events/pokemon-showcase-rockruff-lycanroc-2024-01-07/',
         Summary: 'Rockruff and Lycanroc PokStop Showcases',
-        'Start DateTime': '2024-01-12 16:08:00',
+        'Start DateTime': '2024-01-12 23:22:00',
         'End DateTime': '2024-01-10 20:00:00',
         Duration: ['2024-01-07', '2024-01-08', '2024-01-09', '2024-01-10'],
         preference: 4,
@@ -2873,7 +2873,16 @@ export const NotificationService = navigation => {
   // }, 1000);
 
   const notificationTrigger = () => {
-    loadedEventJSONData?.data?.map((evDat, evIdx) => {
+    const returnedValue = loadedEventJSONData?.data?.filter((evDat, evIdx) => {
+      return (
+        moment(currentTime).format('YYYY-MM-DD HH:mm:ss') ===
+        evDat?.['Start DateTime']
+      );
+    });
+
+    console.log('returnedValue', returnedValue);
+
+    returnedValue?.map((evDat, evIdx) => {
       if (evDat?.Summary.toLowerCase().includes('spotlight')) {
         notificationTitleString = 'Spotlight';
       } else if (evDat?.Summary?.toLowerCase().includes('community day')) {
@@ -2884,41 +2893,63 @@ export const NotificationService = navigation => {
 
       const notificationId = `${evIdx}-${Date.now()}-${Math.random()}`;
 
-      if (
-        moment(currentTime).format('YYYY-MM-DD HH:mm:ss') ===
-        evDat?.['Start DateTime']
-      ) {
-        if (Platform.OS === 'ios') {
-          // sendLocalNotificationWithSound(
-          //   notificationTitleString,
-          //   evDat?.Summary,
-          //   evDat?.Description,
-          //   evDat?.['Img Src']?.[0],
-          // );
-
-          console.log('Events to Notify iOS', notificationId, evDat);
-
-          /* This below one works in background especially in IOS */
-          onDisplayNotification(
-            notificationTitleString,
-            evDat?.Summary,
-            evDat?.Description,
-            evDat?.['Img Src']?.[0],
-            notificationId,
-          );
-        } else if (Platform.OS === 'android') {
-          console.log('Events to Notify android', notificationId, evDat);
-          onDisplayNotification(
-            notificationTitleString,
-            evDat?.Summary,
-            evDat?.Description,
-            evDat?.['Img Src']?.[0],
-            notificationId,
-            evDat,
-          );
-        }
-      }
+      onDisplayNotification(
+        notificationTitleString,
+        evDat?.Summary,
+        evDat?.Description,
+        evDat?.['Img Src']?.[0],
+        notificationId,
+        evDat,
+        returnedValue,
+      );
     });
+
+    // loadedEventJSONData?.data?.map((evDat, evIdx) => {
+    //   if (evDat?.Summary.toLowerCase().includes('spotlight')) {
+    //     notificationTitleString = 'Spotlight';
+    //   } else if (evDat?.Summary?.toLowerCase().includes('community day')) {
+    //     notificationTitleString = 'Community day';
+    //   } else {
+    //     notificationTitleString = 'Event Alert';
+    //   }
+
+    //   const notificationId = `${evIdx}-${Date.now()}-${Math.random()}`;
+
+    //   if (
+    //     moment(currentTime).format('YYYY-MM-DD HH:mm:ss') ===
+    //     evDat?.['Start DateTime']
+    //   ) {
+    //     if (Platform.OS === 'ios') {
+    //       // sendLocalNotificationWithSound(
+    //       //   notificationTitleString,
+    //       //   evDat?.Summary,
+    //       //   evDat?.Description,
+    //       //   evDat?.['Img Src']?.[0],
+    //       // );
+
+    //       console.log('Events to Notify iOS', notificationId, evDat);
+
+    //       /* This below one works in background especially in IOS */
+    //       onDisplayNotification(
+    //         notificationTitleString,
+    //         evDat?.Summary,
+    //         evDat?.Description,
+    //         evDat?.['Img Src']?.[0],
+    //         notificationId,
+    //       );
+    //     } else if (Platform.OS === 'android') {
+    //       console.log('Events to Notify android', notificationId, evDat);
+    //       onDisplayNotification(
+    //         notificationTitleString,
+    //         evDat?.Summary,
+    //         evDat?.Description,
+    //         evDat?.['Img Src']?.[0],
+    //         notificationId,
+    //         evDat,
+    //       );
+    //     }
+    //   }
+    // });
   };
   return {NotificationService};
 };

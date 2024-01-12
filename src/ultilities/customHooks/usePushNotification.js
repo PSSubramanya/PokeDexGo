@@ -370,19 +370,35 @@ export const usePushNotification = navigation => {
     console.log('IM HEREEEEE THREE 123');
   };
 
-  async function onDisplayNotification(
+  function onDisplayNotification(
     notificationTitle,
     notificationSubtitle,
     notificationDescription,
     notificationImageUrl,
     eventId,
     evDat,
+    returnedValue,
     // soundName,
   ) {
+    let channelId;
     // Request permissions (required for iOS)
-    await notifee.requestPermission();
+    notifee
+      .requestPermission()
+      .then(() => {
+        // Permission granted or already granted, you can proceed with displaying notifications
+        console.log('Permission granted');
+      })
+      .catch(error => {
+        // Permission denied or there was an error
+        console.error('Permission request error:', error);
+      });
 
     console.log('event notification evDat', evDat);
+    console.log('event notification returnedValue', returnedValue);
+
+    returnedValue?.map((val, idx) => {
+      console.log('event notification val', val);
+    });
 
     // NOTE: THIS IS WRITTEN FOR BACKGROUND CHECK IN ANDROID
     // NOTE: SEE THIS AND FIX IT LATER
@@ -437,32 +453,55 @@ export const usePushNotification = navigation => {
     */
 
     // Create a channel (required for Android)
-    const channelId = await notifee.createChannel({
-      id: 'default',
-      name: 'Default Channel',
-    });
+    // const channelId = notifee.createChannel({
+    //   id: 'default',
+    //   name: 'Default Channel',
+    // });
+
+    notifee
+      .createChannel({
+        id: 'default',
+        name: 'Default Channel',
+      })
+      .then(cId => {
+        // Channel created successfully, you can use the channelId as needed
+        channelId = cId;
+        console.log('Channel created with ID:', channelId, typeof channelId);
+      })
+      .catch(err => {
+        console.error('Channel request error:', err);
+      });
 
     // Display a notification
-    await notifee.displayNotification({
-      id: eventId,
-      title: notificationTitle,
-      subtitle: notificationSubtitle,
-      body: notificationDescription,
-      android: {
-        channelId,
-        smallIcon: 'ic_launcher', // optional, defaults to 'ic_launcher'.
-        style: {
-          type: AndroidStyle.BIGPICTURE,
-          picture: notificationImageUrl,
-          // picture:
-          //   'https://qph.cf2.quoracdn.net/main-qimg-88a14491cefee50fa13e38063b99a066-lq',
+    notifee
+      .displayNotification({
+        id: eventId,
+        title: notificationTitle,
+        subtitle: notificationSubtitle,
+        body: notificationDescription,
+        android: {
+          channelId: 'default',
+          smallIcon: 'ic_launcher', // optional, defaults to 'ic_launcher'.
+          style: {
+            type: AndroidStyle.BIGPICTURE,
+            picture: notificationImageUrl,
+            // picture:
+            //   'https://qph.cf2.quoracdn.net/main-qimg-88a14491cefee50fa13e38063b99a066-lq',
+          },
+          // pressAction is needed if you want the notification to open the app when pressed
+          pressAction: {
+            id: 'default',
+          },
         },
-        // pressAction is needed if you want the notification to open the app when pressed
-        pressAction: {
-          id: 'default',
-        },
-      },
-    });
+      })
+      .then(() => {
+        // Notification displayed successfully
+        console.log('Notification displayed successfully', notificationTitle);
+      })
+      .catch(error => {
+        // Handle errors during notification display
+        console.error('Error displaying notification:', error);
+      });
   }
 
   return {
