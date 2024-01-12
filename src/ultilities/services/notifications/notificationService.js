@@ -3,6 +3,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import {AppState, Platform} from 'react-native';
 
 // import BackgroundTask from 'react-native-background-task';
+// import _BackgroundTimer from 'react-native-background-timer';
 import {useCurrentTime} from '../../customHooks/notificationContext';
 import {usePushNotification} from '../../customHooks/usePushNotification';
 import useAppStatus from '../../customHooks/useAppState';
@@ -74,7 +75,7 @@ export const NotificationService = navigation => {
         Links:
           'https://leekduck.com/events/tornadius-therian-forme-in-5-star-raid-battles-january-2024/',
         Summary: 'Tornadus (Therian Forme) in 5-star Raid Battles',
-        'Start DateTime': '2024-01-10 10:00:00',
+        'Start DateTime': '2024-01-12 16:08:00',
         'End DateTime': '2024-01-17 10:00:00',
         Duration: [
           '2024-01-10',
@@ -1116,7 +1117,7 @@ export const NotificationService = navigation => {
         Links:
           'https://leekduck.com/events/pokemon-showcase-rockruff-lycanroc-2024-01-07/',
         Summary: 'Rockruff and Lycanroc PokStop Showcases',
-        'Start DateTime': '2024-01-09 22:30:00',
+        'Start DateTime': '2024-01-12 16:08:00',
         'End DateTime': '2024-01-10 20:00:00',
         Duration: ['2024-01-07', '2024-01-08', '2024-01-09', '2024-01-10'],
         preference: 4,
@@ -2867,6 +2868,10 @@ export const NotificationService = navigation => {
     // }
   }, [currentAppState, previousAppState]);
 
+  // _BackgroundTimer?.runBackgroundTimer(() => {
+  //   notificationTrigger();
+  // }, 1000);
+
   const notificationTrigger = () => {
     loadedEventJSONData?.data?.map((evDat, evIdx) => {
       if (evDat?.Summary.toLowerCase().includes('spotlight')) {
@@ -2877,23 +2882,39 @@ export const NotificationService = navigation => {
         notificationTitleString = 'Event Alert';
       }
 
+      const notificationId = `${evIdx}-${Date.now()}-${Math.random()}`;
+
       if (
         moment(currentTime).format('YYYY-MM-DD HH:mm:ss') ===
         evDat?.['Start DateTime']
       ) {
         if (Platform.OS === 'ios') {
-          sendLocalNotificationWithSound(
-            notificationTitleString,
-            evDat?.Summary,
-            evDat?.Description,
-            evDat?.['Img Src']?.[0],
-          );
-        } else if (Platform.OS === 'android') {
+          // sendLocalNotificationWithSound(
+          //   notificationTitleString,
+          //   evDat?.Summary,
+          //   evDat?.Description,
+          //   evDat?.['Img Src']?.[0],
+          // );
+
+          console.log('Events to Notify iOS', notificationId, evDat);
+
+          /* This below one works in background especially in IOS */
           onDisplayNotification(
             notificationTitleString,
             evDat?.Summary,
             evDat?.Description,
             evDat?.['Img Src']?.[0],
+            notificationId,
+          );
+        } else if (Platform.OS === 'android') {
+          console.log('Events to Notify android', notificationId, evDat);
+          onDisplayNotification(
+            notificationTitleString,
+            evDat?.Summary,
+            evDat?.Description,
+            evDat?.['Img Src']?.[0],
+            notificationId,
+            evDat,
           );
         }
       }
