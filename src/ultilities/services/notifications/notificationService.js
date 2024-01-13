@@ -952,7 +952,7 @@ export const NotificationService = navigation => {
         Links:
           'https://leekduck.com/events/gbl-timeless-travels_master-league_fantasy-cup-great-league-edition/',
         Summary: 'Master League and Fantasy Cup',
-        'Start DateTime': '2024-01-13 16:51:00',
+        'Start DateTime': '2024-01-13 18:10:00',
         'End DateTime': '2024-01-19 21:00:00',
         Duration: [
           '2024-01-12',
@@ -1117,7 +1117,7 @@ export const NotificationService = navigation => {
         Links:
           'https://leekduck.com/events/pokemon-showcase-rockruff-lycanroc-2024-01-07/',
         Summary: 'Rockruff and Lycanroc PokStop Showcases',
-        'Start DateTime': '2024-01-13 16:47:00',
+        'Start DateTime': '2024-01-13 18:10:00',
         'End DateTime': '2024-01-10 20:00:00',
         Duration: ['2024-01-07', '2024-01-08', '2024-01-09', '2024-01-10'],
         preference: 4,

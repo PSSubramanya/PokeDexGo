@@ -18,6 +18,19 @@ import PushNotification from 'react-native-push-notification';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import notifee, {EventType} from '@notifee/react-native';
 
+// Request permissions (required for iOS)
+notifee
+  .requestPermission()
+  .then(() => {
+    // Permission granted or already granted, you can proceed with displaying notifications
+    console.log('Permission granted');
+  })
+  .catch(error => {
+    // Permission denied or there was an error
+    console.error('Permission request error:', error);
+  });
+
+// NOTE: This below function is the one used to trigger notifications during background app status
 notifee.onBackgroundEvent(async ({type, detail}) => {
   const {notification, pressAction} = detail;
 

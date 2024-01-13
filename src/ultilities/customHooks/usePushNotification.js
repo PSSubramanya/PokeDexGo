@@ -84,12 +84,6 @@ export const usePushNotification = navigation => {
 
   /* NOTE: The one we are using in the app */
 
-  /* NOTE: You might write a separate similar function.
-  And you might need to map this by taking in the param as the list of events per day.
-  Then you might need to do multi notification trigger */
-
-  /* NOTE: Take addMultipleRequests forreference.
-  But time stamp comes from params. So schedule it as per that */
   const sendLocalNotificationWithSound = (
     notificationTitle,
     notificationSubtitle,
@@ -370,6 +364,7 @@ export const usePushNotification = navigation => {
     console.log('IM HEREEEEE THREE 123');
   };
 
+  // NOTE: This is the function that triggers Notification via Notifee
   function onDisplayNotification(
     notificationTitle,
     notificationSubtitle,
@@ -381,18 +376,6 @@ export const usePushNotification = navigation => {
     // soundName,
   ) {
     let channelId;
-    // Request permissions (required for iOS)
-    notifee
-      .requestPermission()
-      .then(() => {
-        // Permission granted or already granted, you can proceed with displaying notifications
-        console.log('Permission granted');
-      })
-      .catch(error => {
-        // Permission denied or there was an error
-        console.error('Permission request error:', error);
-      });
-
     console.log('event notification evDat', evDat);
     console.log('event notification returnedValue', returnedValue);
 
@@ -451,12 +434,6 @@ export const usePushNotification = navigation => {
         );
       }
     */
-
-    // Create a channel (required for Android)
-    // const channelId = notifee.createChannel({
-    //   id: 'default',
-    //   name: 'Default Channel',
-    // });
 
     notifee
       .createChannel({
