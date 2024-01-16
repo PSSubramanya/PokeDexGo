@@ -1,9 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect, useRef} from 'react';
-import {AppState, Platform} from 'react-native';
+import {AppState, Platform, NativeModules} from 'react-native';
 
-// import BackgroundTask from 'react-native-background-task';
-// import _BackgroundTimer from 'react-native-background-timer';
+import _BackgroundTimer from 'react-native-background-timer';
 import {useCurrentTime} from '../../customHooks/notificationContext';
 import {usePushNotification} from '../../customHooks/usePushNotification';
 import useAppStatus from '../../customHooks/useAppState';
@@ -11,9 +10,9 @@ import moment from 'moment';
 
 export const NotificationService = navigation => {
   let notificationTitleString = '';
+  const {BackgroundTask} = NativeModules;
 
-  const {sendLocalNotificationWithSound, onDisplayNotification} =
-    usePushNotification(navigation);
+  const {onDisplayNotification} = usePushNotification(navigation);
 
   const currentTime = useCurrentTime();
 
@@ -23,9 +22,6 @@ export const NotificationService = navigation => {
   const {appState, prevAppState} = useAppStatus();
   const currentAppState = appState.current;
   const previousAppState = prevAppState.current;
-
-  // console.log('CURRENT APP-STATES', currentAppState);
-  // console.log('PREVIOUS APP-STATES', previousAppState);
 
   const mockDataVal = {
     data: [
@@ -952,7 +948,7 @@ export const NotificationService = navigation => {
         Links:
           'https://leekduck.com/events/gbl-timeless-travels_master-league_fantasy-cup-great-league-edition/',
         Summary: 'Master League and Fantasy Cup',
-        'Start DateTime': '2024-01-13 18:10:00',
+        'Start DateTime': '2024-01-14 01:10:00',
         'End DateTime': '2024-01-19 21:00:00',
         Duration: [
           '2024-01-12',
@@ -2415,7 +2411,7 @@ export const NotificationService = navigation => {
         Links:
           'https://leekduck.com/events/thundurus-therian-forme-in-5-star-raid-battles-january-2024-copy/',
         Summary: 'Thundurus (Therian Forme) in 5-star Raid Battles',
-        'Start DateTime': '2024-01-17 10:00:00',
+        'Start DateTime': '2024-01-17 02:51:00',
         'End DateTime': '2024-01-24 10:00:00',
         Duration: [
           '2024-01-17',
@@ -2768,7 +2764,7 @@ export const NotificationService = navigation => {
       {
         Links: 'https://leekduck.com/events/hisuian-typhlosion-raid-day/',
         Summary: 'Hisuian Typhlosion Raid Day',
-        'Start DateTime': '2024-01-14 14:00:00',
+        'Start DateTime': '2024-01-17 02:52:00',
         'End DateTime': '2024-01-14 17:00:00',
         Duration: ['2024-01-14'],
         preference: 1,
@@ -2799,7 +2795,7 @@ export const NotificationService = navigation => {
       {
         Links: 'https://leekduck.com/events/raidhour20240117/',
         Summary: 'Thundurus (Therian Forme) Raid Hour',
-        'Start DateTime': '2024-01-17 18:00:00',
+        'Start DateTime': '2024-01-17 02:52:00',
         'End DateTime': '2024-01-17 19:00:00',
         Duration: ['2024-01-17'],
         preference: 1,
@@ -2845,32 +2841,36 @@ export const NotificationService = navigation => {
   useEffect(() => {
     notificationTrigger();
 
-    if (previousAppState === 'active') {
-      // BackgroundTask.schedule();
-      console.log('IM IN THE FOREGROUNDDDDD12345');
-      // notificationTrigger();
-    } else {
-      console.log('IM IN THE BACKGROUNDDDDD12345');
-      // notificationTrigger();
-    }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTime]);
 
   useEffect(() => {
-    // if (previousAppState === 'active') {
-    //   // BackgroundTask.schedule();
-    //   console.log('IM IN THE BACKGROUNDDDDD12345');
-    //   notificationTrigger();
-    // } else {
-    //   console.log('IM IN THE FOREGROUNDDDDD12345');
-    //   notificationTrigger();
-    // }
-  }, [currentAppState, previousAppState]);
+    let id;
+    console.log(
+      'IM IN THE This APP STATE 12- ',
+      currentAppState,
+      previousAppState,
+    );
+    if (currentAppState === 'background' || currentAppState === 'inactive') {
+      id = _BackgroundTimer?.setInterval(() => {
+        console.log('HI HI BACKGROUNDTIMER');
+        notificationTrigger();
+        console.log(
+          'BACKGROUNDTIMER Triggered at time - ',
+          moment(currentTime).format('YYYY-MM-DD HH:mm:ss'),
+        );
+      }, 1000);
 
-  // _BackgroundTimer?.runBackgroundTimer(() => {
-  //   notificationTrigger();
-  // }, 1000);
+      console.log(
+        'IM IN THE This APP STATE 123- ',
+        currentAppState,
+        previousAppState,
+      );
+    } else if (currentAppState === 'active') {
+      console.log('BYE BYE BACKGROUNDTIMER');
+      _BackgroundTimer.clearInterval(id);
+    }
+  }, [currentAppState, previousAppState]);
 
   const notificationTrigger = () => {
     const returnedValue = loadedEventJSONData?.data?.filter((evDat, evIdx) => {
@@ -2892,6 +2892,15 @@ export const NotificationService = navigation => {
       }
 
       const notificationId = `${evIdx}-${Date.now()}-${Math.random()}`;
+
+      // if (Platform?.OS === 'android') {
+      //   BackgroundTask?.runInBackground(
+      //     notificationTitleString,
+      //     evDat?.Summary,
+      //     evDat?.Description,
+      //     // evDat?.['Img Src']?.[0],
+      //   );
+      // }
 
       onDisplayNotification(
         notificationTitleString,

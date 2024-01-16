@@ -1,5 +1,6 @@
 // NotificationContext.js
 import React, {createContext, useContext, useEffect, useState} from 'react';
+import _BackgroundTimer from 'react-native-background-timer';
 
 const NotificationContext = createContext();
 
@@ -11,10 +12,10 @@ const NotificationProvider = ({children}) => {
       setCurrentTime(new Date());
     };
 
-    const intervalId = setInterval(updateCurrentTime, 1000);
+    const intervalId = _BackgroundTimer?.setInterval(updateCurrentTime, 1000);
 
     return () => {
-      clearInterval(intervalId);
+      _BackgroundTimer?.clearInterval(intervalId);
     };
   }, []);
 

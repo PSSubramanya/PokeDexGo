@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {DeviceEventEmitter, Alert, Platform} from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import PushNotification from 'react-native-push-notification';
-import notifee, {AndroidStyle} from '@notifee/react-native';
+import notifee, {AndroidStyle, TriggerType} from '@notifee/react-native';
 
 export const usePushNotification = navigation => {
   const [permissions, setPermissions] = useState({});
@@ -376,64 +376,6 @@ export const usePushNotification = navigation => {
     // soundName,
   ) {
     let channelId;
-    console.log('event notification evDat', evDat);
-    console.log('event notification returnedValue', returnedValue);
-
-    returnedValue?.map((val, idx) => {
-      console.log('event notification val', val);
-    });
-
-    // NOTE: THIS IS WRITTEN FOR BACKGROUND CHECK IN ANDROID
-    // NOTE: SEE THIS AND FIX IT LATER
-    /*
-      // 1. checks if battery optimization is enabled
-      const batteryOptimizationEnabled =
-        await notifee.isBatteryOptimizationEnabled();
-      if (batteryOptimizationEnabled) {
-        // 2. ask your users to disable the feature
-        Alert.alert(
-          'Restrictions Detected',
-          'To ensure notifications are delivered, please disable battery optimization for the app.',
-          [
-            // 3. launch intent to navigate the user to the appropriate screen
-            {
-              text: 'OK, open settings',
-              onPress: async () =>
-                await notifee.openBatteryOptimizationSettings(),
-            },
-            {
-              text: 'Cancel',
-              onPress: () => console.log('Cancel Pressed'),
-              style: 'cancel',
-            },
-          ],
-          {cancelable: false},
-        );
-      }
-
-      // 1. get info on the device and the Power Manager settings
-      const powerManagerInfo = await notifee.getPowerManagerInfo();
-      if (powerManagerInfo.activity) {
-        // 2. ask your users to adjust their settings
-        Alert.alert(
-          'Restrictions Detected',
-          'To ensure notifications are delivered, please adjust your settings to prevent the app from being killed',
-          [
-            // 3. launch intent to navigate the user to the appropriate screen
-            {
-              text: 'OK, open settings',
-              onPress: async () => await notifee.openPowerManagerSettings(),
-            },
-            {
-              text: 'Cancel',
-              onPress: () => console.log('Cancel Pressed'),
-              style: 'cancel',
-            },
-          ],
-          {cancelable: false},
-        );
-      }
-    */
 
     notifee
       .createChannel({
@@ -448,6 +390,31 @@ export const usePushNotification = navigation => {
       .catch(err => {
         console.error('Channel request error:', err);
       });
+
+    /*
+    // Create a time-based trigger
+    const trigger = {
+      type: TriggerType.TIMESTAMP,
+      timestamp: Date.now() + 5000, // Schedule notification for 2 minutes for 12000 from now
+      // timestamp: date.getTime(), // fire at 11:10am (10 minutes before meeting)
+    };
+
+    // Create a trigger notification
+    notifee
+      .createTriggerNotification(
+        {
+          title: 'Meeting with Jane',
+          body: 'Today at 11:20am',
+          android: {
+            channelId: 'default',
+          },
+        },
+        trigger,
+      )
+      .then(val => console.log('Create Trigger Notification Successful'))
+      .catch(err => console.log('Error in Create Trigger Notification, ', err));
+
+    */
 
     // Display a notification
     notifee
