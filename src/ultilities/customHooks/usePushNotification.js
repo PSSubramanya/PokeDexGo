@@ -381,6 +381,10 @@ export const usePushNotification = navigation => {
       .createChannel({
         id: 'default',
         name: 'Default Channel',
+        vibration: true,
+        vibrationPattern: [300, 500],
+        sound: 'hollow',
+        // sound: 'pikachu_notification_sound.mp3',
       })
       .then(cId => {
         // Channel created successfully, you can use the channelId as needed
@@ -399,7 +403,7 @@ export const usePushNotification = navigation => {
       // timestamp: date.getTime(), // fire at 11:10am (10 minutes before meeting)
     };
 
-    // Create a trigger notification
+    // Create a scheduled trigger notification
     notifee
       .createTriggerNotification(
         {
@@ -432,6 +436,9 @@ export const usePushNotification = navigation => {
             // picture:
             //   'https://qph.cf2.quoracdn.net/main-qimg-88a14491cefee50fa13e38063b99a066-lq',
           },
+          vibrationPattern: [300, 500],
+          sound: 'hollow',
+          // sound: 'pikachu_notification_sound.mp3',
           // pressAction is needed if you want the notification to open the app when pressed
           pressAction: {
             id: 'default',

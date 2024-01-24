@@ -24,70 +24,70 @@ notifee
   .then(() => {
     // Permission granted or already granted, you can proceed with displaying notifications
     console.log('Permission granted');
+
+    // 1. checks if battery optimization is enabled
+    notifee
+      .isBatteryOptimizationEnabled()
+      .then(batteryOptimizationEnabled => {
+        if (batteryOptimizationEnabled) {
+          // 2. ask your users to disable the feature
+          Alert.alert(
+            'Restrictions Detected',
+            'To ensure notifications are delivered, please disable battery optimization for the app.',
+            [
+              // 3. launch intent to navigate the user to the appropriate screen
+              {
+                text: 'OK, open settings',
+                // onPress: async () => await notifee.openBatteryOptimizationSettings(),
+                onPress: () =>
+                  notifee.openBatteryOptimizationSettings().then().catch(),
+              },
+              {
+                text: 'Cancel',
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+              },
+            ],
+            {cancelable: false},
+          );
+        }
+      })
+      .catch(err => console.log('Battery Optimization error'));
+
+    // 1. get info on the device and the Power Manager settings
+    notifee
+      .getPowerManagerInfo()
+      .then(powerManagerInfo => {
+        if (powerManagerInfo.activity) {
+          // 2. ask your users to adjust their settings
+          Alert.alert(
+            'Restrictions Detected',
+            'To ensure notifications are delivered, please adjust your settings to prevent the app from being killed',
+            [
+              // 3. launch intent to navigate the user to the appropriate screen
+              {
+                text: 'OK, open settings',
+                // onPress: async () => await notifee.openPowerManagerSettings(),
+                onPress: () =>
+                  notifee.openPowerManagerSettings().then().catch(),
+              },
+              {
+                text: 'Cancel',
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+              },
+            ],
+            {cancelable: false},
+          );
+        }
+      })
+      .catch(err => console.log('Power Manager error'));
   })
   .catch(error => {
     // Permission denied or there was an error
     console.error('Permission request error:', error);
   });
 
-/*
-  // 1. checks if battery optimization is enabled
-  notifee
-    .isBatteryOptimizationEnabled()
-    .then(batteryOptimizationEnabled => {
-      if (batteryOptimizationEnabled) {
-        // 2. ask your users to disable the feature
-        Alert.alert(
-          'Restrictions Detected',
-          'To ensure notifications are delivered, please disable battery optimization for the app.',
-          [
-            // 3. launch intent to navigate the user to the appropriate screen
-            {
-              text: 'OK, open settings',
-              // onPress: async () => await notifee.openBatteryOptimizationSettings(),
-              onPress: () =>
-                notifee.openBatteryOptimizationSettings().then().catch(),
-            },
-            {
-              text: 'Cancel',
-              onPress: () => console.log('Cancel Pressed'),
-              style: 'cancel',
-            },
-          ],
-          {cancelable: false},
-        );
-      }
-    })
-    .catch(err => console.log('Battery Optimization error'));
-
-  // 1. get info on the device and the Power Manager settings
-  notifee
-    .getPowerManagerInfo()
-    .then(powerManagerInfo => {
-      if (powerManagerInfo.activity) {
-        // 2. ask your users to adjust their settings
-        Alert.alert(
-          'Restrictions Detected',
-          'To ensure notifications are delivered, please adjust your settings to prevent the app from being killed',
-          [
-            // 3. launch intent to navigate the user to the appropriate screen
-            {
-              text: 'OK, open settings',
-              // onPress: async () => await notifee.openPowerManagerSettings(),
-              onPress: () => notifee.openPowerManagerSettings().then().catch(),
-            },
-            {
-              text: 'Cancel',
-              onPress: () => console.log('Cancel Pressed'),
-              style: 'cancel',
-            },
-          ],
-          {cancelable: false},
-        );
-      }
-    })
-    .catch(err => console.log('Power Manager error'));
-*/
 // NOTE: This below function is the one used to trigger notifications during background app status
 notifee.onBackgroundEvent(async ({type, detail}) => {
   const {notification, pressAction} = detail;

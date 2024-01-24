@@ -22,6 +22,7 @@ public class MyAppPackage implements ReactPackage {
         List<NativeModule> modules = new ArrayList<>();
 
         modules.add(new BackgroundTaskModule(reactContext));
+        modules.add(new BatteryOptimizationModule(reactContext));
 
         return modules;
     }

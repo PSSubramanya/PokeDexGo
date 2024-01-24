@@ -28,7 +28,7 @@ export const NotificationService = navigation => {
       {
         Links: 'https://leekduck.com/events/raidhour20240124/',
         Summary: 'Landorus (Therian Forme) Raid Hour',
-        'Start DateTime': '2024-01-24 18:00:00',
+        'Start DateTime': '2024-01-25 00:33:00',
         'End DateTime': '2024-01-24 19:00:00',
         Duration: ['2024-01-24'],
         preference: 1,
@@ -760,7 +760,7 @@ export const NotificationService = navigation => {
         Links:
           'https://leekduck.com/events/landorus-therian-forme-in-5-star-raid-battles-january-2024/',
         Summary: 'Landorus (Therian Forme) in 5-star Raid Battles',
-        'Start DateTime': '2024-01-24 10:00:00',
+        'Start DateTime': '2024-01-25 00:40:00',
         'End DateTime': '2024-01-31 10:00:00',
         Duration: [
           '2024-01-24',
@@ -2853,21 +2853,9 @@ export const NotificationService = navigation => {
     );
     if (currentAppState === 'background' || currentAppState === 'inactive') {
       id = _BackgroundTimer?.setInterval(() => {
-        console.log('HI HI BACKGROUNDTIMER');
         notificationTrigger();
-        console.log(
-          'BACKGROUNDTIMER Triggered at time - ',
-          moment(currentTime).format('YYYY-MM-DD HH:mm:ss'),
-        );
       }, 1000);
-
-      console.log(
-        'IM IN THE This APP STATE 123- ',
-        currentAppState,
-        previousAppState,
-      );
     } else if (currentAppState === 'active') {
-      console.log('BYE BYE BACKGROUNDTIMER');
       _BackgroundTimer.clearInterval(id);
     }
   }, [currentAppState, previousAppState]);
