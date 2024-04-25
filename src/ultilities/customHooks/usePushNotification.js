@@ -448,6 +448,14 @@ export const usePushNotification = navigation => {
       .then(() => {
         // Notification displayed successfully
         console.log('Notification displayed successfully', notificationTitle);
+
+        /*
+         WHEN CLICKED ON NOTIFICATION:
+
+         navigation.navigate('EventViewScreen', {
+          selectedDate: new Date(),
+         });
+        */
       })
       .catch(error => {
         // Handle errors during notification display

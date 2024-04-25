@@ -3,12 +3,18 @@
  * @format
  */
 
-import {AppRegistry} from 'react-native';
+import {
+  AppRegistry,
+  PermissionsAndroid,
+  View,
+  Text,
+  Image,
+  Alert,
+} from 'react-native';
 import App from './App';
 import {name as appName} from './app.json';
 import {useState, useEffect} from 'react';
 import {useNetStatusInfo} from './src/ultilities/customHooks/useNetStatusInfo';
-import {View, Text, Image, Alert} from 'react-native';
 import imagePaths from './src/constants/imagePaths';
 import {Modal, Portal, Provider as ModalProvider} from 'react-native-paper';
 import {Provider} from 'react-redux';
@@ -17,6 +23,7 @@ import styles from './src/screens/LandingPage/styles';
 import PushNotification from 'react-native-push-notification';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import notifee, {EventType} from '@notifee/react-native';
+import messaging from '@react-native-firebase/messaging';
 
 // Request permissions (required for iOS)
 notifee
@@ -106,9 +113,31 @@ notifee.onBackgroundEvent(async ({type, detail}) => {
   }
 });
 
+// Register background handler
+messaging().setBackgroundMessageHandler(async remoteMessage => {
+  console.log('Message handled in the background!', remoteMessage);
+});
+
 const RNRedux = () => {
   const {networkState} = useNetStatusInfo();
   const [modalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    requestInitialPermission();
+    // PermissionsAndroid.request(
+    //   PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+    // );
+
+    // const unsubscribe = messaging().onMessage(async remoteMessage => {
+    //   Alert.alert(
+    //     remoteMessage?.notification?.title,
+    //     remoteMessage?.notification?.body,
+    //     // JSON.stringify(remoteMessage),
+    //   );
+    // });
+
+    // return unsubscribe;
+  }, []);
 
   useEffect(() => {
     if (networkState) {
@@ -124,6 +153,18 @@ const RNRedux = () => {
 
   const hideModal = () => {
     setModalVisible(false);
+  };
+
+  const requestInitialPermission = async () => {
+    const authStatus = await messaging().requestPermission();
+
+    const enabled =
+      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+    if (enabled) {
+      console.log('Authorization status:', authStatus);
+    }
   };
 
   const modalContainer = () => {

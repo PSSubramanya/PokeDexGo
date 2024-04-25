@@ -14,6 +14,7 @@ import {
 import {Modal, Portal} from 'react-native-paper';
 // import firestore from '@react-native-firebase/firestore';
 import DeviceInfo from 'react-native-device-info';
+import messaging from '@react-native-firebase/messaging';
 // import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {useNetStatusInfo} from '../../ultilities/customHooks/useNetStatusInfo';
 import {usePushNotification} from '../../ultilities/customHooks/usePushNotification';
@@ -35,7 +36,7 @@ const LandingPage = ({navigation}) => {
 
   const dispatch = useDispatch();
   const {networkState} = useNetStatusInfo();
-  const {localNotif} = usePushNotification(navigation);
+  const {onDisplayNotification} = usePushNotification(navigation);
 
   const navigationScreens = [
     {
@@ -75,10 +76,30 @@ const LandingPage = ({navigation}) => {
   const [uniqueDeviceIdValue, setUniqueDeviceIdValue] = useState('');
   const [modalDisplayText, setModalDisplayText] = useState('');
   const [modalTypeValue, setModalType] = useState('');
+  const [inAppNotificationTitle, setInAppNotificationTitle] = useState('');
   const [countDownTimer, setCountDownTimer] = useState(10);
   const [forceUpdateModal, setForceUpdateModal] = useState(false);
 
   NotificationService(navigation);
+
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      setModalType('in-app-notification');
+      setInAppNotificationTitle(remoteMessage?.notification?.title);
+      setModalDisplayText(remoteMessage?.notification?.body);
+      showModal();
+
+      onDisplayNotification(
+        'EVENT ALERT',
+        remoteMessage?.notification?.title,
+        remoteMessage?.notification?.body,
+        'https://leekduck.com/assets/img/events/go-battle-league-season-17-timeless-travels.jpg',
+        '0',
+      );
+    });
+
+    return unsubscribe;
+  }, []);
 
   useEffect(() => {
     let versionData;
@@ -170,7 +191,9 @@ const LandingPage = ({navigation}) => {
           loadedData = res?.data;
           setLoadData(loadedData);
           storeData('eventsData', loadedData);
-          hideModal();
+          if (modalTypeValue !== 'in-app-notification') {
+            hideModal();
+          }
           console.log('SERIALISED EVENTS DATA VALUE from API', loadedData);
         });
       })
@@ -212,7 +235,9 @@ const LandingPage = ({navigation}) => {
           loadedEggData = res?.data;
           setLoadEggData(loadedEggData);
           storeData('eggsData', loadedEggData);
-          hideModal();
+          if (modalTypeValue !== 'in-app-notification') {
+            hideModal();
+          }
         });
       })
       .catch(err => {
@@ -247,7 +272,9 @@ const LandingPage = ({navigation}) => {
           loadedRaidBossData = res?.data;
           setRaidBossData(loadedRaidBossData);
           storeData('raidsData', loadedRaidBossData);
-          hideModal();
+          if (modalTypeValue !== 'in-app-notification') {
+            hideModal();
+          }
         });
       })
       .catch(err => {
@@ -284,7 +311,9 @@ const LandingPage = ({navigation}) => {
           loadedFieldResearchData = res?.data;
           setFieldResearchData(loadedFieldResearchData);
           storeData('fieldResearchData', loadedFieldResearchData);
-          hideModal();
+          if (modalTypeValue !== 'in-app-notification') {
+            hideModal();
+          }
         });
       })
       .catch(err => {
@@ -350,6 +379,21 @@ const LandingPage = ({navigation}) => {
             </Text>
           </View>
         ) : null}
+        {modalType === 'in-app-notification' ? (
+          <View>
+            <Text
+              style={[
+                styles.modalHeaderText,
+                {
+                  color: colors.white,
+                  textTransform: 'uppercase',
+                  textAlign: 'center',
+                },
+              ]}>
+              {inAppNotificationTitle}
+            </Text>
+          </View>
+        ) : null}
         {modalType === 'server-error' ? (
           <Image
             source={imagePaths.serverErrorIcon}
@@ -380,6 +424,29 @@ const LandingPage = ({navigation}) => {
             }}>
             <Text style={styles?.updateText}>UPDATE</Text>
           </TouchableOpacity>
+        ) : null}
+        {modalType === 'in-app-notification' ? (
+          <View>
+            <TouchableOpacity
+              style={styles?.updateButton}
+              onPress={() => {
+                setModalType('');
+                hideModal();
+                navigation.navigate('EventViewScreen', {
+                  selectedDate: new Date(),
+                });
+              }}>
+              <Text style={styles?.updateText}>VIEW</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.noBackgroundButton}
+              onPress={() => {
+                setModalType('');
+                hideModal();
+              }}>
+              <Text style={styles?.closeButton}>CLOSE</Text>
+            </TouchableOpacity>
+          </View>
         ) : null}
         <TouchableOpacity
           onPress={() => {

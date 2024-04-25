@@ -186,4 +186,16 @@ export default styles = StyleSheet.create({
     paddingTop: verticalScale(10),
     justifyContent: 'flex-end',
   },
+  noBackgroundButton: {
+    marginTop: verticalScale(10),
+    width: horizontalScale(100),
+    height: verticalScale(40),
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5,
+  },
+  closeButton: {
+    color: colors?.white,
+    fontFamily: fontFamily.primaryFontFamilySemiBold,
+  },
 });
