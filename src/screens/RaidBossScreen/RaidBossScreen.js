@@ -52,7 +52,7 @@ const RaidBossScreen = props => {
 
     // const dispData = mockRaidBossData?.data; //
     const dispData = loadData; // //loadData
-    console.log('RAID DATA', loadData);
+    console.log('RAID DATA', JSON.stringify(loadData));
     setDisplayData(dispData);
   }, []);
 

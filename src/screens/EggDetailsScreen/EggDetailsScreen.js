@@ -15,6 +15,7 @@ import imagePaths from '../../constants/imagePaths.js';
 import pokemon_alolan_variants from '../../ultilities/pokemonData/pokemon_alolan_variants';
 import pokemon_galarian_variants from '../../ultilities/pokemonData/pokemon_galarian_variants';
 import pokemon_hisuian_variants from '../../ultilities/pokemonData/pokemon_hisuian_variants';
+import pokemon_paldean_variants from '../../ultilities/pokemonData/pokemon_paldean_variants.js';
 import styles from './styles.js';
 import {horizontalScale} from '../../ultilities/scale';
 import {toCamelCase} from '../../ultilities/commonFunctions.js';
@@ -47,6 +48,7 @@ const EggDetailsScreen = props => {
     '5 km Eggs ': imagePaths.fiveKmEggIcon,
     '5 km Eggs (Adventure Sync Rewards)': imagePaths.fiveKmEggIcon,
     '7 km Eggs ': imagePaths.sevenKmEggIcon,
+    '7 km Eggs (From Route Gift)': imagePaths.sevenKmEggIcon,
     '10 km Eggs ': imagePaths.tenKmEggIcon,
     '10 km Eggs (Adventure Sync Rewards)': imagePaths.tenKmEggIcon,
     '12 km Eggs ': imagePaths.twelveKmEggIcon,
@@ -84,6 +86,8 @@ const EggDetailsScreen = props => {
     const substring6 = '_31_shiny.png'; // Shiny Glarian
     const substring7 = '_61.png'; // ALOLAN - DONE
     const substring8 = '_61_shiny.png'; // Shiny Alolan
+    const substring9 = 'fPALDEA.icon.png'; // HISUIAN - DONE
+    const substring10 = 'fPALDEA.s.icon.png'; // HISUIAN Shiny
 
     const modalImages = displayData?.imgSrc;
 
@@ -100,6 +104,9 @@ const EggDetailsScreen = props => {
       } else if (data?.includes(substring7)) {
         pushedImage = pokemon_alolan_variants[displayData?.pokeId?.[idx]];
         displayableModalImages = [...displayableModalImages, pushedImage];
+      } else if (data?.includes(substring9)) {
+        pushedImage = pokemon_paldean_variants[displayData?.pokeId?.[idx]];
+        displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring4)) {
         const idString = displayData?.pokeId?.[idx] + 's';
         pushedImage = pokemon_hisuian_variants[idString];
@@ -111,6 +118,10 @@ const EggDetailsScreen = props => {
       } else if (data?.includes(substring8)) {
         const idString = displayData?.pokeId?.[idx] + 's';
         pushedImage = pokemon_alolan_variants[idString];
+        displayableModalImages = [...displayableModalImages, pushedImage];
+      } else if (data?.includes(substring10)) {
+        const idString = displayData?.pokeId?.[idx] + 's';
+        pushedImage = pokemon_paldean_variants[idString];
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring1)) {
         const ret = data;
@@ -287,20 +298,26 @@ const EggDetailsScreen = props => {
             const alolanTerm = '-alolan.jpg';
             const galarTerm = '-galarian.jpg';
             const hisuianTerm = '-hisuian.jpg';
+            const paldeanTerm = '-paldean.jpg';
 
             let specialCategoryValue = '';
 
             const isSpecialCategory =
               item?.includes(alolanTerm) ||
               item?.includes(galarTerm) ||
-              item?.includes(hisuianTerm);
+              item?.includes(hisuianTerm) ||
+              item?.includes(paldeanTerm);
 
             if (isSpecialCategory) {
-              specialCategoryValue = item?.includes(alolanTerm)
-                ? 'Alola'
-                : item?.includes(galarTerm)
-                ? 'Galarian'
-                : 'Hisuian';
+              if (item?.includes(alolanTerm)) {
+                specialCategoryValue = 'Alola';
+              } else if (item?.includes(galarTerm)) {
+                specialCategoryValue = 'Galarian';
+              } else if (item?.includes(paldeanTerm)) {
+                specialCategoryValue = 'Paldean';
+              } else {
+                specialCategoryValue = 'Hisuian';
+              }
             }
 
             const splittingTerm1 = 'https://img.pokemondb.net/artwork/large/';
@@ -325,6 +342,9 @@ const EggDetailsScreen = props => {
                 finalIdentifier = toCamelCase(finalIdentifier[0]);
               } else if (imageString[1]?.includes(hisuianTerm)) {
                 finalIdentifier = imageString[1].split(hisuianTerm);
+                finalIdentifier = toCamelCase(finalIdentifier[0]);
+              } else if (imageString[1]?.includes(paldeanTerm)) {
+                finalIdentifier = imageString[1].split(paldeanTerm);
                 finalIdentifier = toCamelCase(finalIdentifier[0]);
               }
             } else {
@@ -569,6 +589,8 @@ const EggDetailsScreen = props => {
       sourceImage = pokemon_galarian_variants[pokemonId];
     } else if (val?.form === 'Hisuian') {
       sourceImage = pokemon_hisuian_variants[pokemonId];
+    } else if (val?.form === 'Paldean') {
+      sourceImage = pokemon_paldean_variants[pokemonId];
     } else {
       if (isFemaleGender === 'Female') {
         //TODO: DO THIS FOR FEMALE CATEGORY

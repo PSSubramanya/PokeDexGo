@@ -126,6 +126,10 @@ const BattleCountersScreen = props => {
           loadedCounterData = res?.data;
           storeData('pokemonCounterData', loadedCounterData); //TODO: Try to add this for cache here
           setCounterPokemons(loadedCounterData);
+          console.log(
+            'pokeData1234counterPokemons1234 <||> ',
+            JSON.stringify(loadedCounterData),
+          );
         });
       })
       .catch(err => {
