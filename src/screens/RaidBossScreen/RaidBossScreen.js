@@ -246,7 +246,7 @@ const RaidBossScreen = props => {
                         alignItems: 'center',
                       },
                     ]}>
-                    <View style={{marginRight: 10}}>
+                    <View>
                       {item?.boostedWeather?.map((val, idx) => {
                         return (
                           <Image

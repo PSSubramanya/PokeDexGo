@@ -84,6 +84,7 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 5,
     borderWidth: 1,
+    width: horizontalScale(130),
   },
   rewardTextQuantitytext: {
     fontFamily: fontFamily.primaryFontFamilySemiBold,

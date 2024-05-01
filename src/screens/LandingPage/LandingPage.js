@@ -14,7 +14,7 @@ import {
 import {Modal, Portal} from 'react-native-paper';
 // import firestore from '@react-native-firebase/firestore';
 import DeviceInfo from 'react-native-device-info';
-import messaging from '@react-native-firebase/messaging';
+// import messaging from '@react-native-firebase/messaging';
 // import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {useNetStatusInfo} from '../../ultilities/customHooks/useNetStatusInfo';
 import {usePushNotification} from '../../ultilities/customHooks/usePushNotification';
@@ -82,24 +82,24 @@ const LandingPage = ({navigation}) => {
 
   NotificationService(navigation);
 
-  useEffect(() => {
-    const unsubscribe = messaging().onMessage(async remoteMessage => {
-      setModalType('in-app-notification');
-      setInAppNotificationTitle(remoteMessage?.notification?.title);
-      setModalDisplayText(remoteMessage?.notification?.body);
-      showModal();
+  // useEffect(() => {
+  //   const unsubscribe = messaging().onMessage(async remoteMessage => {
+  //     setModalType('in-app-notification');
+  //     setInAppNotificationTitle(remoteMessage?.notification?.title);
+  //     setModalDisplayText(remoteMessage?.notification?.body);
+  //     showModal();
 
-      onDisplayNotification(
-        'EVENT ALERT',
-        remoteMessage?.notification?.title,
-        remoteMessage?.notification?.body,
-        'https://leekduck.com/assets/img/events/go-battle-league-season-17-timeless-travels.jpg',
-        '0',
-      );
-    });
+  //     onDisplayNotification(
+  //       'EVENT ALERT',
+  //       remoteMessage?.notification?.title,
+  //       remoteMessage?.notification?.body,
+  //       'https://leekduck.com/assets/img/events/go-battle-league-season-17-timeless-travels.jpg',
+  //       '0',
+  //     );
+  //   });
 
-    return unsubscribe;
-  }, []);
+  //   return unsubscribe;
+  // }, []);
 
   useEffect(() => {
     let versionData;
