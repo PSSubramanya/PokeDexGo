@@ -13,7 +13,7 @@ export default styles = StyleSheet.create({
     fontFamily: fontFamily.primaryFontFamilyBold,
     color: colors.bluishGrey,
     marginLeft: horizontalScale(15),
-    marginTop: verticalScale(25),
+    marginTop: verticalScale(10),
     fontSize: moderateScale(12),
   },
   TextInputView: {
@@ -21,7 +21,7 @@ export default styles = StyleSheet.create({
   },
   textInputView: {
     fontFamily: fontFamily.primaryFontFamilyRegular,
-    paddingLeft: horizontalScale(16),
+    paddingLeft: horizontalScale(14),
     textAlign: 'left',
     marginTop: Platform.OS === 'ios' ? verticalScale(10) : verticalScale(0),
     paddingBottom: verticalScale(5),
@@ -37,7 +37,7 @@ export default styles = StyleSheet.create({
   compulsorySign: {
     fontFamily: fontFamily.primaryFontFamilyBold,
     color: colors.red,
-    marginTop: verticalScale(20),
+    marginTop: verticalScale(5),
     fontSize: moderateScale(15),
   },
 });

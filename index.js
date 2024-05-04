@@ -23,7 +23,7 @@ import styles from './src/screens/LandingPage/styles';
 import PushNotification from 'react-native-push-notification';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import notifee, {EventType} from '@notifee/react-native';
-// import messaging from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging';
 
 // Request permissions (required for iOS)
 notifee
@@ -114,16 +114,16 @@ notifee.onBackgroundEvent(async ({type, detail}) => {
 });
 
 // Register background handler
-// messaging().setBackgroundMessageHandler(async remoteMessage => {
-//   console.log('Message handled in the background!', remoteMessage);
-// });
+messaging().setBackgroundMessageHandler(async remoteMessage => {
+  console.log('Message handled in the background!', remoteMessage);
+});
 
 const RNRedux = () => {
   const {networkState} = useNetStatusInfo();
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    // requestInitialPermission();
+    requestInitialPermission();
   }, []);
 
   useEffect(() => {
@@ -142,17 +142,17 @@ const RNRedux = () => {
     setModalVisible(false);
   };
 
-  // const requestInitialPermission = async () => {
-  //   const authStatus = await messaging().requestPermission();
+  const requestInitialPermission = async () => {
+    const authStatus = await messaging().requestPermission();
 
-  //   const enabled =
-  //     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-  //     authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+    const enabled =
+      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
-  //   if (enabled) {
-  //     console.log('Authorization status:', authStatus);
-  //   }
-  // };
+    if (enabled) {
+      console.log('Authorization status:', authStatus);
+    }
+  };
 
   const modalContainer = () => {
     return (

@@ -11,11 +11,12 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2051B2E4166EA4A0CDAF35B1 /* libPods-PokedexApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9854E06067B9F2507CB03FDB /* libPods-PokedexApp.a */; };
+		1A62BA012BE2E253000C6F8C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A62BA002BE2E253000C6F8C /* GoogleService-Info.plist */; };
+		28EE72D0C9E15B66E8E91242 /* Pods_PokedexApp_PokedexAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F22442E6FD143F756136A2F /* Pods_PokedexApp_PokedexAppTests.framework */; };
 		3CE61EA59F804D348EFDA0C9 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 26F2B7F50FEE47EABC19D927 /* Montserrat-SemiBold.ttf */; };
 		4BB74C1C2A29493F9082CB19 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 82E354ED4A35455797AFCFB7 /* Montserrat-Medium.ttf */; };
-		80C460B3963A7FD043948C1F /* libPods-PokedexApp-PokedexAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2C91AACC479EB935560630 /* libPods-PokedexApp-PokedexAppTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		91BA7757B11AE831DB651E78 /* Pods_PokedexApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC71E87F7C5948DA49355F41 /* Pods_PokedexApp.framework */; };
 		D48FA8ADCAE349A39A76D557 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C2F61C5346E14EE882D188A3 /* Montserrat-Regular.ttf */; };
 		D593BBC829145490006A2DE3 /* pikachu_notification_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D593BBC629145490006A2DE3 /* pikachu_notification_sound.mp3 */; };
 		D593BBC929145490006A2DE3 /* pikachu_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D593BBC729145490006A2DE3 /* pikachu_sound.mp3 */; };
@@ -42,20 +43,21 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = PokedexApp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = PokedexApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = PokedexApp/main.m; sourceTree = "<group>"; };
+		1A62BA002BE2E253000C6F8C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		26F2B7F50FEE47EABC19D927 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBold.ttf"; path = "../src/assets/fonts/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
-		3C2C91AACC479EB935560630 /* libPods-PokedexApp-PokedexAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PokedexApp-PokedexAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F34C5A17783E4018EAFA2BB /* Pods-PokedexApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokedexApp.release.xcconfig"; path = "Target Support Files/Pods-PokedexApp/Pods-PokedexApp.release.xcconfig"; sourceTree = "<group>"; };
+		5F22442E6FD143F756136A2F /* Pods_PokedexApp_PokedexAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokedexApp_PokedexAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		712A770C91954C08C6FFEFEC /* Pods-PokedexApp-PokedexAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokedexApp-PokedexAppTests.debug.xcconfig"; path = "Target Support Files/Pods-PokedexApp-PokedexAppTests/Pods-PokedexApp-PokedexAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = PokedexApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		82E354ED4A35455797AFCFB7 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../src/assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		8D1577513E3C810EAAB1D254 /* Pods-PokedexApp-PokedexAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokedexApp-PokedexAppTests.release.xcconfig"; path = "Target Support Files/Pods-PokedexApp-PokedexAppTests/Pods-PokedexApp-PokedexAppTests.release.xcconfig"; sourceTree = "<group>"; };
-		9854E06067B9F2507CB03FDB /* libPods-PokedexApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PokedexApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFCAF3E1982640B99D2B5AF8 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../src/assets/fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		C2F61C5346E14EE882D188A3 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Regular.ttf"; path = "../src/assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		D09E2163A624733E5A043AF3 /* Pods-PokedexApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokedexApp.debug.xcconfig"; path = "Target Support Files/Pods-PokedexApp/Pods-PokedexApp.debug.xcconfig"; sourceTree = "<group>"; };
 		D593BBC629145490006A2DE3 /* pikachu_notification_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = pikachu_notification_sound.mp3; path = ../android/app/src/main/res/raw/pikachu_notification_sound.mp3; sourceTree = "<group>"; };
 		D593BBC729145490006A2DE3 /* pikachu_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = pikachu_sound.mp3; path = ../android/app/src/main/res/raw/pikachu_sound.mp3; sourceTree = "<group>"; };
 		D5BB5EA92B00F285002F1CB7 /* PokedexApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = PokedexApp.entitlements; path = PokedexApp/PokedexApp.entitlements; sourceTree = "<group>"; };
+		EC71E87F7C5948DA49355F41 /* Pods_PokedexApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokedexApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -64,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80C460B3963A7FD043948C1F /* libPods-PokedexApp-PokedexAppTests.a in Frameworks */,
+				28EE72D0C9E15B66E8E91242 /* Pods_PokedexApp_PokedexAppTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2051B2E4166EA4A0CDAF35B1 /* libPods-PokedexApp.a in Frameworks */,
+				91BA7757B11AE831DB651E78 /* Pods_PokedexApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,8 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				9854E06067B9F2507CB03FDB /* libPods-PokedexApp.a */,
-				3C2C91AACC479EB935560630 /* libPods-PokedexApp-PokedexAppTests.a */,
+				EC71E87F7C5948DA49355F41 /* Pods_PokedexApp.framework */,
+				5F22442E6FD143F756136A2F /* Pods_PokedexApp_PokedexAppTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -130,6 +132,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				1A62BA002BE2E253000C6F8C /* GoogleService-Info.plist */,
 				D593BBC629145490006A2DE3 /* pikachu_notification_sound.mp3 */,
 				D593BBC729145490006A2DE3 /* pikachu_sound.mp3 */,
 				13B07FAE1A68108700A75B9A /* PokedexApp */,
@@ -219,6 +222,8 @@
 			dependencies = (
 			);
 			name = PokedexApp;
+			packageProductDependencies = (
+			);
 			productName = PokedexApp;
 			productReference = 13B07F961A680F5B00A75B9A /* PokedexApp.app */;
 			productType = "com.apple.product-type.application";
@@ -249,6 +254,8 @@
 				Base,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
+			packageReferences = (
+			);
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -273,6 +280,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				D593BBC829145490006A2DE3 /* pikachu_notification_sound.mp3 in Resources */,
+				1A62BA012BE2E253000C6F8C /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				E3FD109961FA478E94803EAC /* Montserrat-Bold.ttf in Resources */,
 				D593BBC929145490006A2DE3 /* pikachu_sound.mp3 in Resources */,

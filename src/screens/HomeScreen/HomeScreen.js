@@ -8,6 +8,8 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Pressable,
+  KeyboardAvoidingView,
+  FlatList,
 } from 'react-native';
 
 import {Modal, Portal, Provider} from 'react-native-paper';
@@ -30,6 +32,7 @@ import {
   verticalScale,
   moderateScale,
 } from '../../ultilities/scale';
+import {pokeEventType} from '../../constants/constantListDatas.js';
 import colors from '../../constants/colors';
 import {NotificationService} from '../../ultilities/services/notifications/notificationService';
 
@@ -68,8 +71,12 @@ const HomeScreen = props => {
   const [minute, setMinute] = useState(25);
   const [meridianStatus, setMeridianStatus] = useState('AM');
   const [selectedTimePart, setSelectedTimePart] = useState('hour');
+  const [selectedDropdownOption, setSelectedDropdownOption] = useState(
+    pokeEventType?.[0]?.typeName,
+  );
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [dropDownVisible, setDropdownVisible] = useState(false);
 
   NotificationService(navigation);
 
@@ -105,15 +112,30 @@ const HomeScreen = props => {
             />
             <View style={styles.timeStampStyle}>
               <View style={styles.flexRow}>
-                <Text style={[styles.mediumFont, styles.mediumFontSize]}>
+                <Text
+                  style={[
+                    styles.mediumFont,
+                    styles.mediumFontSize,
+                    primaryTextColorStyle,
+                  ]}>
                   {moment(selectedStartDate.toString()).format('MMM')}
                 </Text>
-                <Text style={[styles.mediumFont, styles.mediumFontSize]}>
+                <Text
+                  style={[
+                    styles.mediumFont,
+                    styles.mediumFontSize,
+                    primaryTextColorStyle,
+                  ]}>
                   {' '}
                   {moment(selectedStartDate.toString()).format('DD')}
                 </Text>
               </View>
-              <Text style={[styles.boldFont, styles.largeFontSize]}>
+              <Text
+                style={[
+                  styles.boldFont,
+                  styles.largeFontSize,
+                  primaryTextColorStyle,
+                ]}>
                 {moment(selectedStartDate.toString()).format('YYYY')}
               </Text>
             </View>
@@ -155,25 +177,65 @@ const HomeScreen = props => {
             textInputData={eventName}
             editable={true}
             compulsoryField={true}
+            containerStyle={styles?.eventNameFieldStyle}
           />
           <View
             style={[commonStyling.flexRow, commonStyling.spaceBetweenStyling]}>
-            <View style={styles.smallerTextfieldWidth}>
-              <View style={commonStyling.flexRow}>
-                <Text style={styles.textFieldsHeader}>
-                  {strings.event_date}
-                </Text>
-                <Text style={styles.compulsorySignStyle}>
-                  {strings.compulsorySign}
-                </Text>
+            {!dropDownVisible ? (
+              <TouchableOpacity
+                style={[
+                  styles.smallerTextfieldWidth,
+                  styles?.eventTypeFieldStyle,
+                ]}
+                onPress={() => {
+                  setDropdownVisible(true);
+                }}>
+                <View style={commonStyling.flexRow}>
+                  <Text style={styles.textFieldsHeader}>
+                    {strings.event_type}
+                  </Text>
+                  <Text style={styles.compulsorySignStyle}>
+                    {strings.compulsorySign}
+                  </Text>
+                </View>
+                <View style={styles.textFieldContainer}>
+                  <Text style={styles.textFieldStyle}>
+                    {selectedDropdownOption}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            ) : (
+              <View
+                style={[
+                  styles.smallerTextfieldWidth,
+                  styles?.dropDownContainerStyle,
+                ]}>
+                <FlatList
+                  data={pokeEventType}
+                  keyExtractor={item => item}
+                  renderItem={({item, ind}) => {
+                    return (
+                      <Pressable
+                        onPress={() => {
+                          setDropdownVisible(false);
+                          setSelectedDropdownOption(item?.typeName);
+                        }}>
+                        <View style={styles?.pokeEventTypesView}>
+                          <Text style={styles?.dropDownOptiontext}>
+                            {item?.typeName}
+                          </Text>
+                        </View>
+                      </Pressable>
+                    );
+                  }}
+                />
               </View>
-              <View style={styles.textFieldContainer}>
-                <Text style={styles.textFieldStyle}>
-                  {moment(selectedStartDate).format('DD/MM/YYYY').toString()}
-                </Text>
-              </View>
-            </View>
-            <View style={styles.smallerTextfieldWidth}>
+            )}
+            <View
+              style={[
+                styles.smallerTextfieldWidth,
+                styles?.eventTimeViewStyle,
+              ]}>
               <View style={commonStyling.flexRow}>
                 <Text style={styles.textFieldsHeader}>
                   {strings.event_time}
@@ -372,7 +434,7 @@ const HomeScreen = props => {
 
   const addEventScreenView = () => {
     return (
-      <View>
+      <KeyboardAvoidingView behavior="position">
         <CalendarView
           setSelectedStartDate={setSelectedStartDate}
           selectedStartDate={selectedStartDate}
@@ -381,7 +443,7 @@ const HomeScreen = props => {
           innerView={cardContainerView()}
           style={styles.cardInnerStyling}
         />
-      </View>
+      </KeyboardAvoidingView>
     );
   };
 
@@ -586,20 +648,22 @@ const HomeScreen = props => {
             {!viewCalendar ? homeScreenBody() : addEventScreenView()}
           </View>
 
-          <TouchableOpacity
-            style={styles.viewEventIcon}
-            onPress={() => {
-              navigation.navigate('EventViewScreen', {
-                selectedDate: selectedStartDate,
-              });
-            }}>
-            <Image
-              source={imagePaths.calendarIcon}
-              height={1}
-              width={1}
-              style={[styles.calendarIcon]}
-            />
-          </TouchableOpacity>
+          {!viewCalendar ? (
+            <TouchableOpacity
+              style={styles.viewEventIcon}
+              onPress={() => {
+                navigation.navigate('EventViewScreen', {
+                  selectedDate: selectedStartDate,
+                });
+              }}>
+              <Image
+                source={imagePaths.calendarIcon}
+                height={1}
+                width={1}
+                style={[styles.calendarIcon]}
+              />
+            </TouchableOpacity>
+          ) : null}
         </SafeAreaView>
       ) : null}
     </Provider>
