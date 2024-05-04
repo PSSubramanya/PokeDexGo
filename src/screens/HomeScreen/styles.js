@@ -303,6 +303,9 @@ export default styles = StyleSheet.create({
     marginHorizontal: horizontalScale(10),
     height: verticalScale(68),
     marginTop: verticalScale(18),
+    borderBottomWidth: 3,
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
   },
   eventTypeFieldStyle: {
     backgroundColor: 'white',

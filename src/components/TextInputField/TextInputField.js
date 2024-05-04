@@ -31,10 +31,7 @@ const TextInputField = ({
         style={[
           containerStyle,
           {
-            borderBottomWidth: 3,
             borderColor: selectedField ? colors.purple : colors.grey,
-            borderBottomLeftRadius: 5,
-            borderBottomRightRadius: 5,
           },
         ]}>
         <View style={[styles.flexRow]}>
