@@ -21,6 +21,13 @@ const PikaGptScreen = props => {
   const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
   const darkModeValue = darkMode?.data;
 
+  /*
+    //NOTE: To get the size of the local images
+
+    const source = require('pathToYourImage');
+    const { width, height } = Image.resolveAssetSource(source);
+  */
+
   //TODO: Add Image as chats,
   //TODO: Add profile images on text ends,
   //TODO: Add 1 date for all chats of today
@@ -28,6 +35,7 @@ const PikaGptScreen = props => {
   //TODO: The text area should expand for 4-5 lines and then scroll
 
   const [message, setMessage] = useState('');
+  const [size, setSize] = useState({width: 0, height: 0});
 
   const headerView = () => {
     return (
@@ -67,18 +75,33 @@ const PikaGptScreen = props => {
                 justifyContent: item?.from === 'Me' ? 'flex-end' : 'flex-start',
               }}>
               <View>
-                <View
-                  style={{
-                    marginHorizontal: 10,
-                    paddingTop: 10,
-                    marginTop: 10,
-                    paddingBottom: 30,
-                    width: 200,
-                    backgroundColor:
-                      item?.from === 'Me'
-                        ? colors?.tertiaryBackgroundColorDarkMode
-                        : colors?.darkGrey,
-                    borderRadius: 10,
+                {item?.image === '' ? (
+                  <View
+                    style={{
+                      marginHorizontal: 10,
+                      paddingTop: 10,
+                      marginTop: 10,
+                      paddingBottom: 30,
+                      width: 200,
+                      backgroundColor:
+                        item?.from === 'Me'
+                          ? colors?.tertiaryBackgroundColorDarkMode
+                          : colors?.darkGrey,
+                      borderRadius: 10,
+                    }}>
+                    <Text
+                      style={[
+                        styles?.chatTextStyle,
+                        {marginTop: item?.image ? 10 : null},
+                      ]}>
+                      {item?.text}
+                    </Text>
+                  </View>
+                ) : null}
+
+                <TouchableOpacity
+                  onPress={() => {
+                    //TODO: Here add a modal of Image view
                   }}>
                   {item?.image ? (
                     <Image
@@ -88,23 +111,46 @@ const PikaGptScreen = props => {
                       style={{
                         width: 200,
                         height: 300,
+                        marginTop: 20,
+                        marginHorizontal: 10,
+                        borderWidth: 10,
+                        borderColor: colors?.darkGrey,
+                        borderRadius: 10,
                       }}
-                      resizeMode={'contain'}
+                      // resizeMode={'contain'}
                     />
                   ) : null}
-                  <Text
-                    style={[
-                      styles?.chatTextStyle,
-                      {marginTop: item?.image ? 10 : null},
-                    ]}>
-                    {item?.text}
-                  </Text>
-                </View>
+
+                  {item?.image !== '' && item?.text !== '' ? (
+                    <View
+                      style={{
+                        marginHorizontal: 10,
+                        paddingTop: 10,
+                        marginTop: -10,
+                        paddingBottom: 30,
+                        width: 200,
+                        backgroundColor:
+                          item?.from === 'Me'
+                            ? colors?.tertiaryBackgroundColorDarkMode
+                            : colors?.darkGrey,
+                        // borderRadius: 10,
+                      }}>
+                      <Text
+                        style={[
+                          styles?.chatTextStyle,
+                          {marginTop: item?.image ? 10 : null},
+                        ]}>
+                        {item?.text}
+                      </Text>
+                    </View>
+                  ) : null}
+                </TouchableOpacity>
+
                 <Text
                   style={[
                     styles?.chatTextStyle,
                     {
-                      marginHorizontal: 12,
+                      marginHorizontal: 5,
                       alignSelf:
                         item?.from === 'Me' ? 'flex-end' : 'flex-start',
                     },
