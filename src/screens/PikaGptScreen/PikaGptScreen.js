@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   Image,
   Platform,
+  TouchableOpacity,
 } from 'react-native';
 import TextInputField from '../../components/TextInputField/TextInputField.js';
 import colors from '../../constants/colors.js';
@@ -24,6 +25,7 @@ const PikaGptScreen = props => {
   //TODO: Add profile images on text ends,
   //TODO: Add 1 date for all chats of today
   //TODO: Different chat options like speaker, media, images etc. Refere different chat apps and dribbble designs
+  //TODO: The text area should expand for 4-5 lines and then scroll
 
   const [message, setMessage] = useState('');
 
@@ -68,7 +70,6 @@ const PikaGptScreen = props => {
                 <View
                   style={{
                     marginHorizontal: 10,
-                    paddingHorizontal: 10,
                     paddingTop: 10,
                     marginTop: 10,
                     paddingBottom: 30,
@@ -79,7 +80,25 @@ const PikaGptScreen = props => {
                         : colors?.darkGrey,
                     borderRadius: 10,
                   }}>
-                  <Text style={styles?.chatTextStyle}>{item?.text}</Text>
+                  {item?.image ? (
+                    <Image
+                      source={{uri: item?.image}}
+                      height={1}
+                      width={1}
+                      style={{
+                        width: 200,
+                        height: 300,
+                      }}
+                      resizeMode={'contain'}
+                    />
+                  ) : null}
+                  <Text
+                    style={[
+                      styles?.chatTextStyle,
+                      {marginTop: item?.image ? 10 : null},
+                    ]}>
+                    {item?.text}
+                  </Text>
                 </View>
                 <Text
                   style={[
@@ -122,8 +141,8 @@ const PikaGptScreen = props => {
           editable={true}
           compulsoryField={false}
           containerStyle={{
-            height: 60,
-            marginBottom: Platform?.OS === 'ios' ? 50 : 0,
+            height: 50,
+            marginBottom: Platform?.OS === 'ios' ? 50 : 10,
             marginHorizontal: 10,
             backgroundColor: 'white',
             borderRadius: 10,

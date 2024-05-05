@@ -5,7 +5,9 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
+import {verticalScale} from '../../ultilities/scale';
 import styles from './styles';
 import colors from '../../constants/colors';
 import strings from '../../constants/strings';
@@ -43,9 +45,7 @@ const TextInputField = ({
               </Text>
             ) : null}
           </View>
-        ) : (
-          <View style={{marginTop: 10}} />
-        )}
+        ) : null}
         {onPress ? (
           <TouchableOpacity
             onPress={onPress}
@@ -72,7 +72,20 @@ const TextInputField = ({
           </TouchableOpacity>
         ) : (
           <TextInput
-            style={styles.textInputView}
+            style={[
+              styles.textInputView,
+              // {backgroundColor: 'red'},
+              {
+                marginTop:
+                  Platform.OS === 'ios'
+                    ? headerTitle
+                      ? verticalScale(10)
+                      : verticalScale(15)
+                    : headerTitle
+                    ? verticalScale(-5)
+                    : verticalScale(3),
+              },
+            ]}
             editable={editable}
             placeholder={placeholderText}
             placeholderTextColor={colors.grey}

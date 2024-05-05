@@ -41,4 +41,19 @@ export const chatData = [
     from: 'Pika',
     timeStamp: '2024-05-06 01:30:00',
   },
+  {
+    id: 6,
+    text: '',
+    image: 'https://images2.alphacoders.com/718/718222.png',
+    from: 'Pika',
+    timeStamp: '2024-05-06 01:30:00',
+  },
+  {
+    id: 7,
+    text: 'Check out this Image',
+    image:
+      'https://i.pinimg.com/564x/b4/de/93/b4de93081ebdee6213afea854af9648d.jpg',
+    from: 'Pika',
+    timeStamp: '2024-05-06 01:30:00',
+  },
 ];

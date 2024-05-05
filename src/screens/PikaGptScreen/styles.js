@@ -14,6 +14,7 @@ export default styles = StyleSheet.create({
     fontFamily: fontFamily.primaryFontFamilyRegular,
     fontSize: moderateScale(12),
     lineHeight: verticalScale(20),
+    paddingHorizontal: horizontalScale(10),
   },
   headerStyle: {
     color: colors?.white,

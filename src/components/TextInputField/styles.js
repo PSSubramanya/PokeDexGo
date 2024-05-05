@@ -24,7 +24,6 @@ export default styles = StyleSheet.create({
     paddingLeft: horizontalScale(14),
     textAlign: 'left',
     paddingBottom: verticalScale(5),
-    marginTop: Platform.OS === 'ios' ? verticalScale(10) : verticalScale(0),
   },
   Divider: {
     borderBottomWidth: 1.5,
