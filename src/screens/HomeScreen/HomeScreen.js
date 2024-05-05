@@ -10,6 +10,8 @@ import {
   Pressable,
   KeyboardAvoidingView,
   FlatList,
+  Platform,
+  ScrollView,
 } from 'react-native';
 
 import {Modal, Portal, Provider} from 'react-native-paper';
@@ -99,6 +101,22 @@ const HomeScreen = props => {
 
   const hideModal = () => setModalVisible(false);
 
+  const textInputField = () => {
+    return (
+      <TextInputField
+        headerTitle={strings.event_name}
+        placeholderText={strings.sample_event_name}
+        onChangeText={val => {
+          setEventName(val);
+        }}
+        textInputData={eventName}
+        editable={true}
+        compulsoryField={true}
+        containerStyle={styles?.eventNameFieldStyle}
+      />
+    );
+  };
+
   const cardContainerView = () => {
     return (
       <>
@@ -168,17 +186,13 @@ const HomeScreen = props => {
         </View>
 
         <View style={styles.inputSection}>
-          <TextInputField
-            headerTitle={strings.event_name}
-            placeholderText={strings.sample_event_name}
-            onChangeText={val => {
-              setEventName(val);
-            }}
-            textInputData={eventName}
-            editable={true}
-            compulsoryField={true}
-            containerStyle={styles?.eventNameFieldStyle}
-          />
+          {Platform.OS !== 'ios' ? (
+            <KeyboardAvoidingView behavior={'height'}>
+              {textInputField()}
+            </KeyboardAvoidingView>
+          ) : (
+            textInputField()
+          )}
           <View
             style={[commonStyling.flexRow, commonStyling.spaceBetweenStyling]}>
             {!dropDownVisible ? (
@@ -257,7 +271,9 @@ const HomeScreen = props => {
           <Button
             buttonStyle={[styles.buttonStyle, styles.viewButton]}
             buttonTextStyle={[styles.viewButtonText]}
-            onPress={() => {}}
+            onPress={() => {
+              setViewCalendar(false);
+            }}
             buttonText={strings.save}
           />
           <Button
@@ -432,7 +448,22 @@ const HomeScreen = props => {
     );
   };
 
-  const addEventScreenView = () => {
+  const customTaskViewForAndroid = () => {
+    return (
+      <ScrollView>
+        <CalendarView
+          setSelectedStartDate={setSelectedStartDate}
+          selectedStartDate={selectedStartDate}
+        />
+        <CardView
+          innerView={cardContainerView()}
+          style={styles.cardInnerStyling}
+        />
+      </ScrollView>
+    );
+  };
+
+  const customTaskViewForIos = () => {
     return (
       <KeyboardAvoidingView behavior="position">
         <CalendarView
@@ -445,6 +476,12 @@ const HomeScreen = props => {
         />
       </KeyboardAvoidingView>
     );
+  };
+
+  const addEventScreenView = () => {
+    return Platform?.OS === 'ios'
+      ? customTaskViewForIos()
+      : customTaskViewForAndroid();
   };
 
   const homeScreenBody = () => {
@@ -627,6 +664,24 @@ const HomeScreen = props => {
             style={[styles.calendarIcon]}
           />
         </TouchableOpacity> */}
+        <TouchableOpacity
+          onPress={() => {
+            setViewCalendar(true);
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignSelf: 'center',
+              alignItems: 'center',
+              height: 60,
+              width: 200,
+              borderRadius: 5,
+              backgroundColor: darkModeValue ? colors?.secondaryColor : null,
+            }}>
+            <Text style={styles?.customTasksText}>CUSTOM TASKS</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   };

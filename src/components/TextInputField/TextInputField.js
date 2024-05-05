@@ -34,10 +34,18 @@ const TextInputField = ({
             borderColor: selectedField ? colors.purple : colors.grey,
           },
         ]}>
-        <View style={[styles.flexRow]}>
-          <Text style={styles.HeaderTitle}>{headerTitle}</Text>
-          <Text style={styles.compulsorySign}>{strings.compulsorySign}</Text>
-        </View>
+        {headerTitle ? (
+          <View style={[styles.flexRow]}>
+            <Text style={styles.HeaderTitle}>{headerTitle}</Text>
+            {compulsoryField ? (
+              <Text style={styles.compulsorySign}>
+                {strings.compulsorySign}
+              </Text>
+            ) : null}
+          </View>
+        ) : (
+          <View style={{marginTop: 10}} />
+        )}
         {onPress ? (
           <TouchableOpacity
             onPress={onPress}

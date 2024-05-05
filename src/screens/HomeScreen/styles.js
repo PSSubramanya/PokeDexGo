@@ -335,4 +335,9 @@ export default styles = StyleSheet.create({
     height: verticalScale(75),
     marginTop: verticalScale(15),
   },
+
+  customTasksText: {
+    fontFamily: fontFamily?.primaryFontFamilyMedium,
+    color: colors?.white,
+  },
 });

@@ -66,6 +66,7 @@ const LandingPage = ({navigation}) => {
     // },
   ];
 
+  //TODO; pdf, pikagpt, trainer info, counter advance, pokedex, custom event add, notifications
   const [loadData, setLoadData] = useState([]);
   const [loadEggData, setLoadEggData] = useState([]);
   const [loadRaidBossData, setRaidBossData] = useState([]);
@@ -464,6 +465,28 @@ const LandingPage = ({navigation}) => {
     );
   };
 
+  const themeButton = () => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          const currentTheme = darkModeStatus;
+          setDarkModeStatus(!currentTheme);
+          dispatch(darkModeActivation(!currentTheme));
+          storeData('themeStatus', !currentTheme);
+        }}>
+        <Image
+          source={
+            darkModeStatus ? imagePaths.darkModeIcon : imagePaths.brightModeIcon
+          }
+          height={1}
+          width={1}
+          style={styles?.infoIcon}
+          resizeMode={'contain'}
+        />
+      </TouchableOpacity>
+    );
+  };
+
   const infoButton = () => {
     return (
       <TouchableOpacity
@@ -605,15 +628,17 @@ const LandingPage = ({navigation}) => {
     );
   };
 
-  const darkModeButton = () => {
+  const pikaGPTButton = () => {
     return (
       <TouchableOpacity
         onPress={() => {
-          const currentTheme = darkModeStatus;
-          setDarkModeStatus(!currentTheme);
-          dispatch(darkModeActivation(!currentTheme));
-          storeData('themeStatus', !currentTheme);
-
+          /*
+            const currentTheme = darkModeStatus;
+            setDarkModeStatus(!currentTheme);
+            dispatch(darkModeActivation(!currentTheme));
+            storeData('themeStatus', !currentTheme);
+          */
+          navigation?.navigate('PikaGptScreen');
           // firestore()
           //   .collection('Users')
           //   .doc('themeData')
@@ -630,7 +655,6 @@ const LandingPage = ({navigation}) => {
           //   .catch(err => {
           //     console.log('ERROR FIRESTORE DATA', err);
           //   });
-
           // firestore()
           //   .collection('Users')
           //   .add({
@@ -648,12 +672,21 @@ const LandingPage = ({navigation}) => {
           //   });
         }}>
         <View style={styles.darkModeButton}>
-          <Image
+          {/* <Image
             source={
               darkModeStatus
                 ? imagePaths.darkModeIcon
                 : imagePaths.brightModeIcon
             }
+            height={1}
+            width={1}
+            style={styles.darkModeIcon}
+            resizeMode={'contain'}
+          /> */}
+
+          <Image
+            // source={imagePaths?.pikaGPTIcon}
+            source={imagePaths?.pikaFace}
             height={1}
             width={1}
             style={styles.darkModeIcon}
@@ -722,6 +755,7 @@ const LandingPage = ({navigation}) => {
           styles.mainContainer,
         ]}>
         <View style={styles?.iconContainer}>
+          {/* {themeButton()} */}
           {notificationButton()}
           {infoButton()}
         </View>
@@ -729,7 +763,7 @@ const LandingPage = ({navigation}) => {
         {loadData?.length !== 0 ? navigationButtons() : null}
         {redoIcon()}
         {modalPopUp(modalDisplayText, modalTypeValue)}
-        {/* {darkModeButton()} */}
+        {pikaGPTButton()}
         {/* <CircleRightArrow /> */}
       </View>
     );
