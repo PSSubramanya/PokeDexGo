@@ -8,7 +8,9 @@ import {
   Image,
   Platform,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
+import {Modal, Portal} from 'react-native-paper';
 import TextInputField from '../../components/TextInputField/TextInputField.js';
 import colors from '../../constants/colors.js';
 import strings from '../../constants/strings.js';
@@ -35,7 +37,10 @@ const PikaGptScreen = props => {
   //TODO: The text area should expand for 4-5 lines and then scroll
 
   const [message, setMessage] = useState('');
-  const [size, setSize] = useState({width: 0, height: 0});
+  const [displayModal, setDisplayModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState('');
+  const [imageLoaded, setImageLoaded] = useState(true);
+  // const [size, setSize] = useState({width: 0, height: 0});
 
   const headerView = () => {
     return (
@@ -102,6 +107,7 @@ const PikaGptScreen = props => {
                 <TouchableOpacity
                   onPress={() => {
                     //TODO: Here add a modal of Image view
+                    showModal(item?.image);
                   }}>
                   {item?.image ? (
                     <Image
@@ -197,6 +203,125 @@ const PikaGptScreen = props => {
       </KeyboardAvoidingView>
     );
   };
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
+  const showModal = image => {
+    setDisplayModal(true);
+    setSelectedImage(image);
+  };
+
+  const hideModal = () => {
+    setDisplayModal(false);
+  };
+
+  const modalContainer = () => {
+    return (
+      <View
+        style={{
+          backgroundColor: colors?.secondaryBackgroundColorDarkMode,
+          height: '100%',
+          marginHorizontal: 10,
+        }}>
+        <View>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <TouchableOpacity
+              onPress={() => {
+                setDisplayModal(false);
+              }}>
+              <Image
+                source={imagePaths?.leftChevronIcon}
+                height={1}
+                width={1}
+                style={[styles.chevronIcon]}
+              />
+            </TouchableOpacity>
+            <View
+              style={{
+                flexDirection: 'row',
+                width: 140,
+                justifyContent: 'space-evenly',
+              }}>
+              <TouchableOpacity onPress={() => {}}>
+                <Image
+                  source={imagePaths?.deleteIcon}
+                  height={1}
+                  width={1}
+                  style={[styles.imageViewIcons]}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => {}}>
+                <Image
+                  source={imagePaths?.shareIcon}
+                  height={1}
+                  width={1}
+                  style={[styles.imageViewIcons]}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => {}}>
+                <Image
+                  source={imagePaths?.greenArrowIcon1}
+                  height={1}
+                  width={1}
+                  style={[styles.chevronIcon, {transform: [{rotate: '90deg'}]}]}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+
+        {imageLoaded ? (
+          <Image
+            source={{uri: selectedImage}}
+            onLoad={handleImageLoad}
+            height={1}
+            width={1}
+            style={{
+              height: 300,
+              width: 350,
+              alignSelf: 'center',
+              flex: 1,
+            }}
+            resizeMode={'contain'}
+          />
+        ) : (
+          <ActivityIndicator
+            size={'large'}
+            style={{
+              flex: 1,
+            }}
+            // color={colors?.secondaryColor}
+            color={colors?.highlightGreen2}
+          />
+        )}
+      </View>
+    );
+  };
+
+  const modalPopUp = () => {
+    return (
+      <Portal>
+        <Modal
+          style={styles.modalMarginStyle}
+          visible={displayModal}
+          onDismiss={hideModal}
+          // contentContainerStyle={[
+          //   styles.modalExternalStyle,
+          //   {
+          //     backgroundColor: darkModeValue
+          //       ? colors.quaternaryBackgroundColorDarkMode
+          //       : colors.white,
+          //   },
+          // ]}
+        >
+          {modalContainer()}
+        </Modal>
+      </Portal>
+    );
+  };
+
   return (
     <View
       style={{
@@ -208,6 +333,7 @@ const PikaGptScreen = props => {
       }}>
       {chatBody()}
       {textingArea()}
+      {modalPopUp()}
     </View>
   );
 };

@@ -30,4 +30,15 @@ export default styles = StyleSheet.create({
   chatBody: {
     flex: 1,
   },
+  chevronIcon: {
+    height: verticalScale(25),
+    width: horizontalScale(25),
+    marginTop: verticalScale(10),
+    marginLeft: horizontalScale(0),
+  },
+  imageViewIcons: {
+    height: verticalScale(20),
+    width: horizontalScale(20),
+    marginTop: verticalScale(12),
+  },
 });

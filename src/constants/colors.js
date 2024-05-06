@@ -7,6 +7,7 @@ export default {
   bluishGrey: '#2d4150',
   pink: '#F93EA7',
   highlightGreen: '#15EF92',
+  highlightGreen2: '#4ebb9c',
   boostedGreen: 'rgba(64, 218, 30, 0.8)',
   orange: '#FFAE4F',
   orangeMedium: 'rgba(255, 174, 79, 0.5)',

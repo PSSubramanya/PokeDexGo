@@ -38,6 +38,8 @@ export default {
   questionMarkIcon: require('../assets/images/icons/questionmark.png'),
   serverErrorIcon: require('../assets/images/icons/serverErrorIcon.png'),
   shadowIcon: require('../assets/images/icons/shadowIcon.png'),
+  shareIcon: require('../assets/images/icons/shareIcon.png'),
+  deleteIcon: require('../assets/images/icons/deleteIcon.png'),
   pikaGPTIcon: require('../assets/images/icons/pikaGPTIcon.png'),
   pikaFace: require('../assets/images/icons/pokemonAppIcon.png'),
 
