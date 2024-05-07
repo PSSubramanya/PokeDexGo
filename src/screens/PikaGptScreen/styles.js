@@ -34,7 +34,6 @@ export default styles = StyleSheet.create({
     height: verticalScale(25),
     width: horizontalScale(25),
     marginTop: verticalScale(10),
-    marginLeft: horizontalScale(0),
   },
   imageViewIcons: {
     height: verticalScale(20),

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {useSelector} from 'react-redux';
 import {
   View,
@@ -9,7 +9,17 @@ import {
   Platform,
   TouchableOpacity,
   ActivityIndicator,
+  // Animated,
+  // PanResponder,
 } from 'react-native';
+// import {PinchGestureHandler, State} from 'react-native-gesture-handler';
+// import {GestureDetector} from 'react-native-gesture-handler';
+// import Animated, {
+//   useSharedValue,
+//   useAnimatedStyle,
+//   withSpring,
+// } from 'react-native-reanimated';
+
 import {Modal, Portal} from 'react-native-paper';
 import TextInputField from '../../components/TextInputField/TextInputField.js';
 import colors from '../../constants/colors.js';
@@ -35,12 +45,51 @@ const PikaGptScreen = props => {
   //TODO: Add 1 date for all chats of today
   //TODO: Different chat options like speaker, media, images etc. Refere different chat apps and dribbble designs
   //TODO: The text area should expand for 4-5 lines and then scroll
+  // TODO: Gesture handler for pinch zoom images
+
+  // const scale = useRef(new Animated.Value(1)).current;
+  // const lastScale = useRef(1);
+  // const baseScale = useRef(1);
 
   const [message, setMessage] = useState('');
   const [displayModal, setDisplayModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
   const [imageLoaded, setImageLoaded] = useState(true);
+  const [isZooming, setIsZooming] = useState(false);
   // const [size, setSize] = useState({width: 0, height: 0});
+
+  /*
+    const isPressed = useSharedValue(false);
+    const offset = useSharedValue({x: 0, y: 0});
+
+    const animatedStyles = useAnimatedStyle(() => {
+      return {
+        transform: [
+          {translateX: offset.value.x},
+          {translateY: offset.value.y},
+          {scale: withSpring(isPressed.value ? 1.2 : 1)},
+        ],
+        backgroundColor: isPressed.value ? 'yellow' : 'blue',
+      };
+    });
+  */
+
+  /*
+    const pinchHandler = Animated.event([{nativeEvent: {scale}}], {
+      useNativeDriver: true,
+    });
+
+    const onPinchStateChange = event => {
+      if (event.nativeEvent.oldState === State.ACTIVE) {
+        lastScale.current *= event.nativeEvent.scale;
+        baseScale.current = lastScale.current;
+        setIsZooming(false);
+      }
+      if (event.nativeEvent.state === State.ACTIVE) {
+        setIsZooming(true);
+      }
+    };
+  */
 
   const headerView = () => {
     return (
@@ -223,7 +272,6 @@ const PikaGptScreen = props => {
         style={{
           backgroundColor: colors?.secondaryBackgroundColorDarkMode,
           height: '100%',
-          marginHorizontal: 10,
         }}>
         <View>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -235,7 +283,8 @@ const PikaGptScreen = props => {
                 source={imagePaths?.leftChevronIcon}
                 height={1}
                 width={1}
-                style={[styles.chevronIcon]}
+                resizeMode={'contain'}
+                style={[styles.chevronIcon, {marginLeft: 10}]}
               />
             </TouchableOpacity>
             <View
@@ -249,6 +298,7 @@ const PikaGptScreen = props => {
                   source={imagePaths?.deleteIcon}
                   height={1}
                   width={1}
+                  resizeMode={'contain'}
                   style={[styles.imageViewIcons]}
                 />
               </TouchableOpacity>
@@ -257,6 +307,7 @@ const PikaGptScreen = props => {
                   source={imagePaths?.shareIcon}
                   height={1}
                   width={1}
+                  resizeMode={'contain'}
                   style={[styles.imageViewIcons]}
                 />
               </TouchableOpacity>
@@ -265,12 +316,50 @@ const PikaGptScreen = props => {
                   source={imagePaths?.greenArrowIcon1}
                   height={1}
                   width={1}
-                  style={[styles.chevronIcon, {transform: [{rotate: '90deg'}]}]}
+                  resizeMode={'contain'}
+                  style={[
+                    styles.chevronIcon,
+                    {
+                      transform: [{rotate: '90deg'}],
+                      marginRight: 10,
+                    },
+                  ]}
                 />
               </TouchableOpacity>
             </View>
           </View>
         </View>
+
+        {/* {imageLoaded ? (
+          <PinchGestureHandler
+            onGestureEvent={pinchHandler}
+            onHandlerStateChange={onPinchStateChange}>
+            <Animated.View style={{transform: [{scale}]}}>
+              <Image
+                source={{uri: selectedImage}}
+                onLoad={handleImageLoad}
+                height={1}
+                width={1}
+                style={{
+                  height: 300,
+                  width: 350,
+                  alignSelf: 'center',
+                  flex: 1,
+                }}
+                resizeMode={'contain'}
+              />
+            </Animated.View>
+          </PinchGestureHandler>
+        ) : (
+          <ActivityIndicator
+            size={'large'}
+            style={{
+              flex: 1,
+            }}
+            // color={colors?.secondaryColor}
+            color={colors?.highlightGreen2}
+          />
+        )} */}
 
         {imageLoaded ? (
           <Image
