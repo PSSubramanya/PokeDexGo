@@ -9,9 +9,13 @@ import {
   Platform,
   TouchableOpacity,
   ActivityIndicator,
+  PermissionsAndroid,
+  Linking,
+  Alert,
   // Animated,
   // PanResponder,
 } from 'react-native';
+import RNFetchBlob from 'rn-fetch-blob';
 // import {PinchGestureHandler, State} from 'react-native-gesture-handler';
 // import {GestureDetector} from 'react-native-gesture-handler';
 // import Animated, {
@@ -46,6 +50,7 @@ const PikaGptScreen = props => {
   //TODO: Different chat options like speaker, media, images etc. Refere different chat apps and dribbble designs
   //TODO: The text area should expand for 4-5 lines and then scroll
   // TODO: Gesture handler for pinch zoom images
+  // TODO: The image write to storage permission granting needs work
 
   // const scale = useRef(new Animated.Value(1)).current;
   // const lastScale = useRef(1);
@@ -90,6 +95,87 @@ const PikaGptScreen = props => {
       }
     };
   */
+
+  const checkPermission = async imageUrl => {
+    // Function to check the platform
+    // If iOS then start downloading
+    // If Android then ask for permission
+
+    if (Platform.OS === 'ios') {
+      downloadImage(imageUrl);
+    } else {
+      try {
+        downloadImage(imageUrl);
+        /*
+          // NOTE: This permission granting needs work
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+            {
+              title: 'Storage Permission Required',
+              message: 'App needs access to your storage to download Photos',
+            },
+          );
+          console.log('PERMISSION BLOB', granted);
+          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            // Once user grant the permission start downloading
+            console.log('Storage Permission Granted.');
+            downloadImage(imageUrl);
+          } else {
+            // If permission denied then show alert
+            alert('Storage Permission Not Granted');
+            downloadImage(imageUrl);
+          }
+        */
+      } catch (err) {
+        // To handle permission related exception
+        console.log('PERMISSION ERROR', err);
+      }
+    }
+  };
+
+  const downloadImage = imageUrl => {
+    // Main function to download the image
+
+    // To add the time suffix in filename
+    let date = new Date();
+    // Image URL which we want to download
+    // let image_URL = REMOTE_IMAGE_PATH;
+    let image_URL = imageUrl;
+    // Getting the extention of the file
+    let ext = getExtention(image_URL);
+    ext = '.' + ext[0];
+    // Get config and fs from RNFetchBlob
+    // config: To pass the downloading related options
+    // fs: Directory path where we want our image to download
+    const {config, fs} = RNFetchBlob;
+    let PictureDir = fs.dirs.PictureDir;
+    let options = {
+      fileCache: true,
+      addAndroidDownloads: {
+        // Related to the Android only
+        useDownloadManager: true,
+        notification: true,
+        path:
+          PictureDir +
+          '/image_' +
+          Math.floor(date.getTime() + date.getSeconds() / 2) +
+          ext,
+        description: 'Image',
+      },
+    };
+    config(options)
+      .fetch('GET', image_URL)
+      .then(res => {
+        // Showing alert after successful downloading
+        console.log('res -> ', JSON.stringify(res));
+        alert('Image Downloaded Successfully.');
+      });
+  };
+
+  const getExtention = filename => {
+    // To get the file extension
+    return /[.]/.exec(filename) ? /[^.]+$/.exec(filename) : undefined;
+  };
 
   const headerView = () => {
     return (
@@ -311,7 +397,10 @@ const PikaGptScreen = props => {
                   style={[styles.imageViewIcons]}
                 />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => {}}>
+              <TouchableOpacity
+                onPress={() => {
+                  checkPermission(selectedImage);
+                }}>
                 <Image
                   source={imagePaths?.greenArrowIcon1}
                   height={1}
