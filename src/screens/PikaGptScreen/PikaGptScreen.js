@@ -51,14 +51,17 @@ const PikaGptScreen = props => {
   //TODO: The text area should expand for 4-5 lines and then scroll
   // TODO: Gesture handler for pinch zoom images
   // TODO: The image write to storage permission granting needs work
+  // TODO: Make the chats also deletavle
+  // TODO: Add more options to the screen
 
   // const scale = useRef(new Animated.Value(1)).current;
   // const lastScale = useRef(1);
   // const baseScale = useRef(1);
 
+  const [chatList, setChatList] = useState(chatData);
   const [message, setMessage] = useState('');
   const [displayModal, setDisplayModal] = useState(false);
-  const [selectedImage, setSelectedImage] = useState('');
+  const [selectedItem, setSelectedItem] = useState('');
   const [imageLoaded, setImageLoaded] = useState(true);
   const [isZooming, setIsZooming] = useState(false);
   // const [size, setSize] = useState({width: 0, height: 0});
@@ -203,7 +206,7 @@ const PikaGptScreen = props => {
   const chatHistory = () => {
     return (
       <FlatList
-        data={chatData}
+        data={chatList}
         keyExtractor={item => item}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{marginHorizontal: 10}}
@@ -242,7 +245,7 @@ const PikaGptScreen = props => {
                 <TouchableOpacity
                   onPress={() => {
                     //TODO: Here add a modal of Image view
-                    showModal(item?.image);
+                    showModal(item);
                   }}>
                   {item?.image ? (
                     <Image
@@ -343,9 +346,9 @@ const PikaGptScreen = props => {
     setImageLoaded(true);
   };
 
-  const showModal = image => {
+  const showModal = item => {
     setDisplayModal(true);
-    setSelectedImage(image);
+    setSelectedItem(item);
   };
 
   const hideModal = () => {
@@ -379,7 +382,33 @@ const PikaGptScreen = props => {
                 width: 140,
                 justifyContent: 'space-evenly',
               }}>
-              <TouchableOpacity onPress={() => {}}>
+              <TouchableOpacity
+                onPress={() => {
+                  Alert.alert(
+                    'Are you sure?',
+                    'Do you want to delete this image?',
+                    [
+                      {
+                        text: 'OK',
+                        onPress: () => {
+                          const indexValue = chatList?.findIndex(
+                            item => item?.id === selectedItem?.id,
+                          );
+                          const tempArray = chatList;
+                          tempArray.splice(indexValue, 1);
+                          setChatList(tempArray);
+                          setDisplayModal(false);
+                        },
+                      },
+                      {
+                        text: 'Cancel',
+                        onPress: () => console.log('OK Pressed'),
+                        style: 'cancel',
+                      },
+                    ],
+                    {cancelable: false},
+                  );
+                }}>
                 <Image
                   source={imagePaths?.deleteIcon}
                   height={1}
@@ -399,7 +428,7 @@ const PikaGptScreen = props => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  checkPermission(selectedImage);
+                  checkPermission(selectedItem?.image);
                 }}>
                 <Image
                   source={imagePaths?.greenArrowIcon1}
@@ -425,7 +454,7 @@ const PikaGptScreen = props => {
             onHandlerStateChange={onPinchStateChange}>
             <Animated.View style={{transform: [{scale}]}}>
               <Image
-                source={{uri: selectedImage}}
+                source={{uri: selectedItem?.image}}
                 onLoad={handleImageLoad}
                 height={1}
                 width={1}
@@ -452,7 +481,7 @@ const PikaGptScreen = props => {
 
         {imageLoaded ? (
           <Image
-            source={{uri: selectedImage}}
+            source={{uri: selectedItem?.image}}
             onLoad={handleImageLoad}
             height={1}
             width={1}
