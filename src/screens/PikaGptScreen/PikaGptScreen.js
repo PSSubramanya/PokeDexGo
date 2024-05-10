@@ -44,15 +44,19 @@ const PikaGptScreen = props => {
     const { width, height } = Image.resolveAssetSource(source);
   */
 
-  //TODO: Add Image as chats,
-  //TODO: Add profile images on text ends,
-  //TODO: Add 1 date for all chats of today
-  //TODO: Different chat options like speaker, media, images etc. Refere different chat apps and dribbble designs
-  //TODO: The text area should expand for 4-5 lines and then scroll
+  // TODO: Add Image as chats,
+  // TODO: Add profile images on text ends,
+  // TODO: Add 1 date for all chats of today
+  // TODO: Different chat options like speaker, media, images etc. Refere different chat apps and dribbble designs
+  // TODO: The text area should expand for 4-5 lines and then scroll
   // TODO: Gesture handler for pinch zoom images
   // TODO: The image write to storage permission granting needs work
   // TODO: Make the chats also deletavle
   // TODO: Add more options to the screen
+  // TODO: Emoji adder (rn-emoji-keyboard), Media adder + Modal display for optionis like whatsap
+  // TODO: Chat search option, clear chat option
+  // TODO: Voice to Text Convertor
+  // TODO: Make chat format a generic component so we can use it commonly for both PikaGPT and users converstaion amidst each other in the app
 
   // const scale = useRef(new Animated.Value(1)).current;
   // const lastScale = useRef(1);
@@ -323,7 +327,7 @@ const PikaGptScreen = props => {
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <TextInputField
-          placeholderText={strings.sample_event_name}
+          placeholderText={strings.type_message}
           onChangeText={val => {
             setMessage(val);
           }}
@@ -337,6 +341,7 @@ const PikaGptScreen = props => {
             backgroundColor: 'white',
             borderRadius: 10,
           }}
+          type={'chatInput'}
         />
       </KeyboardAvoidingView>
     );

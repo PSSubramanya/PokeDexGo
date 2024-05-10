@@ -27,4 +27,5 @@ export default {
   version: 'Version',
   version_number: '1.0',
   futureImplementations: 'Upcoming implementations',
+  type_message: 'Type Message',
 };

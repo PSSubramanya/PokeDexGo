@@ -42,6 +42,11 @@ export default {
   deleteIcon: require('../assets/images/icons/deleteIcon.png'),
   pikaGPTIcon: require('../assets/images/icons/pikaGPTIcon.png'),
   pikaFace: require('../assets/images/icons/pokemonAppIcon.png'),
+  emojiIconOutline: require('../assets/images/icons/emojiIconOutline.png'),
+  emojiIconFilled: require('../assets/images/icons/emojiIconFilled.png'),
+  plusIcon: require('../assets/images/icons/plusIcon.png'),
+  speakerIconNormal: require('../assets/images/icons/speakerIconNormal.png'),
+  speakerIconHighlighted: require('../assets/images/icons/speakerIconHighlighted.png'),
 
   //Images
   calendar1: require('../assets/images/calendar.png'),

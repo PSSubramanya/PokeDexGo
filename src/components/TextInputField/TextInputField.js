@@ -6,14 +6,15 @@ import {
   TextInput,
   TouchableOpacity,
   Platform,
+  Image,
 } from 'react-native';
 import {verticalScale} from '../../ultilities/scale';
 import styles from './styles';
 import colors from '../../constants/colors';
+import imagePaths from '../../constants/imagePaths';
 import strings from '../../constants/strings';
 
 const TextInputField = ({
-  // type,
   placeholderText,
   headerTitle,
   onChangeText,
@@ -22,6 +23,7 @@ const TextInputField = ({
   compulsoryField,
   onPress,
   containerStyle,
+  type,
 }) => {
   /* There are 3 types of text input fields in this custom component -> "Username", "Password" and "Normal" type*/
 
@@ -71,37 +73,80 @@ const TextInputField = ({
             />
           </TouchableOpacity>
         ) : (
-          <TextInput
+          <View
             style={[
               styles.textInputView,
-              // {backgroundColor: 'red'},
-              {
-                marginTop:
-                  Platform.OS === 'ios'
-                    ? headerTitle
-                      ? verticalScale(10)
-                      : verticalScale(15)
-                    : headerTitle
-                    ? verticalScale(-5)
-                    : verticalScale(3),
-              },
-            ]}
-            editable={editable}
-            placeholder={placeholderText}
-            placeholderTextColor={colors.grey}
-            onChangeText={onChangeText}
-            onFocus={val => {
-              setSelectedField(true);
-              console.log('SELECTED TEXTINPUT 1 ...', val);
-            }}
-            onBlur={val => {
-              setSelectedField(false);
-              console.log('SELECTED TEXTINPUT 2 ...', val);
-            }}
-            value={textInputData}
-            // keyboardType={'default'}
-            // secureTextEntry={false}
-          />
+              ,
+              {flexDirection: 'row', justifyContent: 'space-between'},
+            ]}>
+            {type === 'chatInput' ? (
+              <TouchableOpacity onPress={() => {}}>
+                <Image
+                  source={imagePaths?.emojiIconOutline}
+                  height={1}
+                  width={1}
+                  resizeMode={'contain'}
+                  style={[styles.iconStyle, {marginLeft: -5}]}
+                />
+              </TouchableOpacity>
+            ) : null}
+            <TextInput
+              style={[
+                styles.chatTextStyle,
+                {
+                  // backgroundColor: 'red',
+                  marginLeft: type === 'chatInput' ? 0 : 0,
+                },
+                {
+                  marginTop:
+                    Platform.OS === 'ios'
+                      ? headerTitle
+                        ? verticalScale(10)
+                        : verticalScale(15)
+                      : headerTitle
+                      ? verticalScale(-5)
+                      : verticalScale(3),
+                },
+              ]}
+              editable={editable}
+              placeholder={placeholderText}
+              placeholderTextColor={colors.grey}
+              onChangeText={onChangeText}
+              onFocus={val => {
+                setSelectedField(true);
+                console.log('SELECTED TEXTINPUT 1 ...', val);
+              }}
+              onBlur={val => {
+                setSelectedField(false);
+                console.log('SELECTED TEXTINPUT 2 ...', val);
+              }}
+              value={textInputData}
+              // keyboardType={'default'}
+              // secureTextEntry={false}
+            />
+            {type === 'chatInput' ? (
+              <TouchableOpacity onPress={() => {}}>
+                <Image
+                  source={imagePaths?.plusIcon}
+                  height={1}
+                  width={1}
+                  resizeMode={'contain'}
+                  style={[styles.iconStyle]}
+                />
+              </TouchableOpacity>
+            ) : null}
+            {type === 'chatInput' ? (
+              <TouchableOpacity onPress={() => {}}>
+                <Image
+                  source={imagePaths?.speakerIconNormal}
+                  height={1}
+                  width={1}
+                  resizeMode={'contain'}
+                  style={[styles.iconStyle, {marginLeft: 10, marginRight: 10}]}
+                />
+              </TouchableOpacity>
+            ) : null}
+          </View>
         )}
       </View>
 

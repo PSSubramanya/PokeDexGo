@@ -20,10 +20,17 @@ export default styles = StyleSheet.create({
     flexDirection: 'row',
   },
   textInputView: {
-    fontFamily: fontFamily.primaryFontFamilyRegular,
+    // fontFamily: fontFamily.primaryFontFamilyRegular,
     paddingLeft: horizontalScale(14),
     textAlign: 'left',
     paddingBottom: verticalScale(5),
+    // backgroundColor: 'red',
+    // width: 200,
+  },
+  chatTextStyle: {
+    fontFamily: fontFamily.primaryFontFamilyRegular,
+    width: horizontalScale(240),
+    // backgroundColor: 'red',
   },
   Divider: {
     borderBottomWidth: 1.5,
@@ -38,5 +45,11 @@ export default styles = StyleSheet.create({
     color: colors.red,
     marginTop: verticalScale(5),
     fontSize: moderateScale(15),
+  },
+  iconStyle: {
+    height: verticalScale(25),
+    width: horizontalScale(25),
+    marginTop: verticalScale(11),
+    // backgroundColor: 'red',
   },
 });
