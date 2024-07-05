@@ -49,7 +49,7 @@ export default styles = StyleSheet.create({
   iconStyle: {
     height: verticalScale(25),
     width: horizontalScale(25),
-    marginTop: verticalScale(11),
+    marginTop: verticalScale(12),
     // backgroundColor: 'red',
   },
 });

@@ -262,9 +262,9 @@ const EggDetailsScreen = props => {
     tempArray.pop();
     let finalAdditionToArray;
 
-    finalAdditionToArray = tempArray?.[tempArray.length - 1]?.evolutions?.[0];
+    finalAdditionToArray = tempArray?.[tempArray.length - 1]?.evolutions;
 
-    tempArray = [...tempArray, finalAdditionToArray];
+    tempArray = [...tempArray, finalAdditionToArray?.[0]];
 
     setEvolutionChart(tempArray);
 
@@ -273,6 +273,7 @@ const EggDetailsScreen = props => {
       tempArray.length,
       indexInList,
       tempArray,
+      JSON.stringify(tempArray),
     );
 
     //Take slowpoke into consideration
@@ -618,7 +619,8 @@ const EggDetailsScreen = props => {
     return (
       <View>
         {renderEvolutionBox(sourceImage, pokemonNameValue)}
-        {/* TODO: DO THIS FOR FEMALE CATEGORY */}
+        {/* {renderEvolutionBox(sourceImage, pokemonNameValue)} */}
+        {/* TODO: DO THIS FOR FEMALE CATEGORY, 2nd type evolution category */}
         {/* {renderEvolutionBox(sourceImage, pokemonNameValue)} */}
       </View>
     );
@@ -661,7 +663,7 @@ const EggDetailsScreen = props => {
               },
               styles.seasonText,
             ]}>
-            Season: {seasonName[1]}
+            Season: {seasonName?.[1]}
           </Text>
         </View>
         {gridViewDisplay(dispImgs)}

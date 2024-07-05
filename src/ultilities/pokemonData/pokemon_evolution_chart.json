@@ -6738,6 +6738,39 @@
     {
       "evolutions": [
         {
+          "candy_required": 50,
+          "form": "Auspicious_armor",
+          "pokemon_id": 936,
+          "pokemon_name": "Armarouge"
+        },
+        {
+          "candy_required": 50,
+          "form": "Malicious_armor",
+          "pokemon_id": 937,
+          "pokemon_name": "Ceruledge"
+        }
+      ],
+      "form": "Normal",
+      "pokemon_id": 935,
+      "pokemon_name": "Charcadet"
+    },
+    {
+      "evolutions": [
+        {
+          "candy_required": 50,
+          "form": "Normal",
+          "pokemon_id": 966,
+          "pokemon_name": "Revavroom"
+        }
+      ],
+      "form": "Normal",
+      "pokemon_id": 965,
+      "pokemon_name": "Varoom"
+    },
+
+    {
+      "evolutions": [
+        {
           "candy_required": 25,
           "form": "Normal",
           "pokemon_id": 997,

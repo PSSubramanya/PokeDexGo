@@ -327,6 +327,7 @@ export default styles = StyleSheet.create({
   },
   dropDownOptiontext: {
     fontFamily: fontFamily?.primaryFontFamilySemiBold,
+    fontSize: moderateScale(12),
   },
   eventTimeViewStyle: {
     backgroundColor: 'white',

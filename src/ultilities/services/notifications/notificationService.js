@@ -2868,7 +2868,7 @@ export const NotificationService = navigation => {
       );
     });
 
-    console.log('returnedValue', returnedValue);
+    // console.log('returnedValue', returnedValue);
 
     returnedValue?.map((evDat, evIdx) => {
       if (evDat?.Summary.toLowerCase().includes('spotlight')) {

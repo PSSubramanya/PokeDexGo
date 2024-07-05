@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Platform,
   Image,
+  NativeModules,
 } from 'react-native';
 import {verticalScale} from '../../ultilities/scale';
 import styles from './styles';
@@ -25,6 +26,8 @@ const TextInputField = ({
   containerStyle,
   type,
 }) => {
+  // const {SpeechToText} = NativeModules;
+
   /* There are 3 types of text input fields in this custom component -> "Username", "Password" and "Normal" type*/
 
   const [selectedField, setSelectedField] = useState(false);
@@ -76,7 +79,6 @@ const TextInputField = ({
           <View
             style={[
               styles.textInputView,
-              ,
               {flexDirection: 'row', justifyContent: 'space-between'},
             ]}>
             {type === 'chatInput' ? (

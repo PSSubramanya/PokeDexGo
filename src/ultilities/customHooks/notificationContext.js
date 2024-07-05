@@ -9,7 +9,7 @@ const NotificationProvider = ({children}) => {
 
   useEffect(() => {
     const updateCurrentTime = () => {
-      setCurrentTime(new Date());
+      // setCurrentTime(new Date());
     };
 
     const intervalId = _BackgroundTimer?.setInterval(updateCurrentTime, 1000);

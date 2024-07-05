@@ -734,6 +734,18 @@ const EventViewScreen = props => {
     );
   };
 
+  const defaultPokemonImageString = idx => {
+    let indexVal = idx?.replace('_00', '');
+    if (indexVal?.[0] === '0') {
+      if (indexVal?.[1] === '0') {
+        indexVal = indexVal?.[2];
+      } else {
+        indexVal = indexVal?.[1] + indexVal?.[2];
+      }
+    }
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${indexVal}.png`;
+  };
+
   const pokeImageMappingFunction = () => {
     const substring1 = 'pokemon_icons'; // for normal images - DONE
     const substring2 = '_51.png'; // Mega and Mega X - DONE
@@ -875,8 +887,7 @@ const EventViewScreen = props => {
         let newStr3;
 
         if (newStr2 === undefined) {
-          pushedImage =
-            'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png';
+          pushedImage = data;
         } else {
           if (newStr2.includes('.icon.png')) {
             newStr3 = newStr2.replace('.icon.png', '');
@@ -888,7 +899,7 @@ const EventViewScreen = props => {
           if (finalString?.length > 6) {
             pushedImage = data;
           } else {
-            pushedImage = tempImage;
+            pushedImage = defaultPokemonImageString(finalString);
           }
         }
 
@@ -896,7 +907,6 @@ const EventViewScreen = props => {
          * Why length > 6 is used as condition above because when the image string is split, it comes to a number of 3 digits max.
          * Even so some strings may have _00 and _11 attached to it making its length 6 so.
          */
-
         displayableModalImages = [...displayableModalImages, pushedImage];
       }
     });
