@@ -36,6 +36,7 @@ import styles from './styles.js';
 const PikaGptScreen = props => {
   const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
   const darkModeValue = darkMode?.data;
+  const {navigation} = props;
 
   /*
     //NOTE: To get the size of the local images

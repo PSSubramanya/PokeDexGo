@@ -638,7 +638,8 @@ const LandingPage = ({navigation}) => {
             dispatch(darkModeActivation(!currentTheme));
             storeData('themeStatus', !currentTheme);
           */
-          navigation?.navigate('PikaGptScreen');
+          // navigation?.navigate('PikaGptScreen');
+          navigation?.navigate('PokedexScreen');
           // firestore()
           //   .collection('Users')
           //   .doc('themeData')
