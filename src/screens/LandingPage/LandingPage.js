@@ -638,8 +638,7 @@ const LandingPage = ({navigation}) => {
             dispatch(darkModeActivation(!currentTheme));
             storeData('themeStatus', !currentTheme);
           */
-          // navigation?.navigate('PikaGptScreen');
-          navigation?.navigate('PokedexScreen');
+          navigation?.navigate('PikaGptScreen');
           // firestore()
           //   .collection('Users')
           //   .doc('themeData')
@@ -688,6 +687,68 @@ const LandingPage = ({navigation}) => {
           <Image
             // source={imagePaths?.pikaGPTIcon}
             source={imagePaths?.pikaFace}
+            height={1}
+            width={1}
+            style={styles.darkModeIcon}
+            resizeMode={'contain'}
+          />
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  const pokedexButton = () => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          navigation?.navigate('PokedexScreen');
+          //   .collection('Users')
+          //   .doc('themeData')
+          //   .add({
+          //     appTheme: !currentTheme,
+          //   })
+          //   .then(res => {
+          //     console.log(
+          //       'App theme stored FIRESTORE DATA',
+          //       uniqueDeviceIdValue,
+          //       res,
+          //     );
+          //   })
+          //   .catch(err => {
+          //     console.log('ERROR FIRESTORE DATA', err);
+          //   });
+          // firestore()
+          //   .collection('Users')
+          //   .add({
+          //     appTheme: !currentTheme,
+          //   })
+          //   .then(res => {
+          //     console.log(
+          //       'App theme stored FIRESTORE DATA',
+          //       uniqueDeviceIdValue,
+          //       res,
+          //     );
+          //   })
+          //   .catch(err => {
+          //     console.log('ERROR FIRESTORE DATA', err);
+          //   });
+        }}>
+        <View style={[styles.darkModeButton, {marginLeft: 10}]}>
+          {/* <Image
+            source={
+              darkModeStatus
+                ? imagePaths.darkModeIcon
+                : imagePaths.brightModeIcon
+            }
+            height={1}
+            width={1}
+            style={styles.darkModeIcon}
+            resizeMode={'contain'}
+          /> */}
+
+          <Image
+            // source={imagePaths?.pikaGPTIcon}
+            source={imagePaths?.rotomIcon}
             height={1}
             width={1}
             style={styles.darkModeIcon}
@@ -764,7 +825,11 @@ const LandingPage = ({navigation}) => {
         {loadData?.length !== 0 ? navigationButtons() : null}
         {redoIcon()}
         {modalPopUp(modalDisplayText, modalTypeValue)}
-        {pikaGPTButton()}
+        {/* {pikaGPTButton()} */}
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          {pokedexButton()}
+          {pikaGPTButton()}
+        </View>
         {/* <CircleRightArrow /> */}
       </View>
     );

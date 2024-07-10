@@ -1,183 +1,717 @@
 {
   "TODO_Note": "can check mr. rime, viploom. eevee, polytoad, urshifu, beatifly, also make male and female versions also wrt images and this feature would be displayed only in pokedex. So think how exactly to display it code wise",
-  "data": [
-    [
-      {
-        "form": "Normal",
-        "pokemon_id": 1,
-        "pokemon_name": "Bulbasaur",
-        "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
-        "description": "Bulbasaur is a Grass/Poison type Pokémon. Bulbasaur is a small, mainly turquoise amphibian Pokémon with red eyes and a green bulb on its back. The bulb grows into a flower as it evolves. It is one of the three choices for a starter Pokémon in Kanto region.",
-        "evolvesTo": {
-          "candy_required": 25,
-          "specialItemOrCondition": "none",
-          "form": "Normal",
-          "pokemon_id": 2,
-          "pokemon_name": "Ivysaur",
-          "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png",
-          "description": "Ivysaur is an evolved form of Bulbasaur. Ivysaur is a Grass/Poison type Pokémon. The more sunlight Ivysaur bathes in, the more strength wells up within it, allowing the bud on its back to grow larger.",
-          "evolvesTo": {
+  "data": {
+    "Bulbasaur": {
+      "form": "Normal",
+      "pokemon_id": 1,
+      "pokemon_name": "Bulbasaur",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+      "description": "Bulbasaur is a Grass/Poison type Pokémon. Bulbasaur is a small, mainly turquoise amphibian Pokémon with red eyes and a green bulb on its back. The bulb grows into a flower as it evolves. It is one of the three choices for a starter Pokémon in Kanto region.",
+      "type1": "grass",
+      "type2": "poison",
+      "evolvesFrom": ["Egg"],
+      "evolvesTo": ["Ivysaur"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Bulbasaur",
+            "idx": 1,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Ivysaur",
+            "idx": 2,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Venusaur",
+            "idx": 3,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png",
             "candy_required": 100,
             "specialItemOrCondition": "none",
-            "form": "Normal",
-            "pokemon_id": 3,
-            "pokemon_name": "Venusaur",
-            "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png",
-            "description": "Venusaur is a Grass/Poison type Pokémon and an evolved form of Ivysaur. The plant bulb that was on the back of its previous evolutions, Bulbasaur and Ivysaur, has now bloomed into a large flower with large pink petals and a yellow center. The female has a seed in the center.",
-            "evolvesTo": "none"
+            "type1": "grass",
+            "type2": "poison"
           }
-        }
-      }
-    ],
-    [
-      {
-        "form": "Normal",
-        "pokemon_id": 133,
-        "pokemon_name": "Eevee",
-        "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
-        "description": "",
-        "evolvesTo": {
-          "candy_required": 25,
-          "specialItemOrCondition": "water_stone",
-          "form": "Normal",
-          "pokemon_id": 134,
-          "pokemon_name": "Vaporeon",
-          "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/134.png",
-          "description": "",
-          "evolvesTo": "none"
-        }
-      },
-      {
-        "form": "Normal",
-        "pokemon_id": 133,
-        "pokemon_name": "Eevee",
-        "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
-        "description": "",
-        "evolvesTo": {
-          "candy_required": 25,
-          "specialItemOrCondition": "thunder_stone",
-          "form": "Normal",
-          "pokemon_id": 135,
-          "pokemon_name": "Jolteon",
-          "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/135.png",
-          "description": "",
-          "evolvesTo": "none"
-        }
-      },
-      {
-        "form": "Normal",
-        "pokemon_id": 133,
-        "pokemon_name": "Eevee",
-        "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
-        "description": "",
-        "evolvesTo": {
-          "candy_required": 25,
-          "specialItemOrCondition": "fire_stone",
-          "form": "Normal",
-          "pokemon_id": 136,
-          "pokemon_name": "Flareon",
-          "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/136.png",
-          "description": "",
-          "evolvesTo": "none"
-        }
-      },
-      {
-        "form": "Normal",
-        "pokemon_id": 133,
-        "pokemon_name": "Eevee",
-        "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
-        "description": "",
-        "evolvesTo": {
-          "candy_required": 25,
-          "specialItemOrCondition": "evolve_daytime",
-          "buddy_distance_required": 10.0,
-          "must_be_buddy_to_evolve": true,
-          "only_evolves_in_daytime": true,
-          "form": "Normal",
-          "pokemon_id": 196,
-          "pokemon_name": "Espeon",
-          "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/196.png",
-          "description": "",
-          "evolvesTo": "none"
-        }
-      },
-      {
-        "form": "Normal",
-        "pokemon_id": 133,
-        "pokemon_name": "Eevee",
-        "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
-        "description": "",
-        "evolvesTo": {
-          "candy_required": 25,
-          "specialItemOrCondition": "evolve_nighttime",
-          "buddy_distance_required": 10.0,
-          "must_be_buddy_to_evolve": true,
-          "only_evolves_in_nighttime": true,
-          "form": "Normal",
-          "pokemon_id": 197,
-          "pokemon_name": "Umbreon",
-          "priority": 100,
-          "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/197.png",
-          "description": "",
-          "evolvesTo": "none"
-        }
-      },
-      {
-        "form": "Normal",
-        "pokemon_id": 133,
-        "pokemon_name": "Eevee",
-        "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
-        "description": "",
-        "evolvesTo": {
-          "candy_required": 25,
-          "specialItemOrCondition": "leaf_stone",
-          "lure_required": "Mossy Lure Module",
-          "form": "Normal",
-          "pokemon_id": 470,
-          "pokemon_name": "Leafeon",
-          "priority": 200,
-          "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/470.png",
-          "description": "",
-          "evolvesTo": "none"
-        }
-      },
-      {
-        "form": "Normal",
-        "pokemon_id": 133,
-        "pokemon_name": "Eevee",
-        "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
-        "description": "",
-        "evolvesTo": {
-          "candy_required": 25,
-          "specialItemOrCondition": "ice_stone",
-          "lure_required": "Glacial Lure Module",
-          "form": "Normal",
-          "pokemon_id": 471,
-          "pokemon_name": "Glaceon",
-          "priority": 200,
-          "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/471.png",
-          "description": "",
-          "evolvesTo": "none"
-        }
-      },
-      {
-        "form": "Normal",
-        "pokemon_id": 133,
-        "pokemon_name": "Eevee",
-        "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
-        "description": "",
-        "evolvesTo": {
-          "candy_required": 25,
-          "specialItemOrCondition": "learn_fairy_type_move",
-          "form": "Normal",
-          "pokemon_id": 700,
-          "pokemon_name": "Sylveon",
-          "priority": 100,
-          "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/700.png",
-          "description": "",
-          "evolvesTo": "none"
-        }
-      }
-    ]
-  ]
+        ]
+      ]
+    },
+    "Ivysaur": {
+      "form": "Normal",
+      "pokemon_id": 2,
+      "pokemon_name": "Ivysaur",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png",
+      "description": "Ivysaur is an evolved form of Bulbasaur. Ivysaur is a Grass/Poison type Pokémon. The more sunlight Ivysaur bathes in, the more strength wells up within it, allowing the bud on its back to grow larger.",
+      "type1": "grass",
+      "type2": "poison",
+      "evolvesFrom": ["Bulbasaur"],
+      "evolvesTo": ["Venusaur"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Bulbasaur",
+            "idx": 1,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Ivysaur",
+            "idx": 2,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Venusaur",
+            "idx": 3,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png",
+            "candy_required": 100,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          }
+        ]
+      ]
+    },
+    "Venusaur": {
+      "form": "Normal",
+      "pokemon_id": 3,
+      "pokemon_name": "Venusaur",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png",
+      "description": "Venusaur is a Grass/Poison type Pokémon and an evolved form of Ivysaur. The plant bulb that was on the back of its previous evolutions, Bulbasaur and Ivysaur, has now bloomed into a large flower with large pink petals and a yellow center. The female has a seed in the center.",
+      "type1": "grass",
+      "type2": "poison",
+      "evolvesFrom": ["Ivysaur"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Bulbasaur",
+            "idx": 1,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Ivysaur",
+            "idx": 2,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Venusaur",
+            "idx": 3,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png",
+            "candy_required": 100,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          }
+        ]
+      ]
+    },
+    "Charmander": {
+      "form": "Normal",
+      "pokemon_id": 4,
+      "pokemon_name": "Charmander",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png",
+      "description": "Charmander is a Fire type Pokémon. Charmander is a bipedal, reptilian Pokémon. Most of its body is colored orange, while its underbelly is light yellow and it has blue eyes. It has a flame at the end of its tail, which is said to signify its health. It is one of the three choices for a starter Pokémon in Kanto region.",
+      "type1": "fire",
+      "type2": "none",
+      "evolvesFrom": ["Egg"],
+      "evolvesTo": ["Charmeleon"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Charmander",
+            "idx": 4,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "fire",
+            "type2": "none"
+          },
+          {
+            "name": "Charmeleon",
+            "idx": 5,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "none",
+            "type1": "fire",
+            "type2": "none"
+          },
+          {
+            "name": "Charizard",
+            "idx": 6,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png",
+            "candy_required": 100,
+            "specialItemOrCondition": "none",
+            "type1": "fire",
+            "type2": "flying"
+          }
+        ]
+      ]
+    },
+    "Charmeleon": {
+      "form": "Normal",
+      "pokemon_id": 5,
+      "pokemon_name": "Charmeleon",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png",
+      "description": "Charmeleon is an evolved form of Charmander. Charmeleon is a Fire type Pokémon. When it swings its burning tail, it elevates the temperature to unbearably high levels.",
+      "type1": "fire",
+      "type2": "none",
+      "evolvesFrom": ["Charmander"],
+      "evolvesTo": ["Charizard"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Charmander",
+            "idx": 4,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "fire",
+            "type2": "none"
+          },
+          {
+            "name": "Charmeleon",
+            "idx": 5,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "none",
+            "type1": "fire",
+            "type2": "none"
+          },
+          {
+            "name": "Charizard",
+            "idx": 6,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png",
+            "candy_required": 100,
+            "specialItemOrCondition": "none",
+            "type1": "fire",
+            "type2": "flying"
+          }
+        ]
+      ]
+    },
+    "Charizard": {
+      "form": "Normal",
+      "pokemon_id": 6,
+      "pokemon_name": "Charizard",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png",
+      "description": "Charizard is a Fire/Flying type Pokémon and an evolved form of Charmeleon. Charizard is a large dragon-like Pokémon, mainly orange in color. It has two large wings, the underside of which are turquoise.",
+      "type1": "fire",
+      "type2": "flying",
+      "evolvesFrom": ["Charmeleon"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Charmander",
+            "idx": 4,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "fire",
+            "type2": "none"
+          },
+          {
+            "name": "Charmeleon",
+            "idx": 5,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "none",
+            "type1": "fire",
+            "type2": "none"
+          },
+          {
+            "name": "Charizard",
+            "idx": 6,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png",
+            "candy_required": 100,
+            "specialItemOrCondition": "none",
+            "type1": "fire",
+            "type2": "flying"
+          }
+        ]
+      ]
+    },
+    "Eevee": {
+      "form": "Normal",
+      "pokemon_id": 133,
+      "pokemon_name": "Eevee",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+      "description": "",
+      "type1": "normal",
+      "type2": "none",
+      "evolvesFrom": ["Egg"],
+      "evolvesTo": [
+        "Vaporeon",
+        "Jolteon",
+        "Flareon",
+        "Espeon",
+        "Umbreon",
+        "Leafeon",
+        "Glaceon",
+        "Sylveon"
+      ],
+      "evolutionChart": [
+        [
+          {
+            "name": "Eevee",
+            "idx": 133,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Vaporeon",
+            "idx": 134,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/134.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "water_stone",
+            "type1": "water",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Eevee",
+            "idx": 133,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Jolteon",
+            "idx": 135,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/135.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "thunder_stone",
+            "type1": "electric",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Eevee",
+            "idx": 133,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Flareon",
+            "idx": 136,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/136.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "fire_stone",
+            "type1": "fire",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Eevee",
+            "idx": 133,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Espeon",
+            "idx": 196,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/196.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "evolve_daytime",
+            "type1": "psychic",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Eevee",
+            "idx": 133,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Umbreon",
+            "idx": 197,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/197.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "evolve_nighttime",
+            "type1": "dark",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Eevee",
+            "idx": 133,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Leafeon",
+            "idx": 470,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/470.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "leaf_stone",
+            "type1": "grass",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Eevee",
+            "idx": 133,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Glaceon",
+            "idx": 471,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/471.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "ice_stone",
+            "type1": "ice",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Eevee",
+            "idx": 133,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Sylveon",
+            "idx": 700,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/700.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "learn_fairy_type_move",
+            "type1": "fairy",
+            "type2": "none"
+          }
+        ]
+      ]
+    },
+    "Vaporeon": {
+      "form": "Normal",
+      "pokemon_id": 134,
+      "pokemon_name": "Vaporeon",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/134.png",
+      "description": "",
+      "type1": "water",
+      "type2": "none",
+      "evolvesFrom": ["Eevee"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Eevee",
+            "idx": 133,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Vaporeon",
+            "idx": 134,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/134.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "water_stone",
+            "type1": "water",
+            "type2": "none"
+          }
+        ]
+      ]
+    },
+    "Jolteon": {
+      "form": "Normal",
+      "pokemon_id": 135,
+      "pokemon_name": "Jolteon",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/135.png",
+      "description": "",
+      "type1": "electric",
+      "type2": "none",
+      "evolvesFrom": ["Eevee"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Eevee",
+            "idx": 133,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Jolteon",
+            "idx": 135,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/135.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "thunder_stone",
+            "type1": "electric",
+            "type2": "none"
+          }
+        ]
+      ]
+    },
+    "Flareon": {
+      "form": "Normal",
+      "pokemon_id": 136,
+      "pokemon_name": "Flareon",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/136.png",
+      "description": "",
+      "type1": "fire",
+      "type2": "none",
+      "evolvesFrom": ["Eevee"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Eevee",
+            "idx": 133,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Flareon",
+            "idx": 136,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/136.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "fire_stone",
+            "type1": "fire",
+            "type2": "none"
+          }
+        ]
+      ]
+    },
+    "Espeon": {
+      "form": "Normal",
+      "pokemon_id": 196,
+      "pokemon_name": "Espeon",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/196.png",
+      "description": "",
+      "type1": "psychic",
+      "type2": "none",
+      "buddy_distance_required": 10.0,
+      "must_be_buddy_to_evolve": true,
+      "only_evolves_in_daytime": true,
+      "evolvesFrom": ["Eevee"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Eevee",
+            "idx": 133,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Espeon",
+            "idx": 196,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/196.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "evolve_daytime",
+            "type1": "psychic",
+            "type2": "none"
+          }
+        ]
+      ]
+    },
+    "Umbreon": {
+      "form": "Normal",
+      "pokemon_id": 197,
+      "pokemon_name": "Umbreon",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/197.png",
+      "description": "",
+      "type1": "dark",
+      "type2": "none",
+      "buddy_distance_required": 10.0,
+      "must_be_buddy_to_evolve": true,
+      "priority": 100,
+      "only_evolves_in_nighttime": true,
+      "evolvesFrom": ["Eevee"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Eevee",
+            "idx": 133,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Umbreon",
+            "idx": 197,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/197.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "evolve_nighttime",
+            "type1": "dark",
+            "type2": "none"
+          }
+        ]
+      ]
+    },
+    "Leafeon": {
+      "form": "Normal",
+      "pokemon_id": 470,
+      "pokemon_name": "Leafeon",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/470.png",
+      "description": "",
+      "type1": "grass",
+      "type2": "none",
+      "lure_required": "Mossy Lure Module",
+      "priority": 200,
+      "evolvesFrom": ["Eevee"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Eevee",
+            "idx": 133,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Leafeon",
+            "idx": 470,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/470.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "leaf_stone",
+            "type1": "grass",
+            "type2": "none"
+          }
+        ]
+      ]
+    },
+
+    "Glaceon": {
+      "form": "Normal",
+      "pokemon_id": 471,
+      "pokemon_name": "Glaceon",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/471.png",
+      "description": "",
+      "type1": "ice",
+      "type2": "none",
+      "lure_required": "Glacial Lure Module",
+      "priority": 200,
+      "evolvesFrom": ["Eevee"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Eevee",
+            "idx": 133,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Glaceon",
+            "idx": 471,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/471.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "ice_stone",
+            "type1": "ice",
+            "type2": "none"
+          }
+        ]
+      ]
+    },
+
+    "Sylveon": {
+      "form": "Normal",
+      "pokemon_id": 700,
+      "pokemon_name": "Sylveon",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/700.png",
+      "description": "",
+      "type1": "fairy",
+      "type2": "none",
+      "priority": 100,
+      "evolvesFrom": ["Eevee"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Eevee",
+            "idx": 133,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Sylveon",
+            "idx": 700,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/700.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "learn_fairy_type_move",
+            "type1": "fairy",
+            "type2": "none"
+          }
+        ]
+      ]
+    }
+  }
 }

@@ -23,6 +23,7 @@ const TextInputField = ({
   editable,
   compulsoryField,
   onPress,
+  onBlur,
   containerStyle,
   type,
 }) => {
@@ -69,6 +70,7 @@ const TextInputField = ({
               onBlur={val => {
                 setSelectedField(false);
                 console.log('SELECTED TEXTINPUT 2 ...', val);
+                onBlur && onBlur();
               }}
               value={textInputData}
               // keyboardType={'default'}
@@ -121,6 +123,7 @@ const TextInputField = ({
               onBlur={val => {
                 setSelectedField(false);
                 console.log('SELECTED TEXTINPUT 2 ...', val);
+                onBlur && onBlur();
               }}
               value={textInputData}
               // keyboardType={'default'}
