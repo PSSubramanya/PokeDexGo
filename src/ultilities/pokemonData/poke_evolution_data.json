@@ -259,6 +259,135 @@
         ]
       ]
     },
+    "Squirtle": {
+      "form": "Normal",
+      "pokemon_id": 7,
+      "pokemon_name": "Squirtle",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png",
+      "description": "Squirtle is a Water type Pokémon of Generation 1. Squirtle is a bipedal, reptilian Pokémon. It has a blue body with purple eyes, a light brown belly, and a tough red-brown shell on its back. It has a long tail that curls into a spiral. Squirtle is notable for being one of the three choices for a starter Pokémon.",
+      "type1": "water",
+      "type2": "none",
+      "candy_required": 0,
+      "evolvesFrom": ["Egg"],
+      "evolvesTo": ["Wartortle"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Squirtle",
+            "idx": 7,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "water",
+            "type2": "none"
+          },
+          {
+            "name": "Wartortle",
+            "idx": 8,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/8.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "none",
+            "type1": "water",
+            "type2": "none"
+          },
+          {
+            "name": "Blastoise",
+            "idx": 9,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png",
+            "candy_required": 100,
+            "specialItemOrCondition": "none",
+            "type1": "water",
+            "type2": "none"
+          }
+        ]
+      ]
+    },
+    "Wartortle": {
+      "form": "Normal",
+      "pokemon_id": 8,
+      "pokemon_name": "Wartortle",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/8.png",
+      "description": "Wartortle is a Water type Pokémon and an evolved form of Squirtle.",
+      "type1": "water",
+      "type2": "none",
+      "candy_required": 25,
+      "evolvesFrom": ["Squirtle"],
+      "evolvesTo": ["Blastoise"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Squirtle",
+            "idx": 7,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "water",
+            "type2": "none"
+          },
+          {
+            "name": "Wartortle",
+            "idx": 8,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/8.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "none",
+            "type1": "water",
+            "type2": "none"
+          },
+          {
+            "name": "Blastoise",
+            "idx": 9,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png",
+            "candy_required": 100,
+            "specialItemOrCondition": "none",
+            "type1": "water",
+            "type2": "none"
+          }
+        ]
+      ]
+    },
+    "Blastoise": {
+      "form": "Normal",
+      "pokemon_id": 9,
+      "pokemon_name": "Blastoise",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png",
+      "description": "Blastoise is an evolved form of Wartortle. It has a blue body with small purple eyes, a light brown belly, and a stubby tail. It has a large brown shell with two powerful water cannons on either side, which can be withdrawn.",
+      "type1": "water",
+      "type2": "none",
+      "candy_required": 100,
+      "evolvesFrom": ["Wartortle"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Squirtle",
+            "idx": 7,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "water",
+            "type2": "none"
+          },
+          {
+            "name": "Wartortle",
+            "idx": 8,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/8.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "none",
+            "type1": "water",
+            "type2": "none"
+          },
+          {
+            "name": "Blastoise",
+            "idx": 9,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png",
+            "candy_required": 100,
+            "specialItemOrCondition": "none",
+            "type1": "water",
+            "type2": "none"
+          }
+        ]
+      ]
+    },
     "Eevee": {
       "form": "Normal",
       "pokemon_id": 133,
@@ -655,7 +784,6 @@
         ]
       ]
     },
-
     "Glaceon": {
       "form": "Normal",
       "pokemon_id": 471,
@@ -692,7 +820,6 @@
         ]
       ]
     },
-
     "Sylveon": {
       "form": "Normal",
       "pokemon_id": 700,

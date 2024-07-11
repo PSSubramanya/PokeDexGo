@@ -39,6 +39,7 @@ const PokeStatScreen = props => {
   /* If pokemon touched gets gif up to date//https://www.pkparaiso.com/imagenes/xy/sprites/animados/charizard-3.gif */
 
   //TODO:
+  // Add Item images along with candy icon for special evolutions like vaporeon etc.
   // URL for pokemon gifs: https://projectpokemon.org/home/docs/spriteindex_148/3d-models-generation-1-pok%C3%A9mon-r90/
 
   //Hooks
