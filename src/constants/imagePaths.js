@@ -49,6 +49,8 @@ export default {
   speakerIconHighlighted: require('../assets/images/icons/speakerIconHighlighted.png'),
   searchIcon: require('../assets/images/icons/searchIcon.png'),
   rotomIcon: require('../assets/images/icons/rotomIcon.png'),
+  pokeBallIcon: require('../assets/images/icons/pokeBallIcon.png'),
+  masterBallIcon: require('../assets/images/icons/masterBallIcon.png'),
 
   //Images
   calendar1: require('../assets/images/calendar.png'),

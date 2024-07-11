@@ -38,6 +38,7 @@ export default {
   tertiaryBackgroundColorDarkMode: '#464646',
   quaternaryBackgroundColorDarkMode: '#565656',
   secondaryRedColor: 'rgba(203,53,53,1)',
+  secondaryBlueColor: 'rgba(2,95,194,1)',
 
   //pokemnon Type Color
   normal: '#c0c0c0',
