@@ -39,7 +39,6 @@ const PokeStatScreen = props => {
   /* If pokemon touched gets gif up to date//https://www.pkparaiso.com/imagenes/xy/sprites/animados/charizard-3.gif */
 
   //TODO:
-  // * Arrow and candy for evolution
   // URL for pokemon gifs: https://projectpokemon.org/home/docs/spriteindex_148/3d-models-generation-1-pok%C3%A9mon-r90/
 
   //Hooks
@@ -253,100 +252,64 @@ const PokeStatScreen = props => {
         }}>
         <View
           style={{
-            marginTop: 140,
             flexDirection: 'row',
-            justifyContent: 'space-between',
+            marginTop: 140,
           }}>
-          <View
+          <Text
             style={{
-              flexDirection: 'row',
+              marginTop: 0,
+              zIndex: 1,
+              marginLeft: 10,
+              fontSize: 24,
+              fontFamily: fontFamily?.primaryFontFamilyBold,
+              color: colors?.white,
             }}>
-            <Text
-              style={{
-                marginTop: 0,
-                zIndex: 1,
-                marginLeft: 10,
-                fontSize: 24,
-                fontFamily: fontFamily?.primaryFontFamilyBold,
-                color: colors?.white,
-              }}>
-              {pokemonData?.pokemon_name}
-            </Text>
-            <View style={{flexDirection: 'row', marginTop: 4}}>
-              <TouchableOpacity
-                onPress={() => {
-                  setShinyVersion(false);
-                }}>
-                <Image
-                  source={imagePaths?.pokeBallIcon}
-                  height={24}
-                  width={24}
-                  style={{
-                    width: 24,
-                    height: 24,
-                    alignSelf: 'center',
-                    marginLeft: 10,
-                    borderWidth: !shinyVersion ? 3 : 0,
-                    borderColor: colors?.secondaryBlueColor,
-                    borderRadius: 25,
-                  }}
-                  resizeMode={'contain'}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  setShinyVersion(true);
-                }}>
-                <Image
-                  source={imagePaths?.masterBallIcon}
-                  height={24}
-                  width={24}
-                  style={{
-                    width: 24,
-                    height: 24,
-                    alignSelf: 'center',
-                    marginLeft: 10,
-                    borderWidth: shinyVersion ? 3 : 0,
-                    borderColor: colors?.secondaryBlueColor,
-                    borderRadius: 25,
-                  }}
-                  resizeMode={'contain'}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-          {pokemonData?.candy_required !== 0 ? (
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                marginTop: -5,
-                marginRight: 10,
+            {pokemonData?.pokemon_name}
+          </Text>
+          <View style={{flexDirection: 'row', marginTop: 4}}>
+            <TouchableOpacity
+              onPress={() => {
+                setShinyVersion(false);
               }}>
               <Image
-                source={imagePaths?.candyIcon}
-                height={40}
-                width={40}
+                source={imagePaths?.pokeBallIcon}
+                height={24}
+                width={24}
                 style={{
-                  width: 40,
-                  height: 40,
+                  width: 24,
+                  height: 24,
                   alignSelf: 'center',
                   marginLeft: 10,
+                  borderWidth: !shinyVersion ? 3 : 0,
+                  borderColor: colors?.secondaryBlueColor,
+                  borderRadius: 25,
                 }}
                 resizeMode={'contain'}
               />
-              <Text
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setShinyVersion(true);
+              }}>
+              <Image
+                source={imagePaths?.masterBallIcon}
+                height={24}
+                width={24}
                 style={{
-                  fontSize: 12,
-                  fontFamily: fontFamily?.primaryFontFamilyBold,
-                  color: colors?.white,
-                  marginLeft: -3,
-                }}>
-                {pokemonData?.candy_required}
-              </Text>
-            </View>
-          ) : null}
+                  width: 24,
+                  height: 24,
+                  alignSelf: 'center',
+                  marginLeft: 10,
+                  borderWidth: shinyVersion ? 3 : 0,
+                  borderColor: colors?.secondaryBlueColor,
+                  borderRadius: 25,
+                }}
+                resizeMode={'contain'}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
+
         <Text
           style={{
             marginTop: 0,
@@ -446,6 +409,44 @@ const PokeStatScreen = props => {
               }}>
               {pokemonData?.description}
             </Text>
+            {pokemonData?.candy_required !== 0 ? (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  marginLeft: 10,
+                }}>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    fontFamily: fontFamily?.primaryFontFamilySemiBold,
+                    color: colors?.white,
+                  }}>
+                  Candies to evolve to {pokemonData?.pokemon_name}:
+                </Text>
+                <Image
+                  source={imagePaths?.candyIcon}
+                  height={40}
+                  width={40}
+                  style={{
+                    width: 40,
+                    height: 40,
+                    alignSelf: 'center',
+                    // marginLeft: 10,
+                  }}
+                  resizeMode={'contain'}
+                />
+                <Text
+                  style={{
+                    fontSize: 12,
+                    fontFamily: fontFamily?.primaryFontFamilyBold,
+                    color: colors?.white,
+                    marginLeft: -3,
+                  }}>
+                  {pokemonData?.candy_required}
+                </Text>
+              </View>
+            ) : null}
             <Text
               style={{
                 marginTop: 0,
