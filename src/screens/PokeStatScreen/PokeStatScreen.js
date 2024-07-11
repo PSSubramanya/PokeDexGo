@@ -33,14 +33,19 @@ const PokeStatScreen = props => {
   const [evolutionChart, setEvolutionChart] = useState([]);
   const [pokemonName, setPokemonName] = useState('');
   const [pokemonData, setPokemonData] = useState('');
-  const [dataChange, setDataChange] = useState('');
+  const [selectedPokemonIndex, setSelectedPokemonIndex] = useState(0);
   // const [pokemonTouched, setPokemonTouched] = useState(false);
   /* If pokemon touched gets gif up to date//https://www.pkparaiso.com/imagenes/xy/sprites/animados/charizard-3.gif */
 
   //TODO:
-  // Let left and right arrow also to go to previous and next pokemon in the list
-  // So consider current item and search for its index and then based on that get the next and previous item on click of those left and right icons
-  // Arrow and candy for evolution
+  // * Arrow and candy for evolution
+  /* 
+    * Fix the glitch, i.e., when I click on next button the pokemon data is set,
+    but if I select on one of the evolutions,
+    and then click on the left or right button,
+    it takes from previously selected pokemon via left/right button
+    and not the selected evolution button
+  */
 
   //Hooks
   const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
@@ -51,6 +56,13 @@ const PokeStatScreen = props => {
     const tempName = pokeStatData?.pokemonStatsData?.pokemon_name;
     setPokemonName(tempName);
     setPokemonData(pokeStatData);
+
+    for (let i of objKeysArray) {
+      if (i === tempName) {
+        indexValue = objKeysArray.indexOf(i);
+      }
+    }
+    setSelectedPokemonIndex(indexValue);
   }, [pokeStatData]);
 
   useEffect(() => {
@@ -62,23 +74,10 @@ const PokeStatScreen = props => {
   }, [pokemonName]);
 
   useEffect(() => {
-    for (let i of objKeysArray) {
-      if (i === pokemonName) {
-        indexValue = objKeysArray.indexOf(i);
-      }
-    }
-    if (dataChange === 'prev') {
-      if (indexValue > 0) {
-        const tempPokeName = objKeysArray[indexValue - 1];
-        setPokemonName(tempPokeName);
-      }
-    } else if (dataChange === 'next') {
-      if (indexValue < objKeysArray?.length - 1) {
-        const tempPokeName = objKeysArray[indexValue + 1];
-        setPokemonName(tempPokeName);
-      }
-    }
-  }, [dataChange]);
+    setEvolutionChart([]);
+    const tempPokeName = objKeysArray[selectedPokemonIndex];
+    setPokemonName(tempPokeName);
+  }, [selectedPokemonIndex]);
 
   //Functions
   const loadEvolutions = pokeName => {
@@ -151,7 +150,10 @@ const PokeStatScreen = props => {
           }}>
           <TouchableOpacity
             onPress={() => {
-              setDataChange('prev');
+              const currentIndex = selectedPokemonIndex;
+              if (currentIndex > 0) {
+                setSelectedPokemonIndex(currentIndex - 1);
+              }
             }}>
             <View
               style={{
@@ -189,10 +191,19 @@ const PokeStatScreen = props => {
                 ? `https://www.pkparaiso.com/imagenes/xy/sprites/animados/${pokemonData?.pokemon_name?.toLowerCase()}.gif`
                 : `https://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/${pokemonData?.pokemon_name?.toLowerCase()}.gif`,
             }}
+            // Below URLs check for GENS after 7
+            // source={{
+            //   uri: !shinyVersion
+            //     ? `https://projectpokemon.org/images/normal-sprite/${pokemonData?.pokemon_name?.toLowerCase()}.gif`
+            //     : `https://projectpokemon.org/images/sprites-models/swsh-shiny-sprites/${pokemonData?.pokemon_name?.toLowerCase()}.gif`,
+            // }}
           />
           <TouchableOpacity
             onPress={() => {
-              setDataChange('next');
+              const currentIndex = selectedPokemonIndex;
+              if (currentIndex < objKeysArray?.length - 1) {
+                setSelectedPokemonIndex(currentIndex + 1);
+              }
             }}>
             <View
               style={{
@@ -323,7 +334,7 @@ const PokeStatScreen = props => {
                 marginLeft: 5,
                 fontFamily: fontFamily?.primaryFontFamilySemiBold,
               }}>
-              {toCamelCase(pokeStatData?.pokemonStatsData?.type1)}
+              {toCamelCase(pokemonData?.type1)}
             </Text>
           </View>
           {pokemonData?.type2 !== 'none' ? (
@@ -357,7 +368,7 @@ const PokeStatScreen = props => {
                   marginLeft: 5,
                   fontFamily: fontFamily?.primaryFontFamilySemiBold,
                 }}>
-                {toCamelCase(pokeStatData?.pokemonStatsData?.type2)}
+                {toCamelCase(pokemonData?.type2)}
               </Text>
             </View>
           ) : null}
@@ -375,6 +386,22 @@ const PokeStatScreen = props => {
             color: colors?.white,
           }}>
           {pokemonData?.description}
+        </Text>
+        <Text
+          style={{
+            marginTop: 0,
+            zIndex: 1,
+            marginTop: 20,
+            marginLeft: 10,
+            marginRight: 10,
+            fontSize: 12,
+            lineHeight: 20,
+            fontFamily: fontFamily?.primaryFontFamilyBold,
+            color: colors?.white,
+            textTransform: 'uppercase',
+            textDecorationLine: 'underline',
+          }}>
+          The evolution tree
         </Text>
         <View style={{alignItems: 'center'}}>
           <FlatList
