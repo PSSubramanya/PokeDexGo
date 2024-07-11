@@ -39,13 +39,6 @@ const PokeStatScreen = props => {
 
   //TODO:
   // * Arrow and candy for evolution
-  /* 
-    * Fix the glitch, i.e., when I click on next button the pokemon data is set,
-    but if I select on one of the evolutions,
-    and then click on the left or right button,
-    it takes from previously selected pokemon via left/right button
-    and not the selected evolution button
-  */
 
   //Hooks
   const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
@@ -57,12 +50,7 @@ const PokeStatScreen = props => {
     setPokemonName(tempName);
     setPokemonData(pokeStatData);
 
-    for (let i of objKeysArray) {
-      if (i === tempName) {
-        indexValue = objKeysArray.indexOf(i);
-      }
-    }
-    setSelectedPokemonIndex(indexValue);
+    calculatePokemonIndex(tempName);
   }, [pokeStatData]);
 
   useEffect(() => {
@@ -80,6 +68,15 @@ const PokeStatScreen = props => {
   }, [selectedPokemonIndex]);
 
   //Functions
+  const calculatePokemonIndex = tempName => {
+    for (let i of objKeysArray) {
+      if (i === tempName) {
+        indexValue = objKeysArray.indexOf(i);
+      }
+    }
+    setSelectedPokemonIndex(indexValue);
+  };
+
   const loadEvolutions = pokeName => {
     return evolutionData?.data?.[pokeName];
   };
@@ -334,7 +331,8 @@ const PokeStatScreen = props => {
                 marginLeft: 5,
                 fontFamily: fontFamily?.primaryFontFamilySemiBold,
               }}>
-              {toCamelCase(pokemonData?.type1)}
+              {pokemonData?.type1}
+              {/* {toCamelCase(pokemonData?.type1)} */}
             </Text>
           </View>
           {pokemonData?.type2 !== 'none' ? (
@@ -368,7 +366,8 @@ const PokeStatScreen = props => {
                   marginLeft: 5,
                   fontFamily: fontFamily?.primaryFontFamilySemiBold,
                 }}>
-                {toCamelCase(pokemonData?.type2)}
+                {pokemonData?.type2}
+                {/* {toCamelCase(pokemonData?.type2)} */}
               </Text>
             </View>
           ) : null}
@@ -414,7 +413,7 @@ const PokeStatScreen = props => {
                     return (
                       <TouchableOpacity
                         onPress={() => {
-                          setPokemonName(dat?.name);
+                          calculatePokemonIndex(dat?.name);
                         }}>
                         <View
                           style={{
