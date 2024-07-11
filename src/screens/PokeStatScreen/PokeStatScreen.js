@@ -18,13 +18,22 @@ import {toCamelCase} from '../../ultilities/commonFunctions.js';
 import styles from './styles.js';
 
 const PokeStatScreen = props => {
+  //Destructred Data
   const {navigation, route} = props;
   const {params} = route;
   const {pokeStatData} = params;
+
+  //Constants and varibales
+  const fullPokemonData = evolutionData?.data;
+  const objKeysArray = Object.keys(fullPokemonData);
+  let indexValue = -1;
+
+  //State Values
   const [shinyVersion, setShinyVersion] = useState(false);
   const [evolutionChart, setEvolutionChart] = useState([]);
   const [pokemonName, setPokemonName] = useState('');
   const [pokemonData, setPokemonData] = useState('');
+  const [dataChange, setDataChange] = useState('');
   // const [pokemonTouched, setPokemonTouched] = useState(false);
   /* If pokemon touched gets gif up to date//https://www.pkparaiso.com/imagenes/xy/sprites/animados/charizard-3.gif */
 
@@ -33,9 +42,11 @@ const PokeStatScreen = props => {
   // So consider current item and search for its index and then based on that get the next and previous item on click of those left and right icons
   // Arrow and candy for evolution
 
+  //Hooks
   const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
   const darkModeValue = darkMode?.data;
 
+  //useEffect
   useEffect(() => {
     const tempName = pokeStatData?.pokemonStatsData?.pokemon_name;
     setPokemonName(tempName);
@@ -50,6 +61,26 @@ const PokeStatScreen = props => {
     setEvolutionChart(temporaryEvolutionChart);
   }, [pokemonName]);
 
+  useEffect(() => {
+    for (let i of objKeysArray) {
+      if (i === pokemonName) {
+        indexValue = objKeysArray.indexOf(i);
+      }
+    }
+    if (dataChange === 'prev') {
+      if (indexValue > 0) {
+        const tempPokeName = objKeysArray[indexValue - 1];
+        setPokemonName(tempPokeName);
+      }
+    } else if (dataChange === 'next') {
+      if (indexValue < objKeysArray?.length - 1) {
+        const tempPokeName = objKeysArray[indexValue + 1];
+        setPokemonName(tempPokeName);
+      }
+    }
+  }, [dataChange]);
+
+  //Functions
   const loadEvolutions = pokeName => {
     return evolutionData?.data?.[pokeName];
   };
@@ -118,7 +149,10 @@ const PokeStatScreen = props => {
             zIndex: 2,
             marginTop: Platform?.OS === 'android' ? -10 : null,
           }}>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity
+            onPress={() => {
+              setDataChange('prev');
+            }}>
             <View
               style={{
                 backgroundColor: 'white',
@@ -156,7 +190,10 @@ const PokeStatScreen = props => {
                 : `https://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/${pokemonData?.pokemon_name?.toLowerCase()}.gif`,
             }}
           />
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity
+            onPress={() => {
+              setDataChange('next');
+            }}>
             <View
               style={{
                 backgroundColor: 'white',
