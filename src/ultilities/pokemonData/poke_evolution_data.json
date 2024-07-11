@@ -9,6 +9,7 @@
       "description": "Bulbasaur is a Grass/Poison type Pokémon. Bulbasaur is a small, mainly turquoise amphibian Pokémon with red eyes and a green bulb on its back. The bulb grows into a flower as it evolves. It is one of the three choices for a starter Pokémon in Kanto region.",
       "type1": "grass",
       "type2": "poison",
+      "candy_required": 0,
       "evolvesFrom": ["Egg"],
       "evolvesTo": ["Ivysaur"],
       "evolutionChart": [
@@ -51,6 +52,7 @@
       "description": "Ivysaur is an evolved form of Bulbasaur. Ivysaur is a Grass/Poison type Pokémon. The more sunlight Ivysaur bathes in, the more strength wells up within it, allowing the bud on its back to grow larger.",
       "type1": "grass",
       "type2": "poison",
+      "candy_required": 25,
       "evolvesFrom": ["Bulbasaur"],
       "evolvesTo": ["Venusaur"],
       "evolutionChart": [
@@ -93,6 +95,7 @@
       "description": "Venusaur is a Grass/Poison type Pokémon and an evolved form of Ivysaur. The plant bulb that was on the back of its previous evolutions, Bulbasaur and Ivysaur, has now bloomed into a large flower with large pink petals and a yellow center. The female has a seed in the center.",
       "type1": "grass",
       "type2": "poison",
+      "candy_required": 100,
       "evolvesFrom": ["Ivysaur"],
       "evolvesTo": ["None"],
       "evolutionChart": [
@@ -135,6 +138,7 @@
       "description": "Charmander is a Fire type Pokémon. Charmander is a bipedal, reptilian Pokémon. Most of its body is colored orange, while its underbelly is light yellow and it has blue eyes. It has a flame at the end of its tail, which is said to signify its health. It is one of the three choices for a starter Pokémon in Kanto region.",
       "type1": "fire",
       "type2": "none",
+      "candy_required": 0,
       "evolvesFrom": ["Egg"],
       "evolvesTo": ["Charmeleon"],
       "evolutionChart": [
@@ -178,6 +182,7 @@
       "type1": "fire",
       "type2": "none",
       "evolvesFrom": ["Charmander"],
+      "candy_required": 25,
       "evolvesTo": ["Charizard"],
       "evolutionChart": [
         [
@@ -219,6 +224,7 @@
       "description": "Charizard is a Fire/Flying type Pokémon and an evolved form of Charmeleon. Charizard is a large dragon-like Pokémon, mainly orange in color. It has two large wings, the underside of which are turquoise.",
       "type1": "fire",
       "type2": "flying",
+      "candy_required": 100,
       "evolvesFrom": ["Charmeleon"],
       "evolvesTo": ["None"],
       "evolutionChart": [
@@ -261,6 +267,7 @@
       "description": "",
       "type1": "normal",
       "type2": "none",
+      "candy_required": 0,
       "evolvesFrom": ["Egg"],
       "evolvesTo": [
         "Vaporeon",
@@ -443,6 +450,7 @@
       "description": "",
       "type1": "water",
       "type2": "none",
+      "candy_required": 50,
       "evolvesFrom": ["Eevee"],
       "evolvesTo": ["None"],
       "evolutionChart": [
@@ -476,6 +484,7 @@
       "description": "",
       "type1": "electric",
       "type2": "none",
+      "candy_required": 50,
       "evolvesFrom": ["Eevee"],
       "evolvesTo": ["None"],
       "evolutionChart": [
@@ -509,6 +518,7 @@
       "description": "",
       "type1": "fire",
       "type2": "none",
+      "candy_required": 50,
       "evolvesFrom": ["Eevee"],
       "evolvesTo": ["None"],
       "evolutionChart": [
@@ -542,6 +552,7 @@
       "description": "",
       "type1": "psychic",
       "type2": "none",
+      "candy_required": 50,
       "buddy_distance_required": 10.0,
       "must_be_buddy_to_evolve": true,
       "only_evolves_in_daytime": true,
@@ -578,6 +589,7 @@
       "description": "",
       "type1": "dark",
       "type2": "none",
+      "candy_required": 50,
       "buddy_distance_required": 10.0,
       "must_be_buddy_to_evolve": true,
       "priority": 100,
@@ -615,6 +627,7 @@
       "description": "",
       "type1": "grass",
       "type2": "none",
+      "candy_required": 50,
       "lure_required": "Mossy Lure Module",
       "priority": 200,
       "evolvesFrom": ["Eevee"],
@@ -651,6 +664,7 @@
       "description": "",
       "type1": "ice",
       "type2": "none",
+      "candy_required": 50,
       "lure_required": "Glacial Lure Module",
       "priority": 200,
       "evolvesFrom": ["Eevee"],
@@ -687,6 +701,7 @@
       "description": "",
       "type1": "fairy",
       "type2": "none",
+      "candy_required": 50,
       "priority": 100,
       "evolvesFrom": ["Eevee"],
       "evolvesTo": ["None"],

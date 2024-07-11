@@ -7,6 +7,7 @@ import {
   FlatList,
   TouchableOpacity,
   Platform,
+  ScrollView,
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import colors from '../../constants/colors.js';
@@ -39,6 +40,7 @@ const PokeStatScreen = props => {
 
   //TODO:
   // * Arrow and candy for evolution
+  // URL for pokemon gifs: https://projectpokemon.org/home/docs/spriteindex_148/3d-models-generation-1-pok%C3%A9mon-r90/
 
   //Hooks
   const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
@@ -94,6 +96,25 @@ const PokeStatScreen = props => {
       return id;
     }
   };
+
+  const arrowIcon = () => {
+    return (
+      <Image
+        source={imagePaths?.blackArrowIcon}
+        height={1}
+        width={1}
+        resizeMode={'contain'}
+        style={{
+          height: 40,
+          width: 40,
+          // borderWidth: 1,
+          // backgroundColor: 'red',
+        }}
+        // style={styles.arrowIcon}
+      />
+    );
+  };
+
   return (
     <View
       style={{
@@ -232,62 +253,99 @@ const PokeStatScreen = props => {
         }}>
         <View
           style={{
-            flexDirection: 'row',
             marginTop: 140,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
           }}>
-          <Text
+          <View
             style={{
-              marginTop: 0,
-              zIndex: 1,
-              marginLeft: 10,
-              fontSize: 24,
-              fontFamily: fontFamily?.primaryFontFamilyBold,
-              color: colors?.white,
+              flexDirection: 'row',
             }}>
-            {pokemonData?.pokemon_name}
-          </Text>
-          <View style={{flexDirection: 'row', marginTop: 4}}>
-            <TouchableOpacity
-              onPress={() => {
-                setShinyVersion(false);
+            <Text
+              style={{
+                marginTop: 0,
+                zIndex: 1,
+                marginLeft: 10,
+                fontSize: 24,
+                fontFamily: fontFamily?.primaryFontFamilyBold,
+                color: colors?.white,
               }}>
-              <Image
-                source={imagePaths?.pokeBallIcon}
-                height={24}
-                width={24}
-                style={{
-                  width: 24,
-                  height: 24,
-                  alignSelf: 'center',
-                  marginLeft: 10,
-                  borderWidth: !shinyVersion ? 3 : 0,
-                  borderColor: colors?.secondaryBlueColor,
-                  borderRadius: 25,
-                }}
-                resizeMode={'contain'}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                setShinyVersion(true);
-              }}>
-              <Image
-                source={imagePaths?.masterBallIcon}
-                height={24}
-                width={24}
-                style={{
-                  width: 24,
-                  height: 24,
-                  alignSelf: 'center',
-                  marginLeft: 10,
-                  borderWidth: shinyVersion ? 3 : 0,
-                  borderColor: colors?.secondaryBlueColor,
-                  borderRadius: 25,
-                }}
-                resizeMode={'contain'}
-              />
-            </TouchableOpacity>
+              {pokemonData?.pokemon_name}
+            </Text>
+            <View style={{flexDirection: 'row', marginTop: 4}}>
+              <TouchableOpacity
+                onPress={() => {
+                  setShinyVersion(false);
+                }}>
+                <Image
+                  source={imagePaths?.pokeBallIcon}
+                  height={24}
+                  width={24}
+                  style={{
+                    width: 24,
+                    height: 24,
+                    alignSelf: 'center',
+                    marginLeft: 10,
+                    borderWidth: !shinyVersion ? 3 : 0,
+                    borderColor: colors?.secondaryBlueColor,
+                    borderRadius: 25,
+                  }}
+                  resizeMode={'contain'}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setShinyVersion(true);
+                }}>
+                <Image
+                  source={imagePaths?.masterBallIcon}
+                  height={24}
+                  width={24}
+                  style={{
+                    width: 24,
+                    height: 24,
+                    alignSelf: 'center',
+                    marginLeft: 10,
+                    borderWidth: shinyVersion ? 3 : 0,
+                    borderColor: colors?.secondaryBlueColor,
+                    borderRadius: 25,
+                  }}
+                  resizeMode={'contain'}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
+          {pokemonData?.candy_required !== 0 ? (
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginTop: -5,
+                marginRight: 10,
+              }}>
+              <Image
+                source={imagePaths?.candyIcon}
+                height={40}
+                width={40}
+                style={{
+                  width: 40,
+                  height: 40,
+                  alignSelf: 'center',
+                  marginLeft: 10,
+                }}
+                resizeMode={'contain'}
+              />
+              <Text
+                style={{
+                  fontSize: 12,
+                  fontFamily: fontFamily?.primaryFontFamilyBold,
+                  color: colors?.white,
+                  marginLeft: -3,
+                }}>
+                {pokemonData?.candy_required}
+              </Text>
+            </View>
+          ) : null}
         </View>
         <Text
           style={{
@@ -372,81 +430,93 @@ const PokeStatScreen = props => {
             </View>
           ) : null}
         </View>
-        <Text
-          style={{
-            marginTop: 0,
-            zIndex: 1,
-            marginTop: 10,
-            marginLeft: 10,
-            marginRight: 10,
-            fontSize: 12,
-            lineHeight: 20,
-            fontFamily: fontFamily?.primaryFontFamilySemiBold,
-            color: colors?.white,
-          }}>
-          {pokemonData?.description}
-        </Text>
-        <Text
-          style={{
-            marginTop: 0,
-            zIndex: 1,
-            marginTop: 20,
-            marginLeft: 10,
-            marginRight: 10,
-            fontSize: 12,
-            lineHeight: 20,
-            fontFamily: fontFamily?.primaryFontFamilyBold,
-            color: colors?.white,
-            textTransform: 'uppercase',
-            textDecorationLine: 'underline',
-          }}>
-          The evolution tree
-        </Text>
-        <View style={{alignItems: 'center'}}>
-          <FlatList
-            data={evolutionChart}
-            keyExtractor={item => item}
-            renderItem={({item, index}) => {
-              return (
-                <View style={{flexDirection: 'row'}}>
-                  {item?.map((dat, idx) => {
-                    return (
-                      <TouchableOpacity
-                        onPress={() => {
-                          calculatePokemonIndex(dat?.name);
-                        }}>
-                        <View
-                          style={{
-                            backgroundColor: 'white',
-                            marginTop: 30,
-                            marginHorizontal: 10,
-                            borderRadius: 5,
-                            height: 100,
-                            width: 100,
-                            alignItems: 'center',
-                          }}>
-                          <Image
-                            source={{uri: dat?.img}}
-                            style={{height: 75, width: 75}}
-                            height={75}
-                            width={75}
-                          />
-                          <Text
+        <View style={{height: 400}}>
+          <ScrollView style={{marginTop: 10}}>
+            <Text
+              style={{
+                marginTop: 0,
+                zIndex: 1,
+                marginTop: 10,
+                marginLeft: 10,
+                marginRight: 10,
+                fontSize: 12,
+                lineHeight: 20,
+                fontFamily: fontFamily?.primaryFontFamilySemiBold,
+                color: colors?.white,
+              }}>
+              {pokemonData?.description}
+            </Text>
+            <Text
+              style={{
+                marginTop: 0,
+                zIndex: 1,
+                marginTop: 20,
+                marginLeft: 10,
+                marginRight: 10,
+                fontSize: 12,
+                lineHeight: 20,
+                fontFamily: fontFamily?.primaryFontFamilyBold,
+                color: colors?.white,
+                textTransform: 'uppercase',
+                textDecorationLine: 'underline',
+              }}>
+              The evolution tree
+            </Text>
+            <View style={{alignItems: 'center'}}>
+              <FlatList
+                data={evolutionChart}
+                keyExtractor={item => item}
+                renderItem={({item, index}) => {
+                  return (
+                    <View style={{flexDirection: 'row'}}>
+                      {item?.map((dat, idx) => {
+                        return (
+                          <View
                             style={{
-                              marginTop: 5,
-                              fontSize: 10,
-                              fontFamily: fontFamily?.primaryFontFamilyMedium,
+                              flexDirection: 'row',
+                              alignItems: 'center',
                             }}>
-                            {dat?.name}
-                          </Text>
-                        </View>
-                      </TouchableOpacity>
-                    );
-                  })}
-                </View>
-              );
-            }}
-          />
+                            {dat?.candy_required !== 0 ? arrowIcon() : null}
+                            <TouchableOpacity
+                              onPress={() => {
+                                calculatePokemonIndex(dat?.name);
+                              }}>
+                              <View
+                                style={{
+                                  // backgroundColor: 'white',
+                                  marginTop: 30,
+                                  // marginHorizontal: 10,
+                                  borderRadius: 5,
+                                  height: 100,
+                                  width: 100,
+                                  alignItems: 'center',
+                                }}>
+                                <Image
+                                  source={{uri: dat?.img}}
+                                  style={{height: 75, width: 75}}
+                                  height={75}
+                                  width={75}
+                                />
+                                <Text
+                                  style={{
+                                    marginTop: 5,
+                                    fontSize: 10,
+                                    fontFamily:
+                                      fontFamily?.primaryFontFamilyMedium,
+                                  }}>
+                                  {dat?.name}
+                                </Text>
+                              </View>
+                            </TouchableOpacity>
+                          </View>
+                        );
+                      })}
+                    </View>
+                  );
+                }}
+              />
+            </View>
+          </ScrollView>
         </View>
       </View>
     </View>
