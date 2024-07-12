@@ -688,8 +688,9 @@ const HomeScreen = props => {
 
   return (
     <Provider>
+      <SafeAreaView />
       {networkState ? (
-        <SafeAreaView
+        <View
           style={[
             {
               backgroundColor: darkModeValue
@@ -719,7 +720,7 @@ const HomeScreen = props => {
               />
             </TouchableOpacity>
           ) : null}
-        </SafeAreaView>
+        </View>
       ) : null}
     </Provider>
   );

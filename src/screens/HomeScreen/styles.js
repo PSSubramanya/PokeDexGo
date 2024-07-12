@@ -155,7 +155,7 @@ export default styles = StyleSheet.create({
     // shadowRadius: 5,
     // elevation: 5,
     // marginTop: -verticalScale(60),
-    marginBottom: verticalScale(30),
+    marginBottom: verticalScale(60),
     alignSelf: 'flex-end',
     borderRadius: 10,
     marginRight: horizontalScale(18),

@@ -9,6 +9,7 @@ import {
   Dimensions,
   ActivityIndicator,
   TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import imagePaths from '../../constants/imagePaths.js';
@@ -742,6 +743,7 @@ const EggDetailsScreen = props => {
         setIndexVal={setIndexVal}
       /> */}
 
+      <SafeAreaView />
       {/* {loader ? <ActivityIndicator size={'large'} /> : carouselSliderView()} */}
       {loader ? <ActivityIndicator size={'large'} /> : eggDataDisplay()}
       {showEvolutionChart ? (

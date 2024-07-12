@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Animated,
   ScrollView,
+  SafeAreaView,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import colors from '../../constants/colors.js';
@@ -284,6 +285,7 @@ const RaidBossScreen = props => {
           : null,
         flex: 1,
       }}>
+      <SafeAreaView />
       <ScrollView style={styles.raidBossScrollPageStyle}>
         {firstTierRaidArray?.length !== 0 &&
           renderRaidBossViews(raidBossLevels[0], firstTierRaidArray)}

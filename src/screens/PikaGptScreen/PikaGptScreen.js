@@ -12,6 +12,7 @@ import {
   PermissionsAndroid,
   Linking,
   Alert,
+  SafeAreaView,
   // Animated,
   // PanResponder,
 } from 'react-native';
@@ -190,7 +191,7 @@ const PikaGptScreen = props => {
       <View
         style={{
           height: 60,
-          marginTop: Platform.OS === 'ios' ? 40 : null,
+          // marginTop: Platform.OS === 'ios' ? 40 : null,
           backgroundColor: darkModeValue ? colors.darkGrey : null,
           justifyContent: 'center',
           flexDirection: 'row',
@@ -544,6 +545,7 @@ const PikaGptScreen = props => {
           ? colors.secondaryBackgroundColorDarkMode
           : null,
       }}>
+      <SafeAreaView />
       {chatBody()}
       {textingArea()}
       {modalPopUp()}

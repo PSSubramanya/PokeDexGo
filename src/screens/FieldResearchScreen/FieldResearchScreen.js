@@ -6,6 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
   Animated,
+  SafeAreaView,
 } from 'react-native';
 import CardView from '../../components/CardView/CardView';
 import {pokeImageMappingFunction} from '../../ultilities/commonFunctions';
@@ -272,6 +273,7 @@ const FieldResearchScreen = props => {
         backgroundColor: colors?.secondaryBackgroundColorDarkMode,
         flex: 1,
       }}>
+      <SafeAreaView />
       <FlatList
         data={displayData}
         keyExtractor={item => item}

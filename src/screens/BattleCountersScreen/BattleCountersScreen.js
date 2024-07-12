@@ -6,6 +6,7 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import {
   individualPokemonImageMapping,
@@ -351,6 +352,7 @@ const BattleCountersScreen = props => {
 
   return (
     <ScrollView style={styles?.mainBackground}>
+      <SafeAreaView />
       <View style={{alignItems: 'center'}}>
         <Image
           source={{

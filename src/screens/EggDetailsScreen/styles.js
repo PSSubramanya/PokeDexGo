@@ -153,6 +153,7 @@ export default styles = StyleSheet.create({
   evolutionChartContainer: {
     backgroundColor: colors.quaternaryBackgroundColorDarkMode,
     marginHorizontal: horizontalScale(20),
+    marginTop: verticalScale(20),
     borderRadius: 8,
     alignItems: 'center',
     alignSelf: 'center',
