@@ -11,6 +11,7 @@ import PdfViewScreen from './PdfViewScreen/PdfViewScreen';
 import PikaGptScreen from './PikaGptScreen/PikaGptScreen';
 import PokedexScreen from './PokedexScreen/PokedexScreen';
 import PokeStatScreen from './PokeStatScreen/PokeStatScreen';
+import SampleTestingScreen from './SampleTestingScreen/SampleTestingScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -42,6 +43,10 @@ const StackNavigationScreen = () => {
         <Stack.Screen name="PikaGptScreen" component={PikaGptScreen} />
         <Stack.Screen name="PokedexScreen" component={PokedexScreen} />
         <Stack.Screen name="PokeStatScreen" component={PokeStatScreen} />
+        <Stack.Screen
+          name="SampleTestingScreen"
+          component={SampleTestingScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -142,7 +142,8 @@ const PokeStatScreen = props => {
           }}>
           <TouchableOpacity
             onPress={() => {
-              navigation?.goBack();
+              // navigation?.goBack();
+              navigation.navigate('SampleTestingScreen');
             }}>
             <Image
               source={imagePaths.leftChevronIcon}
