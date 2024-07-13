@@ -388,6 +388,135 @@
         ]
       ]
     },
+    "Caterpie": {
+      "form": "Normal",
+      "pokemon_id": 10,
+      "pokemon_name": "Caterpie",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10.png",
+      "description": "Caterpie is a Bug type Pokémon. Its short feet are tipped with suction pads that enable it to tirelessly climb slopes and walls.",
+      "type1": "bug",
+      "type2": "none",
+      "candy_required": 0,
+      "evolvesFrom": ["Egg"],
+      "evolvesTo": ["Metapod"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Caterpie",
+            "idx": 10,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "bug",
+            "type2": "none"
+          },
+          {
+            "name": "Metapod",
+            "idx": 11,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/11.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "none",
+            "type1": "bug",
+            "type2": "none"
+          },
+          {
+            "name": "Butterfree",
+            "idx": 12,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/12.png",
+            "candy_required": 100,
+            "specialItemOrCondition": "none",
+            "type1": "bug",
+            "type2": "flying"
+          }
+        ]
+      ]
+    },
+    "Metapod": {
+      "form": "Normal",
+      "pokemon_id": 11,
+      "pokemon_name": "Metapod",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/11.png",
+      "description": "Metapod is a Bug type Pokémon and an evolved form of Caterpee. It hardens its shell to protect itself.",
+      "type1": "bug",
+      "type2": "none",
+      "candy_required": 25,
+      "evolvesFrom": ["Caterpie"],
+      "evolvesTo": ["Butterfree"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Caterpie",
+            "idx": 10,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "bug",
+            "type2": "none"
+          },
+          {
+            "name": "Metapod",
+            "idx": 11,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/11.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "none",
+            "type1": "bug",
+            "type2": "none"
+          },
+          {
+            "name": "Butterfree",
+            "idx": 12,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/12.png",
+            "candy_required": 100,
+            "specialItemOrCondition": "none",
+            "type1": "bug",
+            "type2": "flying"
+          }
+        ]
+      ]
+    },
+    "Butterfree": {
+      "form": "Normal",
+      "pokemon_id": 12,
+      "pokemon_name": "Butterfree",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/12.png",
+      "description": "Butterfree is a Bug/Flying type Pokémon and an evolved form of Metapod.In battle, it flaps its wings at high speed to release highly toxic dust into the air",
+      "type1": "bug",
+      "type2": "flying",
+      "candy_required": 100,
+      "evolvesFrom": ["Metapod"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Caterpie",
+            "idx": 10,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "bug",
+            "type2": "none"
+          },
+          {
+            "name": "Metapod",
+            "idx": 11,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/11.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "none",
+            "type1": "bug",
+            "type2": "none"
+          },
+          {
+            "name": "Butterfree",
+            "idx": 12,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/12.png",
+            "candy_required": 100,
+            "specialItemOrCondition": "none",
+            "type1": "bug",
+            "type2": "flying"
+          }
+        ]
+      ]
+    },
     "Eevee": {
       "form": "Normal",
       "pokemon_id": 133,
