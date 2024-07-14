@@ -17,6 +17,7 @@ import evolutionData from '../../ultilities/pokemonData/poke_evolution_data.json
 import {toCamelCase} from '../../ultilities/commonFunctions.js';
 import styles from './styles.js';
 import TextToSpeechConverter from '../../components/TextToSpeechConverter/TextToSpeechConverter.js';
+import TypeWriterEffect from 'react-native-typewriter-effect';
 
 const PokeStatScreen = props => {
   //Destructred Data
@@ -405,20 +406,24 @@ const PokeStatScreen = props => {
         </View>
         <View style={{height: 400}}>
           <ScrollView style={{marginTop: 10}}>
-            <Text
-              style={{
-                marginTop: 0,
-                zIndex: 1,
-                marginTop: 10,
-                marginLeft: 10,
-                marginRight: 10,
-                fontSize: 12,
-                lineHeight: 20,
-                fontFamily: fontFamily?.primaryFontFamilySemiBold,
-                color: colors?.white,
-              }}>
-              {pokemonData?.description}
-            </Text>
+            {pokemonData?.description?.length > 0 ? (
+              <TypeWriterEffect
+                content={pokemonData?.description?.toString()}
+                style={{
+                  marginTop: 0,
+                  zIndex: 1,
+                  marginTop: 10,
+                  marginLeft: 10,
+                  marginRight: 10,
+                  fontSize: 12,
+                  lineHeight: 20,
+                  fontFamily: fontFamily?.primaryFontFamilySemiBold,
+                  color: colors?.white,
+                }}
+                maxDelay={1}
+              />
+            ) : null}
+
             {pokemonData?.candy_required !== 0 ? (
               <View
                 style={{

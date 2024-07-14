@@ -7111,6 +7111,11 @@ react-native-tts@^4.1.1:
   resolved "https://registry.npmjs.org/react-native-tts/-/react-native-tts-4.1.1.tgz"
   integrity sha512-VL0TgCwkUWggbbFGIXAPKC3rM1baluAYtgOdgnaTm7UYsWf/y8n5VgmVB0J2Wa8qt1dldZ1cSsdQY9iz3evcAg==
 
+react-native-typewriter-effect@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.npmjs.org/react-native-typewriter-effect/-/react-native-typewriter-effect-0.1.4.tgz"
+  integrity sha512-/hCQ6rgQtpV9iNIHMBrx3KVJY2CoKxU0GExo/VvSjjm8wDJdw2Dy6pSh0ybzjJgN63PLflCET8OIJFQqP02Ylw==
+
 react-native-vector-icons@*:
   version "10.0.3"
   resolved "https://registry.npmjs.org/react-native-vector-icons/-/react-native-vector-icons-10.0.3.tgz"
