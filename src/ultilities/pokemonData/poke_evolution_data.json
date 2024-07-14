@@ -1,5 +1,5 @@
 {
-  "TODO_Note": "can check mr. rime, viploom. eevee, polytoad, urshifu, beatifly, also make male and female versions also wrt images and this feature would be displayed only in pokedex. So think how exactly to display it code wise",
+  "TODO_Note": "can check mr. rime, viploom. eevee, polytoad,vulpix, meowth, taurus, lapras, ditto, urshifu, beautifly, also make male and female versions also wrt images and this feature would be displayed only in pokedex. So think how exactly to display it code wise",
   "data": {
     "Bulbasaur": {
       "form": "Normal",
@@ -178,7 +178,7 @@
       "pokemon_id": 5,
       "pokemon_name": "Charmeleon",
       "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png",
-      "description": "Charmeleon is an evolved form of Charmander. Charmeleon is a Fire type Pokémon. When it swings its burning tail, it elevates the temperature to unbearably high levels.",
+      "description": "Charméleon is an evolved form of Charmander. Charméleon is a Fire type Pokémon. When it swings its burning tail, it elevates the temperature to unbearably high levels.",
       "type1": "fire",
       "type2": "none",
       "evolvesFrom": ["Charmander"],
@@ -221,7 +221,7 @@
       "pokemon_id": 6,
       "pokemon_name": "Charizard",
       "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png",
-      "description": "Charizard is a Fire/Flying type Pokémon and an evolved form of Charmeleon. Charizard is a large dragon-like Pokémon, mainly orange in color. It has two large wings, the underside of which are turquoise.",
+      "description": "Charizard is a Fire/Flying type Pokémon and an evolved form of Charméleon. Charizard is a large dragon-like Pokémon, mainly orange in color. It has two large wings, the underside of which are turquoise.",
       "type1": "fire",
       "type2": "flying",
       "candy_required": 100,
@@ -479,7 +479,7 @@
       "pokemon_id": 12,
       "pokemon_name": "Butterfree",
       "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/12.png",
-      "description": "Butterfree is a Bug/Flying type Pokémon and an evolved form of Metapod.In battle, it flaps its wings at high speed to release highly toxic dust into the air",
+      "description": "Butterfree is a Bug/Flying type Pokémon and an evolved form of Metapod. In battle, it flaps its wings at high speed to release highly toxic dust into the air",
       "type1": "bug",
       "type2": "flying",
       "candy_required": 100,

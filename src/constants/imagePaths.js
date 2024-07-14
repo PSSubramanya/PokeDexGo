@@ -52,6 +52,8 @@ export default {
   rotomIcon: require('../assets/images/icons/rotomIcon.png'),
   pokeBallIcon: require('../assets/images/icons/pokeBallIcon.png'),
   masterBallIcon: require('../assets/images/icons/masterBallIcon.png'),
+  mikeOnIcon: require('../assets/images/icons/mikeOn.png'),
+  mikeOffIcon: require('../assets/images/icons/mikeOff.png'),
 
   //Images
   calendar1: require('../assets/images/calendar.png'),

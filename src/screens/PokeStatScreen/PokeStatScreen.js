@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
-  TextInput,
   Image,
   FlatList,
   TouchableOpacity,
@@ -17,6 +16,7 @@ import pokeTypesData from '../../ultilities/pokemonData/pokemon_types';
 import evolutionData from '../../ultilities/pokemonData/poke_evolution_data.json';
 import {toCamelCase} from '../../ultilities/commonFunctions.js';
 import styles from './styles.js';
+import TextToSpeechConverter from '../../components/TextToSpeechConverter/TextToSpeechConverter.js';
 
 const PokeStatScreen = props => {
   //Destructred Data
@@ -142,8 +142,7 @@ const PokeStatScreen = props => {
           }}>
           <TouchableOpacity
             onPress={() => {
-              // navigation?.goBack();
-              navigation.navigate('SampleTestingScreen');
+              navigation?.goBack();
             }}>
             <Image
               source={imagePaths.leftChevronIcon}
@@ -205,11 +204,17 @@ const PokeStatScreen = props => {
             height={160}
             width={160}
             resizeMode="contain"
+            // source={{
+            //   uri: !shinyVersion
+            //     ? `https://www.pkparaiso.com/imagenes/xy/sprites/animados/${pokemonData?.pokemon_name?.toLowerCase()}.gif`
+            //     : `https://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/${pokemonData?.pokemon_name?.toLowerCase()}.gif`,
+            // }}
             source={{
               uri: !shinyVersion
                 ? `https://www.pkparaiso.com/imagenes/xy/sprites/animados/${pokemonData?.pokemon_name?.toLowerCase()}.gif`
                 : `https://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/${pokemonData?.pokemon_name?.toLowerCase()}.gif`,
             }}
+            //https://img.pokemondb.net/artwork/large/pecharunt.jpg
             // Below URLs check for GENS after 7
             // source={{
             //   uri: !shinyVersion
@@ -394,6 +399,9 @@ const PokeStatScreen = props => {
               </Text>
             </View>
           ) : null}
+          <View style={{marginLeft: 10, justifyContent: 'center'}}>
+            <TextToSpeechConverter targetText={pokemonData?.description} />
+          </View>
         </View>
         <View style={{height: 400}}>
           <ScrollView style={{marginTop: 10}}>
