@@ -28,11 +28,11 @@ const PokedexScreen = props => {
   // Same with colors and other constants
   // Optimise the code for all screens
   // Build a pokedex with all pokemons loading 100 at a time as we scroll, implement that feature in Flatlist
-  // On Click navigate to new detail screen.
-  // Try getting animated gif of each pokemon
+  // On Click navigate to new detail screen - DONE
+  // Try getting animated gif of each pokemon - NEED BETTER GIFs
   // Show evolution chart also
-  // Let left and right arrow also
-  // Follo dribbble and pokemonDB
+  // Let left and right arrow also - DONE
+  // Follow dribbble and pokemonDB - DONE
   // style make it scaled
 
   useEffect(() => {
@@ -55,10 +55,6 @@ const PokedexScreen = props => {
   useEffect(() => {
     setEvolutionChart([]);
   }, [selectedPokemon]);
-
-  const loadEvolutions = pokemonName => {
-    return evolutionData?.data?.[pokemonName];
-  };
 
   return (
     <View
@@ -117,11 +113,12 @@ const PokedexScreen = props => {
         />
         <TouchableOpacity
           onPress={() => {
-            const val = loadEvolutions(selectedPokemon);
-            let temporaryEvolutionChart;
-            temporaryEvolutionChart = val?.evolutionChart;
-            console.log('valvalval', temporaryEvolutionChart);
-            setEvolutionChart(temporaryEvolutionChart);
+            const searchingPokemonData = evolutionData?.data[selectedPokemon];
+            const tempObject = {
+              pokemonName: selectedPokemon,
+              pokemonStatsData: searchingPokemonData,
+            };
+            navigation?.navigate('PokeStatScreen', {pokeStatData: tempObject});
           }}
           style={{marginHorizontal: 10}}>
           <View
