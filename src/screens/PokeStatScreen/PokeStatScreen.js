@@ -33,7 +33,6 @@ const PokeStatScreen = props => {
   const fullPokemonData = evolutionData?.data;
   const objKeysArray = Object.keys(fullPokemonData);
   let indexValue = -1;
-  // let pokemonDescriptionHeight = 0;
 
   //State Values
   const [shinyVersion, setShinyVersion] = useState(false);
@@ -42,7 +41,6 @@ const PokeStatScreen = props => {
   const [pokemonData, setPokemonData] = useState('');
   const [selectedPokemonIndex, setSelectedPokemonIndex] = useState(0);
   const [numOfLines, setNumOfLines] = useState(0);
-  // const [pokemonDescriptionHeight, setPokemonDescriptionHeight] = useState(0);
 
   // const [pokemonTouched, setPokemonTouched] = useState(false);
   /* If pokemon touched gets gif up to date//https://www.pkparaiso.com/imagenes/xy/sprites/animados/charizard-3.gif */
@@ -76,8 +74,6 @@ const PokeStatScreen = props => {
     const descriptionLines = pokemonData?.description?.length / 57;
     let pokeDescHeight = Math.floor(descriptionLines) * 25;
     pokeDescHeight = pokeDescHeight + 25;
-    // setPokemonDescriptionHeight(pokeDescHeight ?? 0);
-    console.log('pokemonDescriptionHeight', descriptionLines, pokeDescHeight);
     return pokeDescHeight;
   }, [pokemonData]);
 
@@ -484,8 +480,7 @@ const PokeStatScreen = props => {
                   lineHeight: 20,
                   fontFamily: fontFamily?.primaryFontFamilySemiBold,
                   color: colors?.white,
-                  // height: 20, //numOfLines * 30,
-                  height: pokemonDescriptionHeight, //10
+                  height: pokemonDescriptionHeight,
                   // backgroundColor: 'red',
                 }}
                 maxDelay={1}
