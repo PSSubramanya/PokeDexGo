@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback, useMemo} from 'react';
 import {
   View,
   Text,
@@ -14,6 +14,10 @@ import imagePaths from '../../constants/imagePaths.js';
 import fontFamily from '../../ultilities/fontFamily.js';
 import pokeTypesData from '../../ultilities/pokemonData/pokemon_types';
 import evolutionData from '../../ultilities/pokemonData/poke_evolution_data.json';
+import pokemon_alolan_variants from '../../ultilities/pokemonData/pokemon_alolan_variants';
+import pokemon_galarian_variants from '../../ultilities/pokemonData/pokemon_galarian_variants';
+import pokemon_hisuian_variants from '../../ultilities/pokemonData/pokemon_hisuian_variants';
+import pokemon_paldean_variants from '../../ultilities/pokemonData/pokemon_paldean_variants.js';
 import {toCamelCase} from '../../ultilities/commonFunctions.js';
 import styles from './styles.js';
 import TextToSpeechConverter from '../../components/TextToSpeechConverter/TextToSpeechConverter.js';
@@ -29,6 +33,7 @@ const PokeStatScreen = props => {
   const fullPokemonData = evolutionData?.data;
   const objKeysArray = Object.keys(fullPokemonData);
   let indexValue = -1;
+  // let pokemonDescriptionHeight = 0;
 
   //State Values
   const [shinyVersion, setShinyVersion] = useState(false);
@@ -36,6 +41,9 @@ const PokeStatScreen = props => {
   const [pokemonName, setPokemonName] = useState('');
   const [pokemonData, setPokemonData] = useState('');
   const [selectedPokemonIndex, setSelectedPokemonIndex] = useState(0);
+  const [numOfLines, setNumOfLines] = useState(0);
+  // const [pokemonDescriptionHeight, setPokemonDescriptionHeight] = useState(0);
+
   // const [pokemonTouched, setPokemonTouched] = useState(false);
   /* If pokemon touched gets gif up to date//https://www.pkparaiso.com/imagenes/xy/sprites/animados/charizard-3.gif */
 
@@ -47,6 +55,14 @@ const PokeStatScreen = props => {
   const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
   const darkModeValue = darkMode?.data;
 
+  const onTextLayout = useCallback(e => {
+    if (numOfLines == 0) {
+      console.log('NUMLINES', pokemonData?.description?.length); //e.nativeEvent.lines.length);
+      // setNumOfLines(e.nativeEvent.lines.length);
+      setNumOfLines(pokemonData?.description?.length);
+    }
+  });
+
   //useEffect
   useEffect(() => {
     const tempName = pokeStatData?.pokemonStatsData?.pokemon_name;
@@ -55,6 +71,15 @@ const PokeStatScreen = props => {
 
     calculatePokemonIndex(tempName);
   }, [pokeStatData]);
+
+  const pokemonDescriptionHeight = useMemo(() => {
+    const descriptionLines = pokemonData?.description?.length / 57;
+    let pokeDescHeight = Math.floor(descriptionLines) * 25;
+    pokeDescHeight = pokeDescHeight + 25;
+    // setPokemonDescriptionHeight(pokeDescHeight ?? 0);
+    console.log('pokemonDescriptionHeight', descriptionLines, pokeDescHeight);
+    return pokeDescHeight;
+  }, [pokemonData]);
 
   useEffect(() => {
     const val = loadEvolutions(pokemonName);
@@ -71,6 +96,13 @@ const PokeStatScreen = props => {
   }, [selectedPokemonIndex]);
 
   //Functions
+  const onLayout = e => {
+    const {height} = e.nativeEvent.layout;
+    // const count = Math.floor(height / styles.text.lineHeight);
+    const count = Math.floor(height / 20);
+    console.log('countcountcount', e.nativeEvent.layout, count);
+  };
+
   const calculatePokemonIndex = tempName => {
     for (let i of objKeysArray) {
       if (i === tempName) {
@@ -114,6 +146,37 @@ const PokeStatScreen = props => {
         // style={styles.arrowIcon}
       />
     );
+  };
+
+  const renderImage = (pokemonIndex, form, pokemonImageString) => {
+    let imageURL = !shinyVersion ? '' : '';
+
+    if (shinyVersion) {
+      if (form === 'alolan') {
+        imageURL = pokemon_alolan_variants[pokemonIndex + 's'];
+      } else if (form === 'galarian') {
+        imageURL = pokemon_galarian_variants[pokemonIndex + 's'];
+      } else if (form === 'hisuian') {
+        imageURL = pokemon_hisuian_variants[pokemonIndex + 's'];
+      } else if (form === 'paldean') {
+        imageURL = pokemon_paldean_variants[pokemonIndex + 's'];
+      } else {
+        imageURL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${pokemonIndex}.png`;
+      }
+    } else {
+      if (form === 'alolan') {
+        imageURL = pokemon_alolan_variants[pokemonIndex + 'ev'];
+      } else if (form === 'galarian') {
+        imageURL = pokemon_galarian_variants[pokemonIndex + 'ev'];
+      } else if (form === 'hisuian') {
+        imageURL = pokemon_hisuian_variants[pokemonIndex + 'ev'];
+      } else if (form === 'paldean') {
+        imageURL = pokemon_paldean_variants[pokemonIndex + 'ev'];
+      } else {
+        imageURL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIndex}.png`;
+      }
+    }
+    return imageURL;
   };
 
   return (
@@ -211,9 +274,11 @@ const PokeStatScreen = props => {
             //     : `https://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/${pokemonData?.pokemon_name?.toLowerCase()}.gif`,
             // }}
             source={{
-              uri: !shinyVersion
-                ? `https://www.pkparaiso.com/imagenes/xy/sprites/animados/${pokemonData?.pokemon_name?.toLowerCase()}.gif`
-                : `https://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/${pokemonData?.pokemon_name?.toLowerCase()}.gif`,
+              uri: renderImage(
+                pokemonData?.pokemon_id,
+                pokemonData?.form,
+                pokemonData?.imageString,
+              ),
             }}
             //https://img.pokemondb.net/artwork/large/pecharunt.jpg
             // Below URLs check for GENS after 7
@@ -406,7 +471,7 @@ const PokeStatScreen = props => {
         </View>
         <View style={{height: 400}}>
           <ScrollView style={{marginTop: 10}}>
-            {pokemonData?.description?.length > 0 ? (
+            {pokemonData?.description?.length > 0 ? ( // <View style={{height: 123, backgroundColor: 'red'}}></View>
               <TypeWriterEffect
                 content={pokemonData?.description?.toString()}
                 style={{
@@ -419,48 +484,14 @@ const PokeStatScreen = props => {
                   lineHeight: 20,
                   fontFamily: fontFamily?.primaryFontFamilySemiBold,
                   color: colors?.white,
+                  // height: 20, //numOfLines * 30,
+                  height: pokemonDescriptionHeight, //10
+                  // backgroundColor: 'red',
                 }}
                 maxDelay={1}
+                onTextLayout={onTextLayout}
+                onLayout={onLayout}
               />
-            ) : null}
-
-            {pokemonData?.candy_required !== 0 ? (
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  marginLeft: 10,
-                }}>
-                <Text
-                  style={{
-                    fontSize: 12,
-                    fontFamily: fontFamily?.primaryFontFamilySemiBold,
-                    color: colors?.white,
-                  }}>
-                  Candies to evolve to {pokemonData?.pokemon_name}:
-                </Text>
-                <Image
-                  source={imagePaths?.candyIcon}
-                  height={40}
-                  width={40}
-                  style={{
-                    width: 40,
-                    height: 40,
-                    alignSelf: 'center',
-                    // marginLeft: 10,
-                  }}
-                  resizeMode={'contain'}
-                />
-                <Text
-                  style={{
-                    fontSize: 12,
-                    fontFamily: fontFamily?.primaryFontFamilyBold,
-                    color: colors?.white,
-                    marginLeft: -3,
-                  }}>
-                  {pokemonData?.candy_required}
-                </Text>
-              </View>
             ) : null}
             <Text
               style={{
@@ -503,7 +534,7 @@ const PokeStatScreen = props => {
                                   marginTop: 30,
                                   // marginHorizontal: 10,
                                   borderRadius: 5,
-                                  height: 100,
+                                  height: 120,
                                   width: 100,
                                   alignItems: 'center',
                                 }}>
@@ -522,6 +553,30 @@ const PokeStatScreen = props => {
                                   }}>
                                   {dat?.name}
                                 </Text>
+                                {dat?.candy_required !== 0 ? (
+                                  <View style={{flexDirection: 'row'}}>
+                                    <Image
+                                      source={imagePaths?.candyIcon}
+                                      height={20}
+                                      width={20}
+                                      style={{
+                                        width: 20,
+                                        height: 20,
+                                        alignSelf: 'center',
+                                      }}
+                                      resizeMode={'contain'}
+                                    />
+                                    <Text
+                                      style={{
+                                        fontSize: 10,
+                                        fontFamily:
+                                          fontFamily?.primaryFontFamilyMedium,
+                                        marginTop: 3,
+                                      }}>
+                                      {dat?.candy_required}
+                                    </Text>
+                                  </View>
+                                ) : null}
                               </View>
                             </TouchableOpacity>
                           </View>

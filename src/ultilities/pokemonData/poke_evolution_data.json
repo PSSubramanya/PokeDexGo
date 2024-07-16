@@ -517,6 +517,236 @@
         ]
       ]
     },
+    "Vulpix": {
+      "form": "Normal",
+      "pokemon_id": 37,
+      "pokemon_name": "Vulpix",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/37.png",
+      "description": "",
+      "type1": "fire",
+      "type2": "none",
+      "candy_required": 0,
+      "evolvesFrom": ["Egg"],
+      "evolvesTo": ["Ninetales"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Vulpix",
+            "idx": 37,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/37.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "fire",
+            "type2": "none"
+          },
+          {
+            "name": "Ninetales",
+            "idx": 38,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/38.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "fire",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Vulpix (Alolan)",
+            "imageString": "vulpix-alolan",
+            "idx": 37,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10103.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "ice",
+            "type2": "none"
+          },
+          {
+            "name": "Ninetales (Alolan)",
+            "imageString": "ninetales-alolan",
+            "idx": 38,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10104.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "ice",
+            "type2": "fairy"
+          }
+        ]
+      ]
+    },
+
+    "Vulpix (Alolan)": {
+      "form": "alolan",
+      "pokemon_id": 37,
+      "pokemon_name": "Vulpix (Alolan)",
+      "imageString": "vulpix-alolan",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10103.png",
+      "description": "",
+      "type1": "ice",
+      "type2": "none",
+      "candy_required": 0,
+      "evolvesFrom": ["Egg"],
+      "evolvesTo": ["Ninetales"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Vulpix",
+            "idx": 37,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/37.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "fire",
+            "type2": "none"
+          },
+          {
+            "name": "Ninetales",
+            "idx": 38,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/38.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "fire",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Vulpix (Alolan)",
+            "imageString": "vulpix-alolan",
+            "idx": 37,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10103.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "ice",
+            "type2": "none"
+          },
+          {
+            "name": "Ninetales (Alolan)",
+            "imageString": "ninetales-alolan",
+            "idx": 38,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10104.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "ice",
+            "type2": "fairy"
+          }
+        ]
+      ]
+    },
+
+    "Ninetales": {
+      "form": "Normal",
+      "pokemon_id": 38,
+      "pokemon_name": "Ninetales",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/38.png",
+      "description": "",
+      "type1": "fire",
+      "type2": "none",
+      "candy_required": 50,
+      "evolvesFrom": ["Vulpix"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Vulpix",
+            "idx": 37,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/37.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "fire",
+            "type2": "none"
+          },
+          {
+            "name": "Ninetales",
+            "idx": 38,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/38.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "fire",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Vulpix (Alolan)",
+            "imageString": "vulpix-alolan",
+            "idx": 37,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10103.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "ice",
+            "type2": "none"
+          },
+          {
+            "name": "Ninetales (Alolan)",
+            "imageString": "ninetales-alolan",
+            "idx": 38,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10104.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "ice",
+            "type2": "fairy"
+          }
+        ]
+      ]
+    },
+
+    "Ninetales (Alolan)": {
+      "form": "alolan",
+      "pokemon_id": 38,
+      "pokemon_name": "Ninetales (Alolan)",
+      "imageString": "ninetales-alolan",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10104.png",
+      "description": "",
+      "type1": "ice",
+      "type2": "fairy",
+      "candy_required": 50,
+      "evolvesFrom": ["Vulpix"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Vulpix",
+            "idx": 37,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/37.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "fire",
+            "type2": "none"
+          },
+          {
+            "name": "Ninetales",
+            "idx": 38,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/38.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "fire",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Vulpix (Alolan)",
+            "imageString": "vulpix-alolan",
+            "idx": 37,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10103.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "ice",
+            "type2": "none"
+          },
+          {
+            "name": "Ninetales (Alolan)",
+            "imageString": "ninetales-alolan",
+            "idx": 38,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10104.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "ice",
+            "type2": "fairy"
+          }
+        ]
+      ]
+    },
+
     "Eevee": {
       "form": "Normal",
       "pokemon_id": 133,
