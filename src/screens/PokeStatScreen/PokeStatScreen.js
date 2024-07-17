@@ -48,6 +48,7 @@ const PokeStatScreen = props => {
   //TODO:
   // Add Item images along with candy icon for special evolutions like vaporeon etc.
   // Add Mega Evolution for the ones that have Mega Evolutions - DONE
+  // Add Mega Pokemon data and display it when clicked on it.
   // URL for pokemon gifs: https://projectpokemon.org/home/docs/spriteindex_148/3d-models-generation-1-pok%C3%A9mon-r90/
 
   //Hooks
@@ -467,162 +468,144 @@ const PokeStatScreen = props => {
           </View>
         </View>
         <View style={{height: 400}}>
-          <ScrollView style={{marginTop: 10}}>
-            {pokemonData?.description?.length > 0 ? ( // <View style={{height: 123, backgroundColor: 'red'}}></View>
-              <TypeWriterEffect
-                content={pokemonData?.description?.toString()}
-                style={{
-                  marginTop: 0,
-                  zIndex: 1,
-                  marginTop: 10,
-                  marginLeft: 10,
-                  marginRight: 10,
-                  fontSize: 12,
-                  lineHeight: 20,
-                  fontFamily: fontFamily?.primaryFontFamilySemiBold,
-                  color: colors?.white,
-                  height: pokemonDescriptionHeight,
-                  // backgroundColor: 'red',
-                }}
-                maxDelay={1}
-                onTextLayout={onTextLayout}
-                onLayout={onLayout}
-              />
-            ) : null}
-            <Text
+          {pokemonData?.description?.length > 0 ? ( // <View style={{height: 123, backgroundColor: 'red'}}></View>
+            <TypeWriterEffect
+              content={pokemonData?.description?.toString()}
               style={{
                 marginTop: 0,
                 zIndex: 1,
-                marginTop: 20,
+                marginTop: 10,
                 marginLeft: 10,
                 marginRight: 10,
                 fontSize: 12,
                 lineHeight: 20,
-                fontFamily: fontFamily?.primaryFontFamilyBold,
+                fontFamily: fontFamily?.primaryFontFamilySemiBold,
                 color: colors?.white,
-                textTransform: 'uppercase',
-                textDecorationLine: 'underline',
-              }}>
-              The evolution tree
-            </Text>
-            <View style={{alignItems: 'center'}}>
-              <FlatList
-                data={evolutionChart}
-                keyExtractor={item => item}
-                renderItem={({item, index}) => {
-                  return (
-                    <View style={{flexDirection: 'row'}}>
-                      {item?.map((dat, idx) => {
-                        return (
-                          <View
-                            style={{
-                              flexDirection: 'row',
-                              alignItems: 'center',
-                            }}>
-                            {dat?.candy_required !== 0 ? arrowIcon() : null}
-                            <TouchableOpacity
-                              onPress={() => {
-                                calculatePokemonIndex(dat?.name);
+                height: pokemonDescriptionHeight,
+                // backgroundColor: 'red',
+              }}
+              maxDelay={1}
+              onTextLayout={onTextLayout}
+              onLayout={onLayout}
+            />
+          ) : null}
+          <Text
+            style={{
+              zIndex: 1,
+              marginLeft: 10,
+              marginRight: 10,
+              fontSize: 12,
+              lineHeight: 20,
+              fontFamily: fontFamily?.primaryFontFamilyBold,
+              color: colors?.white,
+              textTransform: 'uppercase',
+              textDecorationLine: 'underline',
+            }}>
+            The evolution tree
+          </Text>
+          <View style={{height: 200, marginBottom: 20}}>
+            <ScrollView style={{marginTop: 10}}>
+              <View style={{alignItems: 'center'}}>
+                <FlatList
+                  data={evolutionChart}
+                  keyExtractor={item => item}
+                  renderItem={({item, index}) => {
+                    return (
+                      <View style={{flexDirection: 'row'}}>
+                        {item?.map((dat, idx) => {
+                          return (
+                            <View
+                              style={{
+                                flexDirection: 'row',
+                                alignItems: 'center',
                               }}>
-                              <View
-                                style={{
-                                  // backgroundColor: 'white',
-                                  marginTop: 30,
-                                  // marginHorizontal: 10,
-                                  borderRadius: 5,
-                                  height: 120,
-                                  width: 100,
-                                  alignItems: 'center',
+                              {dat?.candy_required !== 0 ? arrowIcon() : null}
+                              <TouchableOpacity
+                                onPress={() => {
+                                  calculatePokemonIndex(dat?.name);
                                 }}>
-                                <Image
-                                  source={{uri: dat?.img}}
-                                  style={{height: 75, width: 75}}
-                                  height={75}
-                                  width={75}
-                                />
-                                <Text
+                                <View
                                   style={{
-                                    marginTop: 5,
-                                    fontSize: 10,
-                                    fontFamily:
-                                      fontFamily?.primaryFontFamilyMedium,
+                                    // backgroundColor: 'white',
+                                    marginTop: 30,
+                                    // marginHorizontal: 10,
+                                    borderRadius: 5,
+                                    height: 120,
+                                    width: 100,
+                                    alignItems: 'center',
                                   }}>
-                                  {dat?.name}
-                                </Text>
-                                {dat?.candy_required !== 0 ? (
-                                  <View style={{flexDirection: 'row'}}>
-                                    <Image
-                                      source={imagePaths?.candyIcon}
-                                      height={20}
-                                      width={20}
-                                      style={{
-                                        width: 20,
-                                        height: 20,
-                                        alignSelf: 'center',
-                                      }}
-                                      resizeMode={'contain'}
-                                    />
-                                    <Text
-                                      style={{
-                                        fontSize: 10,
-                                        fontFamily:
-                                          fontFamily?.primaryFontFamilyMedium,
-                                        marginTop: 3,
-                                      }}>
-                                      {dat?.candy_required}
-                                    </Text>
-                                  </View>
-                                ) : null}
-                              </View>
-                            </TouchableOpacity>
-                          </View>
-                        );
-                      })}
-                    </View>
-                  );
-                }}
-              />
-            </View>
-            {JSON.stringify(pokemonData?.megaEvolution1) !== '{}' ? (
-              <Text
-                style={{
-                  marginTop: 5,
-                  fontSize: 10,
-                  fontFamily: fontFamily?.primaryFontFamilyBold,
-                  alignSelf: 'center',
-                }}>
-                MEGA EVOLUTIONS
-              </Text>
-            ) : null}
-            {JSON.stringify(pokemonData?.megaEvolution1) !== '{}' ? (
-              <View
-                style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                                  <Image
+                                    source={{uri: dat?.img}}
+                                    style={{height: 75, width: 75}}
+                                    height={75}
+                                    width={75}
+                                  />
+                                  <Text
+                                    style={{
+                                      marginTop: 5,
+                                      fontSize: 10,
+                                      fontFamily:
+                                        fontFamily?.primaryFontFamilyMedium,
+                                    }}>
+                                    {dat?.name}
+                                  </Text>
+                                  {dat?.candy_required !== 0 ? (
+                                    <View style={{flexDirection: 'row'}}>
+                                      <Image
+                                        source={imagePaths?.candyIcon}
+                                        height={20}
+                                        width={20}
+                                        style={{
+                                          width: 20,
+                                          height: 20,
+                                          alignSelf: 'center',
+                                        }}
+                                        resizeMode={'contain'}
+                                      />
+                                      <Text
+                                        style={{
+                                          fontSize: 10,
+                                          fontFamily:
+                                            fontFamily?.primaryFontFamilyMedium,
+                                          marginTop: 3,
+                                        }}>
+                                        {dat?.candy_required}
+                                      </Text>
+                                    </View>
+                                  ) : null}
+                                </View>
+                              </TouchableOpacity>
+                            </View>
+                          );
+                        })}
+                      </View>
+                    );
+                  }}
+                />
+              </View>
+              {JSON.stringify(pokemonData?.megaEvolution1) !== '{}' ? (
+                <Text
+                  style={{
+                    marginTop: 5,
+                    fontSize: 10,
+                    fontFamily: fontFamily?.primaryFontFamilyBold,
+                    alignSelf: 'center',
+                  }}>
+                  MEGA EVOLUTIONS
+                </Text>
+              ) : null}
+              {JSON.stringify(pokemonData?.megaEvolution1) !== '{}' ? (
                 <View
                   style={{
-                    alignItems: 'center',
+                    flexDirection: 'row',
+                    justifyContent: 'space-evenly',
                   }}>
-                  <Image
-                    source={{uri: pokemonData?.megaEvolution1?.imageSrc}}
-                    style={{height: 120, width: 120}}
-                    height={120}
-                    width={120}
-                  />
-                  <Text
-                    style={{
-                      marginTop: 5,
-                      fontSize: 10,
-                      fontFamily: fontFamily?.primaryFontFamilyMedium,
-                    }}>
-                    {pokemonData?.megaEvolution1?.name}
-                  </Text>
-                </View>
-                {JSON.stringify(pokemonData?.megaEvolution2) !== '{}' ? (
                   <View
                     style={{
                       alignItems: 'center',
                     }}>
                     <Image
-                      source={{uri: pokemonData?.megaEvolution2?.imageSrc}}
+                      source={{uri: pokemonData?.megaEvolution1?.imageSrc}}
                       style={{height: 120, width: 120}}
                       height={120}
                       width={120}
@@ -633,13 +616,34 @@ const PokeStatScreen = props => {
                         fontSize: 10,
                         fontFamily: fontFamily?.primaryFontFamilyMedium,
                       }}>
-                      {pokemonData?.megaEvolution2?.name}
+                      {pokemonData?.megaEvolution1?.name}
                     </Text>
                   </View>
-                ) : null}
-              </View>
-            ) : null}
-          </ScrollView>
+                  {JSON.stringify(pokemonData?.megaEvolution2) !== '{}' ? (
+                    <View
+                      style={{
+                        alignItems: 'center',
+                      }}>
+                      <Image
+                        source={{uri: pokemonData?.megaEvolution2?.imageSrc}}
+                        style={{height: 120, width: 120}}
+                        height={120}
+                        width={120}
+                      />
+                      <Text
+                        style={{
+                          marginTop: 5,
+                          fontSize: 10,
+                          fontFamily: fontFamily?.primaryFontFamilyMedium,
+                        }}>
+                        {pokemonData?.megaEvolution2?.name}
+                      </Text>
+                    </View>
+                  ) : null}
+                </View>
+              ) : null}
+            </ScrollView>
+          </View>
         </View>
       </View>
     </View>
