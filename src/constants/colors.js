@@ -23,6 +23,7 @@ export default {
   grey: '#cccccc',
   greyLight: '#c0c0c0',
   goldColor: '#FFD700',
+  skinColor: '#FCE3C9',
 
   // common colors
   primaryColor: '#514CFA',

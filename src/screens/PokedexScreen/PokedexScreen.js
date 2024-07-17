@@ -1,13 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
-import {
-  View,
-  Text,
-  TextInput,
-  Image,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, Image, FlatList, TouchableOpacity} from 'react-native';
 import evolutionData from '../../ultilities/pokemonData/poke_evolution_data.json';
 import colors from '../../constants/colors.js';
 import imagePaths from '../../constants/imagePaths.js';
@@ -17,9 +10,9 @@ import TextInputField from '../../components/TextInputField/TextInputField.js';
 
 const PokedexScreen = props => {
   const {navigation} = props;
-  const [evolutionChart, setEvolutionChart] = useState([]);
   const [selectedPokemon, setSelectedPokemon] = useState('');
   const [allPokemonData, setAllPokemonData] = useState([]);
+  const [autoSuggestedPokemonList, setAutoSuggestedPokemonList] = useState([]);
   const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
   const darkModeValue = darkMode?.data;
 
@@ -27,13 +20,15 @@ const PokedexScreen = props => {
   // All text strings in every file should come from string.js file
   // Same with colors and other constants
   // Optimise the code for all screens
-  // Build a pokedex with all pokemons loading 100 at a time as we scroll, implement that feature in Flatlist
-  // On Click navigate to new detail screen - DONE
+  // Build a pokedex with all pokemons
+  // Load only 100 at a time as we scroll, implement that feature in Flatlist
   // Try getting animated gif of each pokemon - NEED BETTER GIFs
-  // Show evolution chart also
+  // style make it scaled
+  // Auto name suggestion integrate for name search type pokemon search pokedex view - DONE
   // Let left and right arrow also - DONE
   // Follow dribbble and pokemonDB - DONE
-  // style make it scaled
+  // On Click navigate to new detail screen - DONE
+  // Show evolution chart also - DONE
 
   useEffect(() => {
     const allPokeData = evolutionData?.data;
@@ -50,10 +45,22 @@ const PokedexScreen = props => {
     setAllPokemonData(tempArray);
   }, []);
 
-  console.log('allPokemonData', allPokemonData);
-
   useEffect(() => {
-    setEvolutionChart([]);
+    const allPokeData = evolutionData?.data;
+    const objKeysArray = Object.keys(allPokeData);
+    const tempAutoSuggestionsArray = objKeysArray?.filter(val => {
+      if (selectedPokemon?.length === 0) {
+        setAutoSuggestedPokemonList([]);
+      } else if (val?.includes(selectedPokemon)) {
+        return val;
+      }
+    });
+    console.log(
+      'allPokemonData1234',
+      selectedPokemon,
+      tempAutoSuggestionsArray,
+    );
+    setAutoSuggestedPokemonList(tempAutoSuggestionsArray);
   }, [selectedPokemon]);
 
   return (
@@ -145,6 +152,56 @@ const PokedexScreen = props => {
       </View>
       <View
         style={{
+          position: 'absolute',
+          top: 220,
+          marginTop: -3,
+          zIndex: 1,
+        }}>
+        <FlatList
+          data={autoSuggestedPokemonList}
+          keyExtractor={item => item}
+          renderItem={({item, index}) => {
+            console.log('POKEDEX_ITEM', item);
+            return (
+              <TouchableOpacity
+                onPress={() => {
+                  const searchingPokemonData = evolutionData?.data[item];
+                  const tempObject = {
+                    pokemonName: item,
+                    pokemonStatsData: searchingPokemonData,
+                  };
+                  navigation?.navigate('PokeStatScreen', {
+                    pokeStatData: tempObject,
+                  });
+                }}
+                activeOpacity={0.6}
+                style={{marginHorizontal: 10}}>
+                <View
+                  style={{
+                    height: 50,
+                    width: 313,
+                    backgroundColor: colors?.skinColor,
+                    justifyContent: 'center',
+                    paddingLeft: 10,
+                  }}>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      fontFamily: fontFamily?.primaryFontFamilyRegular,
+                    }}>
+                    {item}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            );
+          }}
+          // ItemSeparatorComponent={() => {
+          //   return <View />;
+          // }}
+        />
+      </View>
+      <View
+        style={{
           height: 600,
           width: 380,
           flexDirection: 'column',
@@ -159,7 +216,7 @@ const PokedexScreen = props => {
           keyExtractor={item => item}
           numColumns={3}
           renderItem={({item, index}) => {
-            console.log('POKEDEX_ITEM', item);
+            // console.log('POKEDEX_ITEM', item);
             return (
               <TouchableOpacity
                 onPress={() => {

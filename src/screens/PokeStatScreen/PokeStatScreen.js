@@ -47,6 +47,7 @@ const PokeStatScreen = props => {
 
   //TODO:
   // Add Item images along with candy icon for special evolutions like vaporeon etc.
+  // Add Mega Evolution for the ones that have Mega Evolutions
   // URL for pokemon gifs: https://projectpokemon.org/home/docs/spriteindex_148/3d-models-generation-1-pok%C3%A9mon-r90/
 
   //Hooks
