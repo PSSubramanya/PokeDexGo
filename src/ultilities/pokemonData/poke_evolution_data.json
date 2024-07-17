@@ -1,5 +1,5 @@
 {
-  "TODO_Note": "can check mr. rime, viploom. eevee, polytoad,vulpix, meowth, taurus, lapras, ditto, urshifu, beautifly, also make male and female versions also wrt images and this feature would be displayed only in pokedex. So think how exactly to display it code wise",
+  "TODO_Note": "can check mr. rime, vileploom -DONE, eevee -DONE, polytoad, vulpix-DONE, meowth, taurus, lapras, ditto, urshifu, beautifly, also make male and female versions also wrt images and this feature would be displayed only in pokedex. So think how exactly to display it code wise",
   "data": {
     "Bulbasaur": {
       "form": "Normal",
@@ -42,7 +42,9 @@
             "type2": "poison"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     },
     "Ivysaur": {
       "form": "Normal",
@@ -85,7 +87,9 @@
             "type2": "poison"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     },
     "Venusaur": {
       "form": "Normal",
@@ -128,7 +132,12 @@
             "type2": "poison"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {
+        "name": "Mega Venusaur",
+        "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10033.png"
+      },
+      "megaEvolution2": {}
     },
     "Charmander": {
       "form": "Normal",
@@ -171,7 +180,9 @@
             "type2": "flying"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     },
     "Charmeleon": {
       "form": "Normal",
@@ -214,7 +225,9 @@
             "type2": "flying"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     },
     "Charizard": {
       "form": "Normal",
@@ -257,7 +270,15 @@
             "type2": "flying"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {
+        "name": "Mega Charizard X",
+        "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10034.png"
+      },
+      "megaEvolution2": {
+        "name": "Mega Charizard Y",
+        "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10035.png"
+      }
     },
     "Squirtle": {
       "form": "Normal",
@@ -300,7 +321,9 @@
             "type2": "none"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     },
     "Wartortle": {
       "form": "Normal",
@@ -343,7 +366,9 @@
             "type2": "none"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     },
     "Blastoise": {
       "form": "Normal",
@@ -386,7 +411,12 @@
             "type2": "none"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {
+        "name": "Mega Blastoise",
+        "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10036.png"
+      },
+      "megaEvolution2": {}
     },
     "Caterpie": {
       "form": "Normal",
@@ -429,7 +459,9 @@
             "type2": "flying"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     },
     "Metapod": {
       "form": "Normal",
@@ -472,7 +504,9 @@
             "type2": "flying"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     },
     "Butterfree": {
       "form": "Normal",
@@ -515,14 +549,16 @@
             "type2": "flying"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     },
     "Vulpix": {
       "form": "Normal",
       "pokemon_id": 37,
       "pokemon_name": "Vulpix",
       "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/37.png",
-      "description": "",
+      "description": "Vulpix is a Fire type Pokémon. At the time of birth, it has just one tail. The tail splits from its tip as it grows older.",
       "type1": "fire",
       "type2": "none",
       "candy_required": 0,
@@ -571,16 +607,17 @@
             "type2": "fairy"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     },
-
     "Vulpix (Alolan)": {
       "form": "alolan",
       "pokemon_id": 37,
       "pokemon_name": "Vulpix (Alolan)",
       "imageString": "vulpix-alolan",
       "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10103.png",
-      "description": "",
+      "description": "Vulpix has an Alolan Form. It is ice type pokemon. It exhales air colder than -58 degrees Fahrenheit. Elderly people in Alola call this Pokémon by an older name—Keokeo.",
       "type1": "ice",
       "type2": "none",
       "candy_required": 0,
@@ -629,15 +666,16 @@
             "type2": "fairy"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     },
-
     "Ninetales": {
       "form": "Normal",
       "pokemon_id": 38,
       "pokemon_name": "Ninetales",
       "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/38.png",
-      "description": "",
+      "description": "Ninetales is a Fire type Pokémon and an evolved form of Vulpix. It is said to live a thousand years, and each of its tails is loaded with supernatural powers.",
       "type1": "fire",
       "type2": "none",
       "candy_required": 50,
@@ -686,16 +724,17 @@
             "type2": "fairy"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     },
-
     "Ninetales (Alolan)": {
       "form": "alolan",
       "pokemon_id": 38,
       "pokemon_name": "Ninetales (Alolan)",
       "imageString": "ninetales-alolan",
       "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10104.png",
-      "description": "",
+      "description": "Ninetales has an Alolan Form and is an ice/fairy type pokemon. It creates drops of ice in its coat and showers them over its enemies. Anyone who angers it will be frozen stiff in an instant.",
       "type1": "ice",
       "type2": "fairy",
       "candy_required": 50,
@@ -744,9 +783,232 @@
             "type2": "fairy"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     },
-
+    "Oddish": {
+      "form": "Normal",
+      "pokemon_id": 43,
+      "pokemon_name": "Oddish",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png",
+      "description": "Oddish is a Grass/Poison type Pokémon. During the day, it keeps its face buried in the ground. At night, it wanders around sowing its seeds.",
+      "type1": "grass",
+      "type2": "poison",
+      "candy_required": 0,
+      "evolvesFrom": ["Egg"],
+      "evolvesTo": ["Gloom"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Oddish",
+            "idx": 43,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Gloom",
+            "idx": 44,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/44.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Vileplume",
+            "idx": 45,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/45.png",
+            "candy_required": 100,
+            "specialItemOrCondition": "leaf_stone",
+            "type1": "grass",
+            "type2": "poison"
+          }
+        ],
+        [
+          {
+            "name": "Oddish",
+            "idx": 43,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Gloom",
+            "idx": 44,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/44.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Bellossom",
+            "idx": 182,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/182.png",
+            "candy_required": 100,
+            "specialItemOrCondition": "sun_stone",
+            "type1": "grass",
+            "type2": "none"
+          }
+        ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
+    },
+    "Gloom": {
+      "form": "Normal",
+      "pokemon_id": 44,
+      "pokemon_name": "Gloom",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/44.png",
+      "description": "Gloom is a Grass/Poison type Pokémon and an evolved form of Oddish. The fluid that oozes from its mouth isn’t drool. It is a nectar that is used to attract prey.",
+      "type1": "grass",
+      "type2": "poison",
+      "candy_required": 0,
+      "evolvesFrom": ["Oddish"],
+      "evolvesTo": ["Vileplume", "Bellossom"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Oddish",
+            "idx": 43,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Gloom",
+            "idx": 44,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/44.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Vileplume",
+            "idx": 45,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/45.png",
+            "candy_required": 100,
+            "specialItemOrCondition": "leaf_stone",
+            "type1": "grass",
+            "type2": "poison"
+          }
+        ],
+        [
+          {
+            "name": "Oddish",
+            "idx": 43,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Gloom",
+            "idx": 44,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/44.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Bellossom",
+            "idx": 182,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/182.png",
+            "candy_required": 100,
+            "specialItemOrCondition": "sun_stone",
+            "type1": "grass",
+            "type2": "none"
+          }
+        ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
+    },
+    "Vileplume": {
+      "form": "Normal",
+      "pokemon_id": 45,
+      "pokemon_name": "Vileplume",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/45.png",
+      "description": "Vileplume is a Grass/Poison type Pokémon an evolved form of Gloom. The larger its petals, the more toxic pollen it contains. Its big head is heavy and hard to hold up.",
+      "type1": "grass",
+      "type2": "poison",
+      "candy_required": 0,
+      "evolvesFrom": ["Gloom"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Oddish",
+            "idx": 43,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Gloom",
+            "idx": 44,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/44.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Vileplume",
+            "idx": 45,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/45.png",
+            "candy_required": 100,
+            "specialItemOrCondition": "leaf_stone",
+            "type1": "grass",
+            "type2": "poison"
+          }
+        ],
+        [
+          {
+            "name": "Oddish",
+            "idx": 43,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Gloom",
+            "idx": 44,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/44.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Bellossom",
+            "idx": 182,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/182.png",
+            "candy_required": 100,
+            "specialItemOrCondition": "sun_stone",
+            "type1": "grass",
+            "type2": "none"
+          }
+        ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
+    },
     "Eevee": {
       "form": "Normal",
       "pokemon_id": 133,
@@ -928,7 +1190,9 @@
             "type2": "none"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     },
     "Vaporeon": {
       "form": "Normal",
@@ -962,7 +1226,9 @@
             "type2": "none"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     },
     "Jolteon": {
       "form": "Normal",
@@ -996,7 +1262,9 @@
             "type2": "none"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     },
     "Flareon": {
       "form": "Normal",
@@ -1030,7 +1298,83 @@
             "type2": "none"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
+    },
+    "Bellossom": {
+      "form": "Normal",
+      "pokemon_id": 182,
+      "pokemon_name": "Bellossom",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/182.png",
+      "description": "Bellossom is a Grass type Pokémon and an evolved form of Gloom. BELLOSSOM gather at times and appear to dance. They say that the dance is a ritual to summon the sun.",
+      "type1": "grass",
+      "type2": "none",
+      "candy_required": 0,
+      "evolvesFrom": ["Gloom"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Oddish",
+            "idx": 43,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Gloom",
+            "idx": 44,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/44.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Vileplume",
+            "idx": 45,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/45.png",
+            "candy_required": 100,
+            "specialItemOrCondition": "leaf_stone",
+            "type1": "grass",
+            "type2": "poison"
+          }
+        ],
+        [
+          {
+            "name": "Oddish",
+            "idx": 43,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Gloom",
+            "idx": 44,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/44.png",
+            "candy_required": 25,
+            "specialItemOrCondition": "none",
+            "type1": "grass",
+            "type2": "poison"
+          },
+          {
+            "name": "Bellossom",
+            "idx": 182,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/182.png",
+            "candy_required": 100,
+            "specialItemOrCondition": "sun_stone",
+            "type1": "grass",
+            "type2": "none"
+          }
+        ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     },
     "Espeon": {
       "form": "Normal",
@@ -1067,7 +1411,9 @@
             "type2": "none"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     },
     "Umbreon": {
       "form": "Normal",
@@ -1105,7 +1451,9 @@
             "type2": "none"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     },
     "Leafeon": {
       "form": "Normal",
@@ -1141,7 +1489,9 @@
             "type2": "none"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     },
     "Glaceon": {
       "form": "Normal",
@@ -1177,7 +1527,9 @@
             "type2": "none"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     },
     "Sylveon": {
       "form": "Normal",
@@ -1212,7 +1564,9 @@
             "type2": "none"
           }
         ]
-      ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {}
     }
   }
 }

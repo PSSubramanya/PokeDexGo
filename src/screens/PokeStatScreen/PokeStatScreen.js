@@ -47,7 +47,7 @@ const PokeStatScreen = props => {
 
   //TODO:
   // Add Item images along with candy icon for special evolutions like vaporeon etc.
-  // Add Mega Evolution for the ones that have Mega Evolutions
+  // Add Mega Evolution for the ones that have Mega Evolutions - DONE
   // URL for pokemon gifs: https://projectpokemon.org/home/docs/spriteindex_148/3d-models-generation-1-pok%C3%A9mon-r90/
 
   //Hooks
@@ -583,6 +583,62 @@ const PokeStatScreen = props => {
                 }}
               />
             </View>
+            {JSON.stringify(pokemonData?.megaEvolution1) !== '{}' ? (
+              <Text
+                style={{
+                  marginTop: 5,
+                  fontSize: 10,
+                  fontFamily: fontFamily?.primaryFontFamilyBold,
+                  alignSelf: 'center',
+                }}>
+                MEGA EVOLUTIONS
+              </Text>
+            ) : null}
+            {JSON.stringify(pokemonData?.megaEvolution1) !== '{}' ? (
+              <View
+                style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                <View
+                  style={{
+                    alignItems: 'center',
+                  }}>
+                  <Image
+                    source={{uri: pokemonData?.megaEvolution1?.imageSrc}}
+                    style={{height: 120, width: 120}}
+                    height={120}
+                    width={120}
+                  />
+                  <Text
+                    style={{
+                      marginTop: 5,
+                      fontSize: 10,
+                      fontFamily: fontFamily?.primaryFontFamilyMedium,
+                    }}>
+                    {pokemonData?.megaEvolution1?.name}
+                  </Text>
+                </View>
+                {JSON.stringify(pokemonData?.megaEvolution2) !== '{}' ? (
+                  <View
+                    style={{
+                      alignItems: 'center',
+                    }}>
+                    <Image
+                      source={{uri: pokemonData?.megaEvolution2?.imageSrc}}
+                      style={{height: 120, width: 120}}
+                      height={120}
+                      width={120}
+                    />
+                    <Text
+                      style={{
+                        marginTop: 5,
+                        fontSize: 10,
+                        fontFamily: fontFamily?.primaryFontFamilyMedium,
+                      }}>
+                      {pokemonData?.megaEvolution2?.name}
+                    </Text>
+                  </View>
+                ) : null}
+              </View>
+            ) : null}
           </ScrollView>
         </View>
       </View>
