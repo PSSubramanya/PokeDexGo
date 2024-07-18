@@ -1,6 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
-import {View, Text, Image, FlatList, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  FlatList,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
 import evolutionData from '../../ultilities/pokemonData/poke_evolution_data.json';
 import colors from '../../constants/colors.js';
 import imagePaths from '../../constants/imagePaths.js';
@@ -125,7 +132,9 @@ const PokedexScreen = props => {
               pokemonName: selectedPokemon,
               pokemonStatsData: searchingPokemonData,
             };
-            navigation?.navigate('PokeStatScreen', {pokeStatData: tempObject});
+            navigation?.navigate('PokeStatScreen', {
+              pokeStatData: tempObject,
+            });
           }}
           style={{marginHorizontal: 10}}>
           <View
@@ -152,8 +161,8 @@ const PokedexScreen = props => {
       </View>
       <View
         style={{
-          position: 'absolute',
-          top: 220,
+          // position: 'absolute',
+          // top: 220,
           marginTop: -3,
           zIndex: 1,
         }}>
@@ -170,6 +179,7 @@ const PokedexScreen = props => {
                     pokemonName: item,
                     pokemonStatsData: searchingPokemonData,
                   };
+                  setSelectedPokemon('');
                   navigation?.navigate('PokeStatScreen', {
                     pokeStatData: tempObject,
                   });
@@ -179,7 +189,7 @@ const PokedexScreen = props => {
                 <View
                   style={{
                     height: 50,
-                    width: 313,
+                    width: Platform?.OS === 'android' ? 331 : 313,
                     backgroundColor: colors?.skinColor,
                     justifyContent: 'center',
                     paddingLeft: 10,
@@ -200,58 +210,63 @@ const PokedexScreen = props => {
           // }}
         />
       </View>
-      <View
-        style={{
-          height: 600,
-          width: 380,
-          flexDirection: 'column',
 
-          paddingBottom: 60,
-          justifyContent: 'center',
-          alignItems: 'center',
-          alignSelf: 'center',
-        }}>
-        <FlatList
-          data={allPokemonData}
-          keyExtractor={item => item}
-          numColumns={3}
-          renderItem={({item, index}) => {
-            // console.log('POKEDEX_ITEM', item);
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation?.navigate('PokeStatScreen', {pokeStatData: item});
-                }}>
-                <View
-                  style={{
-                    backgroundColor: 'white',
-                    marginTop: 30,
-                    marginHorizontal: 10,
-                    borderRadius: 5,
-                    height: 100,
-                    width: 100,
-                    alignItems: 'center',
+      {selectedPokemon?.length === 0 ? (
+        <View
+          style={{
+            height: 600,
+            width: 380,
+            flexDirection: 'column',
+
+            paddingBottom: 60,
+            justifyContent: 'center',
+            alignItems: 'center',
+            alignSelf: 'center',
+          }}>
+          <FlatList
+            data={allPokemonData}
+            keyExtractor={item => item}
+            numColumns={3}
+            renderItem={({item, index}) => {
+              // console.log('POKEDEX_ITEM', item);
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation?.navigate('PokeStatScreen', {
+                      pokeStatData: item,
+                    });
                   }}>
-                  <Image
-                    source={{uri: item?.pokemonStatsData?.imageSrc}}
-                    style={{height: 75, width: 75}}
-                    height={75}
-                    width={75}
-                  />
-                  <Text
+                  <View
                     style={{
-                      marginTop: 5,
-                      fontSize: 10,
-                      fontFamily: fontFamily?.primaryFontFamilyMedium,
+                      backgroundColor: 'white',
+                      marginTop: 30,
+                      marginHorizontal: 10,
+                      borderRadius: 5,
+                      height: 100,
+                      width: 100,
+                      alignItems: 'center',
                     }}>
-                    {item?.pokemonName}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            );
-          }}
-        />
-      </View>
+                    <Image
+                      source={{uri: item?.pokemonStatsData?.imageSrc}}
+                      style={{height: 75, width: 75}}
+                      height={75}
+                      width={75}
+                    />
+                    <Text
+                      style={{
+                        marginTop: 5,
+                        fontSize: 10,
+                        fontFamily: fontFamily?.primaryFontFamilyMedium,
+                      }}>
+                      {item?.pokemonName}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              );
+            }}
+          />
+        </View>
+      ) : null}
     </View>
   );
 };
