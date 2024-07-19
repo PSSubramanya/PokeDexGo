@@ -44,7 +44,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Ivysaur": {
       "form": "Normal",
@@ -89,7 +90,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Venusaur": {
       "form": "Normal",
@@ -137,7 +139,8 @@
         "name": "Mega Venusaur",
         "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10033.png"
       },
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Charmander": {
       "form": "Normal",
@@ -182,7 +185,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Charmeleon": {
       "form": "Normal",
@@ -227,7 +231,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Charizard": {
       "form": "Normal",
@@ -278,7 +283,8 @@
       "megaEvolution2": {
         "name": "Mega Charizard Y",
         "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10035.png"
-      }
+      },
+      "region": "Kanto"
     },
     "Squirtle": {
       "form": "Normal",
@@ -323,7 +329,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Wartortle": {
       "form": "Normal",
@@ -368,7 +375,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Blastoise": {
       "form": "Normal",
@@ -416,7 +424,8 @@
         "name": "Mega Blastoise",
         "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10036.png"
       },
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Caterpie": {
       "form": "Normal",
@@ -461,7 +470,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Metapod": {
       "form": "Normal",
@@ -506,7 +516,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Butterfree": {
       "form": "Normal",
@@ -551,7 +562,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Vulpix": {
       "form": "Normal",
@@ -609,7 +621,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Vulpix (Alolan)": {
       "form": "alolan",
@@ -668,7 +681,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Ninetales": {
       "form": "Normal",
@@ -726,7 +740,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Ninetales (Alolan)": {
       "form": "alolan",
@@ -785,7 +800,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Oddish": {
       "form": "Normal",
@@ -859,7 +875,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Gloom": {
       "form": "Normal",
@@ -933,7 +950,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Vileplume": {
       "form": "Normal",
@@ -1007,7 +1025,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Eevee": {
       "form": "Normal",
@@ -1192,7 +1211,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Vaporeon": {
       "form": "Normal",
@@ -1228,7 +1248,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Jolteon": {
       "form": "Normal",
@@ -1264,7 +1285,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Flareon": {
       "form": "Normal",
@@ -1300,7 +1322,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Bellossom": {
       "form": "Normal",
@@ -1374,7 +1397,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Espeon": {
       "form": "Normal",
@@ -1413,7 +1437,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Umbreon": {
       "form": "Normal",
@@ -1453,7 +1478,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Leafeon": {
       "form": "Normal",
@@ -1491,7 +1517,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Glaceon": {
       "form": "Normal",
@@ -1529,7 +1556,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     },
     "Sylveon": {
       "form": "Normal",
@@ -1566,7 +1594,8 @@
         ]
       ],
       "megaEvolution1": {},
-      "megaEvolution2": {}
+      "megaEvolution2": {},
+      "region": "Kanto"
     }
   }
 }

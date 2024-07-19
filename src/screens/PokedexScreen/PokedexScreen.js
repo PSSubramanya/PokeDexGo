@@ -9,6 +9,7 @@ import {
   Platform,
 } from 'react-native';
 import evolutionData from '../../ultilities/pokemonData/poke_evolution_data.json';
+import pokemonRegion from '../../ultilities/pokemonData/pokemon_regions.js';
 import colors from '../../constants/colors.js';
 import imagePaths from '../../constants/imagePaths.js';
 import fontFamily from '../../ultilities/fontFamily';
@@ -18,7 +19,9 @@ import TextInputField from '../../components/TextInputField/TextInputField.js';
 const PokedexScreen = props => {
   const {navigation} = props;
   const [selectedPokemon, setSelectedPokemon] = useState('');
+  const [selectedRegion, setSelectedRegion] = useState('Kanto');
   const [allPokemonData, setAllPokemonData] = useState([]);
+  const [allPokeRegions, setAllPokeRegions] = useState([]);
   const [autoSuggestedPokemonList, setAutoSuggestedPokemonList] = useState([]);
   const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
   const darkModeValue = darkMode?.data;
@@ -32,6 +35,7 @@ const PokedexScreen = props => {
   // Try getting animated gif of each pokemon - NEED BETTER GIFs
   // style make it scaled
   // Auto name suggestion integrate for name search type pokemon search pokedex view - DONE
+  // Make region based filter like Kanto (Gen 1), Jhoto (Gen 2) till Paldea
   // Let left and right arrow also - DONE
   // Follow dribbble and pokemonDB - DONE
   // On Click navigate to new detail screen - DONE
@@ -40,6 +44,9 @@ const PokedexScreen = props => {
   useEffect(() => {
     const allPokeData = evolutionData?.data;
     const tempArray = [];
+
+    const pokeRegions = Object?.keys(pokemonRegion);
+    setAllPokeRegions(pokeRegions);
 
     for (const [key, value] of Object.entries(allPokeData)) {
       const tempObject = {
@@ -69,6 +76,42 @@ const PokedexScreen = props => {
     );
     setAutoSuggestedPokemonList(tempAutoSuggestionsArray);
   }, [selectedPokemon]);
+
+  // useEffect(() => {}, [selectedRegion]);
+
+  const renderPokeRegions = ({item}) => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          setSelectedRegion(item);
+        }}>
+        <View
+          style={{
+            backgroundColor:
+              selectedRegion === item
+                ? colors?.white
+                : colors?.secondaryBackgroundColorDarkMode,
+            paddingVertical: 5,
+            paddingHorizontal: 10,
+            marginTop: 10,
+            marginHorizontal: 10,
+            borderRadius: 5,
+            height: 40,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Text
+            style={{
+              fontSize: 10,
+              fontFamily: fontFamily?.primaryFontFamilyBold,
+              color: selectedRegion === item ? colors?.black : colors?.white,
+            }}>
+            {item.toUpperCase()}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <View
@@ -159,6 +202,15 @@ const PokedexScreen = props => {
           </View>
         </TouchableOpacity>
       </View>
+      <View>
+        <FlatList
+          data={allPokeRegions}
+          keyExtractor={item => item}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          renderItem={renderPokeRegions}
+        />
+      </View>
       <View
         style={{
           // position: 'absolute',
@@ -169,6 +221,7 @@ const PokedexScreen = props => {
         <FlatList
           data={autoSuggestedPokemonList}
           keyExtractor={item => item}
+          showsVerticalScrollIndicator={false}
           renderItem={({item, index}) => {
             console.log('POKEDEX_ITEM', item);
             return (
