@@ -1,0 +1,23 @@
+Raid Bosses
+
+https://colab.research.google.com/drive/1Y3qXmWFK9GB9NQGX1hF4-U1ytTgDlj03 
+
+PokeGoCounters
+
+https://colab.research.google.com/drive/1pzzhr7MbuIJMSwct-EAI3x-ph6ENDmBY 
+
+PokeEvent
+
+https://colab.research.google.com/drive/1G7sMy4XBABgvDDbJLrL6F1hLDGqxzS4K 
+
+Egg Data
+
+https://colab.research.google.com/drive/1EGYd4osIe10IwkW7p8QAZYeP_YJ1YMsV 
+
+Previous Events
+
+https://colab.research.google.com/drive/1gQ-JMlIKJjENCy_3z52UCSRf-ReiOcsN
+
+Field Research
+
+https://colab.research.google.com/drive/19o6WspzkgCf3Cf9FigHAa36uQuWjN_6y
