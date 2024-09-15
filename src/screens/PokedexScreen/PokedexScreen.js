@@ -7,6 +7,7 @@ import {
   FlatList,
   TouchableOpacity,
   Platform,
+  SafeAreaView,
 } from 'react-native';
 import evolutionData from '../../ultilities/pokemonData/poke_evolution_data.json';
 import pokemonRegion from '../../ultilities/pokemonData/pokemon_regions.js';
@@ -21,6 +22,7 @@ const PokedexScreen = props => {
   const [selectedPokemon, setSelectedPokemon] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('Kanto');
   const [allPokemonData, setAllPokemonData] = useState([]);
+  const [pokedexEntriesForRegion, setPokedexEntriesForRegion] = useState([]);
   const [allPokeRegions, setAllPokeRegions] = useState([]);
   const [autoSuggestedPokemonList, setAutoSuggestedPokemonList] = useState([]);
   const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
@@ -34,12 +36,13 @@ const PokedexScreen = props => {
   // Load only 100 at a time as we scroll, implement that feature in Flatlist
   // Try getting animated gif of each pokemon - NEED BETTER GIFs
   // style make it scaled
-  // Auto name suggestion integrate for name search type pokemon search pokedex view - DONE
+
   // Make region based filter like Kanto (Gen 1), Jhoto (Gen 2) till Paldea
   // Let left and right arrow also - DONE
   // Follow dribbble and pokemonDB - DONE
   // On Click navigate to new detail screen - DONE
   // Show evolution chart also - DONE
+  // Auto name suggestion integrate for name search type pokemon search pokedex view - DONE
 
   useEffect(() => {
     const allPokeData = evolutionData?.data;
@@ -77,12 +80,21 @@ const PokedexScreen = props => {
     setAutoSuggestedPokemonList(tempAutoSuggestionsArray);
   }, [selectedPokemon]);
 
-  // useEffect(() => {}, [selectedRegion]);
+  useEffect(() => {
+    const tempRegionalPokemons = allPokemonData?.filter((data, index) => {
+      if (selectedRegion === data?.pokemonStatsData?.region) {
+        return data;
+      }
+    });
+    console.log('tempRegionalPokemons', tempRegionalPokemons);
+    setPokedexEntriesForRegion(tempRegionalPokemons);
+  }, [allPokemonData, selectedRegion]);
 
   const renderPokeRegions = ({item}) => {
     return (
       <TouchableOpacity
         onPress={() => {
+          setPokedexEntriesForRegion([]);
           setSelectedRegion(item);
         }}>
         <View
@@ -123,11 +135,12 @@ const PokedexScreen = props => {
         // alignItems: 'center',
         justifyContent: 'center',
       }}>
+      <SafeAreaView />
       <Text
         style={{
           marginTop: 0,
           zIndex: 1,
-          marginTop: 50,
+          marginTop: 100, //50
           marginLeft: 10,
           fontSize: 24,
           fontFamily: fontFamily?.primaryFontFamilyBold,
@@ -202,20 +215,22 @@ const PokedexScreen = props => {
           </View>
         </TouchableOpacity>
       </View>
-      <View>
-        <FlatList
-          data={allPokeRegions}
-          keyExtractor={item => item}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          renderItem={renderPokeRegions}
-        />
-      </View>
+      {selectedPokemon?.length === 0 ? (
+        <View>
+          <FlatList
+            data={allPokeRegions}
+            keyExtractor={item => item}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            renderItem={renderPokeRegions}
+          />
+        </View>
+      ) : null}
       <View
         style={{
           // position: 'absolute',
           // top: 220,
-          marginTop: -3,
+          marginTop: 3,
           zIndex: 1,
         }}>
         <FlatList
@@ -270,54 +285,79 @@ const PokedexScreen = props => {
             height: 600,
             width: 380,
             flexDirection: 'column',
-
             paddingBottom: 60,
             justifyContent: 'center',
-            alignItems: 'center',
+            alignItems: pokedexEntriesForRegion?.length === 0 ? 'center' : null,
             alignSelf: 'center',
           }}>
-          <FlatList
-            data={allPokemonData}
-            keyExtractor={item => item}
-            numColumns={3}
-            renderItem={({item, index}) => {
-              // console.log('POKEDEX_ITEM', item);
-              return (
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation?.navigate('PokeStatScreen', {
-                      pokeStatData: item,
-                    });
-                  }}>
-                  <View
-                    style={{
-                      backgroundColor: 'white',
-                      marginTop: 30,
-                      marginHorizontal: 10,
-                      borderRadius: 5,
-                      height: 100,
-                      width: 100,
-                      alignItems: 'center',
+          {pokedexEntriesForRegion?.length > 0 ? (
+            <FlatList
+              data={pokedexEntriesForRegion}
+              keyExtractor={item => item}
+              numColumns={3}
+              renderItem={({item, index}) => {
+                // console.log('POKEDEX_ITEM', item);
+                return (
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation?.navigate('PokeStatScreen', {
+                        pokeStatData: item,
+                      });
                     }}>
-                    <Image
-                      source={{uri: item?.pokemonStatsData?.imageSrc}}
-                      style={{height: 75, width: 75}}
-                      height={75}
-                      width={75}
-                    />
-                    <Text
+                    <View
                       style={{
-                        marginTop: 5,
-                        fontSize: 10,
-                        fontFamily: fontFamily?.primaryFontFamilyMedium,
+                        backgroundColor: 'white',
+                        marginTop: 30,
+                        marginHorizontal: 10,
+                        borderRadius: 5,
+                        height: 100,
+                        width: 100,
+                        alignItems: 'center',
                       }}>
-                      {item?.pokemonName}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              );
-            }}
-          />
+                      <Image
+                        source={{uri: item?.pokemonStatsData?.imageSrc}}
+                        style={{height: 75, width: 75}}
+                        height={75}
+                        width={75}
+                      />
+                      <Text
+                        style={{
+                          marginTop: 5,
+                          fontSize: 10,
+                          fontFamily: fontFamily?.primaryFontFamilyMedium,
+                        }}>
+                        {item?.pokemonName}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                );
+              }}
+            />
+          ) : (
+            <View>
+              <Image
+                source={imagePaths?.arceusGif}
+                height={100}
+                width={100}
+                style={{
+                  height: 100,
+                  width: 100,
+                  alignSelf: 'center',
+                  marginBottom: 10,
+                }}
+              />
+              <Text
+                style={{
+                  marginTop: 5,
+                  fontSize: 12,
+                  fontFamily: fontFamily?.primaryFontFamilyMedium,
+                  color: colors?.white,
+                  textTransform: 'uppercase',
+                }}>
+                Feature under progress
+              </Text>
+            </View>
+          )}
         </View>
       ) : null}
     </View>

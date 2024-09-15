@@ -75,4 +75,6 @@ export default {
 
   //gifs
   pichuDancing: require('../assets/images/gifs/pichuGif.webp'),
+  togepiGif: require('../assets/images/gifs/togepiGif.gif'),
+  arceusGif: require('../assets/images/gifs/arceusGif.gif'),
 };

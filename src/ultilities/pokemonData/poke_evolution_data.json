@@ -682,7 +682,7 @@
       ],
       "megaEvolution1": {},
       "megaEvolution2": {},
-      "region": "Kanto"
+      "region": "Alola"
     },
     "Ninetales": {
       "form": "Normal",
@@ -801,7 +801,7 @@
       ],
       "megaEvolution1": {},
       "megaEvolution2": {},
-      "region": "Kanto"
+      "region": "Alola"
     },
     "Oddish": {
       "form": "Normal",
@@ -1020,6 +1020,869 @@
             "candy_required": 100,
             "specialItemOrCondition": "sun_stone",
             "type1": "grass",
+            "type2": "none"
+          }
+        ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {},
+      "region": "Kanto"
+    },
+    "Paras": {
+      "form": "Normal",
+      "pokemon_id": 46,
+      "pokemon_name": "Paras",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/46.png",
+      "description": "Paras is a Bug/Grass type Pokémon. It under the ground to gnaw on tree roots. The mushrooms on its back absorb most of the nutrition.",
+      "type1": "bug",
+      "type2": "grass",
+      "candy_required": 0,
+      "evolvesFrom": ["Egg"],
+      "evolvesTo": ["Parasect"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Paras",
+            "idx": 46,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/46.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "bug",
+            "type2": "grass"
+          },
+          {
+            "name": "Parasect",
+            "idx": 47,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/47.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "bug",
+            "type2": "grass"
+          }
+        ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {},
+      "region": "Kanto"
+    },
+    "Parasect": {
+      "form": "Normal",
+      "pokemon_id": 47,
+      "pokemon_name": "Parasect",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/47.png",
+      "description": "Parasect is a Bug/Grass type Pokémon. The bug host is drained of energy by the mushrooms on its back. They appear to do all the thinking.",
+      "type1": "bug",
+      "type2": "grass",
+      "candy_required": 0,
+      "evolvesFrom": ["Paras"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Paras",
+            "idx": 46,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/46.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "bug",
+            "type2": "grass"
+          },
+          {
+            "name": "Parasect",
+            "idx": 47,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/47.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "bug",
+            "type2": "grass"
+          }
+        ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {},
+      "region": "Kanto"
+    },
+    "Venonat": {
+      "form": "Normal",
+      "pokemon_id": 48,
+      "pokemon_name": "Venonat",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/48.png",
+      "description": "Venonat is a Bug/Poison type Pokémon. Lives in the shadows of tall trees where it eats insects. It is attracted by light at night. Its large eyes act as radars. In a bright place, you can see that they are clusters of many tiny eyes.",
+      "type1": "bug",
+      "type2": "poison",
+      "candy_required": 0,
+      "evolvesFrom": ["Egg"],
+      "evolvesTo": ["Parasect"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Venonat",
+            "idx": 48,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/48.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "bug",
+            "type2": "poison"
+          },
+          {
+            "name": "Venomoth",
+            "idx": 49,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/49.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "bug",
+            "type2": "poison"
+          }
+        ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {},
+      "region": "Kanto"
+    },
+    "Venomoth": {
+      "form": "Venomoth",
+      "pokemon_id": 49,
+      "pokemon_name": "Venomoth",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/49.png",
+      "description": "Venomoth is a Bug/Poison type Pokémon and an evolved form of Venonat. The dust-like scales covering its wings are color coded to indicate the kinds of poison it has.",
+      "type1": "bug",
+      "type2": "poison",
+      "candy_required": 0,
+      "evolvesFrom": ["Venonat"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Venonat",
+            "idx": 48,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/48.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "bug",
+            "type2": "poison"
+          },
+          {
+            "name": "Venomoth",
+            "idx": 49,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/49.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "bug",
+            "type2": "poison"
+          }
+        ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {},
+      "region": "Kanto"
+    },
+    "Diglett": {
+      "form": "Normal",
+      "pokemon_id": 50,
+      "pokemon_name": "Diglett",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/50.png",
+      "description": "Diglett is a Ground type Pokémon. It prefers dark places. It spends most of its time underground, though it may pop up in caves.",
+      "type1": "ground",
+      "type2": "none",
+      "candy_required": 0,
+      "evolvesFrom": ["Egg"],
+      "evolvesTo": ["Dugtrio"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Diglett",
+            "idx": 50,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/50.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "none"
+          },
+          {
+            "name": "Dugtrio",
+            "idx": 51,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/51.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Diglett (Alolan)",
+            "imageString": "diglett-alolan",
+            "idx": 50,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10105.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "steel"
+          },
+          {
+            "name": "Dugtrio (Alolan)",
+            "imageString": "dugtrio-alolan",
+            "idx": 51,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10106.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "steel"
+          }
+        ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {},
+      "region": "Kanto"
+    },
+    "Diglett (Alolan)": {
+      "form": "alolan",
+      "pokemon_id": 50,
+      "pokemon_name": "Diglett (Alolan)",
+      "imageString": "diglett-alolan",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10105.png",
+      "description": "Diglett has an Alolan Form. Its head sports an altered form of whiskers made of metal. When in communication with its comrades, its whiskers wobble to and fro.",
+      "type1": "ground",
+      "type2": "steel",
+      "candy_required": 0,
+      "evolvesFrom": ["Egg"],
+      "evolvesTo": ["Dugtrio"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Diglett",
+            "idx": 50,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/50.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "none"
+          },
+          {
+            "name": "Dugtrio",
+            "idx": 51,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/51.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Diglett (Alolan)",
+            "imageString": "diglett-alolan",
+            "idx": 50,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10105.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "steel"
+          },
+          {
+            "name": "Dugtrio (Alolan)",
+            "imageString": "dugtrio-alolan",
+            "idx": 51,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10106.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "steel"
+          }
+        ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {},
+      "region": "Alola"
+    },
+    "Dugtrio": {
+      "form": "Normal",
+      "pokemon_id": 51,
+      "pokemon_name": "Dugtrio",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/51.png",
+      "description": "Dugtrio is a Ground type Pokémon and an evolved form of Diglett. A team of triplets that can burrow over 60 MPH. Due to this, some people think it’s an earthquake.",
+      "type1": "ground",
+      "type2": "none",
+      "candy_required": 50,
+      "evolvesFrom": ["Diglett"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Diglett",
+            "idx": 50,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/50.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "none"
+          },
+          {
+            "name": "Dugtrio",
+            "idx": 51,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/51.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Diglett (Alolan)",
+            "imageString": "diglett-alolan",
+            "idx": 50,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10105.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "steel"
+          },
+          {
+            "name": "Dugtrio (Alolan)",
+            "imageString": "dugtrio-alolan",
+            "idx": 51,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10106.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "steel"
+          }
+        ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {},
+      "region": "Kanto"
+    },
+    "Dugtrio (Alolan)": {
+      "form": "alolan",
+      "pokemon_id": 51,
+      "pokemon_name": "Dugtrio (Alolan)",
+      "imageString": "dugtrio-alolan",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10106.png",
+      "description": "Dugtrio has an Alolan Form. Its metallic whiskers are heavy, so it’s not very fast, but it has the power to dig through bedrock.",
+      "type1": "ground",
+      "type2": "steel",
+      "candy_required": 50,
+      "evolvesFrom": ["Diglett"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Diglett",
+            "idx": 50,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/50.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "none"
+          },
+          {
+            "name": "Dugtrio",
+            "idx": 51,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/51.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Diglett (Alolan)",
+            "imageString": "diglett-alolan",
+            "idx": 50,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10105.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "steel"
+          },
+          {
+            "name": "Dugtrio (Alolan)",
+            "imageString": "dugtrio-alolan",
+            "idx": 51,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10106.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "steel"
+          }
+        ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {},
+      "region": "Alola"
+    },
+    "Meowth": {
+      "form": "Normal",
+      "pokemon_id": 52,
+      "pokemon_name": "Meowth",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/52.png",
+      "description": "Meowth is a Normal type Pokémon from Kanto region. It is fascinated by round objects. It can't stop playing with them until it tires and falls asleep",
+      "type1": "normal",
+      "type2": "none",
+      "candy_required": 0,
+      "evolvesFrom": ["Egg"],
+      "evolvesTo": ["Persian"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Meowth",
+            "idx": 52,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/52.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Persian",
+            "idx": 53,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/53.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Meowth  (Alolan)",
+            "imageString": "meowth-alolan",
+            "idx": 52,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10107.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "dark",
+            "type2": "none"
+          },
+          {
+            "name": "Persian (Alolan)",
+            "imageString": "persian-alolan",
+            "idx": 53,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10108.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "dark",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Meowth (Galarian)",
+            "imageString": "meowth-galarian",
+            "idx": 52,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10161.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "steel",
+            "type2": "none"
+          },
+          {
+            "name": "Perrserker",
+            "idx": 53,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/863.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "steel",
+            "type2": "none"
+          }
+        ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {},
+      "region": "Kanto"
+    },
+    "Persian": {
+      "form": "Normal",
+      "pokemon_id": 53,
+      "pokemon_name": "Persian",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/53.png",
+      "description": "Persian is a Normal type Pokémon introduced in Kanto region. The gem in its forehead glows on its own! It walks with all the grace and elegance of a proud queen.",
+      "type1": "normal",
+      "type2": "none",
+      "candy_required": 50,
+      "evolvesFrom": ["Meowth"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Meowth",
+            "idx": 52,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/52.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Persian",
+            "idx": 53,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/53.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Meowth  (Alolan)",
+            "imageString": "meowth-alolan",
+            "idx": 52,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10107.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "dark",
+            "type2": "none"
+          },
+          {
+            "name": "Persian (Alolan)",
+            "imageString": "persian-alolan",
+            "idx": 53,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10108.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "dark",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Meowth (Galarian)",
+            "imageString": "meowth-galarian",
+            "idx": 52,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10161.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "steel",
+            "type2": "none"
+          },
+          {
+            "name": "Perrserker",
+            "idx": 53,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/863.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "steel",
+            "type2": "none"
+          }
+        ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {},
+      "region": "Kanto"
+    },
+    "Meowth (Alolan)": {
+      "form": "alolan",
+      "pokemon_id": 52,
+      "pokemon_name": "Meowth (Alolan)",
+      "imageString": "meowth-alolan",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10107.png",
+      "description": "Meowth has an Alolan Form. This Pokémon was not originally found in Alola. Human actions caused a surge in their numbers, and they went feral. They're prideful and crafty. When its delicate pride is wounded, or when the gold coin on its forehead is dirtied, it flies into a hysterical rage.",
+      "type1": "dark",
+      "type2": "none",
+      "candy_required": 50,
+      "evolvesFrom": ["Egg"],
+      "evolvesTo": ["Persian"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Meowth",
+            "idx": 52,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/52.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Persian",
+            "idx": 53,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/53.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Meowth  (Alolan)",
+            "imageString": "meowth-alolan",
+            "idx": 52,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10107.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "dark",
+            "type2": "none"
+          },
+          {
+            "name": "Persian (Alolan)",
+            "imageString": "persian-alolan",
+            "idx": 53,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10108.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "dark",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Meowth (Galarian)",
+            "imageString": "meowth-galarian",
+            "idx": 52,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10161.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "steel",
+            "type2": "none"
+          },
+          {
+            "name": "Perrserker",
+            "idx": 53,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/863.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "steel",
+            "type2": "none"
+          }
+        ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {},
+      "region": "Alola"
+    },
+    "Persian (Alolan)": {
+      "form": "alolan",
+      "pokemon_id": 53,
+      "pokemon_name": "Persian (Alolan)",
+      "imageString": "persian-alolan",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10108.png",
+      "description": "Persian has an Alolan Form. It looks down on everyone other than itself. Its preferred tactics are sucker punches and blindside attacks.",
+      "type1": "dark",
+      "type2": "none",
+      "candy_required": 50,
+      "evolvesFrom": ["Meowth"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Meowth",
+            "idx": 52,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/52.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Persian",
+            "idx": 53,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/53.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Meowth  (Alolan)",
+            "imageString": "meowth-alolan",
+            "idx": 52,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10107.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "dark",
+            "type2": "none"
+          },
+          {
+            "name": "Persian (Alolan)",
+            "imageString": "persian-alolan",
+            "idx": 53,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10108.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "dark",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Meowth (Galarian)",
+            "imageString": "meowth-galarian",
+            "idx": 52,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10161.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "steel",
+            "type2": "none"
+          },
+          {
+            "name": "Perrserker",
+            "idx": 53,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/863.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "steel",
+            "type2": "none"
+          }
+        ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {},
+      "region": "Alola"
+    },
+    "Meowth (Galarian)": {
+      "form": "galarian",
+      "pokemon_id": 52,
+      "pokemon_name": "Meowth (Galarian)",
+      "imageString": "meowth-galarian",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10161.png",
+      "description": "Meowth has a Galarian Form. These daring Pokémon have coins on their foreheads. Darker coins are harder, and harder coins garner more respect among Meowth. Living with a savage, seafaring people has toughened this Pokémon’s body so much that parts of it have turned to iron",
+      "type1": "steel",
+      "type2": "none",
+      "candy_required": 50,
+      "evolvesFrom": ["Egg"],
+      "evolvesTo": ["Perrserker"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Meowth",
+            "idx": 52,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/52.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Persian",
+            "idx": 53,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/53.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Meowth  (Alolan)",
+            "imageString": "meowth-alolan",
+            "idx": 52,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10107.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "dark",
+            "type2": "none"
+          },
+          {
+            "name": "Persian (Alolan)",
+            "imageString": "persian-alolan",
+            "idx": 53,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10108.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "dark",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Meowth (Galarian)",
+            "imageString": "meowth-galarian",
+            "idx": 52,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10161.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "steel",
+            "type2": "none"
+          },
+          {
+            "name": "Perrserker",
+            "idx": 53,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/863.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "steel",
+            "type2": "none"
+          }
+        ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {},
+      "region": "Galar"
+    },
+    "Psyduck": {
+      "form": "Normal",
+      "pokemon_id": 54,
+      "pokemon_name": "Psyduck",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/54.png",
+      "description": "Psyduck is a Water type Pokémon introduced in Kanto. It is always tormented by headaches. It uses psychic powers, but it is not known if it intends to do so.",
+      "type1": "water",
+      "type2": "none",
+      "candy_required": 0,
+      "evolvesFrom": ["Egg"],
+      "evolvesTo": ["Golduck"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Psyduck",
+            "idx": 54,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/54.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "water",
+            "type2": "none"
+          },
+          {
+            "name": "Golduck",
+            "idx": 55,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/55.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "water",
+            "type2": "none"
+          }
+        ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {},
+      "region": "Kanto"
+    },
+    "Golduck": {
+      "form": "Normal",
+      "pokemon_id": 55,
+      "pokemon_name": "Golduck",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/55.png",
+      "description": "Golduck is a Water type Pokémon introduced in Kanto. Its slim and long limbs end in broad flippers. They are used for swimming gracefully in lakes.",
+      "type1": "water",
+      "type2": "none",
+      "candy_required": 0,
+      "evolvesFrom": ["Psyduck"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Psyduck",
+            "idx": 54,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/54.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "water",
+            "type2": "none"
+          },
+          {
+            "name": "Golduck",
+            "idx": 55,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/55.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "water",
             "type2": "none"
           }
         ]
@@ -1398,7 +2261,7 @@
       ],
       "megaEvolution1": {},
       "megaEvolution2": {},
-      "region": "Kanto"
+      "region": "Johto"
     },
     "Espeon": {
       "form": "Normal",
@@ -1596,6 +2459,86 @@
       "megaEvolution1": {},
       "megaEvolution2": {},
       "region": "Kanto"
+    },
+    "Perrserker": {
+      "form": "galarian",
+      "pokemon_id": 863,
+      "pokemon_name": "Perrserker",
+      "imageSrc": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/863.png",
+      "description": "Perrserker is a Steel type Pokémon introduced in Galar. What appears to be an iron helmet is actually hardened hair. This Pokémon lives for the thrill of battle. After many battles, it evolved dangerous claws that come together to form daggers when extended.",
+      "type1": "steel",
+      "type2": "none",
+      "candy_required": 50,
+      "evolvesFrom": ["Meowth"],
+      "evolvesTo": ["None"],
+      "evolutionChart": [
+        [
+          {
+            "name": "Meowth",
+            "idx": 52,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/52.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "normal",
+            "type2": "none"
+          },
+          {
+            "name": "Persian",
+            "idx": 53,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/53.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "ground",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Meowth  (Alolan)",
+            "imageString": "meowth-alolan",
+            "idx": 52,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10107.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "dark",
+            "type2": "none"
+          },
+          {
+            "name": "Persian (Alolan)",
+            "imageString": "persian-alolan",
+            "idx": 53,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10108.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "dark",
+            "type2": "none"
+          }
+        ],
+        [
+          {
+            "name": "Meowth (Galarian)",
+            "imageString": "meowth-galarian",
+            "idx": 52,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10161.png",
+            "candy_required": 0,
+            "specialItemOrCondition": "none",
+            "type1": "steel",
+            "type2": "none"
+          },
+          {
+            "name": "Perrserker",
+            "idx": 53,
+            "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/863.png",
+            "candy_required": 50,
+            "specialItemOrCondition": "none",
+            "type1": "steel",
+            "type2": "none"
+          }
+        ]
+      ],
+      "megaEvolution1": {},
+      "megaEvolution2": {},
+      "region": "Galar"
     }
   }
 }
