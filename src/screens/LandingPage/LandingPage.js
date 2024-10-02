@@ -67,6 +67,7 @@ const LandingPage = ({navigation}) => {
   ];
 
   //TODO; pdf, pikagpt, trainer info, counter advance, pokedex, custom event add, notifications
+  //TODO: Previous Events Data - "https://getpantry.cloud/apiv1/pantry/27d83b8a-6b70-4994-8b39-86fe1d49c459/basket/previousEvents"
   const [loadData, setLoadData] = useState([]);
   const [loadEggData, setLoadEggData] = useState([]);
   const [loadRaidBossData, setRaidBossData] = useState([]);
@@ -103,23 +104,14 @@ const LandingPage = ({navigation}) => {
   }, []);
 
   useEffect(() => {
-    let versionData;
     const appVersionCheckURL =
-      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/version';
+      'https://getpantry.cloud/apiv1/pantry/27d83b8a-6b70-4994-8b39-86fe1d49c459/basket/version';
     const installedVersion = DeviceInfo.getVersion();
-
-    console.log(
-      'ASDF',
-      // latestVersion,
-      installedVersion,
-      // latestVersion > installedVersion,
-    );
 
     fetch(appVersionCheckURL)
       ?.then(response => {
         response.json()?.then(res => {
-          versionData = res?.data;
-          const latestVersion = versionData[0]?.version;
+          const latestVersion = res?.versiondata;
 
           if (latestVersion > installedVersion) {
             setForceUpdateModal(true);
@@ -191,7 +183,7 @@ const LandingPage = ({navigation}) => {
   useEffect(() => {
     let loadedData;
     const eventDataURL =
-      'https://getpantry.cloud/apiv1/pantry/9b8287e5-ee0f-4561-97c3-f236acd28f82/basket/pokeEventData';
+      'https://getpantry.cloud/apiv1/pantry/27d83b8a-6b70-4994-8b39-86fe1d49c459/basket/pokemondata';
 
     fetch(eventDataURL)
       ?.then(response => {
@@ -235,8 +227,7 @@ const LandingPage = ({navigation}) => {
   useEffect(() => {
     let loadedEggData;
     const eggDataURL =
-      'https://getpantry.cloud/apiv1/pantry/9b8287e5-ee0f-4561-97c3-f236acd28f82/basket/eggData';
-    //'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/eggData';
+      'https://getpantry.cloud/apiv1/pantry/27d83b8a-6b70-4994-8b39-86fe1d49c459/basket/eggData';
 
     fetch(eggDataURL)
       .then(response => {
@@ -273,8 +264,7 @@ const LandingPage = ({navigation}) => {
   useEffect(() => {
     let loadedRaidBossData;
     const raidBossURL =
-      'https://getpantry.cloud/apiv1/pantry/9b8287e5-ee0f-4561-97c3-f236acd28f82/basket/raidBosses';
-    //'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/raidBosses';
+      'https://getpantry.cloud/apiv1/pantry/27d83b8a-6b70-4994-8b39-86fe1d49c459/basket/raidBosses';
 
     fetch(raidBossURL)
       .then(response => {
@@ -313,7 +303,7 @@ const LandingPage = ({navigation}) => {
   useEffect(() => {
     let loadedFieldResearchData;
     const fieldResearchURL =
-      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/fieldResearch';
+      'https://getpantry.cloud/apiv1/pantry/27d83b8a-6b70-4994-8b39-86fe1d49c459/basket/fieldResearch';
 
     fetch(fieldResearchURL)
       .then(response => {

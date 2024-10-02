@@ -543,7 +543,10 @@ const PokeStatScreen = props => {
                                 }}>
                                 <Image
                                   source={{uri: dat?.img}}
-                                  style={{height: 75, width: 75}}
+                                  style={{
+                                    height: 75,
+                                    width: 75,
+                                  }}
                                   height={75}
                                   width={75}
                                 />

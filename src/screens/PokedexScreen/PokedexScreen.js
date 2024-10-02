@@ -289,6 +289,7 @@ const PokedexScreen = props => {
             justifyContent: 'center',
             alignItems: pokedexEntriesForRegion?.length === 0 ? 'center' : null,
             alignSelf: 'center',
+            alignItems: 'center',
           }}>
           {pokedexEntriesForRegion?.length > 0 ? (
             <FlatList
