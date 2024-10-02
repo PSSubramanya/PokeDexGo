@@ -108,6 +108,13 @@ const LandingPage = ({navigation}) => {
       'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/version';
     const installedVersion = DeviceInfo.getVersion();
 
+    console.log(
+      'ASDF',
+      // latestVersion,
+      installedVersion,
+      // latestVersion > installedVersion,
+    );
+
     fetch(appVersionCheckURL)
       ?.then(response => {
         response.json()?.then(res => {
@@ -184,7 +191,7 @@ const LandingPage = ({navigation}) => {
   useEffect(() => {
     let loadedData;
     const eventDataURL =
-      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/pokemondata';
+      'https://getpantry.cloud/apiv1/pantry/9b8287e5-ee0f-4561-97c3-f236acd28f82/basket/pokeEventData';
 
     fetch(eventDataURL)
       ?.then(response => {
@@ -228,7 +235,8 @@ const LandingPage = ({navigation}) => {
   useEffect(() => {
     let loadedEggData;
     const eggDataURL =
-      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/eggData';
+      'https://getpantry.cloud/apiv1/pantry/9b8287e5-ee0f-4561-97c3-f236acd28f82/basket/eggData';
+    //'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/eggData';
 
     fetch(eggDataURL)
       .then(response => {
@@ -265,7 +273,8 @@ const LandingPage = ({navigation}) => {
   useEffect(() => {
     let loadedRaidBossData;
     const raidBossURL =
-      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/raidBosses';
+      'https://getpantry.cloud/apiv1/pantry/9b8287e5-ee0f-4561-97c3-f236acd28f82/basket/raidBosses';
+    //'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/raidBosses';
 
     fetch(raidBossURL)
       .then(response => {

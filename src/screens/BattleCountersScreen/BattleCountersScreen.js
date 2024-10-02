@@ -119,7 +119,7 @@ const BattleCountersScreen = props => {
   const fetchCounterPokemonData = () => {
     let loadedCounterData;
     const pokemonCountersURL =
-      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/counters';
+      'https://getpantry.cloud/apiv1/pantry/9b8287e5-ee0f-4561-97c3-f236acd28f82/basket/pokeCounters';
 
     fetch(pokemonCountersURL)
       ?.then(response => {

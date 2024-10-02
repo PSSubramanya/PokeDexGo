@@ -285,7 +285,7 @@ const PokedexScreen = props => {
             height: 600,
             width: 380,
             flexDirection: 'column',
-            paddingBottom: 60,
+            paddingBottom: 120,
             justifyContent: 'center',
             alignItems: pokedexEntriesForRegion?.length === 0 ? 'center' : null,
             alignSelf: 'center',

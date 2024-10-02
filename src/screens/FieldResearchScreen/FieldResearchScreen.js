@@ -12,6 +12,7 @@ import CardView from '../../components/CardView/CardView';
 import {pokeImageMappingFunction} from '../../ultilities/commonFunctions';
 import researchData from '../../ultilities/pokemonData/research.json';
 import imagePaths from '../../constants/imagePaths';
+import fontFamily from '../../ultilities/fontFamily.js';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
 import styles from './styles.js';
 import colors from '../../constants/colors';
@@ -38,6 +39,7 @@ const FieldResearchScreen = props => {
 
   const [displayData, setDisplayData] = useState([]);
   const [rewardSectionDisplay, setRewardSectionDisplay] = useState([]);
+  const [listDataExists, setListDataExists] = useState(true);
 
   NotificationService(navigation);
 
@@ -119,6 +121,24 @@ const FieldResearchScreen = props => {
     ];
 
     setDisplayData(jsonData);
+  }, []);
+
+  useEffect(() => {
+    if (
+      eventTasks?.length === 0 &&
+      catchingTasks?.length === 0 &&
+      throwingTasks?.length === 0 &&
+      battleTasks?.length === 0 &&
+      exploreTasks?.length === 0 &&
+      trainingTasks?.length === 0 &&
+      rocketTasks?.length === 0 &&
+      buddyTasks?.length === 0 &&
+      sponsoredTasks?.length === 0 &&
+      scanningTasks?.length === 0 &&
+      otherTasks?.length === 0
+    ) {
+      setListDataExists(false);
+    }
   }, []);
 
   const handleSpringAnimation = (rewardsArray, selectedReward) => {
@@ -274,12 +294,49 @@ const FieldResearchScreen = props => {
         flex: 1,
       }}>
       <SafeAreaView />
-      <FlatList
-        data={displayData}
-        keyExtractor={item => item}
-        renderItem={renderItem}
-        // nestedScrollEnabled={true}
-      />
+      {listDataExists ? (
+        <FlatList
+          data={displayData}
+          keyExtractor={item => item}
+          renderItem={renderItem}
+          // ListEmptyComponent={() => {
+          //   return (
+          //     <View>
+          //       <Text>NO DATA</Text>
+          //     </View>
+          //   );
+          // }}
+          // nestedScrollEnabled={true}
+          // ItemSeparatorComponent={()=>{}}
+        />
+      ) : (
+        <View
+          style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            flex: 1,
+          }}>
+          <Image
+            source={imagePaths?.arceusGif}
+            height={100}
+            width={100}
+            style={{
+              height: 100,
+              width: 100,
+              alignSelf: 'center',
+              marginBottom: 10,
+            }}
+          />
+          <Text
+            style={{
+              fontSize: 16,
+              fontFamily: fontFamily?.primaryFontFamilyBold,
+              color: colors?.white,
+            }}>
+            NO FIELD RESEARCHES
+          </Text>
+        </View>
+      )}
     </View>
   );
 };

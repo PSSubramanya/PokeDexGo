@@ -191,7 +191,6 @@ const PokeStatScreen = props => {
         }}>
         <View
           style={{
-            height: '30%',
             width: '115%',
             marginLeft: -34,
             marginTop: -20,
@@ -326,6 +325,7 @@ const PokeStatScreen = props => {
             height: '100%',
             backgroundColor: pokedexBackgroundDisplayColor(pokemonData?.type1),
             marginTop: -120,
+            marginBottom: 120,
           }}>
           <View
             style={{
@@ -473,7 +473,7 @@ const PokeStatScreen = props => {
               <TextToSpeechConverter targetText={pokemonData?.description} />
             </View>
           </View>
-          <View style={{height: 400}}>
+          <View style={{}}>
             {pokemonData?.description?.length > 0 ? ( // <View style={{height: 123, backgroundColor: 'red'}}></View>
               <TypeWriterEffect
                 content={pokemonData?.description?.toString()}
@@ -509,7 +509,10 @@ const PokeStatScreen = props => {
               }}>
               The evolution tree
             </Text>
-            <View style={{alignItems: 'center'}}>
+            <View
+              style={{
+                alignItems: 'center',
+              }}>
               <FlatList
                 data={evolutionChart}
                 keyExtractor={item => item}
