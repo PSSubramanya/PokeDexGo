@@ -16,7 +16,7 @@ import {
   // Animated,
   // PanResponder,
 } from 'react-native';
-import RNFetchBlob from 'rn-fetch-blob';
+// import RNFetchBlob from 'rn-fetch-blob';
 // import {PinchGestureHandler, State} from 'react-native-gesture-handler';
 // import {GestureDetector} from 'react-native-gesture-handler';
 // import Animated, {
@@ -111,10 +111,10 @@ const PikaGptScreen = props => {
     // If Android then ask for permission
 
     if (Platform.OS === 'ios') {
-      downloadImage(imageUrl);
+      // downloadImage(imageUrl);
     } else {
       try {
-        downloadImage(imageUrl);
+        // downloadImage(imageUrl);
         /*
           // NOTE: This permission granting needs work
           const granted = await PermissionsAndroid.request(
@@ -142,44 +142,44 @@ const PikaGptScreen = props => {
     }
   };
 
-  const downloadImage = imageUrl => {
-    // Main function to download the image
+  // const downloadImage = imageUrl => {
+  //   // Main function to download the image
 
-    // To add the time suffix in filename
-    let date = new Date();
-    // Image URL which we want to download
-    // let image_URL = REMOTE_IMAGE_PATH;
-    let image_URL = imageUrl;
-    // Getting the extention of the file
-    let ext = getExtention(image_URL);
-    ext = '.' + ext[0];
-    // Get config and fs from RNFetchBlob
-    // config: To pass the downloading related options
-    // fs: Directory path where we want our image to download
-    const {config, fs} = RNFetchBlob;
-    let PictureDir = fs.dirs.PictureDir;
-    let options = {
-      fileCache: true,
-      addAndroidDownloads: {
-        // Related to the Android only
-        useDownloadManager: true,
-        notification: true,
-        path:
-          PictureDir +
-          '/image_' +
-          Math.floor(date.getTime() + date.getSeconds() / 2) +
-          ext,
-        description: 'Image',
-      },
-    };
-    config(options)
-      .fetch('GET', image_URL)
-      .then(res => {
-        // Showing alert after successful downloading
-        console.log('res -> ', JSON.stringify(res));
-        alert('Image Downloaded Successfully.');
-      });
-  };
+  //   // To add the time suffix in filename
+  //   let date = new Date();
+  //   // Image URL which we want to download
+  //   // let image_URL = REMOTE_IMAGE_PATH;
+  //   let image_URL = imageUrl;
+  //   // Getting the extention of the file
+  //   let ext = getExtention(image_URL);
+  //   ext = '.' + ext[0];
+  //   // Get config and fs from RNFetchBlob
+  //   // config: To pass the downloading related options
+  //   // fs: Directory path where we want our image to download
+  //   const {config, fs} = RNFetchBlob;
+  //   let PictureDir = fs.dirs.PictureDir;
+  //   let options = {
+  //     fileCache: true,
+  //     addAndroidDownloads: {
+  //       // Related to the Android only
+  //       useDownloadManager: true,
+  //       notification: true,
+  //       path:
+  //         PictureDir +
+  //         '/image_' +
+  //         Math.floor(date.getTime() + date.getSeconds() / 2) +
+  //         ext,
+  //       description: 'Image',
+  //     },
+  //   };
+  //   config(options)
+  //     .fetch('GET', image_URL)
+  //     .then(res => {
+  //       // Showing alert after successful downloading
+  //       console.log('res -> ', JSON.stringify(res));
+  //       alert('Image Downloaded Successfully.');
+  //     });
+  // };
 
   const getExtention = filename => {
     // To get the file extension

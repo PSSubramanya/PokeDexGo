@@ -20,8 +20,8 @@ import {Modal, Portal, Provider as ModalProvider} from 'react-native-paper';
 import {Provider} from 'react-redux';
 import store from './src/store/store.js';
 import styles from './src/screens/LandingPage/styles';
-import PushNotification from 'react-native-push-notification';
-import PushNotificationIOS from '@react-native-community/push-notification-ios';
+// import PushNotification from 'react-native-push-notification';
+// import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import notifee, {EventType} from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
 

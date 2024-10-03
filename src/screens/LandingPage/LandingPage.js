@@ -17,7 +17,7 @@ import DeviceInfo from 'react-native-device-info';
 import messaging from '@react-native-firebase/messaging';
 // import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {useNetStatusInfo} from '../../ultilities/customHooks/useNetStatusInfo';
-import {usePushNotification} from '../../ultilities/customHooks/usePushNotification';
+// import {usePushNotification} from '../../ultilities/customHooks/usePushNotification';
 import strings from '../../constants/strings';
 import imagePaths from '../../constants/imagePaths';
 import colors from '../../constants/colors';
@@ -36,7 +36,7 @@ const LandingPage = ({navigation}) => {
 
   const dispatch = useDispatch();
   const {networkState} = useNetStatusInfo();
-  const {onDisplayNotification} = usePushNotification(navigation);
+  // const {onDisplayNotification} = usePushNotification(navigation);
 
   const navigationScreens = [
     {
@@ -68,6 +68,7 @@ const LandingPage = ({navigation}) => {
 
   //TODO; pdf, pikagpt, trainer info, counter advance, pokedex, custom event add, notifications
   //TODO: Previous Events Data - "https://getpantry.cloud/apiv1/pantry/27d83b8a-6b70-4994-8b39-86fe1d49c459/basket/previousEvents"
+  //TODO: react-native-push-notification for PUSH NOTIFICATIONS, rn-fetch-blob o download images, Previous events UI and Team rockets Poke possibilties UI
   const [loadData, setLoadData] = useState([]);
   const [loadEggData, setLoadEggData] = useState([]);
   const [loadRaidBossData, setRaidBossData] = useState([]);
@@ -91,13 +92,13 @@ const LandingPage = ({navigation}) => {
       setModalDisplayText(remoteMessage?.notification?.body);
       showModal();
 
-      onDisplayNotification(
-        'EVENT ALERT',
-        remoteMessage?.notification?.title,
-        remoteMessage?.notification?.body,
-        'https://leekduck.com/assets/img/events/go-battle-league-season-17-timeless-travels.jpg',
-        '0',
-      );
+      // onDisplayNotification(
+      //   'EVENT ALERT',
+      //   remoteMessage?.notification?.title,
+      //   remoteMessage?.notification?.body,
+      //   'https://leekduck.com/assets/img/events/go-battle-league-season-17-timeless-travels.jpg',
+      //   '0',
+      // );
     });
 
     return unsubscribe;

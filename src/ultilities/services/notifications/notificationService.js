@@ -4,7 +4,7 @@ import {AppState, Platform, NativeModules} from 'react-native';
 
 import _BackgroundTimer from 'react-native-background-timer';
 import {useCurrentTime} from '../../customHooks/notificationContext';
-import {usePushNotification} from '../../customHooks/usePushNotification';
+// import {usePushNotification} from '../../customHooks/usePushNotification';
 import useAppStatus from '../../customHooks/useAppState';
 import moment from 'moment';
 
@@ -12,7 +12,7 @@ export const NotificationService = navigation => {
   let notificationTitleString = '';
   const {BackgroundTask} = NativeModules;
 
-  const {onDisplayNotification} = usePushNotification(navigation);
+  // const {onDisplayNotification} = usePushNotification(navigation);
 
   const currentTime = useCurrentTime();
 
@@ -2890,15 +2890,15 @@ export const NotificationService = navigation => {
       //   );
       // }
 
-      onDisplayNotification(
-        notificationTitleString,
-        evDat?.Summary,
-        evDat?.Description,
-        evDat?.['Img Src']?.[0],
-        notificationId,
-        evDat,
-        returnedValue,
-      );
+      // onDisplayNotification(
+      //   notificationTitleString,
+      //   evDat?.Summary,
+      //   evDat?.Description,
+      //   evDat?.['Img Src']?.[0],
+      //   notificationId,
+      //   evDat,
+      //   returnedValue,
+      // );
     });
   };
   return {NotificationService};

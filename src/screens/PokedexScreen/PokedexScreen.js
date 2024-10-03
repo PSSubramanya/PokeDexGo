@@ -289,10 +289,12 @@ const PokedexScreen = props => {
             justifyContent: 'center',
             alignItems: pokedexEntriesForRegion?.length === 0 ? 'center' : null,
             alignSelf: 'center',
-            alignItems: 'center',
           }}>
           {pokedexEntriesForRegion?.length > 0 ? (
             <FlatList
+              contentContainerStyle={{
+                marginLeft: 10,
+              }}
               data={pokedexEntriesForRegion}
               keyExtractor={item => item}
               numColumns={3}
@@ -314,6 +316,7 @@ const PokedexScreen = props => {
                         height: 100,
                         width: 100,
                         alignItems: 'center',
+                        justifyContent: 'center',
                       }}>
                       <Image
                         source={{uri: item?.pokemonStatsData?.imageSrc}}

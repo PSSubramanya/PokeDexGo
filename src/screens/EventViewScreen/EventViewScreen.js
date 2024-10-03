@@ -736,6 +736,19 @@ const EventViewScreen = props => {
 
   const defaultPokemonImageString = idx => {
     let indexVal = idx?.replace('_00', '');
+
+    if (idx?.includes('585')) {
+      if (idx?.includes('_11')) {
+        indexVal = idx?.replace('_11', '');
+      } else if (idx?.includes('_12')) {
+        indexVal = idx?.replace('_12', '');
+      } else if (idx?.includes('_13')) {
+        indexVal = idx?.replace('_13', '');
+      } else if (idx?.includes('_14')) {
+        indexVal = idx?.replace('_14', '');
+      }
+    }
+
     if (indexVal?.[0] === '0') {
       if (indexVal?.[1] === '0') {
         indexVal = indexVal?.[2];
@@ -910,6 +923,7 @@ const EventViewScreen = props => {
         displayableModalImages = [...displayableModalImages, pushedImage];
       }
     });
+    console.log('modalmodalmodalImages', displayableModalImages);
     return displayableModalImages;
   };
 
