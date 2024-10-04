@@ -16,8 +16,8 @@ import {
   individualPokemonImageMapping,
   toCamelCase,
 } from '../../ultilities/commonFunctions';
-import mockFieldResearchData from '../../ultilities/pokemonData/mock_field_research_data.json';
-import mockRaidBossData from '../../ultilities/pokemonData/mock_raid_boss_data.json';
+// import mockFieldResearchData from '../../ultilities/pokemonData/mock_field_research_data.json';
+// import mockRaidBossData from '../../ultilities/pokemonData/mock_raid_boss_data.json';
 import imagePaths from '../../constants/imagePaths';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
 import pokemonTypesData from '../../ultilities/pokemonData/pokemon_types';

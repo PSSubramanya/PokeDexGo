@@ -14,7 +14,7 @@ export default styles = StyleSheet.create({
     color: colors.bluishGrey,
     marginLeft: horizontalScale(15),
     marginTop: verticalScale(10),
-    fontSize: moderateScale(12),
+    fontSize: moderateScale(14),
   },
   TextInputView: {
     flexDirection: 'row',

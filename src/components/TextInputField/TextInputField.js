@@ -9,7 +9,7 @@ import {
   Image,
   NativeModules,
 } from 'react-native';
-import {verticalScale} from '../../ultilities/scale';
+import {moderateScale, verticalScale} from '../../ultilities/scale';
 import styles from './styles';
 import colors from '../../constants/colors';
 import imagePaths from '../../constants/imagePaths';
@@ -26,6 +26,7 @@ const TextInputField = ({
   onBlur,
   containerStyle,
   type,
+  fontSize,
 }) => {
   // const {SpeechToText} = NativeModules;
 
@@ -100,6 +101,7 @@ const TextInputField = ({
                 {
                   // backgroundColor: 'red',
                   marginLeft: type === 'chatInput' ? 0 : 0,
+                  fontSize: fontSize ? fontSize : moderateScale(12),
                 },
                 {
                   marginTop:
@@ -114,7 +116,7 @@ const TextInputField = ({
               ]}
               editable={editable}
               placeholder={placeholderText}
-              placeholderTextColor={colors.grey}
+              placeholderTextColor={colors.normal}
               onChangeText={onChangeText}
               onFocus={val => {
                 setSelectedField(true);

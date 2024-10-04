@@ -41,7 +41,7 @@ export default styles = StyleSheet.create({
     fontFamily: fontFamily.primaryFontFamilyBold,
   },
   paginationSection: {
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
     height: verticalScale(50),
     width: viewportWidth,
     alignItems: 'center',
@@ -52,5 +52,10 @@ export default styles = StyleSheet.create({
   activityIndicator: {
     flex: 1,
     justifyContent: 'center',
+  },
+  chevronIcon: {
+    height: verticalScale(40),
+    width: horizontalScale(40),
+    marginTop: verticalScale(30),
   },
 });

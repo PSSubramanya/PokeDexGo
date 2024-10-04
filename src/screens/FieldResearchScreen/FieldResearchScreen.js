@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import CardView from '../../components/CardView/CardView';
 import {pokeImageMappingFunction} from '../../ultilities/commonFunctions';
-import researchData from '../../ultilities/pokemonData/research.json';
+// import researchData from '../../ultilities/pokemonData/research.json';
 import imagePaths from '../../constants/imagePaths';
 import fontFamily from '../../ultilities/fontFamily.js';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';

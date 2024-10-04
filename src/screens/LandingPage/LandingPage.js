@@ -27,8 +27,8 @@ import {storeData, retrieveData} from '../../ultilities/commonFunctions';
 import styles from './styles';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
 import {CircleRightArrow} from '../../assets/images/svg';
-import webscrappedData from '../../ultilities/pokemonData/pokemon_data6.json';
-import eggData from '../../ultilities/pokemonData/egg_data.json';
+// import webscrappedData from '../../ultilities/pokemonData/pokemon_data6.json';
+// import eggData from '../../ultilities/pokemonData/egg_data.json';
 import {NotificationService} from '../../ultilities/services/notifications/notificationService';
 
 const LandingPage = ({navigation}) => {
@@ -66,7 +66,9 @@ const LandingPage = ({navigation}) => {
     // },
   ];
 
-  //TODO; pdf, pikagpt, trainer info, counter advance, pokedex, custom event add, notifications
+  //TODO; pdf view for instructions, pikagpt,
+  //TODO: trainer info, counter advance, team rocket data, intermediate evolution display with tasks to unlock them,
+  //TODO: pokedex, custom event add, notifications, Authentication, Card game
   //TODO: Previous Events Data - "https://getpantry.cloud/apiv1/pantry/27d83b8a-6b70-4994-8b39-86fe1d49c459/basket/previousEvents"
   //TODO: react-native-push-notification for PUSH NOTIFICATIONS, rn-fetch-blob o download images, Previous events UI and Team rockets Poke possibilties UI
   const [loadData, setLoadData] = useState([]);

@@ -12,6 +12,7 @@ import PikaGptScreen from './PikaGptScreen/PikaGptScreen';
 import PokedexScreen from './PokedexScreen/PokedexScreen';
 import PokeStatScreen from './PokeStatScreen/PokeStatScreen';
 import SampleTestingScreen from './SampleTestingScreen/SampleTestingScreen';
+import EventHistoryScreen from './EventHistoryScreen/EventHistoryScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -46,6 +47,10 @@ const StackNavigationScreen = () => {
         <Stack.Screen
           name="SampleTestingScreen"
           component={SampleTestingScreen}
+        />
+        <Stack.Screen
+          name="EventHistoryScreen"
+          component={EventHistoryScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

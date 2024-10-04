@@ -13,12 +13,15 @@ import {
   Platform,
 } from 'react-native';
 import {Modal, Portal, Provider} from 'react-native-paper';
+import BottomDrawer from 'rn-bottom-drawer';
+// import RBSheet from 'react-native-raw-bottom-sheet';
 
 import strings from '../../constants/strings';
 import imagePaths from '../../constants/imagePaths';
 import styles from './styles';
 import moment from 'moment';
 import CalendarView from '../../components/CalendarView/CalendarView';
+import TextInputField from '../../components/TextInputField/TextInputField';
 import Button from '../../components/Button/Button';
 import colors from '../../constants/colors';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
@@ -32,6 +35,7 @@ import {toCamelCase, checkImageExists} from '../../ultilities/commonFunctions';
 import CardView from '../../components/CardView/CardView';
 import EventDisplayCard from '../../components/EventDisplayCard/EventDisplayCard';
 import {NotificationService} from '../../ultilities/services/notifications/notificationService';
+import fontFamily from '../../ultilities/fontFamily';
 
 const EventViewScreen = props => {
   const {navigation} = props;
@@ -61,6 +65,8 @@ const EventViewScreen = props => {
   const [showLoader, setShowLoader] = useState(true);
 
   const [gridViewStatus, setGridViewStatus] = useState(false);
+  const [bottomDrawerVisibility, setBottomDrawerVisibility] = useState(false);
+  const [selectedOldDate, setSelectedOldDate] = useState('dd / mm / yyyy');
 
   const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
   const darkModeValue = darkMode?.data;
@@ -151,6 +157,11 @@ const EventViewScreen = props => {
   useEffect(() => {
     setGridViewStatus(false);
   }, [modalVisible]);
+
+  useEffect(() => {
+    const selectedDate = moment(selectedStartDate).format('DD / MM / YYYY');
+    setSelectedOldDate(selectedDate);
+  }, [bottomDrawerVisibility, selectedStartDate]);
 
   const showModal = () => {
     setModalVisible(true);
@@ -990,19 +1001,24 @@ const EventViewScreen = props => {
   const eventHeaderSection = () => {
     return (
       <View style={styles.eventsSectionHeader}>
-        <Text
-          style={[
-            styles.eventDateText,
-            {
-              color: darkModeValue
-                ? colors.primaryTextColorDarkMode
-                : colors.secondaryColor,
-            },
-          ]}>
-          {eventsData !== null
-            ? moment(selectedStartDate).format('MMM Do, YYYY')
-            : ''}
-        </Text>
+        <TouchableOpacity
+          onPress={() => {
+            setBottomDrawerVisibility(!bottomDrawerVisibility);
+          }}>
+          <Text
+            style={[
+              styles.eventDateText,
+              {
+                color: darkModeValue
+                  ? colors.primaryTextColorDarkMode
+                  : colors.secondaryColor,
+              },
+            ]}>
+            {eventsData !== null
+              ? moment(selectedStartDate).format('MMM Do, YYYY')
+              : ''}
+          </Text>
+        </TouchableOpacity>
         <View style={commonStyling?.flexRow}>
           <Text
             style={[
@@ -1041,6 +1057,118 @@ const EventViewScreen = props => {
     );
   };
 
+  const bottomDrawerComponent = () => {
+    return (
+      <>
+        {bottomDrawerVisibility ? (
+          <View
+            style={{
+              height: 260,
+              backgroundColor: darkModeValue
+                ? colors?.quaternaryBackgroundColorDarkMode
+                : colors?.white,
+              borderTopLeftRadius: 25,
+              borderTopRightRadius: 25,
+            }}>
+            <TouchableOpacity
+              onPress={() => {
+                setBottomDrawerVisibility(!bottomDrawerVisibility);
+              }}>
+              <View
+                style={{
+                  height: 30,
+                  width: 30,
+                  borderWidth: 1,
+                  borderRadius: 5,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  alignSelf: 'flex-end',
+                  marginRight: 10,
+                  marginTop: 10,
+                  backgroundColor: colors?.primaryColorDarkMode,
+                  // borderColor: colors?.primaryColorDarkMode,
+                }}>
+                <Text
+                  style={{
+                    fontFamily: fontFamily?.primaryFontFamilyBold,
+                    color: colors?.white,
+                    fontSize: 12,
+                  }}>
+                  X
+                </Text>
+              </View>
+            </TouchableOpacity>
+            <Text
+              style={{
+                marginLeft: 10,
+                marginTop: 10,
+                fontFamily: fontFamily?.primaryFontFamilyBold,
+                color: colors?.white,
+                fontSize: 20,
+              }}>
+              LET'S TRAVEL BACK IN TIME
+            </Text>
+            <Text
+              style={{
+                marginLeft: 10,
+                marginTop: 10,
+                fontFamily: fontFamily?.primaryFontFamilyMedium,
+                color: colors?.white,
+              }}>
+              Enter the Date
+            </Text>
+            <View
+              style={{
+                backgroundColor: colors?.white,
+                height: 60,
+                marginHorizontal: 10,
+                marginTop: 10,
+                justifyContent: 'center',
+              }}>
+              <Text
+                style={{
+                  color: colors?.quaternaryBackgroundColorDarkMode,
+                  fontSize: 14,
+                  fontFamily: fontFamily?.primaryFontFamilyMedium,
+                  marginLeft: 10,
+                }}>
+                {selectedOldDate}
+              </Text>
+            </View>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('EventHistoryScreen', {
+                  selectedDate: selectedOldDate,
+                });
+              }}>
+              <View
+                style={{
+                  height: 40,
+                  width: 100,
+                  backgroundColor: colors?.primaryColor,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  alignSelf: 'center',
+                  marginTop: 10,
+                  borderRadius: 5,
+                }}>
+                <Text
+                  style={{
+                    color: colors?.white,
+                    fontSize: 14,
+                    fontFamily: fontFamily?.primaryFontFamilyMedium,
+                    marginLeft: 10,
+                  }}>
+                  GO
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        ) : null}
+      </>
+    );
+  };
+
   // console.log('EVVVVVV', eventsData);
 
   return (
@@ -1058,6 +1186,7 @@ const EventViewScreen = props => {
           {eventsData !== null ? eventHeaderSection() : null}
           {eventsData !== null ? eventsDetailSection() : null}
           {eventsData === null ? renderSelectDatePromptComponent() : null}
+          {bottomDrawerComponent()}
         </SafeAreaView>
       ) : null}
     </Provider>

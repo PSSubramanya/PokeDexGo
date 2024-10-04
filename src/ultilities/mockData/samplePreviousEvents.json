@@ -1,0 +1,32 @@
+{
+  "data": [
+    {
+      "eventName": "Togedemaru Spotlight Hour Is Over",
+      "imageLink": "https//p337.info/pokemongo/img/pokemon/777.png",
+      "dateTime": "Tue 30-Jul-2024 7:00 PM (19:00)",
+      "officialLinks": "https://pokemongolive.com/seasons/shared-skies",
+      "description": "'Spotlight Hour is set in your local timezone between 6pm and 7pm This event will have feature the following rewards:     - Increased spawns of Togedemaru     - 2x Catch Stardust'"
+    },
+    {
+      "eventName": "Legendary Raid Hour Is Over",
+      "imageLink": "https//p337.info/pokemongo/img/custom/Premium_Raid_Pass.png",
+      "dateTime": "Wed 31-Jul-2024 7:00 PM (19:00)",
+      "officialLinks": "https://pokemongolive.com/seasons/shared-skies",
+      "description": "'Raid hour is on from 6pm to 7pm in your local time:     - Increased 5 star raids : Tornadus Incarnate '"
+    },
+    {
+      "eventName": "Strength Of Steel Event Is Over",
+      "imageLink": "https//p337.info/pokemongo/img/pokemon/374.png",
+      "dateTime": "Tue 30-Jul-2024 8:00 PM (20:00)",
+      "officialLinks": "https://pokemongolive.com/post/ultra-unlock-strength-of-steel",
+      "description": "'Togedemaru makes an electrifying Shiny debut in Ultra Unlock: Strength of Steel!Event Features:     - Shiny Togedemaru released     - 3x Catch Stardust     - Additional Candy and XL Candy for Nice Throws or better.     - Boosted XL Catch candy     - Wild spawns: Alolan Sandshrew, Magnemite, Pineco, Nosepass, Aron, Beldum, Bronzor, Ferroseed, Galarian Stunfisk, Togedemaru    - Rare spawn: Onix, Scyther, Skarmory, Klink '"
+    },
+    {
+      "eventName": "Mega Lucario Raid Day Is Over",
+      "imageLink": "https//p337.info/pokemongo/img/pokemon/448m.png",
+      "dateTime": "Sat 27-Jul-2019 5:00 PM (17:00)",
+      "officialLinks": "https://pokemongolive.com/post/mega-lucario-raid-ultra-unlock",
+      "description": "'See the details for Mega Lucario Raid Day in Pokémon GO! Event Features:     - Mega Lucario released in raids     - Lucario will know the charged attack Force Palm     - 5 Bonus Raid Passes from spinning gyms    - 1.5x P from completing raids     - Increased shiny chance of Mega Lucario from raids     - Increased remote raid pass limit to 20     - Featured spawns after raid ends (Broken feature)    - Paid ticket available '"
+    }
+  ]
+}

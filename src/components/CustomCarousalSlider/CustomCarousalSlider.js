@@ -5,9 +5,11 @@ import {
   Text,
   TouchableOpacity,
   ActivityIndicator,
+  Image,
 } from 'react-native';
 import styles from './styles';
 import colors from '../../constants/colors';
+import imagePaths from '../../constants/imagePaths';
 
 // NOTE: In progress. Yet to be completed. Will be done soon.
 const CustomCarousalSlider = ({
@@ -17,6 +19,7 @@ const CustomCarousalSlider = ({
   sliderData,
   indexVal,
   setIndexVal,
+  containerStyle,
 }) => {
   const prevScrollPos = useRef(0);
   const paginationViewRef = useRef();
@@ -25,6 +28,7 @@ const CustomCarousalSlider = ({
   const [tempcount, settempcount] = useState(0);
   const [scrollingOffsetValue, setScrollingOffsetValue] = useState(0);
   const [loader, setLoader] = useState(false);
+  const [modalImageIndex, setModalImageIndex] = useState(0);
 
   useEffect(() => {
     prevScrollPos.current = scrollingOffsetValue;
@@ -59,7 +63,7 @@ const CustomCarousalSlider = ({
         {paginationData?.length > 1 && paginationStyle ? (
           <FlatList
             data={paginationData}
-            keyExtractor={item => item}
+            keyExtractor={item => item?.id}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             scrollEnabled={false}
@@ -72,7 +76,7 @@ const CustomCarousalSlider = ({
                       styles.paginationDots,
                       {
                         backgroundColor:
-                          indexVal === index
+                          modalImageIndex === index
                             ? colors.vermillion
                             : colors.purple,
                       },
@@ -101,6 +105,74 @@ const CustomCarousalSlider = ({
     );
   };
 
+  const leftChevronIcon = modalImages => {
+    return (
+      <>
+        {modalImages?.length >= 1 ? (
+          <TouchableOpacity
+            onPress={() => {
+              if (modalImageIndex > 0) {
+                const tempIndex = modalImageIndex - 1;
+                setModalImageIndex(tempIndex);
+                paginationViewRef.current.scrollToIndex({
+                  animated: true,
+                  index: tempIndex,
+                });
+                // leftButtonHandler(tempIndex, modalImages);
+              }
+            }}
+            disabled={modalImageIndex > 0 ? false : true}>
+            <Image
+              source={imagePaths.leftChevronIcon}
+              height={1}
+              width={1}
+              style={[
+                styles.chevronIcon,
+                {
+                  opacity: modalImageIndex > 0 ? 1 : 0.5,
+                },
+              ]}
+            />
+          </TouchableOpacity>
+        ) : null}
+      </>
+    );
+  };
+
+  const rightChevronIcon = modalImages => {
+    return (
+      <>
+        {modalImages?.length >= 1 ? (
+          <TouchableOpacity
+            onPress={() => {
+              if (modalImageIndex < modalImages.length) {
+                const tempIndex = modalImageIndex + 1;
+                setModalImageIndex(tempIndex);
+                paginationViewRef.current.scrollToIndex({
+                  animated: true,
+                  index: tempIndex,
+                });
+                // rightButtonHandler(tempIndex, modalImages);
+              }
+            }}
+            disabled={modalImageIndex < modalImages.length - 1 ? false : true}>
+            <Image
+              source={imagePaths.rightChevronIcon}
+              height={1}
+              width={1}
+              style={[
+                styles.chevronIcon,
+                {
+                  opacity: modalImageIndex < modalImages.length - 1 ? 1 : 0.5,
+                },
+              ]}
+            />
+          </TouchableOpacity>
+        ) : null}
+      </>
+    );
+  };
+
   return (
     <>
       {loader ? (
@@ -109,37 +181,47 @@ const CustomCarousalSlider = ({
         </View>
       ) : (
         <>
-          <FlatList
-            data={sliderData}
-            ref={paginationViewRef}
-            keyExtractor={item => item}
-            horizontal={true}
-            renderItem={bodyView}
-            disableIntervalMomentum={true}
-            pagingEnabled={true}
-            showsHorizontalScrollIndicator={false}
-            // onScroll={onScroll}
-            onScroll={event => {
-              const horizontalOffset = event.nativeEvent.contentOffset.x;
-              console.log(
-                'OFFSET VALUE',
-                horizontalOffset,
-                prevScrollPos.current,
-              );
-              setScrollingOffsetValue(horizontalOffset);
-              if (prevScrollPos.current < horizontalOffset) {
-                if (indexVal < sliderData.length - 1) {
-                  tempindexval = tempcount + 1;
-                  settempcount(tempindexval);
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
+            {leftChevronIcon(sliderData)}
+            <FlatList
+              data={sliderData}
+              ref={paginationViewRef}
+              keyExtractor={item => item}
+              contentContainerStyle={containerStyle}
+              horizontal={true}
+              renderItem={bodyView}
+              disableIntervalMomentum={true}
+              pagingEnabled={true}
+              scrollEnabled={false}
+              showsHorizontalScrollIndicator={false}
+              // onScroll={onScroll}
+              onScroll={event => {
+                const horizontalOffset = event.nativeEvent.contentOffset.x;
+                console.log(
+                  'OFFSET VALUE',
+                  horizontalOffset,
+                  prevScrollPos.current,
+                );
+                setScrollingOffsetValue(horizontalOffset);
+                if (prevScrollPos.current < horizontalOffset) {
+                  if (indexVal < sliderData.length - 1) {
+                    tempindexval = tempcount + 1;
+                    settempcount(tempindexval);
+                  }
+                } else {
+                  if (indexVal > 0) {
+                    tempindexval = tempcount - 1;
+                    settempcount(tempindexval);
+                  }
                 }
-              } else {
-                if (indexVal > 0) {
-                  tempindexval = tempcount - 1;
-                  settempcount(tempindexval);
-                }
-              }
-            }}
-          />
+              }}
+            />
+            {rightChevronIcon(sliderData)}
+          </View>
           <View style={styles.paginationSection}>
             {paginationView(sliderData, paginationStyle)}
           </View>
