@@ -39,14 +39,31 @@ const EventHistoryScreen = props => {
   const [monthString, setMonthString] = useState(monthFormatValue);
   const [yearString, setYearString] = useState(yearFormatValue);
 
+  //https://getpantry.cloud/apiv1/pantry/27d83b8a-6b70-4994-8b39-86fe1d49c459/basket/previousEvents
+
   useEffect(() => {
     const filteredData = previousEventsData?.filter((val, idx) => {
-      if (val?.dateTime?.includes(yearString)) {
+      console.log(
+        'CALCulate',
+        val?.dateTime,
+        selectedDateValue,
+        moment(val?.dateTime, 'ddd DD-MMM-YYYY h:mm A (HH:mm)')?.format(
+          'DD / MM / YYYY',
+        ),
+        moment(val?.dateTime, 'ddd DD-MMM-YYYY h:mm A (HH:mm)')?.format(
+          'DD / MM / YYYY',
+        ) === selectedDateValue,
+      );
+      if (
+        moment(val?.dateTime, 'ddd DD-MMM-YYYY h:mm A (HH:mm)')
+          ?.format('DD / MM / YYYY')
+          ?.includes(selectedDateValue)
+      ) {
         return val;
       }
     });
     setDisplayData(filteredData);
-  }, [dateString, monthString, yearString]);
+  }, [dateString, monthString, yearString, selectedDateValue]);
 
   const finishedStrings = ['Is over', 'has finished', 'have finished'];
 
