@@ -382,7 +382,9 @@ const EventHistoryScreen = props => {
             // containerStyle={{backgroundColor: 'red'}}
           />
         </View>
-        <View style={{marginTop: 10}}>{renderDateSection()}</View>
+        <View style={{marginTop: displayData?.length > 1 ? 20 : 10}}>
+          {renderDateSection()}
+        </View>
       </View>
     );
   };
