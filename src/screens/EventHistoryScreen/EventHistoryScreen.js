@@ -7,6 +7,7 @@ import {
   Image,
   ScrollView,
   Platform,
+  KeyboardAvoidingView,
 } from 'react-native';
 import CardView from '../../components/CardView/CardView.js';
 import WebView from 'react-native-webview';
@@ -220,57 +221,71 @@ const EventHistoryScreen = props => {
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <TextInputField
-            placeholderText={'DD'}
-            containerStyle={{
-              backgroundColor: colors?.white,
-              height: 50,
-              width: 50,
-              justifyContent: 'center',
-              marginRight: 10,
-              borderRadius: 5,
-              paddingLeft: 4,
-              paddingBottom: 4,
-            }}
-            onChangeText={val => {
-              setDateString(val);
-            }}
-            textInputData={dateString}
-          />
-          <TextInputField
-            placeholderText={'MM'}
-            containerStyle={{
-              backgroundColor: colors?.white,
-              height: 50,
-              width: 50,
-              justifyContent: 'center',
-              marginRight: 10,
-              borderRadius: 5,
-              paddingLeft: 4,
-              paddingBottom: 4,
-            }}
-            onChangeText={val => {
-              setMonthString(val);
-            }}
-            textInputData={monthString}
-          />
-          <TextInputField
-            placeholderText={'YYYY'}
-            containerStyle={{
-              backgroundColor: colors?.white,
-              height: 50,
-              width: 60,
-              justifyContent: 'center',
-              marginRight: 10,
-              borderRadius: 5,
-              paddingLeft: 2,
-              paddingBottom: 4,
-            }}
-            onChangeText={val => {
-              setYearString(val);
-            }}
-            textInputData={yearString}
-          />
+          <KeyboardAvoidingView behavior={'padding'}>
+            <TextInputField
+              placeholderText={'DD'}
+              containerStyle={{
+                backgroundColor: colors?.white,
+                height: 50,
+                width: 50,
+                justifyContent: 'center',
+                alignContent: 'center',
+                marginRight: 10,
+                borderRadius: 5,
+                paddingLeft: Platform?.OS === 'android' ? null : 4,
+                paddingBottom: Platform?.OS === 'android' ? null : 4,
+                alignContent: 'center',
+              }}
+              onChangeText={val => {
+                setDateString(val);
+              }}
+              textInputData={dateString}
+            />
+          </KeyboardAvoidingView>
+
+          <KeyboardAvoidingView behavior={'padding'}>
+            <TextInputField
+              placeholderText={'MM'}
+              containerStyle={{
+                backgroundColor: colors?.white,
+                height: 50,
+                width: 50,
+                justifyContent: 'center',
+                marginRight: 10,
+                borderRadius: 5,
+                paddingLeft: Platform?.OS === 'android' ? null : 4,
+                paddingBottom: Platform?.OS === 'android' ? null : 4,
+                alignContent: 'center',
+              }}
+              onChangeText={val => {
+                setMonthString(val);
+              }}
+              textInputData={monthString}
+            />
+          </KeyboardAvoidingView>
+
+          <KeyboardAvoidingView behavior={'padding'}>
+            <TextInputField
+              placeholderText={'YYYY'}
+              containerStyle={{
+                backgroundColor: colors?.white,
+                height: 50,
+                width: 72,
+                justifyContent: 'center',
+                marginRight: 10,
+                borderRadius: 5,
+                paddingLeft: Platform?.OS === 'android' ? null : 4,
+                paddingBottom: Platform?.OS === 'android' ? null : 4,
+                alignContent: 'center',
+                marginRight: 10,
+                // backgroundColor: 'red',
+              }}
+              onChangeText={val => {
+                setYearString(val);
+              }}
+              textInputData={yearString}
+            />
+          </KeyboardAvoidingView>
         </View>
         <TouchableOpacity
           onPress={() => {
@@ -311,6 +326,7 @@ const EventHistoryScreen = props => {
           alignItems: 'center',
           flexDirection: 'column',
           justifyContent: 'center',
+          marginTop: 100,
         }}>
         <View>
           <Image
@@ -341,7 +357,7 @@ const EventHistoryScreen = props => {
             style={{
               color: colors?.white,
               fontFamily: fontFamily?.primaryFontFamilySemiBold,
-              marginTop: 60,
+              marginTop: 30,
               textTransform: 'uppercase',
               fontSize: 16,
               textAlign: 'center',
@@ -366,7 +382,7 @@ const EventHistoryScreen = props => {
             // containerStyle={{backgroundColor: 'red'}}
           />
         </View>
-        <View style={{marginTop: -20}}>{renderDateSection()}</View>
+        <View style={{marginTop: 10}}>{renderDateSection()}</View>
       </View>
     );
   };
@@ -374,9 +390,11 @@ const EventHistoryScreen = props => {
   const renderBody = () => {
     return (
       <>
-        {displayData?.length !== 0
-          ? renderNonEmptyComponent()
-          : renderEmptyListComponent()}
+        <ScrollView>
+          {displayData?.length !== 0
+            ? renderNonEmptyComponent()
+            : renderEmptyListComponent()}
+        </ScrollView>
       </>
     );
   };
@@ -392,7 +410,7 @@ const EventHistoryScreen = props => {
       <SafeAreaView />
       <View
         style={{
-          height: urlSelected ? 60 : 60,
+          height: urlSelected ? (Platform?.OS === 'android' ? 90 : 60) : 90,
           marginTop: Platform?.OS === 'android' ? -20 : -20,
           marginLeft: -20,
           // backgroundColor: 'red',
