@@ -64,13 +64,72 @@ const PikaGptScreen = props => {
   // const lastScale = useRef(1);
   // const baseScale = useRef(1);
 
+  const screenViewRef = useRef(null);
+
   const [chatList, setChatList] = useState(chatData);
   const [message, setMessage] = useState('');
   const [displayModal, setDisplayModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState('');
+  const [selectedItemType, setSelectedItemType] = useState('');
   const [imageLoaded, setImageLoaded] = useState(true);
+  const [onDeleteState, setOnDeleteState] = useState(false);
   const [isZooming, setIsZooming] = useState(false);
   // const [size, setSize] = useState({width: 0, height: 0});
+
+  useEffect(() => {
+    if (onDeleteState && selectedItemType === 'text') {
+      Alert.alert(
+        'Are you sure?',
+        'Do you want to delete this message?',
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              const indexValue = chatList?.findIndex(
+                item => item?.id === selectedItem?.id,
+              );
+              const tempArray = chatList;
+              tempArray.splice(indexValue, 1);
+              setChatList(tempArray);
+              setDisplayModal(false);
+            },
+          },
+          {
+            text: 'Cancel',
+            onPress: () => console.log('OK Pressed'),
+            style: 'cancel',
+          },
+        ],
+        {cancelable: false},
+      );
+    } else if (onDeleteState && selectedItemType === 'image') {
+      Alert.alert(
+        'Are you sure?',
+        'Do you want to delete this image?',
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              const indexValue = chatList?.findIndex(
+                item => item?.id === selectedItem?.id,
+              );
+              const tempArray = chatList;
+              tempArray.splice(indexValue, 1);
+              setChatList(tempArray);
+              setDisplayModal(false);
+            },
+          },
+          {
+            text: 'Cancel',
+            onPress: () => console.log('OK Pressed'),
+            style: 'cancel',
+          },
+        ],
+        {cancelable: false},
+      );
+    }
+    setOnDeleteState(false);
+  }, [onDeleteState]);
 
   /*
     const isPressed = useSharedValue(false);
@@ -216,74 +275,34 @@ const PikaGptScreen = props => {
         keyExtractor={item => item}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{marginHorizontal: 10}}
+        ref={screenViewRef}
         renderItem={({item, ind}) => {
           return (
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: item?.from === 'Me' ? 'flex-end' : 'flex-start',
+            <TouchableOpacity
+              onLongPress={() => {
+                showModal(item, 'text');
+                setOnDeleteState(true);
               }}>
-              <View>
-                {item?.image === '' ? (
-                  <View
-                    style={{
-                      marginHorizontal: 10,
-                      paddingTop: 10,
-                      marginTop: 10,
-                      paddingBottom: 30,
-                      width: 200,
-                      backgroundColor:
-                        item?.from === 'Me'
-                          ? colors?.tertiaryBackgroundColorDarkMode
-                          : colors?.darkGrey,
-                      borderRadius: 10,
-                    }}>
-                    <Text
-                      style={[
-                        styles?.chatTextStyle,
-                        {marginTop: item?.image ? 10 : null},
-                      ]}>
-                      {item?.text}
-                    </Text>
-                  </View>
-                ) : null}
-
-                <TouchableOpacity
-                  onPress={() => {
-                    //TODO: Here add a modal of Image view
-                    showModal(item);
-                  }}>
-                  {item?.image ? (
-                    <Image
-                      source={{uri: item?.image}}
-                      height={1}
-                      width={1}
-                      style={{
-                        width: 200,
-                        height: 300,
-                        marginTop: 20,
-                        marginHorizontal: 10,
-                        borderWidth: 10,
-                        borderColor: colors?.darkGrey,
-                        borderRadius: 10,
-                      }}
-                      // resizeMode={'contain'}
-                    />
-                  ) : null}
-
-                  {item?.image !== '' && item?.text !== '' ? (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent:
+                    item?.from === 'Me' ? 'flex-end' : 'flex-start',
+                }}>
+                <View>
+                  {item?.image === '' ? (
                     <View
                       style={{
                         marginHorizontal: 10,
                         paddingTop: 10,
-                        marginTop: -10,
+                        marginTop: 10,
                         paddingBottom: 30,
                         width: 200,
                         backgroundColor:
                           item?.from === 'Me'
                             ? colors?.tertiaryBackgroundColorDarkMode
                             : colors?.darkGrey,
-                        // borderRadius: 10,
+                        borderRadius: 10,
                       }}>
                       <Text
                         style={[
@@ -294,21 +313,69 @@ const PikaGptScreen = props => {
                       </Text>
                     </View>
                   ) : null}
-                </TouchableOpacity>
 
-                <Text
-                  style={[
-                    styles?.chatTextStyle,
-                    {
-                      marginHorizontal: 5,
-                      alignSelf:
-                        item?.from === 'Me' ? 'flex-end' : 'flex-start',
-                    },
-                  ]}>
-                  {moment(item?.timeStamp).format('LT')}
-                </Text>
+                  <TouchableOpacity
+                    onPress={() => {
+                      //TODO: Here add a modal of Image view
+                      showModal(item, 'image');
+                    }}>
+                    {item?.image ? (
+                      <Image
+                        source={{uri: item?.image}}
+                        height={1}
+                        width={1}
+                        style={{
+                          width: 200,
+                          height: 300,
+                          marginTop: 20,
+                          marginHorizontal: 10,
+                          borderWidth: 10,
+                          borderColor: colors?.darkGrey,
+                          borderRadius: 10,
+                        }}
+                        // resizeMode={'contain'}
+                      />
+                    ) : null}
+
+                    {item?.image !== '' && item?.text !== '' ? (
+                      <View
+                        style={{
+                          marginHorizontal: 10,
+                          paddingTop: 10,
+                          marginTop: -10,
+                          paddingBottom: 30,
+                          width: 200,
+                          backgroundColor:
+                            item?.from === 'Me'
+                              ? colors?.tertiaryBackgroundColorDarkMode
+                              : colors?.darkGrey,
+                          // borderRadius: 10,
+                        }}>
+                        <Text
+                          style={[
+                            styles?.chatTextStyle,
+                            {marginTop: item?.image ? 10 : null},
+                          ]}>
+                          {item?.text}
+                        </Text>
+                      </View>
+                    ) : null}
+                  </TouchableOpacity>
+
+                  <Text
+                    style={[
+                      styles?.chatTextStyle,
+                      {
+                        marginHorizontal: 5,
+                        alignSelf:
+                          item?.from === 'Me' ? 'flex-end' : 'flex-start',
+                      },
+                    ]}>
+                    {moment(item?.timeStamp).format('LT')}
+                  </Text>
+                </View>
               </View>
-            </View>
+            </TouchableOpacity>
           );
         }}
       />
@@ -323,6 +390,28 @@ const PikaGptScreen = props => {
       </View>
     );
   };
+
+  const onClickOfSendIcon = (newMessage, type) => {
+    const newTime = new Date();
+    const newItem = {
+      id: chatList[chatList?.length - 1]?.id + 1,
+      text: newMessage,
+      image: '',
+      from: 'Me',
+      timeStamp: newTime,
+    };
+    const tempArray = chatList;
+    // tempArray = [...tempArray, newItem];
+    tempArray.push(newItem);
+    console.log('NEW CHAT ARRAY', tempArray);
+    setChatList(tempArray);
+    setMessage('');
+    screenViewRef?.current.scrollToEnd({
+      animated: true,
+    });
+  };
+
+  const onClickOfPlusIcon = () => {};
 
   const textingArea = () => {
     return (
@@ -344,6 +433,11 @@ const PikaGptScreen = props => {
             borderRadius: 10,
           }}
           type={'chatInput'}
+          onClickOfPlusOrSendIcon={() => {
+            message?.length === 0
+              ? onClickOfPlusIcon()
+              : onClickOfSendIcon(message);
+          }}
         />
       </KeyboardAvoidingView>
     );
@@ -353,9 +447,12 @@ const PikaGptScreen = props => {
     setImageLoaded(true);
   };
 
-  const showModal = item => {
-    setDisplayModal(true);
+  const showModal = (item, type) => {
+    if (type === 'image') {
+      setDisplayModal(true);
+    }
     setSelectedItem(item);
+    setSelectedItemType(type);
   };
 
   const hideModal = () => {
@@ -391,30 +488,7 @@ const PikaGptScreen = props => {
               }}>
               <TouchableOpacity
                 onPress={() => {
-                  Alert.alert(
-                    'Are you sure?',
-                    'Do you want to delete this image?',
-                    [
-                      {
-                        text: 'OK',
-                        onPress: () => {
-                          const indexValue = chatList?.findIndex(
-                            item => item?.id === selectedItem?.id,
-                          );
-                          const tempArray = chatList;
-                          tempArray.splice(indexValue, 1);
-                          setChatList(tempArray);
-                          setDisplayModal(false);
-                        },
-                      },
-                      {
-                        text: 'Cancel',
-                        onPress: () => console.log('OK Pressed'),
-                        style: 'cancel',
-                      },
-                    ],
-                    {cancelable: false},
-                  );
+                  setOnDeleteState(true);
                 }}>
                 <Image
                   source={imagePaths?.deleteIcon}

@@ -27,6 +27,7 @@ const TextInputField = ({
   containerStyle,
   type,
   fontSize,
+  onClickOfPlusOrSendIcon,
 }) => {
   // const {SpeechToText} = NativeModules;
 
@@ -132,9 +133,16 @@ const TextInputField = ({
               // secureTextEntry={false}
             />
             {type === 'chatInput' ? (
-              <TouchableOpacity onPress={() => {}}>
+              <TouchableOpacity
+                onPress={() => {
+                  onClickOfPlusOrSendIcon();
+                }}>
                 <Image
-                  source={imagePaths?.plusIcon}
+                  source={
+                    textInputData?.length === 0
+                      ? imagePaths?.plusIcon
+                      : imagePaths?.sendIcon
+                  }
                   height={1}
                   width={1}
                   resizeMode={'contain'}

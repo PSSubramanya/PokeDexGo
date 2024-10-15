@@ -1067,6 +1067,10 @@ const EventViewScreen = props => {
               backgroundColor: darkModeValue
                 ? colors?.quaternaryBackgroundColorDarkMode
                 : colors?.white,
+              borderColor: colors?.white,
+              borderTopWidth: 2,
+              borderRightWidth: 0.5,
+              borderLeftWidth: 0.5,
               borderTopLeftRadius: 25,
               borderTopRightRadius: 25,
             }}>

@@ -54,6 +54,7 @@ export default {
   masterBallIcon: require('../assets/images/icons/masterBallIcon.png'),
   mikeOnIcon: require('../assets/images/icons/mikeOn.png'),
   mikeOffIcon: require('../assets/images/icons/mikeOff.png'),
+  sendIcon: require('../assets/images/icons/sendIcon.png'),
 
   //Images
   calendar1: require('../assets/images/calendar.png'),
