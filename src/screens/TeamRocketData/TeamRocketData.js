@@ -1,5 +1,12 @@
 import React from 'react';
-import {View, Text, SafeAreaView, Image, FlatList} from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 import {useSelector} from 'react-redux';
 import styles from './styles.js';
 import pokeTypesData from '../../ultilities/pokemonData/pokemon_types';
@@ -62,7 +69,7 @@ const TeamRocketData = props => {
     }
   };
   const renderPokemonPossibilities = ({item, index}) => {
-    const {possibilePokemons, pokemonLevel} = item;
+    const {possibilePokemons, pokemonLevel, catchReward} = item;
     return (
       <View
         style={{
@@ -84,20 +91,24 @@ const TeamRocketData = props => {
           {possibilePokemons?.map((val, idx) => {
             return (
               <View>
-                <Image
-                  source={{uri: pokeImageMappingFunction(val?.image)}}
-                  height={80}
-                  width={80}
-                  style={{
-                    width: 80,
-                    height: 80,
-                    backgroundColor: colors?.white,
-                    margin: 10,
-                    borderRadius: 10,
-                    borderWidth: 2,
-                    borderColor: colors?.purple,
-                  }}
-                />
+                <TouchableOpacity onPress={() => {}}>
+                  <Image
+                    source={{uri: pokeImageMappingFunction(val?.image)}}
+                    height={80}
+                    width={80}
+                    style={{
+                      width: 80,
+                      height: 80,
+                      backgroundColor: catchReward
+                        ? colors?.rock
+                        : colors?.white,
+                      margin: 10,
+                      borderRadius: 10,
+                      borderWidth: 2,
+                      borderColor: catchReward ? colors?.fire : colors?.purple,
+                    }}
+                  />
+                </TouchableOpacity>
                 {val?.shiny ? (
                   <View style={styles.shinyIconContainer}>
                     <Image
@@ -213,6 +224,7 @@ const TeamRocketData = props => {
               "{item?.description}"
             </Text>
           </View>
+
           <Image
             source={imageDecider(item)}
             height={100}
