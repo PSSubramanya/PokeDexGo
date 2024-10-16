@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -21,6 +21,9 @@ const TeamRocketData = props => {
   const darkModeValue = darkMode?.data;
   const {navigation} = props;
   const teamRocketDataValue = teamRocketData?.data;
+
+  const [showWeakness, setShowWeakness] = useState(false);
+  const [showWeaknessStats, setShowWeaknessStats] = useState([]);
 
   const backgroundColorDecider = item => {
     if (item?.level === 'boss') {
@@ -91,7 +94,14 @@ const TeamRocketData = props => {
           {possibilePokemons?.map((val, idx) => {
             return (
               <View>
-                <TouchableOpacity onPress={() => {}}>
+                <TouchableOpacity
+                  onLongPress={() => {
+                    setShowWeakness(true);
+                    setShowWeaknessStats(val?.weakness);
+                  }}
+                  onPressOut={() => {
+                    setShowWeakness(false);
+                  }}>
                   <Image
                     source={{uri: pokeImageMappingFunction(val?.image)}}
                     height={80}
@@ -177,6 +187,81 @@ const TeamRocketData = props => {
   const renderPokemonsPossibilityDisplayerSection = item => {
     return (
       <View style={{marginTop: 5}}>
+        {showWeakness ? (
+          <View
+            style={{
+              // height: 300,
+              width: 220,
+              backgroundColor: colors?.quaternaryBackgroundColorDarkMode,
+              zIndex: 1,
+              position: 'absolute',
+              marginLeft: 10,
+              paddingBottom: 10,
+              borderRadius: 5,
+            }}>
+            <Text
+              style={{
+                color: colors?.white,
+                fontFamily: fontFamily?.primaryFontFamilySemiBold,
+                fontSize: 16,
+                marginLeft: 10,
+                marginTop: 10,
+              }}>
+              WEAKNESS:
+            </Text>
+            <View
+              style={{
+                borderWidth: 0.5,
+                marginHorizontal: 5,
+                marginTop: 5,
+                borderColor: colors?.white,
+              }}
+            />
+            {showWeaknessStats?.map((statValue, statIndex) => {
+              return (
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginTop: 10,
+                  }}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                    }}>
+                    <Image
+                      source={{uri: pokeTypesData[statValue?.type]}}
+                      height={1}
+                      width={1}
+                      resizeMode={'contain'}
+                      style={{height: 20, width: 20, marginLeft: 10}}
+                    />
+                    <Text
+                      style={{
+                        color: colors?.white,
+                        fontSize: 12,
+                        fontFamily: fontFamily?.primaryFontFamilyRegular,
+                        marginLeft: 5,
+                        marginTop: 3,
+                      }}>
+                      {statValue?.type}
+                    </Text>
+                  </View>
+                  <Text
+                    style={{
+                      color: colors?.white,
+                      fontSize: 12,
+                      fontFamily: fontFamily?.primaryFontFamilySemiBold,
+                      marginRight: 10,
+                      marginTop: 3,
+                    }}>
+                    {statValue?.percent}%
+                  </Text>
+                </View>
+              );
+            })}
+          </View>
+        ) : null}
         <FlatList
           data={item?.pokemons}
           keyExtractor={item => item?.id}

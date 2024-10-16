@@ -54,6 +54,7 @@ export default styles = StyleSheet.create({
     fontFamily: fontFamily.primaryFontFamilyMedium,
     marginLeft: horizontalScale(10),
     alignSelf: 'center',
+    width: horizontalScale(100),
   },
   rewardCircle: {
     borderWidth: 1,
