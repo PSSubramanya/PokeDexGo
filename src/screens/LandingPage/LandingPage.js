@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   Text,
@@ -25,6 +25,7 @@ import soundTracks from '../../constants/soundTracks';
 import {eventDataLoad, darkModeActivation} from '../../actions/eventData';
 import {storeData, retrieveData} from '../../ultilities/commonFunctions';
 import styles from './styles';
+import {horizontalScale, verticalScale} from '../../ultilities/scale';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
 import {CircleRightArrow} from '../../assets/images/svg';
 // import webscrappedData from '../../ultilities/pokemonData/pokemon_data6.json';
@@ -74,11 +75,11 @@ const LandingPage = ({navigation}) => {
     //   navigationPath: 'PokedexScreen',
     //   image: imagePaths.rotomIcon,
     // },
-    // {
-    //   name: 'Team Rocket Data',
-    //   navigationPath: 'TeamRocketData',
-    //   image: imagePaths.teamRocketRadarLeaders,
-    // },
+    {
+      name: 'Team Rocket Data',
+      navigationPath: 'TeamRocketData',
+      image: imagePaths.teamRocketRadarGiovanni,
+    },
     // {
     //   name: 'Pokemon Type Coverage (Pros-Cons)',
     //   navigationPath: 'PokedexScreen',
@@ -90,6 +91,8 @@ const LandingPage = ({navigation}) => {
     //   image: imagePaths.rotomIcon,
     // },
   ];
+
+  const navigationButtonsRef = useRef();
 
   //TODO; pdf view for instructions, pikagpt,
   //TODO: trainer info, counter advance, team rocket data, intermediate evolution display with tasks to unlock them,
@@ -109,6 +112,7 @@ const LandingPage = ({navigation}) => {
   const [inAppNotificationTitle, setInAppNotificationTitle] = useState('');
   const [countDownTimer, setCountDownTimer] = useState(10);
   const [forceUpdateModal, setForceUpdateModal] = useState(false);
+  const [scrollIndex, setScrollIndex] = useState(1);
 
   NotificationService(navigation);
 
@@ -586,33 +590,23 @@ const LandingPage = ({navigation}) => {
     );
   };
 
-  const renderItem = ({item}) => {
+  const renderItem = ({item, index}) => {
     return (
       <TouchableOpacity
         onPress={() => {
-          if (item.name === 'Events') {
-            navigation.navigate(item?.navigationPath, {loadData: loadData});
-          } else if (item?.name === 'Eggs') {
-            navigation.navigate(item?.navigationPath, {loadData: loadEggData});
-          } else if (item?.name === 'Raid Bosses') {
-            navigation.navigate(item?.navigationPath, {
-              loadData: loadRaidBossData,
-            });
-          } else if (item?.name === 'Field Research') {
-            navigation.navigate(item?.navigationPath, {
-              loadData: loadFieldResearchData,
-            });
-          } else {
-            navigation.navigate(item?.navigationPath);
-          }
+          // setScrollIndex(index);
+          // navigationButtonsRef?.current?.scrollToIndex({
+          //   index: index,
+          //   animated: true,
+          // });
         }}>
         <View
           style={[
-            {
-              backgroundColor: darkModeStatus
-                ? colors.tertiaryBackgroundColorDarkMode
-                : colors.secondaryBackgroundColor,
-            },
+            // {
+            // backgroundColor: darkModeStatus
+            //   ? colors.tertiaryBackgroundColorDarkMode
+            //   : colors.secondaryBackgroundColor,
+            // },
             styles.navigationButtonStyle,
           ]}>
           <Image
@@ -620,22 +614,81 @@ const LandingPage = ({navigation}) => {
             height={1}
             width={1}
             resizeMode={'contain'}
-            style={styles.buttonIcons}
-          />
-          <Text
             style={[
+              styles.buttonIcons,
               {
-                color: darkModeStatus
-                  ? colors.primaryTextColorDarkMode
-                  : colors.primaryColor,
+                height:
+                  scrollIndex === index ? verticalScale(80) : verticalScale(45),
+                width:
+                  scrollIndex === index
+                    ? horizontalScale(80)
+                    : horizontalScale(45),
               },
-              styles.buttonTextStyles,
-            ]}>
-            {item?.name}
-          </Text>
+            ]}
+          />
+          <TouchableOpacity
+            onPress={() => {
+              // setScrollIndex(index);
+              // navigationButtonsRef?.current?.scrollToIndex({
+              //   index: index,
+              //   animated: true,
+              // });
+              if (scrollIndex === index) {
+                if (item.name === 'Events') {
+                  navigation.navigate(item?.navigationPath, {
+                    loadData: loadData,
+                  });
+                } else if (item?.name === 'Eggs') {
+                  navigation.navigate(item?.navigationPath, {
+                    loadData: loadEggData,
+                  });
+                } else if (item?.name === 'Raid Bosses') {
+                  navigation.navigate(item?.navigationPath, {
+                    loadData: loadRaidBossData,
+                  });
+                } else if (item?.name === 'Field Research') {
+                  navigation.navigate(item?.navigationPath, {
+                    loadData: loadFieldResearchData,
+                  });
+                } else {
+                  navigation.navigate(item?.navigationPath);
+                }
+              }
+            }}>
+            <View
+              style={{
+                backgroundColor:
+                  scrollIndex === index ? colors?.skinColor : null,
+                height: 30,
+                marginTop: scrollIndex === index ? 10 : 0,
+                justifyContent: 'center',
+                borderRadius: 5,
+              }}>
+              <Text
+                style={[
+                  {
+                    color: darkModeStatus
+                      ? scrollIndex === index
+                        ? colors?.primaryTextColor
+                        : colors.primaryTextColorDarkMode
+                      : colors.primaryColor,
+                  },
+                  styles.buttonTextStyles,
+                ]}>
+                {item?.name}
+              </Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </TouchableOpacity>
     );
+  };
+
+  const handleScroll = event => {
+    const offsetX = event.nativeEvent.contentOffset.x; // Vertical scroll position
+    const itemWidth = horizontalScale(130); // Assume each item has a height of 50
+    const scrollIndexValue = Math.ceil(offsetX / itemWidth); // Calculate the index
+    setScrollIndex(scrollIndexValue);
   };
 
   const navigationButtons = () => {
@@ -643,10 +696,19 @@ const LandingPage = ({navigation}) => {
       <>
         {networkState ? (
           <View style={styles.centerAlignmentStyle}>
-            <FlatList
+            {/* <FlatList
               data={navigationScreens}
               keyExtractor={item => item}
               numColumns={2}
+              renderItem={renderItem}
+            /> */}
+            <FlatList
+              data={navigationScreens}
+              keyExtractor={item => item}
+              horizontal={true}
+              ref={navigationButtonsRef}
+              showsHorizontalScrollIndicator={false}
+              onScroll={handleScroll}
               renderItem={renderItem}
             />
           </View>
