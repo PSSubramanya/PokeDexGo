@@ -4,10 +4,12 @@ export default {
   appIcon: require('../assets/images/icons/pokeAppIcon.png'),
 
   //Icons
+  addEventsIcon: require('../assets/images/icons/addEventsIcon.png'),
   cancelIcon: require('../assets/images/icons/cancelIcon.png'),
   rightArrowCircle: require('../assets/images/icons/arrow_circle_right.png'),
   cameraIcon: require('../assets/images/icons/cameraIcon.png'),
   calendarIcon: require('../assets/images/icons/calendarIcon.png'),
+  calendarIcon2: require('../assets/images/icons/calendarIcon2.png'),
   notificationsOnIcon: require('../assets/images/icons/notificationsOnIcon.png'),
   notificationsOffIcon1: require('../assets/images/icons/notificationsOffIcon1.png'),
   notificationsOffIcon2: require('../assets/images/icons/notificationsOffIcon2.png'),

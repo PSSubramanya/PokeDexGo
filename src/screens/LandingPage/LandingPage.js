@@ -43,7 +43,7 @@ const LandingPage = ({navigation}) => {
     {
       name: 'Events',
       navigationPath: 'HomeScreen',
-      image: imagePaths.calendarIcon,
+      image: imagePaths.calendarIcon2,
     },
     {
       name: 'Eggs',
@@ -599,6 +599,27 @@ const LandingPage = ({navigation}) => {
           //   index: index,
           //   animated: true,
           // });
+          if (scrollIndex === index) {
+            if (item.name === 'Events') {
+              navigation.navigate(item?.navigationPath, {
+                loadData: loadData,
+              });
+            } else if (item?.name === 'Eggs') {
+              navigation.navigate(item?.navigationPath, {
+                loadData: loadEggData,
+              });
+            } else if (item?.name === 'Raid Bosses') {
+              navigation.navigate(item?.navigationPath, {
+                loadData: loadRaidBossData,
+              });
+            } else if (item?.name === 'Field Research') {
+              navigation.navigate(item?.navigationPath, {
+                loadData: loadFieldResearchData,
+              });
+            } else {
+              navigation.navigate(item?.navigationPath);
+            }
+          }
         }}>
         <View
           style={[
@@ -618,67 +639,40 @@ const LandingPage = ({navigation}) => {
               styles.buttonIcons,
               {
                 height:
-                  scrollIndex === index ? verticalScale(80) : verticalScale(45),
+                  scrollIndex === index
+                    ? verticalScale(100)
+                    : verticalScale(45),
                 width:
                   scrollIndex === index
-                    ? horizontalScale(80)
+                    ? horizontalScale(100)
                     : horizontalScale(45),
               },
             ]}
           />
-          <TouchableOpacity
-            onPress={() => {
-              // setScrollIndex(index);
-              // navigationButtonsRef?.current?.scrollToIndex({
-              //   index: index,
-              //   animated: true,
-              // });
-              if (scrollIndex === index) {
-                if (item.name === 'Events') {
-                  navigation.navigate(item?.navigationPath, {
-                    loadData: loadData,
-                  });
-                } else if (item?.name === 'Eggs') {
-                  navigation.navigate(item?.navigationPath, {
-                    loadData: loadEggData,
-                  });
-                } else if (item?.name === 'Raid Bosses') {
-                  navigation.navigate(item?.navigationPath, {
-                    loadData: loadRaidBossData,
-                  });
-                } else if (item?.name === 'Field Research') {
-                  navigation.navigate(item?.navigationPath, {
-                    loadData: loadFieldResearchData,
-                  });
-                } else {
-                  navigation.navigate(item?.navigationPath);
-                }
-              }
+          <View
+            style={{
+              backgroundColor: scrollIndex === index ? colors?.skinColor : null,
+              height: 30,
+              marginTop: scrollIndex === index ? 10 : 0,
+              justifyContent: 'center',
+              borderRadius: 5,
+              // borderWidth: 0.5,
+              // borderColor: colors?.white,
             }}>
-            <View
-              style={{
-                backgroundColor:
-                  scrollIndex === index ? colors?.skinColor : null,
-                height: 30,
-                marginTop: scrollIndex === index ? 10 : 0,
-                justifyContent: 'center',
-                borderRadius: 5,
-              }}>
-              <Text
-                style={[
-                  {
-                    color: darkModeStatus
-                      ? scrollIndex === index
-                        ? colors?.primaryTextColor
-                        : colors.primaryTextColorDarkMode
-                      : colors.primaryColor,
-                  },
-                  styles.buttonTextStyles,
-                ]}>
-                {item?.name}
-              </Text>
-            </View>
-          </TouchableOpacity>
+            <Text
+              style={[
+                {
+                  color: darkModeStatus
+                    ? scrollIndex === index
+                      ? colors?.primaryTextColor
+                      : colors.primaryTextColorDarkMode
+                    : colors.primaryColor,
+                },
+                styles.buttonTextStyles,
+              ]}>
+              {item?.name}
+            </Text>
+          </View>
         </View>
       </TouchableOpacity>
     );

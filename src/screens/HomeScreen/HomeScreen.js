@@ -666,7 +666,9 @@ const HomeScreen = props => {
         </TouchableOpacity> */}
         <TouchableOpacity
           onPress={() => {
-            setViewCalendar(true);
+            navigation.navigate('EventViewScreen', {
+              selectedDate: selectedStartDate,
+            });
           }}>
           <View
             style={{
@@ -679,7 +681,7 @@ const HomeScreen = props => {
               borderRadius: 5,
               backgroundColor: darkModeValue ? colors?.secondaryColor : null,
             }}>
-            <Text style={styles?.customTasksText}>CUSTOM TASKS</Text>
+            <Text style={styles?.customTasksText}>VIEW EVENTS</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -708,12 +710,10 @@ const HomeScreen = props => {
             <TouchableOpacity
               style={styles.viewEventIcon}
               onPress={() => {
-                navigation.navigate('EventViewScreen', {
-                  selectedDate: selectedStartDate,
-                });
+                setViewCalendar(true);
               }}>
               <Image
-                source={imagePaths.calendarIcon}
+                source={imagePaths.addEventsIcon}
                 height={1}
                 width={1}
                 style={[styles.calendarIcon]}
