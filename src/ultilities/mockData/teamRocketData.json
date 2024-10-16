@@ -1,0 +1,400 @@
+{
+  "data": [
+    {
+      "name": "Giovanni",
+      "image": "https://leekduck.com/assets/img/rocket/boss-giovanni.png",
+      "description": "I will not tolerate your interference",
+      "level": "boss",
+      "type": "none",
+      "gender": "none",
+      "pokemons": [
+        {
+          "pokemonLevel": 1,
+          "possibilePokemons": [
+            {
+              "id": 1,
+              "name": "Persian",
+              "image": "https://leekduck.com/assets/img/pokemon_icons_crop/pm53.icon.png",
+              "shiny": false,
+              "pokeType": ["normal"],
+              "weakness": [
+                {
+                  "type": "fighting",
+                  "percent": "160"
+                }
+              ]
+            }
+          ],
+          "catchReward": false
+        },
+        {
+          "pokemonLevel": 2,
+          "possibilePokemons": [
+            {
+              "id": 2,
+              "name": "Rhyperior",
+              "image": "https://leekduck.com/assets/img/pokemon_icons_crop/pm464.icon.png",
+              "shiny": false,
+              "pokeType": ["ground", "rock"],
+              "weakness": [
+                {
+                  "type": "water",
+                  "percent": "256"
+                },
+                {
+                  "type": "grass",
+                  "percent": "256"
+                },
+                {
+                  "type": "ice",
+                  "percent": "160"
+                },
+                {
+                  "type": "fighting",
+                  "percent": "160"
+                },
+                {
+                  "type": "ground",
+                  "percent": "160"
+                },
+                {
+                  "type": "steel",
+                  "percent": "160"
+                }
+              ]
+            },
+            {
+              "id": 3,
+              "name": "Kingdra",
+              "image": "https://leekduck.com/assets/img/pokemon_icons_crop/pm230.icon.png",
+              "shiny": false,
+              "pokeType": ["water", "dragon"],
+              "weakness": [
+                {
+                  "type": "dragon",
+                  "percent": "160"
+                },
+                {
+                  "type": "fairy",
+                  "percent": "160"
+                }
+              ]
+            },
+            {
+              "id": 4,
+              "name": "Nidoking",
+              "image": "https://leekduck.com/assets/img/pokemon_icons_crop/pm34.icon.png",
+              "shiny": false,
+              "pokeType": ["poison", "ground"],
+              "weakness": [
+                {
+                  "type": "water",
+                  "percent": "160"
+                },
+                {
+                  "type": "ice",
+                  "percent": "160"
+                },
+                {
+                  "type": "ground",
+                  "percent": "160"
+                },
+                {
+                  "type": "psychic",
+                  "percent": "160"
+                }
+              ]
+            }
+          ],
+          "catchReward": false
+        },
+        {
+          "pokemonLevel": 3,
+          "possibilePokemons": [
+            {
+              "id": 5,
+              "name": "Heatran",
+              "image": "https://leekduck.com/assets/img/pokemon_icons_crop/pm485.icon.png",
+              "shiny": false,
+              "pokeType": ["fire", "steel"],
+              "weakness": [
+                {
+                  "type": "ground",
+                  "percent": "256"
+                },
+                {
+                  "type": "water",
+                  "percent": "160"
+                },
+                {
+                  "type": "fighting",
+                  "percent": "160"
+                }
+              ]
+            }
+          ],
+          "catchReward": true
+        }
+      ]
+    },
+    {
+      "name": "Cliff",
+      "image": "https://leekduck.com/assets/img/rocket/leader-cliff.png",
+      "description": "My strength comes from my loyalty to Team GO Rocket",
+      "level": "leader",
+      "type": "none",
+      "gender": "none",
+      "pokemons": [
+        {
+          "pokemonLevel": 1,
+          "possibilePokemons": [
+            {
+              "id": 6,
+              "name": "Beldum",
+              "image": "https://leekduck.com/assets/img/pokemon_icons_crop/pm374.icon.png",
+              "shiny": true,
+              "pokeType": ["steel", "psychic"],
+              "weakness": [
+                {
+                  "type": "fire",
+                  "percent": "160"
+                },
+                {
+                  "type": "ground",
+                  "percent": "160"
+                },
+                {
+                  "type": "ghost",
+                  "percent": "160"
+                },
+                {
+                  "type": "dark",
+                  "percent": "160"
+                }
+              ]
+            }
+          ],
+          "catchReward": true
+        },
+        {
+          "pokemonLevel": 2,
+          "possibilePokemons": [
+            {
+              "id": 7,
+              "name": "Hypno",
+              "image": "https://leekduck.com/assets/img/pokemon_icons_crop/pm97.icon.png",
+              "shiny": false,
+              "pokeType": ["psychic"],
+              "weakness": [
+                {
+                  "type": "bug",
+                  "percent": "160"
+                },
+                {
+                  "type": "ghost",
+                  "percent": "160"
+                },
+                {
+                  "type": "dark",
+                  "percent": "160"
+                }
+              ]
+            },
+            {
+              "id": 8,
+              "name": "Gyarados",
+              "image": "https://leekduck.com/assets/img/pokemon_icons_crop/pm130.icon.png",
+              "shiny": false,
+              "pokeType": ["water", "flying"],
+              "weakness": [
+                {
+                  "type": "electric",
+                  "percent": "256"
+                },
+                {
+                  "type": "rock",
+                  "percent": "160"
+                }
+              ]
+            },
+            {
+              "id": 9,
+              "name": "Charizard",
+              "image": "https://leekduck.com/assets/img/pokemon_icons_crop/pm6.icon.png",
+              "shiny": false,
+              "pokeType": ["fire", "flying"],
+              "weakness": [
+                {
+                  "type": "rock",
+                  "percent": "256"
+                },
+                {
+                  "type": "water",
+                  "percent": "160"
+                },
+                {
+                  "type": "electric",
+                  "percent": "160"
+                }
+              ]
+            }
+          ],
+          "catchReward": true
+        },
+        {
+          "pokemonLevel": 3,
+          "possibilePokemons": [
+            {
+              "id": 10,
+              "name": "Scizor",
+              "image": "https://leekduck.com/assets/img/pokemon_icons_crop/pm212.icon.png",
+              "shiny": false,
+              "pokeType": ["bug", "steel"],
+              "weakness": [
+                {
+                  "type": "fire",
+                  "percent": "256"
+                }
+              ]
+            },
+            {
+              "id": 11,
+              "name": "Snorlax",
+              "image": "https://leekduck.com/assets/img/pokemon_icons_crop/pm143.icon.png",
+              "shiny": false,
+              "pokeType": ["normal"],
+              "weakness": [
+                {
+                  "type": "fighting",
+                  "percent": "160"
+                }
+              ]
+            },
+            {
+              "id": 12,
+              "name": "Metagross",
+              "image": "https://leekduck.com/assets/img/pokemon_icons_crop/pm376.icon.png",
+              "shiny": false,
+              "pokeType": ["steel", "psychic"],
+              "weakness": [
+                {
+                  "type": "fire",
+                  "percent": "160"
+                },
+                {
+                  "type": "ground",
+                  "percent": "160"
+                },
+                {
+                  "type": "ghost",
+                  "percent": "160"
+                },
+                {
+                  "type": "dark",
+                  "percent": "160"
+                }
+              ]
+            }
+          ],
+          "catchReward": false
+        }
+      ]
+    },
+    {
+      "name": "Fire-type Female Grunt",
+      "image": "https://leekduck.com/assets/img/rocket/female-grunt.png",
+      "description": "Do you know how hot Pokémon fire breath can get?",
+      "level": "grunt",
+      "type": "water",
+      "gender": "female",
+      "pokemons": [
+        {
+          "pokemonLevel": 1,
+          "possibilePokemons": [
+            {
+              "id": 13,
+              "name": "Magikarp",
+              "image": "https://leekduck.com/assets/img/pokemon_icons_crop/pm129.icon.png",
+              "shiny": false,
+              "pokeType": ["water"],
+              "weakness": [
+                {
+                  "type": "grass",
+                  "percent": "160"
+                },
+                {
+                  "type": "electric",
+                  "percent": "160"
+                }
+              ]
+            }
+          ],
+          "catchReward": true
+        },
+        {
+          "pokemonLevel": 2,
+          "possibilePokemons": [
+            {
+              "id": 14,
+              "name": "Magikarp",
+              "image": "https://leekduck.com/assets/img/pokemon_icons_crop/pm129.icon.png",
+              "shiny": false,
+              "pokeType": ["water"],
+              "weakness": [
+                {
+                  "type": "grass",
+                  "percent": "160"
+                },
+                {
+                  "type": "electric",
+                  "percent": "160"
+                }
+              ]
+            }
+          ],
+          "catchReward": false
+        },
+        {
+          "pokemonLevel": 3,
+          "possibilePokemons": [
+            {
+              "id": 15,
+              "name": "Magikarp",
+              "image": "https://leekduck.com/assets/img/pokemon_icons_crop/pm129.icon.png",
+              "shiny": false,
+              "pokeType": ["water"],
+              "weakness": [
+                {
+                  "type": "grass",
+                  "percent": "160"
+                },
+                {
+                  "type": "electric",
+                  "percent": "160"
+                }
+              ]
+            },
+            {
+              "id": 16,
+              "name": "Gyarados",
+              "image": "https://leekduck.com/assets/img/pokemon_icons_crop/pm130.icon.png",
+              "shiny": false,
+              "pokeType": ["water", "flying"],
+              "weakness": [
+                {
+                  "type": "electric",
+                  "percent": "256"
+                },
+                {
+                  "type": "rock",
+                  "percent": "160"
+                }
+              ]
+            }
+          ],
+          "catchReward": false
+        }
+      ]
+    }
+  ]
+}

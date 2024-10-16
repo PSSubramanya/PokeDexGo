@@ -64,6 +64,31 @@ const LandingPage = ({navigation}) => {
     //   navigationPath: 'TrainerInfoScreen',
     //   image: imagePaths.ashCapIcon,
     // },
+    // {
+    //   name: 'PikaGPT',
+    //   navigationPath: 'PikaGptScreen',
+    //   image: imagePaths.pikaFace,
+    // },
+    // {
+    //   name: 'Pokedex',
+    //   navigationPath: 'PokedexScreen',
+    //   image: imagePaths.rotomIcon,
+    // },
+    // {
+    //   name: 'Team Rocket Data',
+    //   navigationPath: 'TeamRocketData',
+    //   image: imagePaths.teamRocketRadarLeaders,
+    // },
+    // {
+    //   name: 'Pokemon Type Coverage (Pros-Cons)',
+    //   navigationPath: 'PokedexScreen',
+    //   image: imagePaths.rotomIcon,
+    // },
+    // {
+    //   name: 'Raid Data',
+    //   navigationPath: 'PokedexScreen',
+    //   image: imagePaths.rotomIcon,
+    // },
   ];
 
   //TODO; pdf view for instructions, pikagpt,

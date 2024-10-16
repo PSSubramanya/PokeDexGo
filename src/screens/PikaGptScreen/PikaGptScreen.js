@@ -411,7 +411,9 @@ const PikaGptScreen = props => {
     });
   };
 
-  const onClickOfPlusIcon = () => {};
+  const onClickOfPlusIcon = () => {
+    navigation?.navigate('TeamRocketData');
+  };
 
   const textingArea = () => {
     return (

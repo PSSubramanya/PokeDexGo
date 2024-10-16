@@ -80,6 +80,8 @@ export default styles = StyleSheet.create({
   buttonTextStyles: {
     fontSize: moderateScale(12),
     fontFamily: fontFamily.primaryFontFamilyMedium,
+    textAlign: 'center',
+    marginHorizontal: horizontalScale(4),
     // color: colors.purple,
   },
   navigationButtonStyle: {

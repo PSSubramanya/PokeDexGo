@@ -10,6 +10,7 @@ export default {
   highlightGreen2: '#4ebb9c',
   boostedGreen: 'rgba(64, 218, 30, 0.8)',
   orange: '#FFAE4F',
+  orange2: '#FF864F',
   orangeMedium: 'rgba(255, 174, 79, 0.5)',
   orangeLight: 'rgba(255, 174, 79, 0.3)',
   orangeLighter: 'rgba(255, 174, 79, 0.1)',

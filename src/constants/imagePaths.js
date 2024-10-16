@@ -55,6 +55,15 @@ export default {
   mikeOnIcon: require('../assets/images/icons/mikeOn.png'),
   mikeOffIcon: require('../assets/images/icons/mikeOff.png'),
   sendIcon: require('../assets/images/icons/sendIcon.png'),
+  teamRocketRadarLeaders: require('../assets/images/icons/teamRocketRadarLeaders.png'),
+  teamRocketRadarGiovanni: require('../assets/images/icons/teamRocketRadarGiovanni.png'),
+  teamRocketRadarGrunt: require('../assets/images/icons/teamRocketRadarGrunt.png'),
+  Giovanni: require('../assets/images/icons/Giovanni.png'),
+  Cliff: require('../assets/images/icons/Cliff.png'),
+  Sierra: require('../assets/images/icons/Sierra.png'),
+  Arlo: require('../assets/images/icons/Arlo.png'),
+  femaleGrunt: require('../assets/images/icons/femaleGrunt.png'),
+  maleGrunt: require('../assets/images/icons/maleGrunt.png'),
 
   //Images
   calendar1: require('../assets/images/calendar.png'),
