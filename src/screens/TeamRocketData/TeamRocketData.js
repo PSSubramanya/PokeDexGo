@@ -24,6 +24,7 @@ const TeamRocketData = props => {
 
   const [showWeakness, setShowWeakness] = useState(false);
   const [showWeaknessStats, setShowWeaknessStats] = useState([]);
+  const [selectedPokemon, setSelectedPokemon] = useState('');
 
   const backgroundColorDecider = item => {
     if (item?.level === 'boss') {
@@ -98,6 +99,7 @@ const TeamRocketData = props => {
                   onLongPress={() => {
                     setShowWeakness(true);
                     setShowWeaknessStats(val?.weakness);
+                    setSelectedPokemon(val?.name);
                   }}
                   onPressOut={() => {
                     setShowWeakness(false);
@@ -199,6 +201,16 @@ const TeamRocketData = props => {
               paddingBottom: 10,
               borderRadius: 5,
             }}>
+            <Text
+              style={{
+                color: colors?.white,
+                fontFamily: fontFamily?.primaryFontFamilyMedium,
+                fontSize: 14,
+                marginLeft: 10,
+                marginTop: 10,
+              }}>
+              {selectedPokemon}
+            </Text>
             <Text
               style={{
                 color: colors?.white,
@@ -314,7 +326,6 @@ const TeamRocketData = props => {
             source={imageDecider(item)}
             height={100}
             width={100}
-            resizeMethod="contain"
             style={{
               height: 110,
               width: 110,

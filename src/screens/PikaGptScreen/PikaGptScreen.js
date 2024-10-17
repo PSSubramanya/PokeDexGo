@@ -64,7 +64,7 @@ const PikaGptScreen = props => {
   // const lastScale = useRef(1);
   // const baseScale = useRef(1);
 
-  const screenViewRef = useRef(null);
+  const screenViewRef = useRef();
 
   const [chatList, setChatList] = useState(chatData);
   const [message, setMessage] = useState('');
@@ -85,12 +85,11 @@ const PikaGptScreen = props => {
           {
             text: 'OK',
             onPress: () => {
-              const indexValue = chatList?.findIndex(
-                item => item?.id === selectedItem?.id,
+              const filteredArrayAfterDeleting = chatList?.filter(
+                item => JSON.stringify(item) !== JSON.stringify(selectedItem),
               );
               const tempArray = chatList;
-              tempArray.splice(indexValue, 1);
-              setChatList(tempArray);
+              setChatList(filteredArrayAfterDeleting);
               setDisplayModal(false);
             },
           },
@@ -394,7 +393,7 @@ const PikaGptScreen = props => {
   const onClickOfSendIcon = (newMessage, type) => {
     const newTime = new Date();
     const newItem = {
-      id: chatList[chatList?.length - 1]?.id + 1,
+      id: chatList?.length + 1,
       text: newMessage,
       image: '',
       from: 'Me',
@@ -411,9 +410,7 @@ const PikaGptScreen = props => {
     });
   };
 
-  const onClickOfPlusIcon = () => {
-    navigation?.navigate('TeamRocketData');
-  };
+  const onClickOfPlusIcon = () => {};
 
   const textingArea = () => {
     return (

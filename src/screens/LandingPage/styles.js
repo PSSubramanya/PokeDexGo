@@ -32,6 +32,8 @@ export default styles = StyleSheet.create({
   centerAlignmentStyle: {
     justifyContent: 'center',
     alignItems: 'center',
+    paddingLeft: horizontalScale(20),
+    paddingRight: horizontalScale(30),
   },
   smallTextSize: {
     fontSize: moderateScale(12),
@@ -86,7 +88,7 @@ export default styles = StyleSheet.create({
   },
   navigationButtonStyle: {
     height: verticalScale(130),
-    width: horizontalScale(130),
+    width: horizontalScale(110),
     margin: verticalScale(12),
     // backgroundColor: colors.white,
     borderRadius: 10,

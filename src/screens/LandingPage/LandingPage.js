@@ -112,7 +112,7 @@ const LandingPage = ({navigation}) => {
   const [inAppNotificationTitle, setInAppNotificationTitle] = useState('');
   const [countDownTimer, setCountDownTimer] = useState(10);
   const [forceUpdateModal, setForceUpdateModal] = useState(false);
-  const [scrollIndex, setScrollIndex] = useState(1);
+  const [scrollIndex, setScrollIndex] = useState(0);
 
   NotificationService(navigation);
 
@@ -653,7 +653,7 @@ const LandingPage = ({navigation}) => {
             style={{
               backgroundColor: scrollIndex === index ? colors?.skinColor : null,
               height: 30,
-              marginTop: scrollIndex === index ? 10 : 0,
+              // marginTop: scrollIndex === index ? 10 : 0,
               justifyContent: 'center',
               borderRadius: 5,
               // borderWidth: 0.5,
@@ -680,7 +680,7 @@ const LandingPage = ({navigation}) => {
 
   const handleScroll = event => {
     const offsetX = event.nativeEvent.contentOffset.x; // Vertical scroll position
-    const itemWidth = horizontalScale(130); // Assume each item has a height of 50
+    const itemWidth = horizontalScale(110); // Assume each item has a height of 50
     const scrollIndexValue = Math.ceil(offsetX / itemWidth); // Calculate the index
     setScrollIndex(scrollIndexValue);
   };
@@ -689,7 +689,7 @@ const LandingPage = ({navigation}) => {
     return (
       <>
         {networkState ? (
-          <View style={styles.centerAlignmentStyle}>
+          <View style={[styles.centerAlignmentStyle]}>
             {/* <FlatList
               data={navigationScreens}
               keyExtractor={item => item}
