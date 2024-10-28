@@ -1,11 +1,17 @@
 import React, {useState, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {View, Text, SafeAreaView, TouchableOpacity, Image} from 'react-native';
 import styles from './styles.js';
 import colors from '../../constants/colors.js';
-import {useSelector} from 'react-redux';
 import fontFamily from '../../ultilities/fontFamily.js';
 
 const PokeAttackTypeCalculator = props => {
+  // const selectedPokemonData=useSelector(state=>state?.pok)
+  //pokemonSelectionReducer
+
+  const selectedPokemonData = useSelector(
+    state => state?.eventDataReducer?.pokemonSelectionValue,
+  );
   const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
   const darkModeValue = darkMode?.data;
   const {navigation} = props;
@@ -108,6 +114,8 @@ const PokeAttackTypeCalculator = props => {
       </TouchableOpacity>
     );
   };
+
+  console.log('selectedPokeData---->', selectedPokemonData);
 
   return (
     <View

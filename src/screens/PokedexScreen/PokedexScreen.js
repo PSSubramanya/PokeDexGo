@@ -193,7 +193,7 @@ const PokedexScreen = props => {
               pokemonStatsData: searchingPokemonData,
             };
             if (comingFrom === 'pokeCalculator') {
-              // dispatch(selectedPokemonForCalculation(tempObject));
+              dispatch(selectedPokemonForCalculation(tempObject));
               navigation.goBack();
             } else {
               navigation?.navigate('PokeStatScreen', {
@@ -258,7 +258,7 @@ const PokedexScreen = props => {
                   };
                   setSelectedPokemon('');
                   if (comingFrom === 'pokeCalculator') {
-                    // dispatch(selectedPokemonForCalculation(tempObject));
+                    dispatch(selectedPokemonForCalculation(tempObject));
                     navigation.goBack();
                   } else {
                     navigation?.navigate('PokeStatScreen', {
@@ -318,7 +318,7 @@ const PokedexScreen = props => {
                   <TouchableOpacity
                     onPress={() => {
                       if (comingFrom === 'pokeCalculator') {
-                        // dispatch(selectedPokemonForCalculation(tempObject));
+                        dispatch(selectedPokemonForCalculation(item));
                         navigation.goBack();
                       } else {
                         navigation?.navigate('PokeStatScreen', {

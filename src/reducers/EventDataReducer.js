@@ -1,4 +1,8 @@
-import {EVENT_DATA_LOAD, DARK_MODE_STATUS} from '../constants/types';
+import {
+  EVENT_DATA_LOAD,
+  DARK_MODE_STATUS,
+  POKEMON_SELECTED_DATA,
+} from '../constants/types';
 import {combineReducers} from 'redux';
 
 const initialState = {
@@ -29,9 +33,22 @@ const darkModeValue = (state = initialState, action) => {
   }
 };
 
+const pokemonSelectionValue = (state = initialState, action) => {
+  switch (action?.type) {
+    case POKEMON_SELECTED_DATA:
+      return {
+        ...state,
+        data: action?.payload,
+      };
+    default:
+      return state;
+  }
+};
+
 const eventDataReducer = combineReducers({
   eventdataload,
   darkModeValue,
+  pokemonSelectionValue,
 });
 
 export default eventDataReducer;
