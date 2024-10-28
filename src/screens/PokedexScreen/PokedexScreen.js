@@ -192,8 +192,12 @@ const PokedexScreen = props => {
               pokemonName: selectedPokemon,
               pokemonStatsData: searchingPokemonData,
             };
+            const selectedPokeData = {
+              pokemonInfo: tempObject,
+              pokeSlotValue: pokeSlot,
+            };
             if (comingFrom === 'pokeCalculator') {
-              dispatch(selectedPokemonForCalculation(tempObject));
+              dispatch(selectedPokemonForCalculation(selectedPokeData));
               navigation.goBack();
             } else {
               navigation?.navigate('PokeStatScreen', {
@@ -256,9 +260,13 @@ const PokedexScreen = props => {
                     pokemonName: item,
                     pokemonStatsData: searchingPokemonData,
                   };
+                  const selectedPokeData = {
+                    pokemonInfo: tempObject,
+                    pokeSlotValue: pokeSlot,
+                  };
                   setSelectedPokemon('');
                   if (comingFrom === 'pokeCalculator') {
-                    dispatch(selectedPokemonForCalculation(tempObject));
+                    dispatch(selectedPokemonForCalculation(selectedPokeData));
                     navigation.goBack();
                   } else {
                     navigation?.navigate('PokeStatScreen', {
@@ -317,8 +325,14 @@ const PokedexScreen = props => {
                 return (
                   <TouchableOpacity
                     onPress={() => {
+                      const selectedPokeData = {
+                        pokemonInfo: item,
+                        pokeSlotValue: pokeSlot,
+                      };
                       if (comingFrom === 'pokeCalculator') {
-                        dispatch(selectedPokemonForCalculation(item));
+                        dispatch(
+                          selectedPokemonForCalculation(selectedPokeData),
+                        );
                         navigation.goBack();
                       } else {
                         navigation?.navigate('PokeStatScreen', {

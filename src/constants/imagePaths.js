@@ -68,6 +68,8 @@ export default {
   maleGrunt: require('../assets/images/icons/maleGrunt.png'),
   pokeCalculatorIcon: require('../assets/images/icons/pokeCalculatorIcon.png'),
   pokeCalculatorIcon2: require('../assets/images/icons/pokeCalculatorIcon2.png'),
+  vsIcon1: require('../assets/images/icons/vsIcon1.png'),
+  vsIcon2: require('../assets/images/icons/vsIcon2.png'),
 
   //Images
   calendar1: require('../assets/images/calendar.png'),

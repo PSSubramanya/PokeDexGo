@@ -4,6 +4,7 @@ import {View, Text, SafeAreaView, TouchableOpacity, Image} from 'react-native';
 import styles from './styles.js';
 import colors from '../../constants/colors.js';
 import fontFamily from '../../ultilities/fontFamily.js';
+import imagePaths from '../../constants/imagePaths.js';
 
 const PokeAttackTypeCalculator = props => {
   const selectedPokemonData = useSelector(
@@ -14,6 +15,39 @@ const PokeAttackTypeCalculator = props => {
   const {navigation} = props;
 
   const [changeButtonTitle, setChangeButtonTitle] = useState(false);
+  const [currentSlot, setCurrentSlot] = useState(0);
+
+  const [imageSlot1, setImageSlot1] = useState('');
+  const [imageSlot2, setImageSlot2] = useState('');
+  const [imageSlot3, setImageSlot3] = useState('');
+  const [imageSlot4, setImageSlot4] = useState('');
+  const [imageSlot5, setImageSlot5] = useState('');
+  const [imageSlot6, setImageSlot6] = useState('');
+  const [imageSlotRaid, setImageSlotRaid] = useState('');
+
+  useEffect(() => {
+    if (currentSlot === 1) {
+      const image1 =
+        selectedPokemonData?.data?.pokemonInfo?.pokemonStatsData?.imageSrc;
+      const name1 =
+        selectedPokemonData?.data?.pokemonInfo?.pokemonStatsData?.pokemon_name;
+      const objectValue = {
+        image: image1,
+        name: name1,
+      };
+      setImageSlot1(image1);
+    } else if (currentSlot === 2) {
+      const image2 =
+        selectedPokemonData?.data?.pokemonInfo?.pokemonStatsData?.imageSrc;
+      const name2 =
+        selectedPokemonData?.data?.pokemonInfo?.pokemonStatsData?.pokemon_name;
+      const objectValue = {
+        image: image2,
+        name: name2,
+      };
+      setImageSlot2(image2);
+    }
+  }, [selectedPokemonData, currentSlot]);
 
   const infoForSingleAndDualTypes = () => {
     // Single typing info
@@ -35,49 +69,108 @@ const PokeAttackTypeCalculator = props => {
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
-          //   backgroundColor: 'red',
-          width: 350,
         }}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation?.navigate('PokedexScreen', {
-              comingFrom: 'pokeCalculator',
-              pokeSlot: 'first',
-            });
-          }}>
+        <View>
+          <TouchableOpacity
+            onPress={() => {
+              setCurrentSlot(1);
+              navigation?.navigate('PokedexScreen', {
+                comingFrom: 'pokeCalculator',
+                pokeSlot: currentSlot,
+              });
+            }}>
+            <View>
+              <View
+                style={{
+                  height: 130,
+                  width: 130,
+                  borderWidth: 4,
+                  borderRadius: 8,
+                  backgroundColor: colors?.white,
+                  borderColor: colors?.secondaryRedColor,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image
+                  source={{
+                    uri: imageSlot1,
+                  }}
+                  style={{
+                    height: 100,
+                    width: 100,
+                  }}
+                  width={100}
+                  height={100}
+                />
+              </View>
+            </View>
+          </TouchableOpacity>
           <View>
-            <View
-              style={{
-                height: 150,
-                width: 150,
-                borderWidth: 4,
-                borderRadius: 8,
-                backgroundColor: colors?.white,
-                borderColor: colors?.secondaryRedColor,
-              }}></View>
-            <View></View>
+            <Text style={{color: colors?.white}}>
+              {
+                selectedPokemonData?.data?.pokemonInfo?.pokemonStatsData
+                  ?.pokemon_name
+              }
+            </Text>
           </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigation?.navigate('PokedexScreen', {
-              comingFrom: 'pokeCalculator',
-              pokeSlot: 'second',
-            });
-          }}>
+        </View>
+
+        <Image
+          source={imagePaths?.vsIcon2}
+          style={{
+            height: 100,
+            width: 100,
+          }}
+          width={100}
+          height={100}
+        />
+
+        <View>
+          <TouchableOpacity
+            onPress={() => {
+              setCurrentSlot(2);
+              navigation?.navigate('PokedexScreen', {
+                comingFrom: 'pokeCalculator',
+                pokeSlot: currentSlot,
+              });
+            }}>
+            <View>
+              <View
+                style={{
+                  height: 130,
+                  width: 130,
+                  borderWidth: 4,
+                  borderRadius: 8,
+                  backgroundColor: colors?.white,
+                  borderColor: colors?.purple,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image
+                  source={{
+                    uri: imageSlot2,
+                  }}
+                  style={{
+                    height: 100,
+                    width: 100,
+                  }}
+                  width={100}
+                  height={100}
+                />
+              </View>
+            </View>
+          </TouchableOpacity>
           <View>
-            <View
-              style={{
-                height: 150,
-                width: 150,
-                borderWidth: 4,
-                borderRadius: 8,
-                backgroundColor: colors?.white,
-                borderColor: colors?.purple,
-              }}></View>
-            <View></View>
+            <Text style={{color: colors?.white}}>
+              {
+                selectedPokemonData?.data?.pokemonInfo?.pokemonStatsData
+                  ?.pokemon_name
+              }
+            </Text>
           </View>
-        </TouchableOpacity>
+        </View>
+
+        <View></View>
       </View>
     );
   };
@@ -112,7 +205,10 @@ const PokeAttackTypeCalculator = props => {
     );
   };
 
-  console.log('selectedPokeData---->', selectedPokemonData);
+  console.log(
+    'selectedPokeData---->',
+    selectedPokemonData?.data?.pokemonInfo?.pokemonStatsData,
+  );
 
   return (
     <View
