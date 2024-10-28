@@ -6,11 +6,8 @@ import colors from '../../constants/colors.js';
 import fontFamily from '../../ultilities/fontFamily.js';
 
 const PokeAttackTypeCalculator = props => {
-  // const selectedPokemonData=useSelector(state=>state?.pok)
-  //pokemonSelectionReducer
-
   const selectedPokemonData = useSelector(
-    state => state?.eventDataReducer?.pokemonSelectionValue,
+    state => state?.pokemonSelectionReducer?.pokemonSelectionValue,
   );
   const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
   const darkModeValue = darkMode?.data;

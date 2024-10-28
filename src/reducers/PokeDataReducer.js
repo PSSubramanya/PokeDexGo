@@ -1,22 +1,24 @@
-import {combineReducers} from 'redux';
 import {POKEMON_SELECTED_DATA} from '../constants/types';
+import {combineReducers} from 'redux';
 
-const initialData = {
+const initialState = {
   data: {},
 };
 
-const pokemonSelectionReducer = (state = initialData, action) => {
+const pokemonSelectionValue = (state = initialState, action) => {
   switch (action?.type) {
     case POKEMON_SELECTED_DATA:
       return {
         ...state,
         data: action?.payload,
       };
+    default:
+      return state;
   }
 };
 
 const pokeDataReducer = combineReducers({
-  pokemonSelectionReducer,
+  pokemonSelectionValue,
 });
 
 export default pokeDataReducer;

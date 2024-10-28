@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux';
 import EventDataReducer from './EventDataReducer';
-// import PokeDataReducer from './PokeDataReducer';
+import PokeDataReducer from './PokeDataReducer';
 
 const AppReducer = combineReducers({
   eventDataReducer: EventDataReducer,
-  // pokemonSelectionReducer: PokeDataReducer,
+  pokemonSelectionReducer: PokeDataReducer,
 });
 
 const mainReducer = (state = {}, action) => {

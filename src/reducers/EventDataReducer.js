@@ -33,22 +33,9 @@ const darkModeValue = (state = initialState, action) => {
   }
 };
 
-const pokemonSelectionValue = (state = initialState, action) => {
-  switch (action?.type) {
-    case POKEMON_SELECTED_DATA:
-      return {
-        ...state,
-        data: action?.payload,
-      };
-    default:
-      return state;
-  }
-};
-
 const eventDataReducer = combineReducers({
   eventdataload,
   darkModeValue,
-  pokemonSelectionValue,
 });
 
 export default eventDataReducer;
