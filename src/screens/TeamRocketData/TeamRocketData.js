@@ -23,6 +23,7 @@ const TeamRocketData = props => {
   const teamRocketDataValue = teamRocketData?.data;
 
   const [showWeakness, setShowWeakness] = useState(false);
+  const [selectedPokemonOwner, setSelectedPokemonOwner] = useState('');
   const [showWeaknessStats, setShowWeaknessStats] = useState([]);
   const [selectedPokemon, setSelectedPokemon] = useState('');
 
@@ -100,6 +101,7 @@ const TeamRocketData = props => {
                     setShowWeakness(true);
                     setShowWeaknessStats(val?.weakness);
                     setSelectedPokemon(val?.name);
+                    setSelectedPokemonOwner(val?.ownerName);
                   }}
                   onPressOut={() => {
                     setShowWeakness(false);
@@ -189,7 +191,7 @@ const TeamRocketData = props => {
   const renderPokemonsPossibilityDisplayerSection = item => {
     return (
       <View style={{marginTop: 5}}>
-        {showWeakness ? (
+        {showWeakness && selectedPokemonOwner === item?.name ? (
           <View
             style={{
               // height: 300,

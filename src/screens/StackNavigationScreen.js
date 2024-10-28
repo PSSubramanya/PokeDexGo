@@ -14,6 +14,7 @@ import PokeStatScreen from './PokeStatScreen/PokeStatScreen';
 import SampleTestingScreen from './SampleTestingScreen/SampleTestingScreen';
 import EventHistoryScreen from './EventHistoryScreen/EventHistoryScreen';
 import TeamRocketData from './TeamRocketData/TeamRocketData';
+import PokeAttackTypeCalculator from './PokeAttackTypeCalculator/PokeAttackTypeCalculator';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -54,6 +55,10 @@ const StackNavigationScreen = () => {
           component={EventHistoryScreen}
         />
         <Stack.Screen name="TeamRocketData" component={TeamRocketData} />
+        <Stack.Screen
+          name="PokeAttackTypeCalculator"
+          component={PokeAttackTypeCalculator}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

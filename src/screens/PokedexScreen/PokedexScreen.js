@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   View,
   Text,
@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import evolutionData from '../../ultilities/pokemonData/poke_evolution_data.json';
 import pokemonRegion from '../../ultilities/pokemonData/pokemon_regions.js';
+import {selectedPokemonForCalculation} from '../../actions/pokeSelectedData.js';
 import colors from '../../constants/colors.js';
 import imagePaths from '../../constants/imagePaths.js';
 import fontFamily from '../../ultilities/fontFamily';
@@ -18,7 +19,10 @@ import styles from './styles.js';
 import TextInputField from '../../components/TextInputField/TextInputField.js';
 
 const PokedexScreen = props => {
-  const {navigation} = props;
+  const {navigation, route} = props;
+  const {params} = route;
+  const {comingFrom, pokeSlot} = params;
+  const dispatch = useDispatch();
   const [selectedPokemon, setSelectedPokemon] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('Kanto');
   const [allPokemonData, setAllPokemonData] = useState([]);
@@ -188,9 +192,14 @@ const PokedexScreen = props => {
               pokemonName: selectedPokemon,
               pokemonStatsData: searchingPokemonData,
             };
-            navigation?.navigate('PokeStatScreen', {
-              pokeStatData: tempObject,
-            });
+            if (comingFrom === 'pokeCalculator') {
+              // dispatch(selectedPokemonForCalculation(tempObject));
+              navigation.goBack();
+            } else {
+              navigation?.navigate('PokeStatScreen', {
+                pokeStatData: tempObject,
+              });
+            }
           }}
           style={{marginHorizontal: 10}}>
           <View
@@ -248,9 +257,14 @@ const PokedexScreen = props => {
                     pokemonStatsData: searchingPokemonData,
                   };
                   setSelectedPokemon('');
-                  navigation?.navigate('PokeStatScreen', {
-                    pokeStatData: tempObject,
-                  });
+                  if (comingFrom === 'pokeCalculator') {
+                    // dispatch(selectedPokemonForCalculation(tempObject));
+                    navigation.goBack();
+                  } else {
+                    navigation?.navigate('PokeStatScreen', {
+                      pokeStatData: tempObject,
+                    });
+                  }
                 }}
                 activeOpacity={0.6}
                 style={{marginHorizontal: 10}}>
@@ -303,9 +317,14 @@ const PokedexScreen = props => {
                 return (
                   <TouchableOpacity
                     onPress={() => {
-                      navigation?.navigate('PokeStatScreen', {
-                        pokeStatData: item,
-                      });
+                      if (comingFrom === 'pokeCalculator') {
+                        // dispatch(selectedPokemonForCalculation(tempObject));
+                        navigation.goBack();
+                      } else {
+                        navigation?.navigate('PokeStatScreen', {
+                          pokeStatData: item,
+                        });
+                      }
                     }}>
                     <View
                       style={{

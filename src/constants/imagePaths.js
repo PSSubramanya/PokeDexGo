@@ -66,6 +66,8 @@ export default {
   Arlo: require('../assets/images/icons/Arlo.png'),
   femaleGrunt: require('../assets/images/icons/femaleGrunt.png'),
   maleGrunt: require('../assets/images/icons/maleGrunt.png'),
+  pokeCalculatorIcon: require('../assets/images/icons/pokeCalculatorIcon.png'),
+  pokeCalculatorIcon2: require('../assets/images/icons/pokeCalculatorIcon2.png'),
 
   //Images
   calendar1: require('../assets/images/calendar.png'),

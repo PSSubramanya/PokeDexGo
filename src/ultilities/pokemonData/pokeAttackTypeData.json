@@ -1,0 +1,14 @@
+{
+  "data": {
+    "fire": {
+      "superAffectiveAgainst": ["grass", "ice", "bug", "steel"],
+      "notVeryAffectiveAgainst": ["fire", "water", "rock", "dragon"],
+      "noAffectAgainst": []
+    },
+    "normal": {
+      "superAffectiveAgainst": [],
+      "notVeryAffectiveAgainst": ["rock", "steel"],
+      "noAffectAgainst": ["ghost"]
+    }
+  }
+}

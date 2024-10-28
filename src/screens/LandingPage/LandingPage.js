@@ -76,6 +76,11 @@ const LandingPage = ({navigation}) => {
     //   image: imagePaths.rotomIcon,
     // },
     {
+      name: 'Poke Attack Type Calculator',
+      navigationPath: 'PokeAttackTypeCalculator',
+      image: imagePaths.pokeCalculatorIcon2,
+    },
+    {
       name: 'Team Rocket Data',
       navigationPath: 'TeamRocketData',
       image: imagePaths.teamRocketRadarGiovanni,
