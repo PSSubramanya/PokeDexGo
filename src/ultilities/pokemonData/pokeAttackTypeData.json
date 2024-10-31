@@ -1,14 +1,194 @@
 {
   "data": {
-    "fire": {
-      "superAffectiveAgainst": ["grass", "ice", "bug", "steel"],
-      "notVeryAffectiveAgainst": ["fire", "water", "rock", "dragon"],
-      "noAffectAgainst": []
-    },
     "normal": {
-      "superAffectiveAgainst": [],
-      "notVeryAffectiveAgainst": ["rock", "steel"],
-      "noAffectAgainst": ["ghost"]
+      "movesSuperEffectiveAgainst": [],
+      "movesNotVeryEffectiveAgainst": ["rock", "steel"],
+      "movesNoEffectAgainst": ["ghost"],
+      "typesWithNoEffect": ["ghost"],
+      "typesNotVeryEffective": [],
+      "typesSuperEffective": ["fighting"]
+    },
+    "fire": {
+      "movesSuperEffectiveAgainst": ["grass", "ice", "bug", "steel"],
+      "movesNotVeryEffectiveAgainst": ["fire", "water", "rock", "dragon"],
+      "movesNoEffectAgainst": [],
+      "typesWithNoEffect": [],
+      "typesNotVeryEffective": [
+        "fire",
+        "grass",
+        "ice",
+        "bug",
+        "steel",
+        "fairy"
+      ],
+      "typesSuperEffective": ["water", "ground", "rock"]
+    },
+    "water": {
+      "movesSuperEffectiveAgainst": ["fire", "ground", "rock"],
+      "movesNotVeryEffectiveAgainst": ["water", "grass", "dragon", "dragon"],
+      "movesNoEffectAgainst": [],
+      "typesWithNoEffect": [],
+      "typesNotVeryEffective": ["fire", "water", "ice", "steel"],
+      "typesSuperEffective": ["electric", "grass"]
+    },
+    "electric": {
+      "movesSuperEffectiveAgainst": ["water", "flying"],
+      "movesNotVeryEffectiveAgainst": ["electric", "grass", "dragon", "dragon"],
+      "movesNoEffectAgainst": ["ground"],
+      "typesWithNoEffect": [],
+      "typesNotVeryEffective": ["electric", "flying", "steel"],
+      "typesSuperEffective": ["ground"]
+    },
+    "grass": {
+      "movesSuperEffectiveAgainst": ["water", "ground", "rock"],
+      "movesNotVeryEffectiveAgainst": [
+        "fire",
+        "grass",
+        "poison",
+        "flying",
+        "bug",
+        "dragon",
+        "steel"
+      ],
+      "movesNoEffectAgainst": [],
+      "typesWithNoEffect": [],
+      "typesNotVeryEffective": ["water", "electric", "grass", "ground"],
+      "typesSuperEffective": ["fire", "ice", "poison", "flying", "bug"]
+    },
+    "ice": {
+      "movesSuperEffectiveAgainst": ["grass", "ground", "flying", "dragon"],
+      "movesNotVeryEffectiveAgainst": ["fire", "water", "ice", "steel"],
+      "movesNoEffectAgainst": [],
+      "typesWithNoEffect": [],
+      "typesNotVeryEffective": ["ice"],
+      "typesSuperEffective": ["fire", "fighting", "rock", "steel"]
+    },
+    "fighting": {
+      "movesSuperEffectiveAgainst": ["normal", "ice", "rock", "dark", "steel"],
+      "movesNotVeryEffectiveAgainst": [
+        "poison",
+        "flying",
+        "psychic",
+        "bug",
+        "fairy"
+      ],
+      "movesNoEffectAgainst": ["ghost"],
+      "typesWithNoEffect": [],
+      "typesNotVeryEffective": ["bug", "rock", "dark"],
+      "typesSuperEffective": ["flying", "psychic", "fairy"]
+    },
+    "poison": {
+      "movesSuperEffectiveAgainst": ["grass", "fairy"],
+      "movesNotVeryEffectiveAgainst": ["poison", "ground", "rock", "ghost"],
+      "movesNoEffectAgainst": ["steel"],
+      "typesWithNoEffect": [],
+      "typesNotVeryEffective": ["grass", "fighting", "poison", "bug", "fairy"],
+      "typesSuperEffective": ["ground", "psychic"]
+    },
+    "ground": {
+      "movesSuperEffectiveAgainst": [
+        "fire",
+        "electric",
+        "poison",
+        "rock",
+        "steel"
+      ],
+      "movesNotVeryEffectiveAgainst": ["grass", "bug"],
+      "movesNoEffectAgainst": ["flying"],
+      "typesWithNoEffect": ["electric"],
+      "typesNotVeryEffective": ["poison", "rock"],
+      "typesSuperEffective": ["water", "grass", "ice"]
+    },
+    "flying": {
+      "movesSuperEffectiveAgainst": ["grass", "fighting", "bug"],
+      "movesNotVeryEffectiveAgainst": ["electric", "rock", "steel"],
+      "movesNoEffectAgainst": [],
+      "typesWithNoEffect": ["ground"],
+      "typesNotVeryEffective": ["grass", "fighting", "bug"],
+      "typesSuperEffective": ["electric", "ice", "rock"]
+    },
+    "psychic": {
+      "movesSuperEffectiveAgainst": ["fighting", "poison"],
+      "movesNotVeryEffectiveAgainst": ["psychic", "steel"],
+      "movesNoEffectAgainst": ["dark"],
+      "typesWithNoEffect": [],
+      "typesNotVeryEffective": ["fighting", "psychic"],
+      "typesSuperEffective": ["bug", "ghost", "dark"]
+    },
+    "bug": {
+      "movesSuperEffectiveAgainst": ["grass", "psychic", "dark"],
+      "movesNotVeryEffectiveAgainst": [
+        "fire",
+        "fighting",
+        "poison",
+        "flying",
+        "ghost",
+        "steel",
+        "fairy"
+      ],
+      "movesNoEffectAgainst": [],
+      "typesWithNoEffect": [],
+      "typesNotVeryEffective": ["grass", "fighting", "ground"],
+      "typesSuperEffective": ["fire", "flying", "rock"]
+    },
+    "rock": {
+      "movesSuperEffectiveAgainst": ["fire", "ice", "flying", "bug"],
+      "movesNotVeryEffectiveAgainst": ["fighting", "ground", "steel"],
+      "movesNoEffectAgainst": [],
+      "typesWithNoEffect": [],
+      "typesNotVeryEffective": ["normal", "fire", "poison", "flying"],
+      "typesSuperEffective": ["water", "grass", "fighting", "steel"]
+    },
+    "ghost": {
+      "movesSuperEffectiveAgainst": ["psychic", "ghost"],
+      "movesNotVeryEffectiveAgainst": ["dark"],
+      "movesNoEffectAgainst": ["normal"],
+      "typesWithNoEffect": ["normal", "fighting"],
+      "typesNotVeryEffective": ["poison", "bug"],
+      "typesSuperEffective": ["ghost", "dark"]
+    },
+    "dragon": {
+      "movesSuperEffectiveAgainst": ["dragon"],
+      "movesNotVeryEffectiveAgainst": ["steel"],
+      "movesNoEffectAgainst": ["fairy"],
+      "typesWithNoEffect": [],
+      "typesNotVeryEffective": ["fire", "water", "electric", "grass"],
+      "typesSuperEffective": ["ice", "dragon", "fairy"]
+    },
+    "dark": {
+      "movesSuperEffectiveAgainst": ["psychic", "ghost"],
+      "movesNotVeryEffectiveAgainst": ["fighting", "dark", "fairy"],
+      "movesNoEffectAgainst": [],
+      "typesWithNoEffect": ["psychic"],
+      "typesNotVeryEffective": ["ghost", "dark"],
+      "typesSuperEffective": ["fighting", "bug", "fairy"]
+    },
+    "steel": {
+      "movesSuperEffectiveAgainst": ["ice", "rock", "fairy"],
+      "movesNotVeryEffectiveAgainst": ["fire", "water", "electric", "steel"],
+      "movesNoEffectAgainst": [],
+      "typesWithNoEffect": ["poison"],
+      "typesNotVeryEffective": [
+        "normal",
+        "grass",
+        "ice",
+        "flying",
+        "psychic",
+        "bug",
+        "rock",
+        "dragon",
+        "steel",
+        "fairy"
+      ],
+      "typesSuperEffective": ["fire", "fighting", "ground"]
+    },
+    "fairy": {
+      "movesSuperEffectiveAgainst": ["fighting", "dragon", "dark"],
+      "movesNotVeryEffectiveAgainst": ["fire", "poison", "steel"],
+      "movesNoEffectAgainst": [],
+      "typesWithNoEffect": ["dragon"],
+      "typesNotVeryEffective": ["fighting", "bug", "dark"],
+      "typesSuperEffective": ["poison", "steel"]
     }
   }
 }

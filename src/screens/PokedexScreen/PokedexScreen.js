@@ -21,7 +21,9 @@ import TextInputField from '../../components/TextInputField/TextInputField.js';
 const PokedexScreen = props => {
   const {navigation, route} = props;
   const {params} = route;
-  const {comingFrom, pokeSlot} = params;
+  const comingFrom = params?.comingFrom ?? '';
+  const pokeSlot = params?.pokeSlot ?? '';
+
   const dispatch = useDispatch();
   const [selectedPokemon, setSelectedPokemon] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('Kanto');
