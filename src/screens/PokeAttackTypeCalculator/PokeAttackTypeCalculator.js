@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   FlatList,
+  ScrollView,
 } from 'react-native';
 import pokeTypesData from '../../ultilities/pokemonData/pokemon_types';
 import pokeAttackTypeData from '../../ultilities/pokemonData/pokeAttackTypeData.json';
@@ -14,6 +15,7 @@ import styles from './styles.js';
 import colors from '../../constants/colors.js';
 import fontFamily from '../../ultilities/fontFamily.js';
 import imagePaths from '../../constants/imagePaths.js';
+import strings from '../../constants/strings.js';
 
 //TODO:
 /*
@@ -60,15 +62,6 @@ Same for 1 vs 6, but here comparison between each vs the raid boss and score goe
 */
 
 const PokeAttackTypeCalculator = props => {
-  const selectedPokemonData = useSelector(
-    state => state?.pokemonSelectionReducer?.pokemonSelectionValue,
-  );
-  const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
-  const darkModeValue = darkMode?.data;
-  const {navigation} = props;
-
-  const pokeCalculatorData = pokeAttackTypeData?.data;
-
   let typesStats = {
     normal: 1,
     fire: 1,
@@ -90,6 +83,22 @@ const PokeAttackTypeCalculator = props => {
     fairy: 1,
   };
 
+  // let verySuperEffectiveArray = [];
+  // let superEffectiveArray = [];
+  // let normalEffectiveArray = [];
+  // let notVeryEffective = [];
+  // let notVeryEffectiveTwoTimes = [];
+  // let noEffectArray = [];
+
+  const selectedPokemonData = useSelector(
+    state => state?.pokemonSelectionReducer?.pokemonSelectionValue,
+  );
+  const darkMode = useSelector(state => state?.eventDataReducer?.darkModeValue);
+  const darkModeValue = darkMode?.data;
+  const {navigation} = props;
+
+  const pokeCalculatorData = pokeAttackTypeData?.data;
+
   const [changeButtonTitle, setChangeButtonTitle] = useState(false);
   const [currentSlot, setCurrentSlot] = useState(0);
 
@@ -101,8 +110,18 @@ const PokeAttackTypeCalculator = props => {
   const [pokemonSlot6, setPokemonSlot6] = useState('');
   const [pokemonSlotRaid, setPokemonSlotRaid] = useState('');
 
-  const [typesStatForDefenceValues, setTypesStatForDefenceValues] =
-    useState(typesStats);
+  const [typesStatForDefenceValues, setTypesStatForDefenceValues] = useState(
+    {},
+  );
+
+  const [verySuperEffectiveArray, setVerySuperEffectiveArray] = useState([]);
+  const [superEffectiveArray, setSuperEffectiveArray] = useState([]);
+  const [normalEffectiveArray, setNormalEffectiveArray] = useState([]);
+  const [notVeryEffective, setNotVeryEffectiveArray] = useState([]);
+  const [notVeryEffectiveTwoTimes, setNotVeryEffectiveTwoTimesArray] = useState(
+    [],
+  );
+  const [noEffectArray, setNoEffectArray] = useState([]);
 
   useEffect(() => {
     if (currentSlot === 1) {
@@ -149,7 +168,59 @@ const PokeAttackTypeCalculator = props => {
   }, [pokemonSlot1, pokemonSlot2]);
 
   useEffect(() => {
-    console.log('TYPE VALUES', typesStatForDefenceValues);
+    if (JSON?.stringify(typesStatForDefenceValues) !== JSON.stringify({})) {
+      let verySuperEffectiveArrayValue = typesStatForDefenceValues?.filter(
+        (val, ind) => {
+          if (val?.weaknessCount >= 4) {
+            return val;
+          }
+        },
+      );
+
+      let superEffectiveArrayValue = typesStatForDefenceValues?.filter(
+        (val, ind) => {
+          if (val?.weaknessCount === 2) {
+            return val;
+          }
+        },
+      );
+
+      let normalEffectiveArrayValue = typesStatForDefenceValues?.filter(
+        (val, ind) => {
+          if (val?.weaknessCount === 1) {
+            return val;
+          }
+        },
+      );
+
+      let notVeryEffectiveValue = typesStatForDefenceValues?.filter(
+        (val, ind) => {
+          if (val?.weaknessCount === 0.5) {
+            return val;
+          }
+        },
+      );
+
+      let notVeryEffectiveTwoTimesValue = typesStatForDefenceValues?.filter(
+        (val, ind) => {
+          if (val?.weaknessCount <= 0.25 && val?.weaknessCount > 0) {
+            return val;
+          }
+        },
+      );
+
+      let noEffectArrayValue = typesStatForDefenceValues?.filter((val, ind) => {
+        if (val?.weaknessCount === 0) {
+          return val;
+        }
+      });
+      setVerySuperEffectiveArray(verySuperEffectiveArrayValue);
+      setSuperEffectiveArray(superEffectiveArrayValue);
+      setNormalEffectiveArray(normalEffectiveArrayValue);
+      setNotVeryEffectiveArray(notVeryEffectiveValue);
+      setNotVeryEffectiveTwoTimesArray(notVeryEffectiveTwoTimesValue);
+      setNoEffectArray(noEffectArrayValue);
+    }
   }, [typesStatForDefenceValues]);
 
   const calculateDefenseStats = (type1, type2) => {
@@ -206,7 +277,6 @@ const PokeAttackTypeCalculator = props => {
     }
 
     setTypesStatForDefenceValues(tempArray);
-    // console.log('TYPE VALUES', typesStatForDefence);
   };
 
   const infoForSingleAndDualTypes = () => {
@@ -466,7 +536,9 @@ const PokeAttackTypeCalculator = props => {
         onPress={() => {
           setChangeButtonTitle(!changeButtonTitle);
         }}
-        style={{alignItems: 'center'}}>
+        style={{
+          alignItems: 'center',
+        }}>
         <View
           style={{
             height: 40,
@@ -484,35 +556,41 @@ const PokeAttackTypeCalculator = props => {
               color: colors?.white,
               fontFamily: fontFamily?.primaryFontFamilyMedium,
             }}>
-            {changeButtonTitle ? 'Info Section' : 'Compare'}
+            {changeButtonTitle ? 'Info Section' : 'Calculate'}
           </Text>
         </View>
       </TouchableOpacity>
     );
   };
 
-  const renderWeaknessStats = ({item, index}) => {
+  const renderWeaknessStats = (item, index) => {
     return (
       <View
         style={{
           flexDirection: 'row',
           marginTop: 10,
+          marginLeft: 5,
+          borderWidth: 0.5,
+          borderRadius: 2,
+          borderColor: colors?.white,
+          padding: 3,
+          paddingRight: 10,
         }}>
         <Image
           source={{uri: pokeTypesData[item?.pokemonType]}}
           height={1}
           width={1}
           resizeMode={'contain'}
-          style={{height: 12, width: 12, marginLeft: 2, marginTop: 2}}
+          style={{height: 15, width: 15, marginLeft: 2, marginTop: 2}}
         />
         <Text
           style={{
             color: colors.white,
             fontFamily: fontFamily?.primaryFontFamilyRegular,
-            fontSize: 12,
-            marginLeft: 1,
+            fontSize: 15,
+            marginLeft: 6,
           }}>
-          {item?.pokemonType} x {item?.weaknessCount}
+          {item?.pokemonType}
         </Text>
       </View>
     );
@@ -527,6 +605,7 @@ const PokeAttackTypeCalculator = props => {
           marginRight: 20,
           backgroundColor: colors?.quaternaryBackgroundColorDarkMode,
           borderRadius: 5,
+          paddingBottom: 20,
         }}>
         <Text
           style={{
@@ -536,7 +615,7 @@ const PokeAttackTypeCalculator = props => {
             marginTop: 20,
             marginLeft: 10,
           }}>
-          Weak against:
+          Defense
         </Text>
         <View
           style={{
@@ -546,11 +625,128 @@ const PokeAttackTypeCalculator = props => {
             marginHorizontal: 10,
           }}
         />
-        <FlatList
-          data={typesStatForDefenceValues}
-          keyExtractor={item => item}
-          renderItem={renderWeaknessStats}
-        />
+
+        {verySuperEffectiveArray?.length !== 0 && (
+          <>
+            <Text
+              style={{
+                fontFamily: fontFamily?.primaryFontFamilyMedium,
+                color: colors?.white,
+                marginTop: 20,
+                marginLeft: 10,
+              }}>
+              Takes x 4 damage against:
+            </Text>
+            <View
+              style={{flexDirection: 'row', flexWrap: 'wrap', marginLeft: 5}}>
+              {verySuperEffectiveArray?.map((val, idx) =>
+                renderWeaknessStats(val, idx),
+              )}
+            </View>
+          </>
+        )}
+
+        {superEffectiveArray?.length !== 0 && (
+          <>
+            <Text
+              style={{
+                fontFamily: fontFamily?.primaryFontFamilyMedium,
+                color: colors?.white,
+                marginTop: 20,
+                marginLeft: 10,
+              }}>
+              Takes x 2 damage against:
+            </Text>
+            <View
+              style={{flexDirection: 'row', flexWrap: 'wrap', marginLeft: 5}}>
+              {superEffectiveArray?.map((val, idx) =>
+                renderWeaknessStats(val, idx),
+              )}
+            </View>
+          </>
+        )}
+
+        {normalEffectiveArray?.length !== 0 && (
+          <>
+            <Text
+              style={{
+                fontFamily: fontFamily?.primaryFontFamilyMedium,
+                color: colors?.white,
+                marginTop: 20,
+                marginLeft: 10,
+              }}>
+              Takes x 1 damage against:
+            </Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                marginLeft: 5,
+              }}>
+              {normalEffectiveArray?.map((val, idx) =>
+                renderWeaknessStats(val, idx),
+              )}
+            </View>
+          </>
+        )}
+
+        {notVeryEffective?.length !== 0 && (
+          <>
+            <Text
+              style={{
+                fontFamily: fontFamily?.primaryFontFamilyMedium,
+                color: colors?.white,
+                marginTop: 20,
+                marginLeft: 10,
+              }}>
+              Takes x 0.5 damage against:
+            </Text>
+            <View
+              style={{flexDirection: 'row', flexWrap: 'wrap', marginLeft: 5}}>
+              {notVeryEffective?.map((val, idx) =>
+                renderWeaknessStats(val, idx),
+              )}
+            </View>
+          </>
+        )}
+
+        {notVeryEffectiveTwoTimes?.length !== 0 && (
+          <>
+            <Text
+              style={{
+                fontFamily: fontFamily?.primaryFontFamilyMedium,
+                color: colors?.white,
+                marginTop: 20,
+                marginLeft: 10,
+              }}>
+              Takes x 0.25 damage against:
+            </Text>
+            <View
+              style={{flexDirection: 'row', flexWrap: 'wrap', marginLeft: 5}}>
+              {notVeryEffectiveTwoTimes?.map((val, idx) =>
+                renderWeaknessStats(val, idx),
+              )}
+            </View>
+          </>
+        )}
+
+        {noEffectArray?.length !== 0 && (
+          <>
+            <Text
+              style={{
+                fontFamily: fontFamily?.primaryFontFamilyMedium,
+                color: colors?.white,
+                marginTop: 20,
+                marginLeft: 10,
+              }}>
+              Takes x 0 damage against:
+            </Text>
+            <View
+              style={{flexDirection: 'row', flexWrap: 'wrap', marginLeft: 5}}>
+              {noEffectArray?.map((val, idx) => renderWeaknessStats(val, idx))}
+            </View>
+          </>
+        )}
       </View>
     );
   };
@@ -562,14 +758,16 @@ const PokeAttackTypeCalculator = props => {
         backgroundColor: darkModeValue
           ? colors?.secondaryBackgroundColorDarkMode
           : colors?.white,
-        // alignItems: 'center',
       }}>
       <SafeAreaView />
-      {changeButtonTitle
-        ? pokeComparisonCalculator()
-        : infoForSingleAndDualTypes()}
-      {defenceStatsView()}
-      {buttonView()}
+      <ScrollView>
+        {changeButtonTitle
+          ? pokeComparisonCalculator()
+          : infoForSingleAndDualTypes()}
+        {pokemonSlot2 !== '' && defenceStatsView()}
+        {buttonView()}
+      </ScrollView>
+
       {/* We use the above button to shift above 2 characteristics  */}
     </View>
   );
