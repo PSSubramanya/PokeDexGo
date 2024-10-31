@@ -124,6 +124,10 @@ const PokeAttackTypeCalculator = props => {
   const [noEffectArray, setNoEffectArray] = useState([]);
 
   useEffect(() => {
+    console.log('changeButtonTitle', changeButtonTitle);
+  }, [changeButtonTitle]);
+
+  useEffect(() => {
     if (currentSlot === 1) {
       const image1 =
         selectedPokemonData?.data?.pokemonInfo?.pokemonStatsData?.imageSrc;
@@ -532,34 +536,63 @@ const PokeAttackTypeCalculator = props => {
 
   const buttonView = () => {
     return (
-      <TouchableOpacity
-        onPress={() => {
-          setChangeButtonTitle(!changeButtonTitle);
-        }}
+      <View
         style={{
-          alignItems: 'center',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
         }}>
-        <View
-          style={{
-            height: 40,
-            width: 120,
-            marginTop: 20,
-            backgroundColor: colors?.purple,
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 5,
-          }}>
-          <Text
-            style={{
-              fontSize: 14,
-              textTransform: 'uppercase',
-              color: colors?.white,
-              fontFamily: fontFamily?.primaryFontFamilyMedium,
-            }}>
-            {changeButtonTitle ? 'Info Section' : 'Calculate'}
-          </Text>
-        </View>
-      </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            setChangeButtonTitle(false);
+          }}
+          style={{}}>
+          <View
+            style={[
+              styles?.bottomTabBar,
+              {
+                backgroundColor: !changeButtonTitle
+                  ? colors?.purple
+                  : colors?.tertiaryBackgroundColorDarkMode,
+              },
+            ]}>
+            <Text
+              style={{
+                fontSize: 14,
+                textTransform: 'uppercase',
+                color: colors?.white,
+                fontFamily: fontFamily?.primaryFontFamilyMedium,
+              }}>
+              Info Section
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            setChangeButtonTitle(true);
+          }}
+          style={{}}>
+          <View
+            style={[
+              styles?.bottomTabBar,
+              {
+                backgroundColor:
+                  changeButtonTitle === true
+                    ? colors?.purple
+                    : colors?.tertiaryBackgroundColorDarkMode,
+              },
+            ]}>
+            <Text
+              style={{
+                fontSize: 14,
+                textTransform: 'uppercase',
+                color: colors?.white,
+                fontFamily: fontFamily?.primaryFontFamilyMedium,
+              }}>
+              Calculate
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     );
   };
 
@@ -764,11 +797,9 @@ const PokeAttackTypeCalculator = props => {
         {changeButtonTitle
           ? pokeComparisonCalculator()
           : infoForSingleAndDualTypes()}
-        {pokemonSlot2 !== '' && defenceStatsView()}
-        {buttonView()}
+        {changeButtonTitle && pokemonSlot2 !== '' && defenceStatsView()}
       </ScrollView>
-
-      {/* We use the above button to shift above 2 characteristics  */}
+      {buttonView()}
     </View>
   );
 };
