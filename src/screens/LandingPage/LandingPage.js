@@ -9,11 +9,14 @@ import {
   StatusBar,
   FlatList,
   Linking,
+  Platform,
 } from 'react-native';
 import {Modal, Portal} from 'react-native-paper';
 // import firestore from '@react-native-firebase/firestore';
 import DeviceInfo from 'react-native-device-info';
+// import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {useNetStatusInfo} from '../../ultilities/customHooks/useNetStatusInfo';
+import {usePushNotification} from '../../ultilities/customHooks/usePushNotification';
 import strings from '../../constants/strings';
 import imagePaths from '../../constants/imagePaths';
 import colors from '../../constants/colors';
@@ -25,12 +28,14 @@ import commonStyling from '../../ultilities/commonStyling/commonStyling';
 import {CircleRightArrow} from '../../assets/images/svg';
 import webscrappedData from '../../ultilities/pokemonData/pokemon_data6.json';
 import eggData from '../../ultilities/pokemonData/egg_data.json';
+import {NotificationService} from '../../ultilities/services/notifications/notificationService';
 
 const LandingPage = ({navigation}) => {
   // const subscriber = firestore().collection('Users').doc(uniqueDeviceIdValue);
 
   const dispatch = useDispatch();
   const {networkState} = useNetStatusInfo();
+  const {localNotif} = usePushNotification(navigation);
 
   const navigationScreens = [
     {
@@ -43,26 +48,27 @@ const LandingPage = ({navigation}) => {
       navigationPath: 'EggDetailsScreen',
       image: imagePaths.pokeEggIcon,
     },
-    // {
-    //   name: 'Field Research',
-    //   navigationPath: 'FieldResearchScreen',
-    //   image: imagePaths.fieldResearchIcon,
-    // },
+    {
+      name: 'Field Research',
+      navigationPath: 'FieldResearchScreen',
+      image: imagePaths.fieldResearchIcon,
+    },
     {
       name: 'Raid Bosses',
       navigationPath: 'RaidBossScreen',
       image: imagePaths.raidIcon,
     },
-    {
-      name: 'Trainer Info',
-      navigationPath: 'TrainerInfoScreen',
-      image: imagePaths.ashCapIcon,
-    },
+    // {
+    //   name: 'Trainer Info',
+    //   navigationPath: 'TrainerInfoScreen',
+    //   image: imagePaths.ashCapIcon,
+    // },
   ];
 
   const [loadData, setLoadData] = useState([]);
   const [loadEggData, setLoadEggData] = useState([]);
   const [loadRaidBossData, setRaidBossData] = useState([]);
+  const [loadFieldResearchData, setFieldResearchData] = useState([]);
   const [darkModeStatus, setDarkModeStatus] = useState(true);
   const [reloadData, setReloadData] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
@@ -70,6 +76,37 @@ const LandingPage = ({navigation}) => {
   const [modalDisplayText, setModalDisplayText] = useState('');
   const [modalTypeValue, setModalType] = useState('');
   const [countDownTimer, setCountDownTimer] = useState(10);
+  const [forceUpdateModal, setForceUpdateModal] = useState(false);
+
+  NotificationService(navigation);
+
+  useEffect(() => {
+    let versionData;
+    const appVersionCheckURL =
+      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/version';
+    const installedVersion = DeviceInfo.getVersion();
+
+    fetch(appVersionCheckURL)
+      ?.then(response => {
+        response.json()?.then(res => {
+          versionData = res?.data;
+          const latestVersion = versionData[0]?.version;
+
+          if (latestVersion > installedVersion) {
+            setForceUpdateModal(true);
+            setModalType('force-update');
+            setModalDisplayText(
+              'A new version of the app is available. Please update to continue using the app.',
+            );
+          } else {
+            setForceUpdateModal(false);
+          }
+        });
+      })
+      .catch(err => {
+        console.log(' APP VERSION ERROR', err);
+      });
+  }, []);
 
   useEffect(() => {
     dispatch(darkModeActivation(darkModeStatus));
@@ -157,7 +194,7 @@ const LandingPage = ({navigation}) => {
         });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [networkState]);
+  }, [networkState, countDownTimer]);
 
   useEffect(() => {
     dispatch(eventDataLoad(loadData));
@@ -236,6 +273,50 @@ const LandingPage = ({navigation}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [networkState]);
 
+  useEffect(() => {
+    let loadedFieldResearchData;
+    const fieldResearchURL =
+      'https://getpantry.cloud/apiv1/pantry/b45d3e57-17a6-498d-8aec-b8173408efb4/basket/fieldResearch';
+
+    fetch(fieldResearchURL)
+      .then(response => {
+        response.json().then(res => {
+          loadedFieldResearchData = res?.data;
+          setFieldResearchData(loadedFieldResearchData);
+          storeData('fieldResearchData', loadedFieldResearchData);
+          hideModal();
+        });
+      })
+      .catch(err => {
+        console.log('SERIALISED FIELD RESEARCH DATA VALUE ERROR', err);
+      });
+
+    if (loadFieldResearchData?.length === 0) {
+      retrieveData('fieldResearchData')
+        .then(researchVal => {
+          if (researchVal) {
+            // Do something with the retrieved data, e.g., display it in your component.
+            const serializedValue = JSON.parse(researchVal);
+            loadedFieldResearchData = serializedValue;
+            setFieldResearchData(loadedFieldResearchData);
+            console.log(
+              'SERIALISED FIELD RESEACH DATA VALUE',
+              loadedFieldResearchData,
+            );
+          }
+        })
+        .catch(err => {
+          console.log('field research data ERROR.', err);
+        });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [networkState]);
+
+  /* NOTE: HERE STARTS NOTIFICATION CODE */
+
+  /* NOTE: HERE ENDS NOTIFICATION CODE*/
+
   const decreaseTimer = () => {
     setCountDownTimer(prev => prev - 1);
   };
@@ -258,6 +339,17 @@ const LandingPage = ({navigation}) => {
   const modalContainer = (modalText, modalType) => {
     return (
       <View style={styles.modalInnerStyle}>
+        {forceUpdateModal && modalType === 'force-update' ? (
+          <View>
+            <Text
+              style={[
+                styles.modalHeaderText,
+                {color: colors.white, textTransform: 'uppercase'},
+              ]}>
+              Update Required
+            </Text>
+          </View>
+        ) : null}
         {modalType === 'server-error' ? (
           <Image
             source={imagePaths.serverErrorIcon}
@@ -268,9 +360,27 @@ const LandingPage = ({navigation}) => {
           />
         ) : null}
         {modalType === 'server-error' ? (
-          <Text style={styles.modalHeaderText}>SOMETHING WENT WRONG</Text>
+          <Text
+            style={[styles.modalHeaderText, {color: colors.secondaryRedColor}]}>
+            SOMETHING WENT WRONG
+          </Text>
         ) : null}
         <Text style={styles.queryText}>{modalText}</Text>
+        {forceUpdateModal && modalType === 'force-update' ? (
+          <TouchableOpacity
+            style={styles?.updateButton}
+            onPress={() => {
+              if (Platform?.OS === 'android') {
+                Linking.openURL(
+                  'https://play.google.com/store/apps/details?id=com.sarrarpa.pokeguide',
+                ); // Android
+              } else if (Platform?.OS === 'ios') {
+                // Linking.openURL('https://apps.apple.com/app/idyourappid'); // iOS
+              }
+            }}>
+            <Text style={styles?.updateText}>UPDATE</Text>
+          </TouchableOpacity>
+        ) : null}
         <TouchableOpacity
           onPress={() => {
             if (modalType === 'email') {
@@ -296,10 +406,26 @@ const LandingPage = ({navigation}) => {
           setModalType('email');
           setModalDisplayText(modalQueryDisplayText);
           showModal();
-        }}
-        style={styles.infoIconButton}>
+        }}>
         <Image
           source={imagePaths?.questionMarkIcon}
+          height={1}
+          width={1}
+          style={styles.infoIcon}
+          resizeMode={'contain'}
+        />
+      </TouchableOpacity>
+    );
+  };
+
+  const notificationButton = () => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          // navigation.navigate('PdfViewScreen');
+        }}>
+        <Image
+          source={imagePaths?.notificationsOnIcon}
           height={1}
           width={1}
           style={styles.infoIcon}
@@ -312,7 +438,6 @@ const LandingPage = ({navigation}) => {
   const appIconContainer = () => {
     return (
       <View style={styles.centerAlignmentStyle}>
-        {infoButton()}
         <Image
           source={imagePaths.appIcon}
           height={1}
@@ -345,6 +470,10 @@ const LandingPage = ({navigation}) => {
           } else if (item?.name === 'Raid Bosses') {
             navigation.navigate(item?.navigationPath, {
               loadData: loadRaidBossData,
+            });
+          } else if (item?.name === 'Field Research') {
+            navigation.navigate(item?.navigationPath, {
+              loadData: loadFieldResearchData,
             });
           } else {
             navigation.navigate(item?.navigationPath);
@@ -488,7 +617,7 @@ const LandingPage = ({navigation}) => {
       <Portal>
         <Modal
           style={styles.modalMarginStyle}
-          visible={modalVisible}
+          visible={modalVisible || forceUpdateModal}
           onDismiss={hideModal}
           contentContainerStyle={[
             styles.modalExternalStyle,
@@ -515,6 +644,10 @@ const LandingPage = ({navigation}) => {
           },
           styles.mainContainer,
         ]}>
+        <View style={styles?.iconContainer}>
+          {notificationButton()}
+          {infoButton()}
+        </View>
         {loadData?.length !== 0 ? appIconContainer() : null}
         {loadData?.length !== 0 ? navigationButtons() : null}
         {redoIcon()}

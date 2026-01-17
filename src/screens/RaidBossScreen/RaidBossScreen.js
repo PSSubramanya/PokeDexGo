@@ -21,6 +21,7 @@ import imagePaths from '../../constants/imagePaths';
 import commonStyling from '../../ultilities/commonStyling/commonStyling';
 import pokemonTypesData from '../../ultilities/pokemonData/pokemon_types';
 import styles from './styles.js';
+import {NotificationService} from '../../ultilities/services/notifications/notificationService.js';
 
 const RaidBossScreen = props => {
   const {navigation, route} = props;
@@ -43,6 +44,8 @@ const RaidBossScreen = props => {
 
   const [displayData, setDisplayData] = useState([]);
   const [loader, setLoader] = useState(true);
+
+  NotificationService(navigation);
 
   useEffect(() => {
     // const dispData = mockFieldResearchData?.data;
@@ -134,19 +137,29 @@ const RaidBossScreen = props => {
               <View style={styles.rewardsSection}>
                 <View style={commonStyling?.flexRow}>
                   <View style={styles.rewardCircle}>
-                    <Image
-                      source={{
-                        uri: individualPokemonImageMapping(
-                          item?.image,
-                          item?.pokeId,
-                          item?.name,
-                        ),
-                      }}
-                      height={1}
-                      width={1}
-                      resizeMode={'contain'}
-                      style={styles.raidBossImageDisplay}
-                    />
+                    <TouchableOpacity
+                      onPress={() => {
+                        navigation.navigate('BattleCountersScreen', {
+                          pokeImage: item?.image,
+                          pokeName: item?.name,
+                          pokeId: item?.pokeId,
+                          pokeData: item,
+                        });
+                      }}>
+                      <Image
+                        source={{
+                          uri: individualPokemonImageMapping(
+                            item?.image,
+                            item?.pokeId,
+                            item?.name,
+                          ),
+                        }}
+                        height={1}
+                        width={1}
+                        resizeMode={'contain'}
+                        style={styles.raidBossImageDisplay}
+                      />
+                    </TouchableOpacity>
                     {item?.canBeShiny ? (
                       <View style={styles.shinyIconContainer}>
                         <Image
@@ -249,7 +262,7 @@ const RaidBossScreen = props => {
                       })}
                     </View>
                     <Text style={styles.boostedText}>
-                      CP : {item?.combatPower?.normal?.min} -
+                      CP : {item?.combatPower?.boosted?.min} -
                       {item?.combatPower?.boosted?.max}
                     </Text>
                   </View>

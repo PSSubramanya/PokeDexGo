@@ -106,6 +106,7 @@ export default styles = StyleSheet.create({
     color: colors.white,
     marginLeft: horizontalScale(12),
     alignSelf: 'center',
+    width: horizontalScale(150),
   },
   rewardCircle: {
     borderWidth: 2,

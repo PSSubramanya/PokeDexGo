@@ -22,6 +22,7 @@ import colors from '../../constants/colors.js';
 import commonStyling from '../../ultilities/commonStyling/commonStyling.js';
 import evolutiionData from '../../ultilities/pokemonData/pokemon_evolution_chart.json';
 // import CustomCarousalSlider from '../../components/CustomCarousalSlider/CustomCarousalSlider.js';
+import {NotificationService} from '../../ultilities/services/notifications/notificationService.js';
 
 const EggDetailsScreen = props => {
   const {navigation, route} = props;
@@ -59,6 +60,8 @@ const EggDetailsScreen = props => {
   const [showEvolutionChart, setShowEvolutionChart] = useState(false);
   const [evolutionChart, setEvolutionChart] = useState([]);
   const [selectedShiny, setSelectedShiny] = useState(false);
+
+  NotificationService(navigation);
 
   useEffect(() => {
     setLoader(true);
@@ -569,7 +572,11 @@ const EggDetailsScreen = props => {
     } else {
       if (isFemaleGender === 'Female') {
         //TODO: DO THIS FOR FEMALE CATEGORY
-        sourceImage = `https://img.pokemondb.net/artwork/large/${pokemonNameValue}-female.jpg`;
+        if (pokemonNameValue === 'salazzle') {
+          sourceImage = `https://img.pokemondb.net/artwork/large/${pokemonNameValue}.jpg`;
+        } else {
+          sourceImage = `https://img.pokemondb.net/artwork/large/${pokemonNameValue}-female.jpg`;
+        }
       } else {
         sourceImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
       }

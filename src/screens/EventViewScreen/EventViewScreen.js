@@ -10,6 +10,7 @@ import {
   FlatList,
   ScrollView,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
 import {Modal, Portal, Provider} from 'react-native-paper';
 
@@ -30,8 +31,10 @@ import {horizontalScale, verticalScale} from '../../ultilities/scale';
 import {toCamelCase, checkImageExists} from '../../ultilities/commonFunctions';
 import CardView from '../../components/CardView/CardView';
 import EventDisplayCard from '../../components/EventDisplayCard/EventDisplayCard';
+import {NotificationService} from '../../ultilities/services/notifications/notificationService';
 
 const EventViewScreen = props => {
+  const {navigation} = props;
   const selectedDate = props?.route?.params?.selectedDate;
 
   let listViewRef = useRef();
@@ -81,6 +84,16 @@ const EventViewScreen = props => {
     });
   }
 
+  // useEffect(() => {
+  //   const updateCurrentTime = () => {
+  //     setCurrentTime(new Date());
+  //   };
+
+  //   const intervalId = setInterval(updateCurrentTime, 1000);
+
+  //   return () => clearInterval(intervalId);
+  // }, []);
+
   useEffect(() => {
     const displayableEvents = loadedEventJSONData?.data.filter(data =>
       data?.Duration?.includes(moment(selectedStartDate).format('YYYY-MM-DD')),
@@ -88,8 +101,15 @@ const EventViewScreen = props => {
     const sortedArry =
       sortByKey(displayableEvents, 'preference') ?? displayableEvents;
     setEventsData(sortedArry);
+
+    if (selectedStartDate === null) {
+      setEventsData(null);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStartDate]);
+
+  NotificationService(navigation); //NOTE: THIS FUNCTION IS TO CALL NOTIFICATIONS
+  //TODO: Navigation needs to be done somehow on click
 
   useEffect(() => {
     let pokeName;
@@ -163,6 +183,11 @@ const EventViewScreen = props => {
   };
 
   const renderItem = ({item}) => {
+    const specialCase =
+      item?.Summary.toLowerCase().includes('spotlight') ||
+      item?.Summary?.toLowerCase().includes('community day');
+
+    // console.log('CHECKKKKKKK', item?.Summary, specialCase);
     return (
       <View style={styles.eventsList}>
         <TouchableOpacity
@@ -176,7 +201,13 @@ const EventViewScreen = props => {
           }}>
           <CardView
             innerView={eventCardContainer(item)}
-            style={styles.cardInnerStyling}
+            style={[
+              styles.cardInnerStyling,
+              {
+                borderWidth: specialCase ? 2 : 0,
+                borderColor: specialCase ? colors.goldColor : null,
+              },
+            ]}
           />
         </TouchableOpacity>
       </View>
@@ -572,7 +603,7 @@ const EventViewScreen = props => {
           }}
           height={1}
           width={1}
-          style={styles.pokemonTypeImageStyel}
+          style={styles.pokemonTypeImageStyle}
           resizeMode={'contain'}
         />
         <Text
@@ -732,35 +763,47 @@ const EventViewScreen = props => {
       let pushedImage;
       if (data?.includes(substring2) || data?.includes(substring12)) {
         if (pokemonName === 'charizard' || pokemonName === 'mewtwo') {
-          pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-mega-x.jpg`;
+          const pokeString = pokemonName + 'X';
+          const staticInageIdFromDb = pokemon_mega_images[pokeString];
+          pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${staticInageIdFromDb}.png`;
         } else {
-          pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-mega.jpg`;
+          const pokeString = pokemonName;
+          const staticInageIdFromDb = pokemon_mega_images[pokeString];
+          pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${staticInageIdFromDb}.png`;
         }
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring3)) {
-        pushedImage = `https://img.pokemondb.net/artwork/large/${pokemonName}-mega-y.jpg`;
+        const pokeString = pokemonName + 'Y';
+        const staticInageIdFromDb = pokemon_mega_images[pokeString];
+        pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${staticInageIdFromDb}.png`;
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring14) || data?.includes(substring13)) {
         if (pokemonName === 'charizard' || pokemonName === 'mewtwo') {
           const pokeString = pokemonName + 'X';
-          pushedImage = pokemon_mega_images[pokeString];
+          const staticInageIdFromDb = pokemon_mega_images[pokeString];
+          pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${staticInageIdFromDb}.png`;
         } else {
           const pokeString = pokemonName;
-          pushedImage = pokemon_mega_images[pokeString];
+          const staticInageIdFromDb = pokemon_mega_images[pokeString];
+          pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${staticInageIdFromDb}.png`;
         }
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring15)) {
         const pokeString = pokemonName + 'Y';
-        pushedImage = pokemon_mega_images[pokeString];
+        const staticInageIdFromDb = pokemon_mega_images[pokeString];
+        pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${staticInageIdFromDb}.png`;
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring6)) {
-        pushedImage = pokemon_hisuian_variants[modalData?.pokemonId?.[idx]];
+        const idString = modalData?.pokemonId?.[idx] + 'ev';
+        pushedImage = pokemon_hisuian_variants[idString];
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring8)) {
-        pushedImage = pokemon_galarian_variants[modalData?.pokemonId?.[idx]];
+        const idString = modalData?.pokemonId?.[idx] + 'ev';
+        pushedImage = pokemon_galarian_variants[idString];
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring10)) {
-        pushedImage = pokemon_alolan_variants[modalData?.pokemonId?.[idx]];
+        const idString = modalData?.pokemonId?.[idx] + 'ev';
+        pushedImage = pokemon_alolan_variants[idString];
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring7)) {
         const idString = modalData?.pokemonId?.[idx] + 's';
@@ -784,10 +827,14 @@ const EventViewScreen = props => {
         const newstr3 = newStr2.substr(-3);
         const finalString = newStr2.replace(newstr3, '');
 
-        // eslint-disable-next-line radix
-        pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${parseInt(
-          finalString,
-        )}.png`;
+        if (finalString === '201') {
+          pushedImage = data;
+        } else {
+          // eslint-disable-next-line radix
+          pushedImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${parseInt(
+            finalString,
+          )}.png`;
+        }
         displayableModalImages = [...displayableModalImages, pushedImage];
       } else if (data?.includes(substring5)) {
         const ret = data;
@@ -969,6 +1016,8 @@ const EventViewScreen = props => {
       </ScrollView>
     );
   };
+
+  // console.log('EVVVVVV', eventsData);
 
   return (
     <Provider>

@@ -37,6 +37,7 @@ export default {
   infoIcon: require('../assets/images/icons/ibutton.png'),
   questionMarkIcon: require('../assets/images/icons/questionmark.png'),
   serverErrorIcon: require('../assets/images/icons/serverErrorIcon.png'),
+  shadowIcon: require('../assets/images/icons/shadowIcon.png'),
 
   //Images
   calendar1: require('../assets/images/calendar.png'),
